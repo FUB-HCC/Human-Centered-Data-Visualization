@@ -1,0 +1,1119 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Tutorial 4: Geovisualization &#8212; Test Book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=12da95d707ffb74b382d" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=12da95d707ffb74b382d" />
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'altair-tutorial';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Bibliography" href="bibliography.html" />
+    <link rel="prev" title="Chapter 1" href="mymarkdownfile.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/Cat.jpg" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="_static/Cat.jpg" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Welcome to your Jupyter Book
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="markdown-notebooks.html">Notebooks with MyST Markdown</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mymarkdownfile.html">Chapter 1</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Tutorial 4: Geovisualization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bibliography.html">Bibliography</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Faltair-tutorial.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/altair-tutorial.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Tutorial 4: Geovisualization</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prepare">🛒 1. Prepare</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#load-data">Load Data</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#present">2. Present</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-map-projection">Simple map projection</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#graduated-symbols">Graduated Symbols</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#choropleth-map">Choropleth Map</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <p><strong>Data Visualization course - winter semester 20/21 - FU Berlin</strong></p>
+<p><em>Tutorials adapted from the <a class="reference external" href="https://infovis.fh-potsdam.de/tutorials/">Information Visualization</a> course at the FH Potsdam</em></p>
+<section class="tex2jax_ignore mathjax_ignore" id="tutorial-4-geovisualization">
+<h1>Tutorial 4: Geovisualization<a class="headerlink" href="#tutorial-4-geovisualization" title="Permalink to this heading">#</a></h1>
+<p>In this installment of the information visualization tutorials we will be analyzing and visualizing geographic data; i.e., data that refers to geospatial entities. Geospatial entities can, for example, be particular places such as schools and libraries or political boundaries of cities or countries. Of course, this tutorial only scratches the surface. Consider this as a teaser into geovisualization, which in itself has become a branch of research and practice at the intersection of geography and visualization. We will only touch on a few basic steps to get your feet wet and hands dirty.</p>
+<section id="prepare">
+<h2>🛒 1. Prepare<a class="headerlink" href="#prepare" title="Permalink to this heading">#</a></h2>
+<p>As you come to expect by now we first assemble our tools and then prepare the data.</p>
+<div class="dropdown admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference external" href="https://altair-viz.github.io/user_guide/generated/toplevel/altair.Chart.html">Altair documentation</a>
+<br/>
+<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.info.html">Pandas documentation</a></p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">altair</span> <span class="k">as</span> <span class="nn">alt</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">vega_datasets</span> <span class="kn">import</span> <span class="n">data</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="load-data">
+<h3>Load Data<a class="headerlink" href="#load-data" title="Permalink to this heading">#</a></h3>
+<p>As usual, we need to get ou data into our notebook first:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># First, allow unverified SSL connections, in case the certificate can not be verified</span>
+<span class="kn">import</span> <span class="nn">ssl</span>
+<span class="n">ssl</span><span class="o">.</span><span class="n">_create_default_https_context</span> <span class="o">=</span> <span class="n">ssl</span><span class="o">.</span><span class="n">_create_unverified_context</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">covid_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;https://covid.ourworldindata.org/data/owid-covid-data.csv&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Additionally to our usual dataset we are going to use another dataset which contains a mapping of different country ISO codes and the avergae coordinates of each country.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">code_lookup</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;country_lookup.csv&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">code_lookup</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 256 entries, 0 to 255
+Data columns (total 6 columns):
+ #   Column               Non-Null Count  Dtype  
+---  ------               --------------  -----  
+ 0   Country              256 non-null    object 
+ 1   Alpha-2 code         255 non-null    object 
+ 2   Alpha-3 code         256 non-null    object 
+ 3   Numeric code         256 non-null    int64  
+ 4   Latitude (average)   256 non-null    float64
+ 5   Longitude (average)  256 non-null    float64
+dtypes: float64(2), int64(1), object(3)
+memory usage: 12.1+ KB
+</pre></div>
+</div>
+</div>
+</div>
+<p>Finally we also need data which tells us how countries actually look like in order to visualize them properly. This information is encoded in TopoJSON, an extension of GEOJSON, which is able to encode topology in the often used JSON serialization format.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">countries</span> <span class="o">=</span> <span class="n">alt</span><span class="o">.</span><span class="n">topo_feature</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">world_110m</span><span class="o">.</span><span class="n">url</span><span class="p">,</span> <span class="s1">&#39;countries&#39;</span><span class="p">)</span>
+<span class="n">countries</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>UrlData({
+  format: TopoDataFormat({
+    feature: &#39;countries&#39;,
+    type: &#39;topojson&#39;
+  }),
+  url: &#39;https://cdn.jsdelivr.net/npm/vega-datasets@v1.29.0/data/world-110m.json&#39;
+})
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="present">
+<h2>2. Present<a class="headerlink" href="#present" title="Permalink to this heading">#</a></h2>
+<section id="simple-map-projection">
+<h3>Simple map projection<a class="headerlink" href="#simple-map-projection" title="Permalink to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">alt</span><span class="o">.</span><span class="n">Chart</span><span class="p">(</span><span class="n">countries</span><span class="p">)</span><span class="o">.</span><span class="n">mark_geoshape</span><span class="p">(</span>
+    <span class="n">stroke</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span>
+    <span class="n">fill</span><span class="o">=</span><span class="s1">&#39;#A9A9A9&#39;</span>
+<span class="p">)</span><span class="o">.</span><span class="n">project</span><span class="p">(</span>
+    <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;mercator&#39;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+<div id="altair-viz-e022dc4332a445faa1239226d95754d6"></div>
+<script type="text/javascript">
+  var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
+  (function(spec, embedOpt){
+    let outputDiv = document.currentScript.previousElementSibling;
+    if (outputDiv.id !== "altair-viz-e022dc4332a445faa1239226d95754d6") {
+      outputDiv = document.getElementById("altair-viz-e022dc4332a445faa1239226d95754d6");
+    }
+    const paths = {
+      "vega": "https://cdn.jsdelivr.net/npm//vega@5?noext",
+      "vega-lib": "https://cdn.jsdelivr.net/npm//vega-lib?noext",
+      "vega-lite": "https://cdn.jsdelivr.net/npm//vega-lite@4.17.0?noext",
+      "vega-embed": "https://cdn.jsdelivr.net/npm//vega-embed@6?noext",
+    };
+
+    function maybeLoadScript(lib, version) {
+      var key = `${lib.replace("-", "")}_version`;
+      return (VEGA_DEBUG[key] == version) ?
+        Promise.resolve(paths[lib]) :
+        new Promise(function(resolve, reject) {
+          var s = document.createElement('script');
+          document.getElementsByTagName("head")[0].appendChild(s);
+          s.async = true;
+          s.onload = () => {
+            VEGA_DEBUG[key] = version;
+            return resolve(paths[lib]);
+          };
+          s.onerror = () => reject(`Error loading script: ${paths[lib]}`);
+          s.src = paths[lib];
+        });
+    }
+
+    function showError(err) {
+      outputDiv.innerHTML = `<div class="error" style="color:red;">${err}</div>`;
+      throw err;
+    }
+
+    function displayChart(vegaEmbed) {
+      vegaEmbed(outputDiv, spec, embedOpt)
+        .catch(err => showError(`Javascript Error: ${err.message}<br>This usually means there's a typo in your chart specification. See the javascript console for the full traceback.`));
+    }
+
+    if(typeof define === "function" && define.amd) {
+      requirejs.config({paths});
+      require(["vega-embed"], displayChart, err => showError(`Error loading script: ${err.message}`));
+    } else {
+      maybeLoadScript("vega", "5")
+        .then(() => maybeLoadScript("vega-lite", "4.17.0"))
+        .then(() => maybeLoadScript("vega-embed", "6"))
+        .catch(showError)
+        .then(() => displayChart(vegaEmbed));
+    }
+  })({"config": {"view": {"continuousWidth": 400, "continuousHeight": 300}}, "data": {"url": "https://cdn.jsdelivr.net/npm/vega-datasets@v1.29.0/data/world-110m.json", "format": {"feature": "countries", "type": "topojson"}}, "mark": {"type": "geoshape", "fill": "#A9A9A9", "stroke": "white"}, "projection": {"type": "mercator"}, "$schema": "https://vega.github.io/schema/vega-lite/v4.17.0.json"}, {"mode": "vega-lite"});
+</script></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">map</span> <span class="o">=</span> <span class="n">alt</span><span class="o">.</span><span class="n">Chart</span><span class="p">(</span><span class="n">countries</span><span class="p">)</span><span class="o">.</span><span class="n">mark_geoshape</span><span class="p">(</span>
+    <span class="n">stroke</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span>
+    <span class="n">fill</span><span class="o">=</span><span class="s1">&#39;#A9A9A9&#39;</span>
+<span class="p">)</span><span class="o">.</span><span class="n">project</span><span class="p">(</span>
+    <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;mercator&#39;</span><span class="p">,</span>
+    <span class="n">scale</span><span class="o">=</span><span class="mi">250</span><span class="p">,</span>
+    <span class="n">center</span><span class="o">=</span><span class="p">[</span><span class="mi">20</span><span class="p">,</span><span class="mi">55</span><span class="p">],</span>
+    <span class="n">clipExtent</span><span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">400</span><span class="p">,</span> <span class="mi">300</span><span class="p">]]</span>
+<span class="p">)</span>
+<span class="nb">map</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+<div id="altair-viz-69286130c3704d91acc4e3d1b6e900bf"></div>
+<script type="text/javascript">
+  var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
+  (function(spec, embedOpt){
+    let outputDiv = document.currentScript.previousElementSibling;
+    if (outputDiv.id !== "altair-viz-69286130c3704d91acc4e3d1b6e900bf") {
+      outputDiv = document.getElementById("altair-viz-69286130c3704d91acc4e3d1b6e900bf");
+    }
+    const paths = {
+      "vega": "https://cdn.jsdelivr.net/npm//vega@5?noext",
+      "vega-lib": "https://cdn.jsdelivr.net/npm//vega-lib?noext",
+      "vega-lite": "https://cdn.jsdelivr.net/npm//vega-lite@4.17.0?noext",
+      "vega-embed": "https://cdn.jsdelivr.net/npm//vega-embed@6?noext",
+    };
+
+    function maybeLoadScript(lib, version) {
+      var key = `${lib.replace("-", "")}_version`;
+      return (VEGA_DEBUG[key] == version) ?
+        Promise.resolve(paths[lib]) :
+        new Promise(function(resolve, reject) {
+          var s = document.createElement('script');
+          document.getElementsByTagName("head")[0].appendChild(s);
+          s.async = true;
+          s.onload = () => {
+            VEGA_DEBUG[key] = version;
+            return resolve(paths[lib]);
+          };
+          s.onerror = () => reject(`Error loading script: ${paths[lib]}`);
+          s.src = paths[lib];
+        });
+    }
+
+    function showError(err) {
+      outputDiv.innerHTML = `<div class="error" style="color:red;">${err}</div>`;
+      throw err;
+    }
+
+    function displayChart(vegaEmbed) {
+      vegaEmbed(outputDiv, spec, embedOpt)
+        .catch(err => showError(`Javascript Error: ${err.message}<br>This usually means there's a typo in your chart specification. See the javascript console for the full traceback.`));
+    }
+
+    if(typeof define === "function" && define.amd) {
+      requirejs.config({paths});
+      require(["vega-embed"], displayChart, err => showError(`Error loading script: ${err.message}`));
+    } else {
+      maybeLoadScript("vega", "5")
+        .then(() => maybeLoadScript("vega-lite", "4.17.0"))
+        .then(() => maybeLoadScript("vega-embed", "6"))
+        .catch(showError)
+        .then(() => displayChart(vegaEmbed));
+    }
+  })({"config": {"view": {"continuousWidth": 400, "continuousHeight": 300}}, "data": {"url": "https://cdn.jsdelivr.net/npm/vega-datasets@v1.29.0/data/world-110m.json", "format": {"feature": "countries", "type": "topojson"}}, "mark": {"type": "geoshape", "fill": "#A9A9A9", "stroke": "white"}, "projection": {"center": [20, 55], "clipExtent": [[0, 0], [400, 300]], "scale": 250, "type": "mercator"}, "$schema": "https://vega.github.io/schema/vega-lite/v4.17.0.json"}, {"mode": "vega-lite"});
+</script></div></div>
+</div>
+</section>
+<section id="graduated-symbols">
+<h3>Graduated Symbols<a class="headerlink" href="#graduated-symbols" title="Permalink to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">country_infections</span> <span class="o">=</span> <span class="n">covid_data</span><span class="p">[[</span><span class="s1">&#39;iso_code&#39;</span><span class="p">,</span> <span class="s1">&#39;total_cases_per_million&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;iso_code&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="n">country_infections</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 255 entries, 0 to 254
+Data columns (total 2 columns):
+ #   Column                   Non-Null Count  Dtype  
+---  ------                   --------------  -----  
+ 0   iso_code                 255 non-null    object 
+ 1   total_cases_per_million  244 non-null    float64
+dtypes: float64(1), object(1)
+memory usage: 4.1+ KB
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">merged_lookup_data</span> <span class="o">=</span> <span class="n">country_infections</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">code_lookup</span><span class="p">,</span> <span class="n">left_on</span><span class="o">=</span><span class="s1">&#39;iso_code&#39;</span><span class="p">,</span> <span class="n">right_on</span><span class="o">=</span><span class="s1">&#39;Alpha-3 code&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;Numeric code&#39;</span><span class="p">:</span> <span class="s1">&#39;id&#39;</span><span class="p">})</span>
+<span class="n">merged_lookup_data</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>iso_code</th>
+      <th>total_cases_per_million</th>
+      <th>Country</th>
+      <th>Alpha-2 code</th>
+      <th>Alpha-3 code</th>
+      <th>id</th>
+      <th>Latitude (average)</th>
+      <th>Longitude (average)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>ABW</td>
+      <td>414995.444</td>
+      <td>Aruba</td>
+      <td>AW</td>
+      <td>ABW</td>
+      <td>533</td>
+      <td>12.5000</td>
+      <td>-69.9667</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>AFG</td>
+      <td>5284.889</td>
+      <td>Afghanistan</td>
+      <td>AF</td>
+      <td>AFG</td>
+      <td>4</td>
+      <td>33.0000</td>
+      <td>65.0000</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>AGO</td>
+      <td>2961.140</td>
+      <td>Angola</td>
+      <td>AO</td>
+      <td>AGO</td>
+      <td>24</td>
+      <td>-12.5000</td>
+      <td>18.5000</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>AIA</td>
+      <td>245890.282</td>
+      <td>Anguilla</td>
+      <td>AI</td>
+      <td>AIA</td>
+      <td>660</td>
+      <td>18.2500</td>
+      <td>-63.1667</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>ALB</td>
+      <td>117541.387</td>
+      <td>Albania</td>
+      <td>AL</td>
+      <td>ALB</td>
+      <td>8</td>
+      <td>41.0000</td>
+      <td>20.0000</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>239</th>
+      <td>WSM</td>
+      <td>75376.591</td>
+      <td>Samoa</td>
+      <td>WS</td>
+      <td>WSM</td>
+      <td>882</td>
+      <td>-13.5833</td>
+      <td>-172.3333</td>
+    </tr>
+    <tr>
+      <th>240</th>
+      <td>YEM</td>
+      <td>354.487</td>
+      <td>Yemen</td>
+      <td>YE</td>
+      <td>YEM</td>
+      <td>887</td>
+      <td>15.0000</td>
+      <td>48.0000</td>
+    </tr>
+    <tr>
+      <th>241</th>
+      <td>ZAF</td>
+      <td>67995.807</td>
+      <td>South Africa</td>
+      <td>ZA</td>
+      <td>ZAF</td>
+      <td>710</td>
+      <td>-29.0000</td>
+      <td>24.0000</td>
+    </tr>
+    <tr>
+      <th>242</th>
+      <td>ZMB</td>
+      <td>17180.371</td>
+      <td>Zambia</td>
+      <td>ZM</td>
+      <td>ZMB</td>
+      <td>894</td>
+      <td>-15.0000</td>
+      <td>30.0000</td>
+    </tr>
+    <tr>
+      <th>243</th>
+      <td>ZWE</td>
+      <td>16223.484</td>
+      <td>Zimbabwe</td>
+      <td>ZW</td>
+      <td>ZWE</td>
+      <td>716</td>
+      <td>-20.0000</td>
+      <td>30.0000</td>
+    </tr>
+  </tbody>
+</table>
+<p>244 rows × 8 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">symbols</span> <span class="o">=</span> <span class="n">alt</span><span class="o">.</span><span class="n">Chart</span><span class="p">(</span><span class="n">merged_lookup_data</span><span class="p">)</span><span class="o">.</span><span class="n">mark_circle</span><span class="p">()</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span>
+    <span class="n">longitude</span><span class="o">=</span><span class="s1">&#39;Longitude (average)&#39;</span><span class="p">,</span>
+    <span class="n">latitude</span><span class="o">=</span><span class="s1">&#39;Latitude (average)&#39;</span><span class="p">,</span>
+    <span class="n">size</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">Size</span><span class="p">(</span><span class="s1">&#39;total_cases_per_million&#39;</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
+    <span class="n">tooltip</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Country&#39;</span><span class="p">,</span> <span class="s1">&#39;total_cases_per_million&#39;</span><span class="p">],</span>
+<span class="p">)</span><span class="o">.</span><span class="n">project</span><span class="p">(</span>
+    <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;mercator&#39;</span><span class="p">,</span>
+    <span class="n">scale</span><span class="o">=</span><span class="mi">250</span><span class="p">,</span>
+    <span class="n">center</span><span class="o">=</span><span class="p">[</span><span class="mi">20</span><span class="p">,</span><span class="mi">55</span><span class="p">],</span>
+    <span class="n">clipExtent</span><span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">400</span><span class="p">,</span> <span class="mi">300</span><span class="p">]]</span>
+<span class="p">)</span>
+
+<span class="nb">map</span> <span class="o">+</span> <span class="n">symbols</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+<div id="altair-viz-7d910e2c157a492a90859da5ee69284d"></div>
+<script type="text/javascript">
+  var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
+  (function(spec, embedOpt){
+    let outputDiv = document.currentScript.previousElementSibling;
+    if (outputDiv.id !== "altair-viz-7d910e2c157a492a90859da5ee69284d") {
+      outputDiv = document.getElementById("altair-viz-7d910e2c157a492a90859da5ee69284d");
+    }
+    const paths = {
+      "vega": "https://cdn.jsdelivr.net/npm//vega@5?noext",
+      "vega-lib": "https://cdn.jsdelivr.net/npm//vega-lib?noext",
+      "vega-lite": "https://cdn.jsdelivr.net/npm//vega-lite@4.17.0?noext",
+      "vega-embed": "https://cdn.jsdelivr.net/npm//vega-embed@6?noext",
+    };
+
+    function maybeLoadScript(lib, version) {
+      var key = `${lib.replace("-", "")}_version`;
+      return (VEGA_DEBUG[key] == version) ?
+        Promise.resolve(paths[lib]) :
+        new Promise(function(resolve, reject) {
+          var s = document.createElement('script');
+          document.getElementsByTagName("head")[0].appendChild(s);
+          s.async = true;
+          s.onload = () => {
+            VEGA_DEBUG[key] = version;
+            return resolve(paths[lib]);
+          };
+          s.onerror = () => reject(`Error loading script: ${paths[lib]}`);
+          s.src = paths[lib];
+        });
+    }
+
+    function showError(err) {
+      outputDiv.innerHTML = `<div class="error" style="color:red;">${err}</div>`;
+      throw err;
+    }
+
+    function displayChart(vegaEmbed) {
+      vegaEmbed(outputDiv, spec, embedOpt)
+        .catch(err => showError(`Javascript Error: ${err.message}<br>This usually means there's a typo in your chart specification. See the javascript console for the full traceback.`));
+    }
+
+    if(typeof define === "function" && define.amd) {
+      requirejs.config({paths});
+      require(["vega-embed"], displayChart, err => showError(`Error loading script: ${err.message}`));
+    } else {
+      maybeLoadScript("vega", "5")
+        .then(() => maybeLoadScript("vega-lite", "4.17.0"))
+        .then(() => maybeLoadScript("vega-embed", "6"))
+        .catch(showError)
+        .then(() => displayChart(vegaEmbed));
+    }
+  })({"config": {"view": {"continuousWidth": 400, "continuousHeight": 300}}, "layer": [{"data": {"url": "https://cdn.jsdelivr.net/npm/vega-datasets@v1.29.0/data/world-110m.json", "format": {"feature": "countries", "type": "topojson"}}, "mark": {"type": "geoshape", "fill": "#A9A9A9", "stroke": "white"}, "projection": {"center": [20, 55], "clipExtent": [[0, 0], [400, 300]], "scale": 250, "type": "mercator"}}, {"data": {"name": "data-b7c517a8fbb2b6ebbfa048bb7d4f2d41"}, "mark": "circle", "encoding": {"latitude": {"field": "Latitude (average)", "type": "quantitative"}, "longitude": {"field": "Longitude (average)", "type": "quantitative"}, "size": {"field": "total_cases_per_million", "legend": null, "type": "quantitative"}, "tooltip": [{"field": "Country", "type": "nominal"}, {"field": "total_cases_per_million", "type": "quantitative"}]}, "projection": {"center": [20, 55], "clipExtent": [[0, 0], [400, 300]], "scale": 250, "type": "mercator"}}], "$schema": "https://vega.github.io/schema/vega-lite/v4.17.0.json", "datasets": {"data-b7c517a8fbb2b6ebbfa048bb7d4f2d41": [{"iso_code": "ABW", "total_cases_per_million": 414995.444, "Country": "Aruba", "Alpha-2 code": "AW", "Alpha-3 code": "ABW", "id": 533, "Latitude (average)": 12.5, "Longitude (average)": -69.9667}, {"iso_code": "AFG", "total_cases_per_million": 5284.889, "Country": "Afghanistan", "Alpha-2 code": "AF", "Alpha-3 code": "AFG", "id": 4, "Latitude (average)": 33.0, "Longitude (average)": 65.0}, {"iso_code": "AGO", "total_cases_per_million": 2961.14, "Country": "Angola", "Alpha-2 code": "AO", "Alpha-3 code": "AGO", "id": 24, "Latitude (average)": -12.5, "Longitude (average)": 18.5}, {"iso_code": "AIA", "total_cases_per_million": 245890.282, "Country": "Anguilla", "Alpha-2 code": "AI", "Alpha-3 code": "AIA", "id": 660, "Latitude (average)": 18.25, "Longitude (average)": -63.1667}, {"iso_code": "ALB", "total_cases_per_million": 117541.387, "Country": "Albania", "Alpha-2 code": "AL", "Alpha-3 code": "ALB", "id": 8, "Latitude (average)": 41.0, "Longitude (average)": 20.0}, {"iso_code": "AND", "total_cases_per_million": 601367.684, "Country": "Andorra", "Alpha-2 code": "AD", "Alpha-3 code": "AND", "id": 20, "Latitude (average)": 42.5, "Longitude (average)": 1.6}, {"iso_code": "ARE", "total_cases_per_million": 112723.381, "Country": "United Arab Emirates", "Alpha-2 code": "AE", "Alpha-3 code": "ARE", "id": 784, "Latitude (average)": 24.0, "Longitude (average)": 54.0}, {"iso_code": "ARG", "total_cases_per_million": 220718.205, "Country": "Argentina", "Alpha-2 code": "AR", "Alpha-3 code": "ARG", "id": 32, "Latitude (average)": -34.0, "Longitude (average)": -64.0}, {"iso_code": "ARM", "total_cases_per_million": 161505.672, "Country": "Armenia", "Alpha-2 code": "AM", "Alpha-3 code": "ARM", "id": 51, "Latitude (average)": 40.0, "Longitude (average)": 45.0}, {"iso_code": "ASM", "total_cases_per_million": 188079.919, "Country": "American Samoa", "Alpha-2 code": "AS", "Alpha-3 code": "ASM", "id": 16, "Latitude (average)": -14.3333, "Longitude (average)": -170.0}, {"iso_code": "ATG", "total_cases_per_million": 97107.879, "Country": "Antigua and Barbuda", "Alpha-2 code": "AG", "Alpha-3 code": "ATG", "id": 28, "Latitude (average)": 17.05, "Longitude (average)": -61.8}, {"iso_code": "AUS", "total_cases_per_million": 430555.238, "Country": "Australia", "Alpha-2 code": "AU", "Alpha-3 code": "AUS", "id": 36, "Latitude (average)": -27.0, "Longitude (average)": 133.0}, {"iso_code": "AUT", "total_cases_per_million": 678916.334, "Country": "Austria", "Alpha-2 code": "AT", "Alpha-3 code": "AUT", "id": 40, "Latitude (average)": 47.3333, "Longitude (average)": 13.3333}, {"iso_code": "AZE", "total_cases_per_million": 80281.593, "Country": "Azerbaijan", "Alpha-2 code": "AZ", "Alpha-3 code": "AZE", "id": 31, "Latitude (average)": 40.5, "Longitude (average)": 47.5}, {"iso_code": "BDI", "total_cases_per_million": 4169.258, "Country": "Burundi", "Alpha-2 code": "BI", "Alpha-3 code": "BDI", "id": 108, "Latitude (average)": -3.5, "Longitude (average)": 30.0}, {"iso_code": "BEL", "total_cases_per_million": 411385.782, "Country": "Belgium", "Alpha-2 code": "BE", "Alpha-3 code": "BEL", "id": 56, "Latitude (average)": 50.8333, "Longitude (average)": 4.0}, {"iso_code": "BEN", "total_cases_per_million": 2097.977, "Country": "Benin", "Alpha-2 code": "BJ", "Alpha-3 code": "BEN", "id": 204, "Latitude (average)": 9.5, "Longitude (average)": 2.25}, {"iso_code": "BFA", "total_cases_per_million": 972.754, "Country": "Burkina Faso", "Alpha-2 code": "BF", "Alpha-3 code": "BFA", "id": 854, "Latitude (average)": 13.0, "Longitude (average)": -2.0}, {"iso_code": "BGD", "total_cases_per_million": 11907.397, "Country": "Bangladesh", "Alpha-2 code": "BD", "Alpha-3 code": "BGD", "id": 50, "Latitude (average)": 24.0, "Longitude (average)": 90.0}, {"iso_code": "BGR", "total_cases_per_million": 192466.332, "Country": "Bulgaria", "Alpha-2 code": "BG", "Alpha-3 code": "BGR", "id": 100, "Latitude (average)": 43.0, "Longitude (average)": 25.0}, {"iso_code": "BHR", "total_cases_per_million": 473167.024, "Country": "Bahrain", "Alpha-2 code": "BH", "Alpha-3 code": "BHR", "id": 48, "Latitude (average)": 26.0, "Longitude (average)": 50.55}, {"iso_code": "BHS", "total_cases_per_million": 92890.297, "Country": "Bahamas", "Alpha-2 code": "BS", "Alpha-3 code": "BHS", "id": 44, "Latitude (average)": 24.25, "Longitude (average)": -76.0}, {"iso_code": "BIH", "total_cases_per_million": 124597.576, "Country": "Bosnia and Herzegovina", "Alpha-2 code": "BA", "Alpha-3 code": "BIH", "id": 70, "Latitude (average)": 44.0, "Longitude (average)": 18.0}, {"iso_code": "BLR", "total_cases_per_million": 104251.871, "Country": "Belarus", "Alpha-2 code": "BY", "Alpha-3 code": "BLR", "id": 112, "Latitude (average)": 53.0, "Longitude (average)": 28.0}, {"iso_code": "BLZ", "total_cases_per_million": 174647.47, "Country": "Belize", "Alpha-2 code": "BZ", "Alpha-3 code": "BLZ", "id": 84, "Latitude (average)": 17.25, "Longitude (average)": -88.75}, {"iso_code": "BMU", "total_cases_per_million": 293737.443, "Country": "Bermuda", "Alpha-2 code": "BM", "Alpha-3 code": "BMU", "id": 60, "Latitude (average)": 32.3333, "Longitude (average)": -64.75}, {"iso_code": "BOL", "total_cases_per_million": 97974.381, "Country": "Bolivia,Plurinational State of", "Alpha-2 code": "BO", "Alpha-3 code": "BOL", "id": 68, "Latitude (average)": -17.0, "Longitude (average)": -65.0}, {"iso_code": "BOL", "total_cases_per_million": 97974.381, "Country": "Bolivia", "Alpha-2 code": "BO", "Alpha-3 code": "BOL", "id": 68, "Latitude (average)": -17.0, "Longitude (average)": -65.0}, {"iso_code": "BRA", "total_cases_per_million": 174108.778, "Country": "Brazil", "Alpha-2 code": "BR", "Alpha-3 code": "BRA", "id": 76, "Latitude (average)": -10.0, "Longitude (average)": -55.0}, {"iso_code": "BRB", "total_cases_per_million": 381919.147, "Country": "Barbados", "Alpha-2 code": "BB", "Alpha-3 code": "BRB", "id": 52, "Latitude (average)": 13.1667, "Longitude (average)": -59.5333}, {"iso_code": "BRN", "total_cases_per_million": 651765.471, "Country": "Brunei Darussalam", "Alpha-2 code": "BN", "Alpha-3 code": "BRN", "id": 96, "Latitude (average)": 4.5, "Longitude (average)": 114.6667}, {"iso_code": "BRN", "total_cases_per_million": 651765.471, "Country": "Brunei", "Alpha-2 code": "BN", "Alpha-3 code": "BRN", "id": 96, "Latitude (average)": 4.5, "Longitude (average)": 114.6667}, {"iso_code": "BTN", "total_cases_per_million": 80091.302, "Country": "Bhutan", "Alpha-2 code": "BT", "Alpha-3 code": "BTN", "id": 64, "Latitude (average)": 27.5, "Longitude (average)": 90.5}, {"iso_code": "BWA", "total_cases_per_million": 125406.227, "Country": "Botswana", "Alpha-2 code": "BW", "Alpha-3 code": "BWA", "id": 72, "Latitude (average)": -22.0, "Longitude (average)": 24.0}, {"iso_code": "CAF", "total_cases_per_million": 2754.363, "Country": "Central African Republic", "Alpha-2 code": "CF", "Alpha-3 code": "CAF", "id": 140, "Latitude (average)": 7.0, "Longitude (average)": 21.0}, {"iso_code": "CAN", "total_cases_per_million": 121325.381, "Country": "Canada", "Alpha-2 code": "CA", "Alpha-3 code": "CAN", "id": 124, "Latitude (average)": 60.0, "Longitude (average)": -95.0}, {"iso_code": "CHE", "total_cases_per_million": 503802.141, "Country": "Switzerland", "Alpha-2 code": "CH", "Alpha-3 code": "CHE", "id": 756, "Latitude (average)": 47.0, "Longitude (average)": 8.0}, {"iso_code": "CHL", "total_cases_per_million": 269607.13, "Country": "Chile", "Alpha-2 code": "CL", "Alpha-3 code": "CHL", "id": 152, "Latitude (average)": -30.0, "Longitude (average)": -71.0}, {"iso_code": "CHN", "total_cases_per_million": 69607.479, "Country": "China", "Alpha-2 code": "CN", "Alpha-3 code": "CHN", "id": 156, "Latitude (average)": 35.0, "Longitude (average)": 105.0}, {"iso_code": "CIV", "total_cases_per_million": 3136.516, "Country": "C\u00f4te d'Ivoire", "Alpha-2 code": "CI", "Alpha-3 code": "CIV", "id": 384, "Latitude (average)": 8.0, "Longitude (average)": -5.0}, {"iso_code": "CIV", "total_cases_per_million": 3136.516, "Country": "Ivory Coast", "Alpha-2 code": "CI", "Alpha-3 code": "CIV", "id": 384, "Latitude (average)": 8.0, "Longitude (average)": -5.0}, {"iso_code": "CMR", "total_cases_per_million": 4477.344, "Country": "Cameroon", "Alpha-2 code": "CM", "Alpha-3 code": "CMR", "id": 120, "Latitude (average)": 6.0, "Longitude (average)": 12.0}, {"iso_code": "COD", "total_cases_per_million": 973.667, "Country": "Congo,the Democratic Republic of the", "Alpha-2 code": "CD", "Alpha-3 code": "COD", "id": 180, "Latitude (average)": 0.0, "Longitude (average)": 25.0}, {"iso_code": "COG", "total_cases_per_million": 4219.462, "Country": "Congo", "Alpha-2 code": "CG", "Alpha-3 code": "COG", "id": 178, "Latitude (average)": -1.0, "Longitude (average)": 15.0}, {"iso_code": "COK", "total_cases_per_million": 414924.847, "Country": "Cook Islands", "Alpha-2 code": "CK", "Alpha-3 code": "COK", "id": 184, "Latitude (average)": -21.2333, "Longitude (average)": -159.7667}, {"iso_code": "COL", "total_cases_per_million": 122706.145, "Country": "Colombia", "Alpha-2 code": "CO", "Alpha-3 code": "COL", "id": 170, "Latitude (average)": 4.0, "Longitude (average)": -72.0}, {"iso_code": "COM", "total_cases_per_million": 10885.737, "Country": "Comoros", "Alpha-2 code": "KM", "Alpha-3 code": "COM", "id": 174, "Latitude (average)": -12.1667, "Longitude (average)": 44.25}, {"iso_code": "CPV", "total_cases_per_million": 107243.89, "Country": "Cape Verde", "Alpha-2 code": "CV", "Alpha-3 code": "CPV", "id": 132, "Latitude (average)": 16.0, "Longitude (average)": -24.0}, {"iso_code": "CRI", "total_cases_per_million": 237333.704, "Country": "Costa Rica", "Alpha-2 code": "CR", "Alpha-3 code": "CRI", "id": 188, "Latitude (average)": 10.0, "Longitude (average)": -84.0}, {"iso_code": "CUB", "total_cases_per_million": 99302.563, "Country": "Cuba", "Alpha-2 code": "CU", "Alpha-3 code": "CUB", "id": 192, "Latitude (average)": 21.5, "Longitude (average)": -80.0}, {"iso_code": "CYM", "total_cases_per_million": 457961.061, "Country": "Cayman Islands", "Alpha-2 code": "KY", "Alpha-3 code": "CYM", "id": 136, "Latitude (average)": 19.5, "Longitude (average)": -80.5}, {"iso_code": "CYP", "total_cases_per_million": 737554.506, "Country": "Cyprus", "Alpha-2 code": "CY", "Alpha-3 code": "CYP", "id": 196, "Latitude (average)": 35.0, "Longitude (average)": 33.0}, {"iso_code": "CZE", "total_cases_per_million": 442244.084, "Country": "Czech Republic", "Alpha-2 code": "CZ", "Alpha-3 code": "CZE", "id": 203, "Latitude (average)": 49.75, "Longitude (average)": 15.5}, {"iso_code": "DEU", "total_cases_per_million": 460755.088, "Country": "Germany", "Alpha-2 code": "DE", "Alpha-3 code": "DEU", "id": 276, "Latitude (average)": 51.0, "Longitude (average)": 9.0}, {"iso_code": "DJI", "total_cases_per_million": 13998.292, "Country": "Djibouti", "Alpha-2 code": "DJ", "Alpha-3 code": "DJI", "id": 262, "Latitude (average)": 11.5, "Longitude (average)": 43.0}, {"iso_code": "DMA", "total_cases_per_million": 216608.483, "Country": "Dominica", "Alpha-2 code": "DM", "Alpha-3 code": "DMA", "id": 212, "Latitude (average)": 15.4167, "Longitude (average)": -61.3333}, {"iso_code": "DNK", "total_cases_per_million": 580124.915, "Country": "Denmark", "Alpha-2 code": "DK", "Alpha-3 code": "DNK", "id": 208, "Latitude (average)": 56.0, "Longitude (average)": 10.0}, {"iso_code": "DOM", "total_cases_per_million": 58875.549, "Country": "Dominican Republic", "Alpha-2 code": "DO", "Alpha-3 code": "DOM", "id": 214, "Latitude (average)": 19.0, "Longitude (average)": -70.6667}, {"iso_code": "DZA", "total_cases_per_million": 6051.926, "Country": "Algeria", "Alpha-2 code": "DZ", "Alpha-3 code": "DZA", "id": 12, "Latitude (average)": 28.0, "Longitude (average)": 3.0}, {"iso_code": "ECU", "total_cases_per_million": 58983.717, "Country": "Ecuador", "Alpha-2 code": "EC", "Alpha-3 code": "ECU", "id": 218, "Latitude (average)": -2.0, "Longitude (average)": -77.5}, {"iso_code": "EGY", "total_cases_per_million": 4649.271, "Country": "Egypt", "Alpha-2 code": "EG", "Alpha-3 code": "EGY", "id": 818, "Latitude (average)": 27.0, "Longitude (average)": 30.0}, {"iso_code": "ERI", "total_cases_per_million": 2765.713, "Country": "Eritrea", "Alpha-2 code": "ER", "Alpha-3 code": "ERI", "id": 232, "Latitude (average)": 15.0, "Longitude (average)": 39.0}, {"iso_code": "ESH", "total_cases_per_million": null, "Country": "Western Sahara", "Alpha-2 code": "EH", "Alpha-3 code": "ESH", "id": 732, "Latitude (average)": 24.5, "Longitude (average)": -13.0}, {"iso_code": "ESP", "total_cases_per_million": 291131.692, "Country": "Spain", "Alpha-2 code": "ES", "Alpha-3 code": "ESP", "id": 724, "Latitude (average)": 40.0, "Longitude (average)": -4.0}, {"iso_code": "EST", "total_cases_per_million": 466342.499, "Country": "Estonia", "Alpha-2 code": "EE", "Alpha-3 code": "EST", "id": 233, "Latitude (average)": 59.0, "Longitude (average)": 26.0}, {"iso_code": "ETH", "total_cases_per_million": 4059.437, "Country": "Ethiopia", "Alpha-2 code": "ET", "Alpha-3 code": "ETH", "id": 231, "Latitude (average)": 8.0, "Longitude (average)": 38.0}, {"iso_code": "FIN", "total_cases_per_million": 266277.91, "Country": "Finland", "Alpha-2 code": "FI", "Alpha-3 code": "FIN", "id": 246, "Latitude (average)": 64.0, "Longitude (average)": 26.0}, {"iso_code": "FJI", "total_cases_per_million": 74127.014, "Country": "Fiji", "Alpha-2 code": "FJ", "Alpha-3 code": "FJI", "id": 242, "Latitude (average)": -18.0, "Longitude (average)": 175.0}, {"iso_code": "FLK", "total_cases_per_million": 505919.495, "Country": "Falkland Islands (Malvinas)", "Alpha-2 code": "FK", "Alpha-3 code": "FLK", "id": 238, "Latitude (average)": -51.75, "Longitude (average)": -59.0}, {"iso_code": "FRA", "total_cases_per_million": 602864.51, "Country": "France", "Alpha-2 code": "FR", "Alpha-3 code": "FRA", "id": 250, "Latitude (average)": 46.0, "Longitude (average)": 2.0}, {"iso_code": "FRO", "total_cases_per_million": 652484.139, "Country": "Faroe Islands", "Alpha-2 code": "FO", "Alpha-3 code": "FRO", "id": 234, "Latitude (average)": 62.0, "Longitude (average)": -7.0}, {"iso_code": "FSM", "total_cases_per_million": 231682.11, "Country": "Micronesia,Federated States of", "Alpha-2 code": "FM", "Alpha-3 code": "FSM", "id": 583, "Latitude (average)": 6.9167, "Longitude (average)": 158.25}, {"iso_code": "GAB", "total_cases_per_million": 20502.747, "Country": "Gabon", "Alpha-2 code": "GA", "Alpha-3 code": "GAB", "id": 266, "Latitude (average)": -1.0, "Longitude (average)": 11.75}, {"iso_code": "GBR", "total_cases_per_million": 364291.818, "Country": "United Kingdom", "Alpha-2 code": "GB", "Alpha-3 code": "GBR", "id": 826, "Latitude (average)": 54.0, "Longitude (average)": -2.0}, {"iso_code": "GEO", "total_cases_per_million": 491452.401, "Country": "Georgia", "Alpha-2 code": "GE", "Alpha-3 code": "GEO", "id": 268, "Latitude (average)": 42.0, "Longitude (average)": 43.5}, {"iso_code": "GGY", "total_cases_per_million": 557817.114, "Country": "Guernsey", "Alpha-2 code": "GG", "Alpha-3 code": "GGY", "id": 831, "Latitude (average)": 49.5, "Longitude (average)": -2.56}, {"iso_code": "GHA", "total_cases_per_million": 5127.664, "Country": "Ghana", "Alpha-2 code": "GH", "Alpha-3 code": "GHA", "id": 288, "Latitude (average)": 8.0, "Longitude (average)": -2.0}, {"iso_code": "GIB", "total_cases_per_million": 628882.7, "Country": "Gibraltar", "Alpha-2 code": "GI", "Alpha-3 code": "GIB", "id": 292, "Latitude (average)": 36.1833, "Longitude (average)": -5.3667}, {"iso_code": "GIN", "total_cases_per_million": 2775.166, "Country": "Guinea", "Alpha-2 code": "GN", "Alpha-3 code": "GIN", "id": 324, "Latitude (average)": 11.0, "Longitude (average)": -10.0}, {"iso_code": "GLP", "total_cases_per_million": 512057.752, "Country": "Guadeloupe", "Alpha-2 code": "GP", "Alpha-3 code": "GLP", "id": 312, "Latitude (average)": 16.25, "Longitude (average)": -61.5833}, {"iso_code": "GMB", "total_cases_per_million": 4665.936, "Country": "Gambia", "Alpha-2 code": "GM", "Alpha-3 code": "GMB", "id": 270, "Latitude (average)": 13.4667, "Longitude (average)": -16.5667}, {"iso_code": "GNB", "total_cases_per_million": 4565.963, "Country": "Guinea-Bissau", "Alpha-2 code": "GW", "Alpha-3 code": "GNB", "id": 624, "Latitude (average)": 12.0, "Longitude (average)": -15.0}, {"iso_code": "GNQ", "total_cases_per_million": 10227.379, "Country": "Equatorial Guinea", "Alpha-2 code": "GQ", "Alpha-3 code": "GNQ", "id": 226, "Latitude (average)": 2.0, "Longitude (average)": 10.0}, {"iso_code": "GRC", "total_cases_per_million": 580239.985, "Country": "Greece", "Alpha-2 code": "GR", "Alpha-3 code": "GRC", "id": 300, "Latitude (average)": 39.0, "Longitude (average)": 22.0}, {"iso_code": "GRD", "total_cases_per_million": 156967.615, "Country": "Grenada", "Alpha-2 code": "GD", "Alpha-3 code": "GRD", "id": 308, "Latitude (average)": 12.1167, "Longitude (average)": -61.6667}, {"iso_code": "GRL", "total_cases_per_million": 211898.609, "Country": "Greenland", "Alpha-2 code": "GL", "Alpha-3 code": "GRL", "id": 304, "Latitude (average)": 72.0, "Longitude (average)": -40.0}, {"iso_code": "GTM", "total_cases_per_million": 69985.935, "Country": "Guatemala", "Alpha-2 code": "GT", "Alpha-3 code": "GTM", "id": 320, "Latitude (average)": 15.5, "Longitude (average)": -90.25}, {"iso_code": "GUF", "total_cases_per_million": 321901.841, "Country": "French Guiana", "Alpha-2 code": "GF", "Alpha-3 code": "GUF", "id": 254, "Latitude (average)": 4.0, "Longitude (average)": -53.0}, {"iso_code": "GUM", "total_cases_per_million": 298283.299, "Country": "Guam", "Alpha-2 code": "GU", "Alpha-3 code": "GUM", "id": 316, "Latitude (average)": 13.4667, "Longitude (average)": 144.7833}, {"iso_code": "GUY", "total_cases_per_million": 90473.052, "Country": "Guyana", "Alpha-2 code": "GY", "Alpha-3 code": "GUY", "id": 328, "Latitude (average)": 5.0, "Longitude (average)": -59.0}, {"iso_code": "HKG", "total_cases_per_million": null, "Country": "Hong Kong", "Alpha-2 code": "HK", "Alpha-3 code": "HKG", "id": 344, "Latitude (average)": 22.25, "Longitude (average)": 114.1667}, {"iso_code": "HND", "total_cases_per_million": 45292.766, "Country": "Honduras", "Alpha-2 code": "HN", "Alpha-3 code": "HND", "id": 340, "Latitude (average)": 15.0, "Longitude (average)": -86.5}, {"iso_code": "HRV", "total_cases_per_million": 315916.118, "Country": "Croatia", "Alpha-2 code": "HR", "Alpha-3 code": "HRV", "id": 191, "Latitude (average)": 45.1667, "Longitude (average)": 15.5}, {"iso_code": "HTI", "total_cases_per_million": 2954.509, "Country": "Haiti", "Alpha-2 code": "HT", "Alpha-3 code": "HTI", "id": 332, "Latitude (average)": 19.0, "Longitude (average)": -72.4167}, {"iso_code": "HUN", "total_cases_per_million": 220904.67, "Country": "Hungary", "Alpha-2 code": "HU", "Alpha-3 code": "HUN", "id": 348, "Latitude (average)": 47.0, "Longitude (average)": 20.0}, {"iso_code": "IDN", "total_cases_per_million": 24650.047, "Country": "Indonesia", "Alpha-2 code": "ID", "Alpha-3 code": "IDN", "id": 360, "Latitude (average)": -5.0, "Longitude (average)": 120.0}, {"iso_code": "IMN", "total_cases_per_million": 449617.905, "Country": "Isle of Man", "Alpha-2 code": "IM", "Alpha-3 code": "IMN", "id": 833, "Latitude (average)": 54.23, "Longitude (average)": -4.55}, {"iso_code": "IND", "total_cases_per_million": 31734.161, "Country": "India", "Alpha-2 code": "IN", "Alpha-3 code": "IND", "id": 356, "Latitude (average)": 20.0, "Longitude (average)": 77.0}, {"iso_code": "IRL", "total_cases_per_million": 340551.109, "Country": "Ireland", "Alpha-2 code": "IE", "Alpha-3 code": "IRL", "id": 372, "Latitude (average)": 53.0, "Longitude (average)": -8.0}, {"iso_code": "IRN", "total_cases_per_million": 85938.715, "Country": "Iran,Islamic Republic of", "Alpha-2 code": "IR", "Alpha-3 code": "IRN", "id": 364, "Latitude (average)": 32.0, "Longitude (average)": 53.0}, {"iso_code": "IRQ", "total_cases_per_million": 55410.332, "Country": "Iraq", "Alpha-2 code": "IQ", "Alpha-3 code": "IRQ", "id": 368, "Latitude (average)": 33.0, "Longitude (average)": 44.0}, {"iso_code": "ISL", "total_cases_per_million": 560979.665, "Country": "Iceland", "Alpha-2 code": "IS", "Alpha-3 code": "ISL", "id": 352, "Latitude (average)": 65.0, "Longitude (average)": -18.0}, {"iso_code": "ISR", "total_cases_per_million": 510459.202, "Country": "Israel", "Alpha-2 code": "IL", "Alpha-3 code": "ISR", "id": 376, "Latitude (average)": 31.5, "Longitude (average)": 34.75}, {"iso_code": "ITA", "total_cases_per_million": 437166.551, "Country": "Italy", "Alpha-2 code": "IT", "Alpha-3 code": "ITA", "id": 380, "Latitude (average)": 42.8333, "Longitude (average)": 12.8333}, {"iso_code": "JAM", "total_cases_per_million": 54745.344, "Country": "Jamaica", "Alpha-2 code": "JM", "Alpha-3 code": "JAM", "id": 388, "Latitude (average)": 18.25, "Longitude (average)": -77.5}, {"iso_code": "JEY", "total_cases_per_million": 599218.383, "Country": "Jersey", "Alpha-2 code": "JE", "Alpha-3 code": "JEY", "id": 832, "Latitude (average)": 49.21, "Longitude (average)": -2.13}, {"iso_code": "JOR", "total_cases_per_million": 154794.998, "Country": "Jordan", "Alpha-2 code": "JO", "Alpha-3 code": "JOR", "id": 400, "Latitude (average)": 31.0, "Longitude (average)": 36.0}, {"iso_code": "JPN", "total_cases_per_million": 272633.857, "Country": "Japan", "Alpha-2 code": "JP", "Alpha-3 code": "JPN", "id": 392, "Latitude (average)": 36.0, "Longitude (average)": 138.0}, {"iso_code": "KAZ", "total_cases_per_million": 77474.851, "Country": "Kazakhstan", "Alpha-2 code": "KZ", "Alpha-3 code": "KAZ", "id": 398, "Latitude (average)": 48.0, "Longitude (average)": 68.0}, {"iso_code": "KEN", "total_cases_per_million": 6349.972, "Country": "Kenya", "Alpha-2 code": "KE", "Alpha-3 code": "KEN", "id": 404, "Latitude (average)": 1.0, "Longitude (average)": 38.0}, {"iso_code": "KGZ", "total_cases_per_million": 31201.904, "Country": "Kyrgyzstan", "Alpha-2 code": "KG", "Alpha-3 code": "KGZ", "id": 417, "Latitude (average)": 41.0, "Longitude (average)": 75.0}, {"iso_code": "KHM", "total_cases_per_million": 8273.869, "Country": "Cambodia", "Alpha-2 code": "KH", "Alpha-3 code": "KHM", "id": 116, "Latitude (average)": 13.0, "Longitude (average)": 105.0}, {"iso_code": "KIR", "total_cases_per_million": 38289.507, "Country": "Kiribati", "Alpha-2 code": "KI", "Alpha-3 code": "KIR", "id": 296, "Latitude (average)": 1.4167, "Longitude (average)": 173.0}, {"iso_code": "KNA", "total_cases_per_million": 138398.943, "Country": "Saint Kitts and Nevis", "Alpha-2 code": "KN", "Alpha-3 code": "KNA", "id": 659, "Latitude (average)": 17.3333, "Longitude (average)": -62.75}, {"iso_code": "KOR", "total_cases_per_million": 603790.835, "Country": "Korea,Republic of", "Alpha-2 code": "KR", "Alpha-3 code": "KOR", "id": 410, "Latitude (average)": 37.0, "Longitude (average)": 127.5}, {"iso_code": "KOR", "total_cases_per_million": 603790.835, "Country": "South Korea", "Alpha-2 code": "KR", "Alpha-3 code": "KOR", "id": 410, "Latitude (average)": 37.0, "Longitude (average)": 127.5}, {"iso_code": "KWT", "total_cases_per_million": 155977.695, "Country": "Kuwait", "Alpha-2 code": "KW", "Alpha-3 code": "KWT", "id": 414, "Latitude (average)": 29.3375, "Longitude (average)": 47.6581}, {"iso_code": "LAO", "total_cases_per_million": 28964.163, "Country": "Lao People's Democratic Republic", "Alpha-2 code": "LA", "Alpha-3 code": "LAO", "id": 418, "Latitude (average)": 18.0, "Longitude (average)": 105.0}, {"iso_code": "LBN", "total_cases_per_million": 225352.403, "Country": "Lebanon", "Alpha-2 code": "LB", "Alpha-3 code": "LBN", "id": 422, "Latitude (average)": 33.8333, "Longitude (average)": 35.8333}, {"iso_code": "LBR", "total_cases_per_million": 1525.641, "Country": "Liberia", "Alpha-2 code": "LR", "Alpha-3 code": "LBR", "id": 430, "Latitude (average)": 6.5, "Longitude (average)": -9.5}, {"iso_code": "LBY", "total_cases_per_million": 74460.714, "Country": "Libyan Arab Jamahiriya", "Alpha-2 code": "LY", "Alpha-3 code": "LBY", "id": 434, "Latitude (average)": 25.0, "Longitude (average)": 17.0}, {"iso_code": "LBY", "total_cases_per_million": 74460.714, "Country": "Libya", "Alpha-2 code": "LY", "Alpha-3 code": "LBY", "id": 434, "Latitude (average)": 25.0, "Longitude (average)": 17.0}, {"iso_code": "LCA", "total_cases_per_million": 167074.364, "Country": "Saint Lucia", "Alpha-2 code": "LC", "Alpha-3 code": "LCA", "id": 662, "Latitude (average)": 13.8833, "Longitude (average)": -61.1333}, {"iso_code": "LIE", "total_cases_per_million": 545419.896, "Country": "Liechtenstein", "Alpha-2 code": "LI", "Alpha-3 code": "LIE", "id": 438, "Latitude (average)": 47.1667, "Longitude (average)": 9.5333}, {"iso_code": "LKA", "total_cases_per_million": 30790.692, "Country": "Sri Lanka", "Alpha-2 code": "LK", "Alpha-3 code": "LKA", "id": 144, "Latitude (average)": 7.0, "Longitude (average)": 81.0}, {"iso_code": "LSO", "total_cases_per_million": 14957.764, "Country": "Lesotho", "Alpha-2 code": "LS", "Alpha-3 code": "LSO", "id": 426, "Latitude (average)": -29.5, "Longitude (average)": 28.5}, {"iso_code": "LTU", "total_cases_per_million": 479668.792, "Country": "Lithuania", "Alpha-2 code": "LT", "Alpha-3 code": "LTU", "id": 440, "Latitude (average)": 56.0, "Longitude (average)": 24.0}, {"iso_code": "LUX", "total_cases_per_million": 494068.107, "Country": "Luxembourg", "Alpha-2 code": "LU", "Alpha-3 code": "LUX", "id": 442, "Latitude (average)": 49.75, "Longitude (average)": 6.1667}, {"iso_code": "LVA", "total_cases_per_million": 528339.711, "Country": "Latvia", "Alpha-2 code": "LV", "Alpha-3 code": "LVA", "id": 428, "Latitude (average)": 57.0, "Longitude (average)": 25.0}, {"iso_code": "MAC", "total_cases_per_million": null, "Country": "Macao", "Alpha-2 code": "MO", "Alpha-3 code": "MAC", "id": 446, "Latitude (average)": 22.1667, "Longitude (average)": 113.55}, {"iso_code": "MAR", "total_cases_per_million": 34006.963, "Country": "Morocco", "Alpha-2 code": "MA", "Alpha-3 code": "MAR", "id": 504, "Latitude (average)": 32.0, "Longitude (average)": -5.0}, {"iso_code": "MCO", "total_cases_per_million": 459291.332, "Country": "Monaco", "Alpha-2 code": "MC", "Alpha-3 code": "MCO", "id": 492, "Latitude (average)": 43.7333, "Longitude (average)": 7.4}, {"iso_code": "MDA", "total_cases_per_million": 189556.776, "Country": "Moldova,Republic of", "Alpha-2 code": "MD", "Alpha-3 code": "MDA", "id": 498, "Latitude (average)": 47.0, "Longitude (average)": 29.0}, {"iso_code": "MDG", "total_cases_per_million": 2304.932, "Country": "Madagascar", "Alpha-2 code": "MG", "Alpha-3 code": "MDG", "id": 450, "Latitude (average)": -20.0, "Longitude (average)": 47.0}, {"iso_code": "MDV", "total_cases_per_million": 356102.925, "Country": "Maldives", "Alpha-2 code": "MV", "Alpha-3 code": "MDV", "id": 462, "Latitude (average)": 3.25, "Longitude (average)": 73.0}, {"iso_code": "MEX", "total_cases_per_million": 59571.204, "Country": "Mexico", "Alpha-2 code": "MX", "Alpha-3 code": "MEX", "id": 484, "Latitude (average)": 23.0, "Longitude (average)": -102.0}, {"iso_code": "MHL", "total_cases_per_million": 386627.558, "Country": "Marshall Islands", "Alpha-2 code": "MH", "Alpha-3 code": "MHL", "id": 584, "Latitude (average)": 9.0, "Longitude (average)": 168.0}, {"iso_code": "MKD", "total_cases_per_million": 166323.081, "Country": "Macedonia,the former Yugoslav Republic of", "Alpha-2 code": "MK", "Alpha-3 code": "MKD", "id": 807, "Latitude (average)": 41.8333, "Longitude (average)": 22.0}, {"iso_code": "MLI", "total_cases_per_million": 1466.964, "Country": "Mali", "Alpha-2 code": "ML", "Alpha-3 code": "MLI", "id": 466, "Latitude (average)": 17.0, "Longitude (average)": -4.0}, {"iso_code": "MLT", "total_cases_per_million": 222343.065, "Country": "Malta", "Alpha-2 code": "MT", "Alpha-3 code": "MLT", "id": 470, "Latitude (average)": 35.8333, "Longitude (average)": 14.5833}, {"iso_code": "MMR", "total_cases_per_million": 11745.959, "Country": "Myanmar", "Alpha-2 code": "MM", "Alpha-3 code": "MMR", "id": 104, "Latitude (average)": 22.0, "Longitude (average)": 98.0}, {"iso_code": "MMR", "total_cases_per_million": 11745.959, "Country": "Burma", "Alpha-2 code": "MM", "Alpha-3 code": "MMR", "id": 104, "Latitude (average)": 22.0, "Longitude (average)": 98.0}, {"iso_code": "MNE", "total_cases_per_million": 461330.416, "Country": "Montenegro", "Alpha-2 code": "ME", "Alpha-3 code": "MNE", "id": 499, "Latitude (average)": 42.0, "Longitude (average)": 19.0}, {"iso_code": "MNG", "total_cases_per_million": 296623.708, "Country": "Mongolia", "Alpha-2 code": "MN", "Alpha-3 code": "MNG", "id": 496, "Latitude (average)": 46.0, "Longitude (average)": 105.0}, {"iso_code": "MNP", "total_cases_per_million": 279360.148, "Country": "Northern Mariana Islands", "Alpha-2 code": "MP", "Alpha-3 code": "MNP", "id": 580, "Latitude (average)": 15.2, "Longitude (average)": 145.75}, {"iso_code": "MOZ", "total_cases_per_million": 7079.782, "Country": "Mozambique", "Alpha-2 code": "MZ", "Alpha-3 code": "MOZ", "id": 508, "Latitude (average)": -18.25, "Longitude (average)": 35.0}, {"iso_code": "MRT", "total_cases_per_million": 13432.229, "Country": "Mauritania", "Alpha-2 code": "MR", "Alpha-3 code": "MRT", "id": 478, "Latitude (average)": 20.0, "Longitude (average)": -12.0}, {"iso_code": "MSR", "total_cases_per_million": 317924.315, "Country": "Montserrat", "Alpha-2 code": "MS", "Alpha-3 code": "MSR", "id": 500, "Latitude (average)": 16.75, "Longitude (average)": -62.2}, {"iso_code": "MTQ", "total_cases_per_million": 625557.805, "Country": "Martinique", "Alpha-2 code": "MQ", "Alpha-3 code": "MTQ", "id": 474, "Latitude (average)": 14.6667, "Longitude (average)": -61.0}, {"iso_code": "MUS", "total_cases_per_million": 232935.84, "Country": "Mauritius", "Alpha-2 code": "MU", "Alpha-3 code": "MUS", "id": 480, "Latitude (average)": -20.2833, "Longitude (average)": 57.55}, {"iso_code": "MWI", "total_cases_per_million": 4343.868, "Country": "Malawi", "Alpha-2 code": "MW", "Alpha-3 code": "MWI", "id": 454, "Latitude (average)": -13.5, "Longitude (average)": 34.0}, {"iso_code": "MYS", "total_cases_per_million": 149667.148, "Country": "Malaysia", "Alpha-2 code": "MY", "Alpha-3 code": "MYS", "id": 458, "Latitude (average)": 2.5, "Longitude (average)": 112.5}, {"iso_code": "MYT", "total_cases_per_million": 128872.507, "Country": "Mayotte", "Alpha-2 code": "YT", "Alpha-3 code": "MYT", "id": 175, "Latitude (average)": -12.8333, "Longitude (average)": 45.1667}, {"iso_code": "NAM", "total_cases_per_million": 66700.584, "Country": "Namibia", "Alpha-2 code": null, "Alpha-3 code": "NAM", "id": 516, "Latitude (average)": -22.0, "Longitude (average)": 17.0}, {"iso_code": "NCL", "total_cases_per_million": 276101.104, "Country": "New Caledonia", "Alpha-2 code": "NC", "Alpha-3 code": "NCL", "id": 540, "Latitude (average)": -21.5, "Longitude (average)": 165.5}, {"iso_code": "NER", "total_cases_per_million": 362.981, "Country": "Niger", "Alpha-2 code": "NE", "Alpha-3 code": "NER", "id": 562, "Latitude (average)": 16.0, "Longitude (average)": 8.0}, {"iso_code": "NGA", "total_cases_per_million": 1220.25, "Country": "Nigeria", "Alpha-2 code": "NG", "Alpha-3 code": "NGA", "id": 566, "Latitude (average)": 10.0, "Longitude (average)": 8.0}, {"iso_code": "NIC", "total_cases_per_million": 2260.09, "Country": "Nicaragua", "Alpha-2 code": "NI", "Alpha-3 code": "NIC", "id": 558, "Latitude (average)": 13.0, "Longitude (average)": -85.0}, {"iso_code": "NIU", "total_cases_per_million": 382684.426, "Country": "Niue", "Alpha-2 code": "NU", "Alpha-3 code": "NIU", "id": 570, "Latitude (average)": -19.0333, "Longitude (average)": -169.8667}, {"iso_code": "NLD", "total_cases_per_million": 490227.864, "Country": "Netherlands", "Alpha-2 code": "NL", "Alpha-3 code": "NLD", "id": 528, "Latitude (average)": 52.5, "Longitude (average)": 5.75}, {"iso_code": "NOR", "total_cases_per_million": 273012.614, "Country": "Norway", "Alpha-2 code": "NO", "Alpha-3 code": "NOR", "id": 578, "Latitude (average)": 62.0, "Longitude (average)": 10.0}, {"iso_code": "NPL", "total_cases_per_million": 32839.158, "Country": "Nepal", "Alpha-2 code": "NP", "Alpha-3 code": "NPL", "id": 524, "Latitude (average)": 28.0, "Longitude (average)": 84.0}, {"iso_code": "NRU", "total_cases_per_million": 424946.813, "Country": "Nauru", "Alpha-2 code": "NR", "Alpha-3 code": "NRU", "id": 520, "Latitude (average)": -0.5333, "Longitude (average)": 166.9167}, {"iso_code": "NZL", "total_cases_per_million": 438206.819, "Country": "New Zealand", "Alpha-2 code": "NZ", "Alpha-3 code": "NZL", "id": 554, "Latitude (average)": -41.0, "Longitude (average)": 174.0}, {"iso_code": "OMN", "total_cases_per_million": 87286.454, "Country": "Oman", "Alpha-2 code": "OM", "Alpha-3 code": "OMN", "id": 512, "Latitude (average)": 21.0, "Longitude (average)": 57.0}, {"iso_code": "PAK", "total_cases_per_million": 6702.563, "Country": "Pakistan", "Alpha-2 code": "PK", "Alpha-3 code": "PAK", "id": 586, "Latitude (average)": 30.0, "Longitude (average)": 70.0}, {"iso_code": "PAN", "total_cases_per_million": 235296.519, "Country": "Panama", "Alpha-2 code": "PA", "Alpha-3 code": "PAN", "id": 591, "Latitude (average)": 9.0, "Longitude (average)": -80.0}, {"iso_code": "PCN", "total_cases_per_million": 85106.383, "Country": "Pitcairn", "Alpha-2 code": "PN", "Alpha-3 code": "PCN", "id": 612, "Latitude (average)": -24.7, "Longitude (average)": -127.4}, {"iso_code": "PER", "total_cases_per_million": 132254.816, "Country": "Peru", "Alpha-2 code": "PE", "Alpha-3 code": "PER", "id": 604, "Latitude (average)": -10.0, "Longitude (average)": -76.0}, {"iso_code": "PHL", "total_cases_per_million": 35503.835, "Country": "Philippines", "Alpha-2 code": "PH", "Alpha-3 code": "PHL", "id": 608, "Latitude (average)": 13.0, "Longitude (average)": 122.0}, {"iso_code": "PLW", "total_cases_per_million": 331785.003, "Country": "Palau", "Alpha-2 code": "PW", "Alpha-3 code": "PLW", "id": 585, "Latitude (average)": 7.5, "Longitude (average)": 134.5}, {"iso_code": "PNG", "total_cases_per_million": 4619.021, "Country": "Papua New Guinea", "Alpha-2 code": "PG", "Alpha-3 code": "PNG", "id": 598, "Latitude (average)": -6.0, "Longitude (average)": 147.0}, {"iso_code": "POL", "total_cases_per_million": 163458.701, "Country": "Poland", "Alpha-2 code": "PL", "Alpha-3 code": "POL", "id": 616, "Latitude (average)": 52.0, "Longitude (average)": 20.0}, {"iso_code": "PRI", "total_cases_per_million": 344347.211, "Country": "Puerto Rico", "Alpha-2 code": "PR", "Alpha-3 code": "PRI", "id": 630, "Latitude (average)": 18.25, "Longitude (average)": -66.5}, {"iso_code": "PRK", "total_cases_per_million": null, "Country": "Korea,Democratic People's Republic of", "Alpha-2 code": "KP", "Alpha-3 code": "PRK", "id": 408, "Latitude (average)": 40.0, "Longitude (average)": 127.0}, {"iso_code": "PRT", "total_cases_per_million": 543575.575, "Country": "Portugal", "Alpha-2 code": "PT", "Alpha-3 code": "PRT", "id": 620, "Latitude (average)": 39.5, "Longitude (average)": -8.0}, {"iso_code": "PRY", "total_cases_per_million": 108507.104, "Country": "Paraguay", "Alpha-2 code": "PY", "Alpha-3 code": "PRY", "id": 600, "Latitude (average)": -23.0, "Longitude (average)": -58.0}, {"iso_code": "PSE", "total_cases_per_million": 133946.251, "Country": "Palestinian Territory,Occupied", "Alpha-2 code": "PS", "Alpha-3 code": "PSE", "id": 275, "Latitude (average)": 32.0, "Longitude (average)": 35.25}, {"iso_code": "PYF", "total_cases_per_million": 256350.15, "Country": "French Polynesia", "Alpha-2 code": "PF", "Alpha-3 code": "PYF", "id": 258, "Latitude (average)": -15.0, "Longitude (average)": -140.0}, {"iso_code": "QAT", "total_cases_per_million": 189022.352, "Country": "Qatar", "Alpha-2 code": "QA", "Alpha-3 code": "QAT", "id": 634, "Latitude (average)": 25.5, "Longitude (average)": 51.25}, {"iso_code": "REU", "total_cases_per_million": 507765.419, "Country": "R\u00e9union", "Alpha-2 code": "RE", "Alpha-3 code": "REU", "id": 638, "Latitude (average)": -21.1, "Longitude (average)": 55.6}, {"iso_code": "ROU", "total_cases_per_million": 172812.368, "Country": "Romania", "Alpha-2 code": "RO", "Alpha-3 code": "ROU", "id": 642, "Latitude (average)": 46.0, "Longitude (average)": 25.0}, {"iso_code": "RUS", "total_cases_per_million": 158136.751, "Country": "Russian Federation", "Alpha-2 code": "RU", "Alpha-3 code": "RUS", "id": 643, "Latitude (average)": 60.0, "Longitude (average)": 100.0}, {"iso_code": "RUS", "total_cases_per_million": 158136.751, "Country": "Russia", "Alpha-2 code": "RU", "Alpha-3 code": "RUS", "id": 643, "Latitude (average)": 60.0, "Longitude (average)": 100.0}, {"iso_code": "RWA", "total_cases_per_million": 9668.061, "Country": "Rwanda", "Alpha-2 code": "RW", "Alpha-3 code": "RWA", "id": 646, "Latitude (average)": -2.0, "Longitude (average)": 30.0}, {"iso_code": "SAU", "total_cases_per_million": 23111.678, "Country": "Saudi Arabia", "Alpha-2 code": "SA", "Alpha-3 code": "SAU", "id": 682, "Latitude (average)": 25.0, "Longitude (average)": 45.0}, {"iso_code": "SDN", "total_cases_per_million": 1365.207, "Country": "Sudan", "Alpha-2 code": "SD", "Alpha-3 code": "SDN", "id": 736, "Latitude (average)": 15.0, "Longitude (average)": 30.0}, {"iso_code": "SEN", "total_cases_per_million": 5139.448, "Country": "Senegal", "Alpha-2 code": "SN", "Alpha-3 code": "SEN", "id": 686, "Latitude (average)": 14.0, "Longitude (average)": -14.0}, {"iso_code": "SGP", "total_cases_per_million": 424204.128, "Country": "Singapore", "Alpha-2 code": "SG", "Alpha-3 code": "SGP", "id": 702, "Latitude (average)": 1.3667, "Longitude (average)": 103.8}, {"iso_code": "SHN", "total_cases_per_million": 401036.845, "Country": "Saint Helena,Ascension and Tristan da Cunha", "Alpha-2 code": "SH", "Alpha-3 code": "SHN", "id": 654, "Latitude (average)": -15.9333, "Longitude (average)": -5.7}, {"iso_code": "SLB", "total_cases_per_million": 33930.623, "Country": "Solomon Islands", "Alpha-2 code": "SB", "Alpha-3 code": "SLB", "id": 90, "Latitude (average)": -8.0, "Longitude (average)": 159.0}, {"iso_code": "SLE", "total_cases_per_million": 901.958, "Country": "Sierra Leone", "Alpha-2 code": "SL", "Alpha-3 code": "SLE", "id": 694, "Latitude (average)": 8.5, "Longitude (average)": -11.5}, {"iso_code": "SLV", "total_cases_per_million": 31845.405, "Country": "El Salvador", "Alpha-2 code": "SV", "Alpha-3 code": "SLV", "id": 222, "Latitude (average)": 13.8333, "Longitude (average)": -88.9167}, {"iso_code": "SMR", "total_cases_per_million": 718610.864, "Country": "San Marino", "Alpha-2 code": "SM", "Alpha-3 code": "SMR", "id": 674, "Latitude (average)": 43.7667, "Longitude (average)": 12.4167}, {"iso_code": "SOM", "total_cases_per_million": 1553.288, "Country": "Somalia", "Alpha-2 code": "SO", "Alpha-3 code": "SOM", "id": 706, "Latitude (average)": 10.0, "Longitude (average)": 49.0}, {"iso_code": "SPM", "total_cases_per_million": 582158.029, "Country": "Saint Pierre and Miquelon", "Alpha-2 code": "PM", "Alpha-3 code": "SPM", "id": 666, "Latitude (average)": 46.8333, "Longitude (average)": -56.3333}, {"iso_code": "SRB", "total_cases_per_million": 369246.692, "Country": "Serbia", "Alpha-2 code": "RS", "Alpha-3 code": "SRB", "id": 688, "Latitude (average)": 44.0, "Longitude (average)": 21.0}, {"iso_code": "SSD", "total_cases_per_million": 1683.104, "Country": "South Sudan", "Alpha-2 code": "SS", "Alpha-3 code": "SSD", "id": 728, "Latitude (average)": 8.0, "Longitude (average)": 30.0}, {"iso_code": "STP", "total_cases_per_million": 28857.529, "Country": "Sao Tome and Principe", "Alpha-2 code": "ST", "Alpha-3 code": "STP", "id": 678, "Latitude (average)": 1.0, "Longitude (average)": 7.0}, {"iso_code": "SUR", "total_cases_per_million": 133477.12, "Country": "Suriname", "Alpha-2 code": "SR", "Alpha-3 code": "SUR", "id": 740, "Latitude (average)": 4.0, "Longitude (average)": -56.0}, {"iso_code": "SVK", "total_cases_per_million": 330763.158, "Country": "Slovakia", "Alpha-2 code": "SK", "Alpha-3 code": "SVK", "id": 703, "Latitude (average)": 48.6667, "Longitude (average)": 19.5}, {"iso_code": "SVN", "total_cases_per_million": 633877.603, "Country": "Slovenia", "Alpha-2 code": "SI", "Alpha-3 code": "SVN", "id": 705, "Latitude (average)": 46.0, "Longitude (average)": 15.0}, {"iso_code": "SWE", "total_cases_per_million": 256620.006, "Country": "Sweden", "Alpha-2 code": "SE", "Alpha-3 code": "SWE", "id": 752, "Latitude (average)": 62.0, "Longitude (average)": 15.0}, {"iso_code": "SWZ", "total_cases_per_million": 62138.007, "Country": "Swaziland", "Alpha-2 code": "SZ", "Alpha-3 code": "SWZ", "id": 748, "Latitude (average)": -26.5, "Longitude (average)": 31.5}, {"iso_code": "SYC", "total_cases_per_million": 475446.866, "Country": "Seychelles", "Alpha-2 code": "SC", "Alpha-3 code": "SYC", "id": 690, "Latitude (average)": -4.5833, "Longitude (average)": 55.6667}, {"iso_code": "SYR", "total_cases_per_million": 2595.361, "Country": "Syrian Arab Republic", "Alpha-2 code": "SY", "Alpha-3 code": "SYR", "id": 760, "Latitude (average)": 35.0, "Longitude (average)": 38.0}, {"iso_code": "TCA", "total_cases_per_million": 144075.581, "Country": "Turks and Caicos Islands", "Alpha-2 code": "TC", "Alpha-3 code": "TCA", "id": 796, "Latitude (average)": 21.75, "Longitude (average)": -71.5833}, {"iso_code": "TCD", "total_cases_per_million": 434.343, "Country": "Chad", "Alpha-2 code": "TD", "Alpha-3 code": "TCD", "id": 148, "Latitude (average)": 15.0, "Longitude (average)": 19.0}, {"iso_code": "TGO", "total_cases_per_million": 4462.802, "Country": "Togo", "Alpha-2 code": "TG", "Alpha-3 code": "TGO", "id": 768, "Latitude (average)": 8.0, "Longitude (average)": 1.1667}, {"iso_code": "THA", "total_cases_per_million": 66027.845, "Country": "Thailand", "Alpha-2 code": "TH", "Alpha-3 code": "THA", "id": 764, "Latitude (average)": 15.0, "Longitude (average)": 100.0}, {"iso_code": "TJK", "total_cases_per_million": 1787.037, "Country": "Tajikistan", "Alpha-2 code": "TJ", "Alpha-3 code": "TJK", "id": 762, "Latitude (average)": 39.0, "Longitude (average)": 71.0}, {"iso_code": "TKL", "total_cases_per_million": 2641.31, "Country": "Tokelau", "Alpha-2 code": "TK", "Alpha-3 code": "TKL", "id": 772, "Latitude (average)": -9.0, "Longitude (average)": -172.0}, {"iso_code": "TKM", "total_cases_per_million": null, "Country": "Turkmenistan", "Alpha-2 code": "TM", "Alpha-3 code": "TKM", "id": 795, "Latitude (average)": 40.0, "Longitude (average)": 60.0}, {"iso_code": "TLS", "total_cases_per_million": 17470.391, "Country": "Timor-Leste", "Alpha-2 code": "TL", "Alpha-3 code": "TLS", "id": 626, "Latitude (average)": -8.55, "Longitude (average)": 125.5167}, {"iso_code": "TON", "total_cases_per_million": 157354.469, "Country": "Tonga", "Alpha-2 code": "TO", "Alpha-3 code": "TON", "id": 776, "Latitude (average)": -20.0, "Longitude (average)": -175.0}, {"iso_code": "TTO", "total_cases_per_million": 125075.52, "Country": "Trinidad and Tobago", "Alpha-2 code": "TT", "Alpha-3 code": "TTO", "id": 780, "Latitude (average)": 11.0, "Longitude (average)": -61.0}, {"iso_code": "TUN", "total_cases_per_million": 93304.158, "Country": "Tunisia", "Alpha-2 code": "TN", "Alpha-3 code": "TUN", "id": 788, "Latitude (average)": 34.0, "Longitude (average)": 9.0}, {"iso_code": "TUR", "total_cases_per_million": 199255.078, "Country": "Turkey", "Alpha-2 code": "TR", "Alpha-3 code": "TUR", "id": 792, "Latitude (average)": 39.0, "Longitude (average)": 35.0}, {"iso_code": "TUV", "total_cases_per_million": 245169.828, "Country": "Tuvalu", "Alpha-2 code": "TV", "Alpha-3 code": "TUV", "id": 798, "Latitude (average)": -8.0, "Longitude (average)": 178.0}, {"iso_code": "TWN", "total_cases_per_million": null, "Country": "Taiwan,Province of China", "Alpha-2 code": "TW", "Alpha-3 code": "TWN", "id": 158, "Latitude (average)": 23.5, "Longitude (average)": 121.0}, {"iso_code": "TWN", "total_cases_per_million": null, "Country": "Taiwan", "Alpha-2 code": "TW", "Alpha-3 code": "TWN", "id": 158, "Latitude (average)": 23.5, "Longitude (average)": 121.0}, {"iso_code": "TZA", "total_cases_per_million": 657.702, "Country": "Tanzania,United Republic of", "Alpha-2 code": "TZ", "Alpha-3 code": "TZA", "id": 834, "Latitude (average)": -6.0, "Longitude (average)": 35.0}, {"iso_code": "UGA", "total_cases_per_million": 3612.116, "Country": "Uganda", "Alpha-2 code": "UG", "Alpha-3 code": "UGA", "id": 800, "Latitude (average)": 1.0, "Longitude (average)": 32.0}, {"iso_code": "UKR", "total_cases_per_million": 139499.086, "Country": "Ukraine", "Alpha-2 code": "UA", "Alpha-3 code": "UKR", "id": 804, "Latitude (average)": 49.0, "Longitude (average)": 32.0}, {"iso_code": "URY", "total_cases_per_million": 303229.582, "Country": "Uruguay", "Alpha-2 code": "UY", "Alpha-3 code": "URY", "id": 858, "Latitude (average)": -33.0, "Longitude (average)": -56.0}, {"iso_code": "USA", "total_cases_per_million": 305488.229, "Country": "United States", "Alpha-2 code": "US", "Alpha-3 code": "USA", "id": 840, "Latitude (average)": 38.0, "Longitude (average)": -97.0}, {"iso_code": "UZB", "total_cases_per_million": 7314.589, "Country": "Uzbekistan", "Alpha-2 code": "UZ", "Alpha-3 code": "UZB", "id": 860, "Latitude (average)": 41.0, "Longitude (average)": 64.0}, {"iso_code": "VAT", "total_cases_per_million": 32178.218, "Country": "Holy See (Vatican City State)", "Alpha-2 code": "VA", "Alpha-3 code": "VAT", "id": 336, "Latitude (average)": 41.9, "Longitude (average)": 12.45}, {"iso_code": "VCT", "total_cases_per_million": 92526.862, "Country": "Saint Vincent and the Grenadines", "Alpha-2 code": "VC", "Alpha-3 code": "VCT", "id": 670, "Latitude (average)": 13.25, "Longitude (average)": -61.2}, {"iso_code": "VCT", "total_cases_per_million": 92526.862, "Country": "Saint Vincent & the Grenadines", "Alpha-2 code": "VC", "Alpha-3 code": "VCT", "id": 670, "Latitude (average)": 13.25, "Longitude (average)": -61.2}, {"iso_code": "VCT", "total_cases_per_million": 92526.862, "Country": "St. Vincent and the Grenadines", "Alpha-2 code": "VC", "Alpha-3 code": "VCT", "id": 670, "Latitude (average)": 13.25, "Longitude (average)": -61.2}, {"iso_code": "VEN", "total_cases_per_million": 19528.686, "Country": "Venezuela,Bolivarian Republic of", "Alpha-2 code": "VE", "Alpha-3 code": "VEN", "id": 862, "Latitude (average)": 8.0, "Longitude (average)": -66.0}, {"iso_code": "VEN", "total_cases_per_million": 19528.686, "Country": "Venezuela", "Alpha-2 code": "VE", "Alpha-3 code": "VEN", "id": 862, "Latitude (average)": 8.0, "Longitude (average)": -66.0}, {"iso_code": "VGB", "total_cases_per_million": 233148.219, "Country": "Virgin Islands,British", "Alpha-2 code": "VG", "Alpha-3 code": "VGB", "id": 92, "Latitude (average)": 18.5, "Longitude (average)": -64.5}, {"iso_code": "VIR", "total_cases_per_million": 250665.97, "Country": "Virgin Islands,U.S.", "Alpha-2 code": "VI", "Alpha-3 code": "VIR", "id": 850, "Latitude (average)": 18.3333, "Longitude (average)": -64.8333}, {"iso_code": "VNM", "total_cases_per_million": 117896.463, "Country": "Viet Nam", "Alpha-2 code": "VN", "Alpha-3 code": "VNM", "id": 704, "Latitude (average)": 16.0, "Longitude (average)": 106.0}, {"iso_code": "VNM", "total_cases_per_million": 117896.463, "Country": "Vietnam", "Alpha-2 code": "VN", "Alpha-3 code": "VNM", "id": 704, "Latitude (average)": 16.0, "Longitude (average)": 106.0}, {"iso_code": "VUT", "total_cases_per_million": 36774.968, "Country": "Vanuatu", "Alpha-2 code": "VU", "Alpha-3 code": "VUT", "id": 548, "Latitude (average)": -16.0, "Longitude (average)": 167.0}, {"iso_code": "WLF", "total_cases_per_million": 295532.942, "Country": "Wallis and Futuna", "Alpha-2 code": "WF", "Alpha-3 code": "WLF", "id": 876, "Latitude (average)": -13.3, "Longitude (average)": -176.2}, {"iso_code": "WSM", "total_cases_per_million": 75376.591, "Country": "Samoa", "Alpha-2 code": "WS", "Alpha-3 code": "WSM", "id": 882, "Latitude (average)": -13.5833, "Longitude (average)": -172.3333}, {"iso_code": "YEM", "total_cases_per_million": 354.487, "Country": "Yemen", "Alpha-2 code": "YE", "Alpha-3 code": "YEM", "id": 887, "Latitude (average)": 15.0, "Longitude (average)": 48.0}, {"iso_code": "ZAF", "total_cases_per_million": 67995.807, "Country": "South Africa", "Alpha-2 code": "ZA", "Alpha-3 code": "ZAF", "id": 710, "Latitude (average)": -29.0, "Longitude (average)": 24.0}, {"iso_code": "ZMB", "total_cases_per_million": 17180.371, "Country": "Zambia", "Alpha-2 code": "ZM", "Alpha-3 code": "ZMB", "id": 894, "Latitude (average)": -15.0, "Longitude (average)": 30.0}, {"iso_code": "ZWE", "total_cases_per_million": 16223.484, "Country": "Zimbabwe", "Alpha-2 code": "ZW", "Alpha-3 code": "ZWE", "id": 716, "Latitude (average)": -20.0, "Longitude (average)": 30.0}]}}, {"mode": "vega-lite"});
+</script></div></div>
+</div>
+</section>
+<section id="choropleth-map">
+<h3>Choropleth Map<a class="headerlink" href="#choropleth-map" title="Permalink to this heading">#</a></h3>
+<p>For the first time we need to encode our data manually since we use the <code class="docutils literal notranslate"><span class="pre">transform_lookup</span></code> function and Altair cannot infer the types of the variable therefore.
+The following encodings are possible:</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p>Data Type</p></th>
+<th class="head text-center"><p>Shorthand Code</p></th>
+<th class="head text-center"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p>quantitative</p></td>
+<td class="text-center"><p>Q</p></td>
+<td class="text-center"><p>a continuous real-valued quantity</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>ordinal</p></td>
+<td class="text-center"><p>O</p></td>
+<td class="text-center"><p>a discrete ordered quantity</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>nominal</p></td>
+<td class="text-center"><p>N</p></td>
+<td class="text-center"><p>a discrete unordered category</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>temporal</p></td>
+<td class="text-center"><p>T</p></td>
+<td class="text-center"><p>a time or date value</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>geojson</p></td>
+<td class="text-center"><p>G</p></td>
+<td class="text-center"><p>a geographic shape</p></td>
+</tr>
+</tbody>
+</table>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">alt</span><span class="o">.</span><span class="n">Chart</span><span class="p">(</span><span class="n">countries</span><span class="p">)</span><span class="o">.</span><span class="n">mark_geoshape</span><span class="p">(</span>
+    <span class="n">stroke</span><span class="o">=</span><span class="s1">&#39;white&#39;</span>
+<span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span>
+    <span class="n">color</span><span class="o">=</span><span class="s1">&#39;total_cases_per_million:Q&#39;</span><span class="p">,</span>
+    <span class="n">tooltip</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Country:N&#39;</span><span class="p">,</span><span class="s1">&#39;total_cases_per_million:Q&#39;</span><span class="p">]</span>
+<span class="p">)</span><span class="o">.</span><span class="n">transform_lookup</span><span class="p">(</span>
+    <span class="n">lookup</span><span class="o">=</span><span class="s1">&#39;id&#39;</span><span class="p">,</span>
+    <span class="n">from_</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">LookupData</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">merged_lookup_data</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;total_cases_per_million&#39;</span><span class="p">,</span> <span class="s1">&#39;Country&#39;</span><span class="p">])</span>
+<span class="p">)</span><span class="o">.</span><span class="n">project</span><span class="p">(</span>
+    <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;mercator&#39;</span><span class="p">,</span>
+    <span class="n">scale</span><span class="o">=</span><span class="mi">250</span><span class="p">,</span>
+    <span class="n">center</span><span class="o">=</span><span class="p">[</span><span class="mi">20</span><span class="p">,</span><span class="mi">55</span><span class="p">],</span>
+    <span class="n">clipExtent</span><span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">400</span><span class="p">,</span> <span class="mi">300</span><span class="p">]]</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+<div id="altair-viz-0be73e1d093b4df8ada6ce3b1aa48199"></div>
+<script type="text/javascript">
+  var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
+  (function(spec, embedOpt){
+    let outputDiv = document.currentScript.previousElementSibling;
+    if (outputDiv.id !== "altair-viz-0be73e1d093b4df8ada6ce3b1aa48199") {
+      outputDiv = document.getElementById("altair-viz-0be73e1d093b4df8ada6ce3b1aa48199");
+    }
+    const paths = {
+      "vega": "https://cdn.jsdelivr.net/npm//vega@5?noext",
+      "vega-lib": "https://cdn.jsdelivr.net/npm//vega-lib?noext",
+      "vega-lite": "https://cdn.jsdelivr.net/npm//vega-lite@4.17.0?noext",
+      "vega-embed": "https://cdn.jsdelivr.net/npm//vega-embed@6?noext",
+    };
+
+    function maybeLoadScript(lib, version) {
+      var key = `${lib.replace("-", "")}_version`;
+      return (VEGA_DEBUG[key] == version) ?
+        Promise.resolve(paths[lib]) :
+        new Promise(function(resolve, reject) {
+          var s = document.createElement('script');
+          document.getElementsByTagName("head")[0].appendChild(s);
+          s.async = true;
+          s.onload = () => {
+            VEGA_DEBUG[key] = version;
+            return resolve(paths[lib]);
+          };
+          s.onerror = () => reject(`Error loading script: ${paths[lib]}`);
+          s.src = paths[lib];
+        });
+    }
+
+    function showError(err) {
+      outputDiv.innerHTML = `<div class="error" style="color:red;">${err}</div>`;
+      throw err;
+    }
+
+    function displayChart(vegaEmbed) {
+      vegaEmbed(outputDiv, spec, embedOpt)
+        .catch(err => showError(`Javascript Error: ${err.message}<br>This usually means there's a typo in your chart specification. See the javascript console for the full traceback.`));
+    }
+
+    if(typeof define === "function" && define.amd) {
+      requirejs.config({paths});
+      require(["vega-embed"], displayChart, err => showError(`Error loading script: ${err.message}`));
+    } else {
+      maybeLoadScript("vega", "5")
+        .then(() => maybeLoadScript("vega-lite", "4.17.0"))
+        .then(() => maybeLoadScript("vega-embed", "6"))
+        .catch(showError)
+        .then(() => displayChart(vegaEmbed));
+    }
+  })({"config": {"view": {"continuousWidth": 400, "continuousHeight": 300}}, "data": {"url": "https://cdn.jsdelivr.net/npm/vega-datasets@v1.29.0/data/world-110m.json", "format": {"feature": "countries", "type": "topojson"}}, "mark": {"type": "geoshape", "stroke": "white"}, "encoding": {"color": {"field": "total_cases_per_million", "type": "quantitative"}, "tooltip": [{"field": "Country", "type": "nominal"}, {"field": "total_cases_per_million", "type": "quantitative"}]}, "projection": {"center": [20, 55], "clipExtent": [[0, 0], [400, 300]], "scale": 250, "type": "mercator"}, "transform": [{"lookup": "id", "from": {"data": {"name": "data-b7c517a8fbb2b6ebbfa048bb7d4f2d41"}, "key": "id", "fields": ["total_cases_per_million", "Country"]}}], "$schema": "https://vega.github.io/schema/vega-lite/v4.17.0.json", "datasets": {"data-b7c517a8fbb2b6ebbfa048bb7d4f2d41": [{"iso_code": "ABW", "total_cases_per_million": 414995.444, "Country": "Aruba", "Alpha-2 code": "AW", "Alpha-3 code": "ABW", "id": 533, "Latitude (average)": 12.5, "Longitude (average)": -69.9667}, {"iso_code": "AFG", "total_cases_per_million": 5284.889, "Country": "Afghanistan", "Alpha-2 code": "AF", "Alpha-3 code": "AFG", "id": 4, "Latitude (average)": 33.0, "Longitude (average)": 65.0}, {"iso_code": "AGO", "total_cases_per_million": 2961.14, "Country": "Angola", "Alpha-2 code": "AO", "Alpha-3 code": "AGO", "id": 24, "Latitude (average)": -12.5, "Longitude (average)": 18.5}, {"iso_code": "AIA", "total_cases_per_million": 245890.282, "Country": "Anguilla", "Alpha-2 code": "AI", "Alpha-3 code": "AIA", "id": 660, "Latitude (average)": 18.25, "Longitude (average)": -63.1667}, {"iso_code": "ALB", "total_cases_per_million": 117541.387, "Country": "Albania", "Alpha-2 code": "AL", "Alpha-3 code": "ALB", "id": 8, "Latitude (average)": 41.0, "Longitude (average)": 20.0}, {"iso_code": "AND", "total_cases_per_million": 601367.684, "Country": "Andorra", "Alpha-2 code": "AD", "Alpha-3 code": "AND", "id": 20, "Latitude (average)": 42.5, "Longitude (average)": 1.6}, {"iso_code": "ARE", "total_cases_per_million": 112723.381, "Country": "United Arab Emirates", "Alpha-2 code": "AE", "Alpha-3 code": "ARE", "id": 784, "Latitude (average)": 24.0, "Longitude (average)": 54.0}, {"iso_code": "ARG", "total_cases_per_million": 220718.205, "Country": "Argentina", "Alpha-2 code": "AR", "Alpha-3 code": "ARG", "id": 32, "Latitude (average)": -34.0, "Longitude (average)": -64.0}, {"iso_code": "ARM", "total_cases_per_million": 161505.672, "Country": "Armenia", "Alpha-2 code": "AM", "Alpha-3 code": "ARM", "id": 51, "Latitude (average)": 40.0, "Longitude (average)": 45.0}, {"iso_code": "ASM", "total_cases_per_million": 188079.919, "Country": "American Samoa", "Alpha-2 code": "AS", "Alpha-3 code": "ASM", "id": 16, "Latitude (average)": -14.3333, "Longitude (average)": -170.0}, {"iso_code": "ATG", "total_cases_per_million": 97107.879, "Country": "Antigua and Barbuda", "Alpha-2 code": "AG", "Alpha-3 code": "ATG", "id": 28, "Latitude (average)": 17.05, "Longitude (average)": -61.8}, {"iso_code": "AUS", "total_cases_per_million": 430555.238, "Country": "Australia", "Alpha-2 code": "AU", "Alpha-3 code": "AUS", "id": 36, "Latitude (average)": -27.0, "Longitude (average)": 133.0}, {"iso_code": "AUT", "total_cases_per_million": 678916.334, "Country": "Austria", "Alpha-2 code": "AT", "Alpha-3 code": "AUT", "id": 40, "Latitude (average)": 47.3333, "Longitude (average)": 13.3333}, {"iso_code": "AZE", "total_cases_per_million": 80281.593, "Country": "Azerbaijan", "Alpha-2 code": "AZ", "Alpha-3 code": "AZE", "id": 31, "Latitude (average)": 40.5, "Longitude (average)": 47.5}, {"iso_code": "BDI", "total_cases_per_million": 4169.258, "Country": "Burundi", "Alpha-2 code": "BI", "Alpha-3 code": "BDI", "id": 108, "Latitude (average)": -3.5, "Longitude (average)": 30.0}, {"iso_code": "BEL", "total_cases_per_million": 411385.782, "Country": "Belgium", "Alpha-2 code": "BE", "Alpha-3 code": "BEL", "id": 56, "Latitude (average)": 50.8333, "Longitude (average)": 4.0}, {"iso_code": "BEN", "total_cases_per_million": 2097.977, "Country": "Benin", "Alpha-2 code": "BJ", "Alpha-3 code": "BEN", "id": 204, "Latitude (average)": 9.5, "Longitude (average)": 2.25}, {"iso_code": "BFA", "total_cases_per_million": 972.754, "Country": "Burkina Faso", "Alpha-2 code": "BF", "Alpha-3 code": "BFA", "id": 854, "Latitude (average)": 13.0, "Longitude (average)": -2.0}, {"iso_code": "BGD", "total_cases_per_million": 11907.397, "Country": "Bangladesh", "Alpha-2 code": "BD", "Alpha-3 code": "BGD", "id": 50, "Latitude (average)": 24.0, "Longitude (average)": 90.0}, {"iso_code": "BGR", "total_cases_per_million": 192466.332, "Country": "Bulgaria", "Alpha-2 code": "BG", "Alpha-3 code": "BGR", "id": 100, "Latitude (average)": 43.0, "Longitude (average)": 25.0}, {"iso_code": "BHR", "total_cases_per_million": 473167.024, "Country": "Bahrain", "Alpha-2 code": "BH", "Alpha-3 code": "BHR", "id": 48, "Latitude (average)": 26.0, "Longitude (average)": 50.55}, {"iso_code": "BHS", "total_cases_per_million": 92890.297, "Country": "Bahamas", "Alpha-2 code": "BS", "Alpha-3 code": "BHS", "id": 44, "Latitude (average)": 24.25, "Longitude (average)": -76.0}, {"iso_code": "BIH", "total_cases_per_million": 124597.576, "Country": "Bosnia and Herzegovina", "Alpha-2 code": "BA", "Alpha-3 code": "BIH", "id": 70, "Latitude (average)": 44.0, "Longitude (average)": 18.0}, {"iso_code": "BLR", "total_cases_per_million": 104251.871, "Country": "Belarus", "Alpha-2 code": "BY", "Alpha-3 code": "BLR", "id": 112, "Latitude (average)": 53.0, "Longitude (average)": 28.0}, {"iso_code": "BLZ", "total_cases_per_million": 174647.47, "Country": "Belize", "Alpha-2 code": "BZ", "Alpha-3 code": "BLZ", "id": 84, "Latitude (average)": 17.25, "Longitude (average)": -88.75}, {"iso_code": "BMU", "total_cases_per_million": 293737.443, "Country": "Bermuda", "Alpha-2 code": "BM", "Alpha-3 code": "BMU", "id": 60, "Latitude (average)": 32.3333, "Longitude (average)": -64.75}, {"iso_code": "BOL", "total_cases_per_million": 97974.381, "Country": "Bolivia,Plurinational State of", "Alpha-2 code": "BO", "Alpha-3 code": "BOL", "id": 68, "Latitude (average)": -17.0, "Longitude (average)": -65.0}, {"iso_code": "BOL", "total_cases_per_million": 97974.381, "Country": "Bolivia", "Alpha-2 code": "BO", "Alpha-3 code": "BOL", "id": 68, "Latitude (average)": -17.0, "Longitude (average)": -65.0}, {"iso_code": "BRA", "total_cases_per_million": 174108.778, "Country": "Brazil", "Alpha-2 code": "BR", "Alpha-3 code": "BRA", "id": 76, "Latitude (average)": -10.0, "Longitude (average)": -55.0}, {"iso_code": "BRB", "total_cases_per_million": 381919.147, "Country": "Barbados", "Alpha-2 code": "BB", "Alpha-3 code": "BRB", "id": 52, "Latitude (average)": 13.1667, "Longitude (average)": -59.5333}, {"iso_code": "BRN", "total_cases_per_million": 651765.471, "Country": "Brunei Darussalam", "Alpha-2 code": "BN", "Alpha-3 code": "BRN", "id": 96, "Latitude (average)": 4.5, "Longitude (average)": 114.6667}, {"iso_code": "BRN", "total_cases_per_million": 651765.471, "Country": "Brunei", "Alpha-2 code": "BN", "Alpha-3 code": "BRN", "id": 96, "Latitude (average)": 4.5, "Longitude (average)": 114.6667}, {"iso_code": "BTN", "total_cases_per_million": 80091.302, "Country": "Bhutan", "Alpha-2 code": "BT", "Alpha-3 code": "BTN", "id": 64, "Latitude (average)": 27.5, "Longitude (average)": 90.5}, {"iso_code": "BWA", "total_cases_per_million": 125406.227, "Country": "Botswana", "Alpha-2 code": "BW", "Alpha-3 code": "BWA", "id": 72, "Latitude (average)": -22.0, "Longitude (average)": 24.0}, {"iso_code": "CAF", "total_cases_per_million": 2754.363, "Country": "Central African Republic", "Alpha-2 code": "CF", "Alpha-3 code": "CAF", "id": 140, "Latitude (average)": 7.0, "Longitude (average)": 21.0}, {"iso_code": "CAN", "total_cases_per_million": 121325.381, "Country": "Canada", "Alpha-2 code": "CA", "Alpha-3 code": "CAN", "id": 124, "Latitude (average)": 60.0, "Longitude (average)": -95.0}, {"iso_code": "CHE", "total_cases_per_million": 503802.141, "Country": "Switzerland", "Alpha-2 code": "CH", "Alpha-3 code": "CHE", "id": 756, "Latitude (average)": 47.0, "Longitude (average)": 8.0}, {"iso_code": "CHL", "total_cases_per_million": 269607.13, "Country": "Chile", "Alpha-2 code": "CL", "Alpha-3 code": "CHL", "id": 152, "Latitude (average)": -30.0, "Longitude (average)": -71.0}, {"iso_code": "CHN", "total_cases_per_million": 69607.479, "Country": "China", "Alpha-2 code": "CN", "Alpha-3 code": "CHN", "id": 156, "Latitude (average)": 35.0, "Longitude (average)": 105.0}, {"iso_code": "CIV", "total_cases_per_million": 3136.516, "Country": "C\u00f4te d'Ivoire", "Alpha-2 code": "CI", "Alpha-3 code": "CIV", "id": 384, "Latitude (average)": 8.0, "Longitude (average)": -5.0}, {"iso_code": "CIV", "total_cases_per_million": 3136.516, "Country": "Ivory Coast", "Alpha-2 code": "CI", "Alpha-3 code": "CIV", "id": 384, "Latitude (average)": 8.0, "Longitude (average)": -5.0}, {"iso_code": "CMR", "total_cases_per_million": 4477.344, "Country": "Cameroon", "Alpha-2 code": "CM", "Alpha-3 code": "CMR", "id": 120, "Latitude (average)": 6.0, "Longitude (average)": 12.0}, {"iso_code": "COD", "total_cases_per_million": 973.667, "Country": "Congo,the Democratic Republic of the", "Alpha-2 code": "CD", "Alpha-3 code": "COD", "id": 180, "Latitude (average)": 0.0, "Longitude (average)": 25.0}, {"iso_code": "COG", "total_cases_per_million": 4219.462, "Country": "Congo", "Alpha-2 code": "CG", "Alpha-3 code": "COG", "id": 178, "Latitude (average)": -1.0, "Longitude (average)": 15.0}, {"iso_code": "COK", "total_cases_per_million": 414924.847, "Country": "Cook Islands", "Alpha-2 code": "CK", "Alpha-3 code": "COK", "id": 184, "Latitude (average)": -21.2333, "Longitude (average)": -159.7667}, {"iso_code": "COL", "total_cases_per_million": 122706.145, "Country": "Colombia", "Alpha-2 code": "CO", "Alpha-3 code": "COL", "id": 170, "Latitude (average)": 4.0, "Longitude (average)": -72.0}, {"iso_code": "COM", "total_cases_per_million": 10885.737, "Country": "Comoros", "Alpha-2 code": "KM", "Alpha-3 code": "COM", "id": 174, "Latitude (average)": -12.1667, "Longitude (average)": 44.25}, {"iso_code": "CPV", "total_cases_per_million": 107243.89, "Country": "Cape Verde", "Alpha-2 code": "CV", "Alpha-3 code": "CPV", "id": 132, "Latitude (average)": 16.0, "Longitude (average)": -24.0}, {"iso_code": "CRI", "total_cases_per_million": 237333.704, "Country": "Costa Rica", "Alpha-2 code": "CR", "Alpha-3 code": "CRI", "id": 188, "Latitude (average)": 10.0, "Longitude (average)": -84.0}, {"iso_code": "CUB", "total_cases_per_million": 99302.563, "Country": "Cuba", "Alpha-2 code": "CU", "Alpha-3 code": "CUB", "id": 192, "Latitude (average)": 21.5, "Longitude (average)": -80.0}, {"iso_code": "CYM", "total_cases_per_million": 457961.061, "Country": "Cayman Islands", "Alpha-2 code": "KY", "Alpha-3 code": "CYM", "id": 136, "Latitude (average)": 19.5, "Longitude (average)": -80.5}, {"iso_code": "CYP", "total_cases_per_million": 737554.506, "Country": "Cyprus", "Alpha-2 code": "CY", "Alpha-3 code": "CYP", "id": 196, "Latitude (average)": 35.0, "Longitude (average)": 33.0}, {"iso_code": "CZE", "total_cases_per_million": 442244.084, "Country": "Czech Republic", "Alpha-2 code": "CZ", "Alpha-3 code": "CZE", "id": 203, "Latitude (average)": 49.75, "Longitude (average)": 15.5}, {"iso_code": "DEU", "total_cases_per_million": 460755.088, "Country": "Germany", "Alpha-2 code": "DE", "Alpha-3 code": "DEU", "id": 276, "Latitude (average)": 51.0, "Longitude (average)": 9.0}, {"iso_code": "DJI", "total_cases_per_million": 13998.292, "Country": "Djibouti", "Alpha-2 code": "DJ", "Alpha-3 code": "DJI", "id": 262, "Latitude (average)": 11.5, "Longitude (average)": 43.0}, {"iso_code": "DMA", "total_cases_per_million": 216608.483, "Country": "Dominica", "Alpha-2 code": "DM", "Alpha-3 code": "DMA", "id": 212, "Latitude (average)": 15.4167, "Longitude (average)": -61.3333}, {"iso_code": "DNK", "total_cases_per_million": 580124.915, "Country": "Denmark", "Alpha-2 code": "DK", "Alpha-3 code": "DNK", "id": 208, "Latitude (average)": 56.0, "Longitude (average)": 10.0}, {"iso_code": "DOM", "total_cases_per_million": 58875.549, "Country": "Dominican Republic", "Alpha-2 code": "DO", "Alpha-3 code": "DOM", "id": 214, "Latitude (average)": 19.0, "Longitude (average)": -70.6667}, {"iso_code": "DZA", "total_cases_per_million": 6051.926, "Country": "Algeria", "Alpha-2 code": "DZ", "Alpha-3 code": "DZA", "id": 12, "Latitude (average)": 28.0, "Longitude (average)": 3.0}, {"iso_code": "ECU", "total_cases_per_million": 58983.717, "Country": "Ecuador", "Alpha-2 code": "EC", "Alpha-3 code": "ECU", "id": 218, "Latitude (average)": -2.0, "Longitude (average)": -77.5}, {"iso_code": "EGY", "total_cases_per_million": 4649.271, "Country": "Egypt", "Alpha-2 code": "EG", "Alpha-3 code": "EGY", "id": 818, "Latitude (average)": 27.0, "Longitude (average)": 30.0}, {"iso_code": "ERI", "total_cases_per_million": 2765.713, "Country": "Eritrea", "Alpha-2 code": "ER", "Alpha-3 code": "ERI", "id": 232, "Latitude (average)": 15.0, "Longitude (average)": 39.0}, {"iso_code": "ESH", "total_cases_per_million": null, "Country": "Western Sahara", "Alpha-2 code": "EH", "Alpha-3 code": "ESH", "id": 732, "Latitude (average)": 24.5, "Longitude (average)": -13.0}, {"iso_code": "ESP", "total_cases_per_million": 291131.692, "Country": "Spain", "Alpha-2 code": "ES", "Alpha-3 code": "ESP", "id": 724, "Latitude (average)": 40.0, "Longitude (average)": -4.0}, {"iso_code": "EST", "total_cases_per_million": 466342.499, "Country": "Estonia", "Alpha-2 code": "EE", "Alpha-3 code": "EST", "id": 233, "Latitude (average)": 59.0, "Longitude (average)": 26.0}, {"iso_code": "ETH", "total_cases_per_million": 4059.437, "Country": "Ethiopia", "Alpha-2 code": "ET", "Alpha-3 code": "ETH", "id": 231, "Latitude (average)": 8.0, "Longitude (average)": 38.0}, {"iso_code": "FIN", "total_cases_per_million": 266277.91, "Country": "Finland", "Alpha-2 code": "FI", "Alpha-3 code": "FIN", "id": 246, "Latitude (average)": 64.0, "Longitude (average)": 26.0}, {"iso_code": "FJI", "total_cases_per_million": 74127.014, "Country": "Fiji", "Alpha-2 code": "FJ", "Alpha-3 code": "FJI", "id": 242, "Latitude (average)": -18.0, "Longitude (average)": 175.0}, {"iso_code": "FLK", "total_cases_per_million": 505919.495, "Country": "Falkland Islands (Malvinas)", "Alpha-2 code": "FK", "Alpha-3 code": "FLK", "id": 238, "Latitude (average)": -51.75, "Longitude (average)": -59.0}, {"iso_code": "FRA", "total_cases_per_million": 602864.51, "Country": "France", "Alpha-2 code": "FR", "Alpha-3 code": "FRA", "id": 250, "Latitude (average)": 46.0, "Longitude (average)": 2.0}, {"iso_code": "FRO", "total_cases_per_million": 652484.139, "Country": "Faroe Islands", "Alpha-2 code": "FO", "Alpha-3 code": "FRO", "id": 234, "Latitude (average)": 62.0, "Longitude (average)": -7.0}, {"iso_code": "FSM", "total_cases_per_million": 231682.11, "Country": "Micronesia,Federated States of", "Alpha-2 code": "FM", "Alpha-3 code": "FSM", "id": 583, "Latitude (average)": 6.9167, "Longitude (average)": 158.25}, {"iso_code": "GAB", "total_cases_per_million": 20502.747, "Country": "Gabon", "Alpha-2 code": "GA", "Alpha-3 code": "GAB", "id": 266, "Latitude (average)": -1.0, "Longitude (average)": 11.75}, {"iso_code": "GBR", "total_cases_per_million": 364291.818, "Country": "United Kingdom", "Alpha-2 code": "GB", "Alpha-3 code": "GBR", "id": 826, "Latitude (average)": 54.0, "Longitude (average)": -2.0}, {"iso_code": "GEO", "total_cases_per_million": 491452.401, "Country": "Georgia", "Alpha-2 code": "GE", "Alpha-3 code": "GEO", "id": 268, "Latitude (average)": 42.0, "Longitude (average)": 43.5}, {"iso_code": "GGY", "total_cases_per_million": 557817.114, "Country": "Guernsey", "Alpha-2 code": "GG", "Alpha-3 code": "GGY", "id": 831, "Latitude (average)": 49.5, "Longitude (average)": -2.56}, {"iso_code": "GHA", "total_cases_per_million": 5127.664, "Country": "Ghana", "Alpha-2 code": "GH", "Alpha-3 code": "GHA", "id": 288, "Latitude (average)": 8.0, "Longitude (average)": -2.0}, {"iso_code": "GIB", "total_cases_per_million": 628882.7, "Country": "Gibraltar", "Alpha-2 code": "GI", "Alpha-3 code": "GIB", "id": 292, "Latitude (average)": 36.1833, "Longitude (average)": -5.3667}, {"iso_code": "GIN", "total_cases_per_million": 2775.166, "Country": "Guinea", "Alpha-2 code": "GN", "Alpha-3 code": "GIN", "id": 324, "Latitude (average)": 11.0, "Longitude (average)": -10.0}, {"iso_code": "GLP", "total_cases_per_million": 512057.752, "Country": "Guadeloupe", "Alpha-2 code": "GP", "Alpha-3 code": "GLP", "id": 312, "Latitude (average)": 16.25, "Longitude (average)": -61.5833}, {"iso_code": "GMB", "total_cases_per_million": 4665.936, "Country": "Gambia", "Alpha-2 code": "GM", "Alpha-3 code": "GMB", "id": 270, "Latitude (average)": 13.4667, "Longitude (average)": -16.5667}, {"iso_code": "GNB", "total_cases_per_million": 4565.963, "Country": "Guinea-Bissau", "Alpha-2 code": "GW", "Alpha-3 code": "GNB", "id": 624, "Latitude (average)": 12.0, "Longitude (average)": -15.0}, {"iso_code": "GNQ", "total_cases_per_million": 10227.379, "Country": "Equatorial Guinea", "Alpha-2 code": "GQ", "Alpha-3 code": "GNQ", "id": 226, "Latitude (average)": 2.0, "Longitude (average)": 10.0}, {"iso_code": "GRC", "total_cases_per_million": 580239.985, "Country": "Greece", "Alpha-2 code": "GR", "Alpha-3 code": "GRC", "id": 300, "Latitude (average)": 39.0, "Longitude (average)": 22.0}, {"iso_code": "GRD", "total_cases_per_million": 156967.615, "Country": "Grenada", "Alpha-2 code": "GD", "Alpha-3 code": "GRD", "id": 308, "Latitude (average)": 12.1167, "Longitude (average)": -61.6667}, {"iso_code": "GRL", "total_cases_per_million": 211898.609, "Country": "Greenland", "Alpha-2 code": "GL", "Alpha-3 code": "GRL", "id": 304, "Latitude (average)": 72.0, "Longitude (average)": -40.0}, {"iso_code": "GTM", "total_cases_per_million": 69985.935, "Country": "Guatemala", "Alpha-2 code": "GT", "Alpha-3 code": "GTM", "id": 320, "Latitude (average)": 15.5, "Longitude (average)": -90.25}, {"iso_code": "GUF", "total_cases_per_million": 321901.841, "Country": "French Guiana", "Alpha-2 code": "GF", "Alpha-3 code": "GUF", "id": 254, "Latitude (average)": 4.0, "Longitude (average)": -53.0}, {"iso_code": "GUM", "total_cases_per_million": 298283.299, "Country": "Guam", "Alpha-2 code": "GU", "Alpha-3 code": "GUM", "id": 316, "Latitude (average)": 13.4667, "Longitude (average)": 144.7833}, {"iso_code": "GUY", "total_cases_per_million": 90473.052, "Country": "Guyana", "Alpha-2 code": "GY", "Alpha-3 code": "GUY", "id": 328, "Latitude (average)": 5.0, "Longitude (average)": -59.0}, {"iso_code": "HKG", "total_cases_per_million": null, "Country": "Hong Kong", "Alpha-2 code": "HK", "Alpha-3 code": "HKG", "id": 344, "Latitude (average)": 22.25, "Longitude (average)": 114.1667}, {"iso_code": "HND", "total_cases_per_million": 45292.766, "Country": "Honduras", "Alpha-2 code": "HN", "Alpha-3 code": "HND", "id": 340, "Latitude (average)": 15.0, "Longitude (average)": -86.5}, {"iso_code": "HRV", "total_cases_per_million": 315916.118, "Country": "Croatia", "Alpha-2 code": "HR", "Alpha-3 code": "HRV", "id": 191, "Latitude (average)": 45.1667, "Longitude (average)": 15.5}, {"iso_code": "HTI", "total_cases_per_million": 2954.509, "Country": "Haiti", "Alpha-2 code": "HT", "Alpha-3 code": "HTI", "id": 332, "Latitude (average)": 19.0, "Longitude (average)": -72.4167}, {"iso_code": "HUN", "total_cases_per_million": 220904.67, "Country": "Hungary", "Alpha-2 code": "HU", "Alpha-3 code": "HUN", "id": 348, "Latitude (average)": 47.0, "Longitude (average)": 20.0}, {"iso_code": "IDN", "total_cases_per_million": 24650.047, "Country": "Indonesia", "Alpha-2 code": "ID", "Alpha-3 code": "IDN", "id": 360, "Latitude (average)": -5.0, "Longitude (average)": 120.0}, {"iso_code": "IMN", "total_cases_per_million": 449617.905, "Country": "Isle of Man", "Alpha-2 code": "IM", "Alpha-3 code": "IMN", "id": 833, "Latitude (average)": 54.23, "Longitude (average)": -4.55}, {"iso_code": "IND", "total_cases_per_million": 31734.161, "Country": "India", "Alpha-2 code": "IN", "Alpha-3 code": "IND", "id": 356, "Latitude (average)": 20.0, "Longitude (average)": 77.0}, {"iso_code": "IRL", "total_cases_per_million": 340551.109, "Country": "Ireland", "Alpha-2 code": "IE", "Alpha-3 code": "IRL", "id": 372, "Latitude (average)": 53.0, "Longitude (average)": -8.0}, {"iso_code": "IRN", "total_cases_per_million": 85938.715, "Country": "Iran,Islamic Republic of", "Alpha-2 code": "IR", "Alpha-3 code": "IRN", "id": 364, "Latitude (average)": 32.0, "Longitude (average)": 53.0}, {"iso_code": "IRQ", "total_cases_per_million": 55410.332, "Country": "Iraq", "Alpha-2 code": "IQ", "Alpha-3 code": "IRQ", "id": 368, "Latitude (average)": 33.0, "Longitude (average)": 44.0}, {"iso_code": "ISL", "total_cases_per_million": 560979.665, "Country": "Iceland", "Alpha-2 code": "IS", "Alpha-3 code": "ISL", "id": 352, "Latitude (average)": 65.0, "Longitude (average)": -18.0}, {"iso_code": "ISR", "total_cases_per_million": 510459.202, "Country": "Israel", "Alpha-2 code": "IL", "Alpha-3 code": "ISR", "id": 376, "Latitude (average)": 31.5, "Longitude (average)": 34.75}, {"iso_code": "ITA", "total_cases_per_million": 437166.551, "Country": "Italy", "Alpha-2 code": "IT", "Alpha-3 code": "ITA", "id": 380, "Latitude (average)": 42.8333, "Longitude (average)": 12.8333}, {"iso_code": "JAM", "total_cases_per_million": 54745.344, "Country": "Jamaica", "Alpha-2 code": "JM", "Alpha-3 code": "JAM", "id": 388, "Latitude (average)": 18.25, "Longitude (average)": -77.5}, {"iso_code": "JEY", "total_cases_per_million": 599218.383, "Country": "Jersey", "Alpha-2 code": "JE", "Alpha-3 code": "JEY", "id": 832, "Latitude (average)": 49.21, "Longitude (average)": -2.13}, {"iso_code": "JOR", "total_cases_per_million": 154794.998, "Country": "Jordan", "Alpha-2 code": "JO", "Alpha-3 code": "JOR", "id": 400, "Latitude (average)": 31.0, "Longitude (average)": 36.0}, {"iso_code": "JPN", "total_cases_per_million": 272633.857, "Country": "Japan", "Alpha-2 code": "JP", "Alpha-3 code": "JPN", "id": 392, "Latitude (average)": 36.0, "Longitude (average)": 138.0}, {"iso_code": "KAZ", "total_cases_per_million": 77474.851, "Country": "Kazakhstan", "Alpha-2 code": "KZ", "Alpha-3 code": "KAZ", "id": 398, "Latitude (average)": 48.0, "Longitude (average)": 68.0}, {"iso_code": "KEN", "total_cases_per_million": 6349.972, "Country": "Kenya", "Alpha-2 code": "KE", "Alpha-3 code": "KEN", "id": 404, "Latitude (average)": 1.0, "Longitude (average)": 38.0}, {"iso_code": "KGZ", "total_cases_per_million": 31201.904, "Country": "Kyrgyzstan", "Alpha-2 code": "KG", "Alpha-3 code": "KGZ", "id": 417, "Latitude (average)": 41.0, "Longitude (average)": 75.0}, {"iso_code": "KHM", "total_cases_per_million": 8273.869, "Country": "Cambodia", "Alpha-2 code": "KH", "Alpha-3 code": "KHM", "id": 116, "Latitude (average)": 13.0, "Longitude (average)": 105.0}, {"iso_code": "KIR", "total_cases_per_million": 38289.507, "Country": "Kiribati", "Alpha-2 code": "KI", "Alpha-3 code": "KIR", "id": 296, "Latitude (average)": 1.4167, "Longitude (average)": 173.0}, {"iso_code": "KNA", "total_cases_per_million": 138398.943, "Country": "Saint Kitts and Nevis", "Alpha-2 code": "KN", "Alpha-3 code": "KNA", "id": 659, "Latitude (average)": 17.3333, "Longitude (average)": -62.75}, {"iso_code": "KOR", "total_cases_per_million": 603790.835, "Country": "Korea,Republic of", "Alpha-2 code": "KR", "Alpha-3 code": "KOR", "id": 410, "Latitude (average)": 37.0, "Longitude (average)": 127.5}, {"iso_code": "KOR", "total_cases_per_million": 603790.835, "Country": "South Korea", "Alpha-2 code": "KR", "Alpha-3 code": "KOR", "id": 410, "Latitude (average)": 37.0, "Longitude (average)": 127.5}, {"iso_code": "KWT", "total_cases_per_million": 155977.695, "Country": "Kuwait", "Alpha-2 code": "KW", "Alpha-3 code": "KWT", "id": 414, "Latitude (average)": 29.3375, "Longitude (average)": 47.6581}, {"iso_code": "LAO", "total_cases_per_million": 28964.163, "Country": "Lao People's Democratic Republic", "Alpha-2 code": "LA", "Alpha-3 code": "LAO", "id": 418, "Latitude (average)": 18.0, "Longitude (average)": 105.0}, {"iso_code": "LBN", "total_cases_per_million": 225352.403, "Country": "Lebanon", "Alpha-2 code": "LB", "Alpha-3 code": "LBN", "id": 422, "Latitude (average)": 33.8333, "Longitude (average)": 35.8333}, {"iso_code": "LBR", "total_cases_per_million": 1525.641, "Country": "Liberia", "Alpha-2 code": "LR", "Alpha-3 code": "LBR", "id": 430, "Latitude (average)": 6.5, "Longitude (average)": -9.5}, {"iso_code": "LBY", "total_cases_per_million": 74460.714, "Country": "Libyan Arab Jamahiriya", "Alpha-2 code": "LY", "Alpha-3 code": "LBY", "id": 434, "Latitude (average)": 25.0, "Longitude (average)": 17.0}, {"iso_code": "LBY", "total_cases_per_million": 74460.714, "Country": "Libya", "Alpha-2 code": "LY", "Alpha-3 code": "LBY", "id": 434, "Latitude (average)": 25.0, "Longitude (average)": 17.0}, {"iso_code": "LCA", "total_cases_per_million": 167074.364, "Country": "Saint Lucia", "Alpha-2 code": "LC", "Alpha-3 code": "LCA", "id": 662, "Latitude (average)": 13.8833, "Longitude (average)": -61.1333}, {"iso_code": "LIE", "total_cases_per_million": 545419.896, "Country": "Liechtenstein", "Alpha-2 code": "LI", "Alpha-3 code": "LIE", "id": 438, "Latitude (average)": 47.1667, "Longitude (average)": 9.5333}, {"iso_code": "LKA", "total_cases_per_million": 30790.692, "Country": "Sri Lanka", "Alpha-2 code": "LK", "Alpha-3 code": "LKA", "id": 144, "Latitude (average)": 7.0, "Longitude (average)": 81.0}, {"iso_code": "LSO", "total_cases_per_million": 14957.764, "Country": "Lesotho", "Alpha-2 code": "LS", "Alpha-3 code": "LSO", "id": 426, "Latitude (average)": -29.5, "Longitude (average)": 28.5}, {"iso_code": "LTU", "total_cases_per_million": 479668.792, "Country": "Lithuania", "Alpha-2 code": "LT", "Alpha-3 code": "LTU", "id": 440, "Latitude (average)": 56.0, "Longitude (average)": 24.0}, {"iso_code": "LUX", "total_cases_per_million": 494068.107, "Country": "Luxembourg", "Alpha-2 code": "LU", "Alpha-3 code": "LUX", "id": 442, "Latitude (average)": 49.75, "Longitude (average)": 6.1667}, {"iso_code": "LVA", "total_cases_per_million": 528339.711, "Country": "Latvia", "Alpha-2 code": "LV", "Alpha-3 code": "LVA", "id": 428, "Latitude (average)": 57.0, "Longitude (average)": 25.0}, {"iso_code": "MAC", "total_cases_per_million": null, "Country": "Macao", "Alpha-2 code": "MO", "Alpha-3 code": "MAC", "id": 446, "Latitude (average)": 22.1667, "Longitude (average)": 113.55}, {"iso_code": "MAR", "total_cases_per_million": 34006.963, "Country": "Morocco", "Alpha-2 code": "MA", "Alpha-3 code": "MAR", "id": 504, "Latitude (average)": 32.0, "Longitude (average)": -5.0}, {"iso_code": "MCO", "total_cases_per_million": 459291.332, "Country": "Monaco", "Alpha-2 code": "MC", "Alpha-3 code": "MCO", "id": 492, "Latitude (average)": 43.7333, "Longitude (average)": 7.4}, {"iso_code": "MDA", "total_cases_per_million": 189556.776, "Country": "Moldova,Republic of", "Alpha-2 code": "MD", "Alpha-3 code": "MDA", "id": 498, "Latitude (average)": 47.0, "Longitude (average)": 29.0}, {"iso_code": "MDG", "total_cases_per_million": 2304.932, "Country": "Madagascar", "Alpha-2 code": "MG", "Alpha-3 code": "MDG", "id": 450, "Latitude (average)": -20.0, "Longitude (average)": 47.0}, {"iso_code": "MDV", "total_cases_per_million": 356102.925, "Country": "Maldives", "Alpha-2 code": "MV", "Alpha-3 code": "MDV", "id": 462, "Latitude (average)": 3.25, "Longitude (average)": 73.0}, {"iso_code": "MEX", "total_cases_per_million": 59571.204, "Country": "Mexico", "Alpha-2 code": "MX", "Alpha-3 code": "MEX", "id": 484, "Latitude (average)": 23.0, "Longitude (average)": -102.0}, {"iso_code": "MHL", "total_cases_per_million": 386627.558, "Country": "Marshall Islands", "Alpha-2 code": "MH", "Alpha-3 code": "MHL", "id": 584, "Latitude (average)": 9.0, "Longitude (average)": 168.0}, {"iso_code": "MKD", "total_cases_per_million": 166323.081, "Country": "Macedonia,the former Yugoslav Republic of", "Alpha-2 code": "MK", "Alpha-3 code": "MKD", "id": 807, "Latitude (average)": 41.8333, "Longitude (average)": 22.0}, {"iso_code": "MLI", "total_cases_per_million": 1466.964, "Country": "Mali", "Alpha-2 code": "ML", "Alpha-3 code": "MLI", "id": 466, "Latitude (average)": 17.0, "Longitude (average)": -4.0}, {"iso_code": "MLT", "total_cases_per_million": 222343.065, "Country": "Malta", "Alpha-2 code": "MT", "Alpha-3 code": "MLT", "id": 470, "Latitude (average)": 35.8333, "Longitude (average)": 14.5833}, {"iso_code": "MMR", "total_cases_per_million": 11745.959, "Country": "Myanmar", "Alpha-2 code": "MM", "Alpha-3 code": "MMR", "id": 104, "Latitude (average)": 22.0, "Longitude (average)": 98.0}, {"iso_code": "MMR", "total_cases_per_million": 11745.959, "Country": "Burma", "Alpha-2 code": "MM", "Alpha-3 code": "MMR", "id": 104, "Latitude (average)": 22.0, "Longitude (average)": 98.0}, {"iso_code": "MNE", "total_cases_per_million": 461330.416, "Country": "Montenegro", "Alpha-2 code": "ME", "Alpha-3 code": "MNE", "id": 499, "Latitude (average)": 42.0, "Longitude (average)": 19.0}, {"iso_code": "MNG", "total_cases_per_million": 296623.708, "Country": "Mongolia", "Alpha-2 code": "MN", "Alpha-3 code": "MNG", "id": 496, "Latitude (average)": 46.0, "Longitude (average)": 105.0}, {"iso_code": "MNP", "total_cases_per_million": 279360.148, "Country": "Northern Mariana Islands", "Alpha-2 code": "MP", "Alpha-3 code": "MNP", "id": 580, "Latitude (average)": 15.2, "Longitude (average)": 145.75}, {"iso_code": "MOZ", "total_cases_per_million": 7079.782, "Country": "Mozambique", "Alpha-2 code": "MZ", "Alpha-3 code": "MOZ", "id": 508, "Latitude (average)": -18.25, "Longitude (average)": 35.0}, {"iso_code": "MRT", "total_cases_per_million": 13432.229, "Country": "Mauritania", "Alpha-2 code": "MR", "Alpha-3 code": "MRT", "id": 478, "Latitude (average)": 20.0, "Longitude (average)": -12.0}, {"iso_code": "MSR", "total_cases_per_million": 317924.315, "Country": "Montserrat", "Alpha-2 code": "MS", "Alpha-3 code": "MSR", "id": 500, "Latitude (average)": 16.75, "Longitude (average)": -62.2}, {"iso_code": "MTQ", "total_cases_per_million": 625557.805, "Country": "Martinique", "Alpha-2 code": "MQ", "Alpha-3 code": "MTQ", "id": 474, "Latitude (average)": 14.6667, "Longitude (average)": -61.0}, {"iso_code": "MUS", "total_cases_per_million": 232935.84, "Country": "Mauritius", "Alpha-2 code": "MU", "Alpha-3 code": "MUS", "id": 480, "Latitude (average)": -20.2833, "Longitude (average)": 57.55}, {"iso_code": "MWI", "total_cases_per_million": 4343.868, "Country": "Malawi", "Alpha-2 code": "MW", "Alpha-3 code": "MWI", "id": 454, "Latitude (average)": -13.5, "Longitude (average)": 34.0}, {"iso_code": "MYS", "total_cases_per_million": 149667.148, "Country": "Malaysia", "Alpha-2 code": "MY", "Alpha-3 code": "MYS", "id": 458, "Latitude (average)": 2.5, "Longitude (average)": 112.5}, {"iso_code": "MYT", "total_cases_per_million": 128872.507, "Country": "Mayotte", "Alpha-2 code": "YT", "Alpha-3 code": "MYT", "id": 175, "Latitude (average)": -12.8333, "Longitude (average)": 45.1667}, {"iso_code": "NAM", "total_cases_per_million": 66700.584, "Country": "Namibia", "Alpha-2 code": null, "Alpha-3 code": "NAM", "id": 516, "Latitude (average)": -22.0, "Longitude (average)": 17.0}, {"iso_code": "NCL", "total_cases_per_million": 276101.104, "Country": "New Caledonia", "Alpha-2 code": "NC", "Alpha-3 code": "NCL", "id": 540, "Latitude (average)": -21.5, "Longitude (average)": 165.5}, {"iso_code": "NER", "total_cases_per_million": 362.981, "Country": "Niger", "Alpha-2 code": "NE", "Alpha-3 code": "NER", "id": 562, "Latitude (average)": 16.0, "Longitude (average)": 8.0}, {"iso_code": "NGA", "total_cases_per_million": 1220.25, "Country": "Nigeria", "Alpha-2 code": "NG", "Alpha-3 code": "NGA", "id": 566, "Latitude (average)": 10.0, "Longitude (average)": 8.0}, {"iso_code": "NIC", "total_cases_per_million": 2260.09, "Country": "Nicaragua", "Alpha-2 code": "NI", "Alpha-3 code": "NIC", "id": 558, "Latitude (average)": 13.0, "Longitude (average)": -85.0}, {"iso_code": "NIU", "total_cases_per_million": 382684.426, "Country": "Niue", "Alpha-2 code": "NU", "Alpha-3 code": "NIU", "id": 570, "Latitude (average)": -19.0333, "Longitude (average)": -169.8667}, {"iso_code": "NLD", "total_cases_per_million": 490227.864, "Country": "Netherlands", "Alpha-2 code": "NL", "Alpha-3 code": "NLD", "id": 528, "Latitude (average)": 52.5, "Longitude (average)": 5.75}, {"iso_code": "NOR", "total_cases_per_million": 273012.614, "Country": "Norway", "Alpha-2 code": "NO", "Alpha-3 code": "NOR", "id": 578, "Latitude (average)": 62.0, "Longitude (average)": 10.0}, {"iso_code": "NPL", "total_cases_per_million": 32839.158, "Country": "Nepal", "Alpha-2 code": "NP", "Alpha-3 code": "NPL", "id": 524, "Latitude (average)": 28.0, "Longitude (average)": 84.0}, {"iso_code": "NRU", "total_cases_per_million": 424946.813, "Country": "Nauru", "Alpha-2 code": "NR", "Alpha-3 code": "NRU", "id": 520, "Latitude (average)": -0.5333, "Longitude (average)": 166.9167}, {"iso_code": "NZL", "total_cases_per_million": 438206.819, "Country": "New Zealand", "Alpha-2 code": "NZ", "Alpha-3 code": "NZL", "id": 554, "Latitude (average)": -41.0, "Longitude (average)": 174.0}, {"iso_code": "OMN", "total_cases_per_million": 87286.454, "Country": "Oman", "Alpha-2 code": "OM", "Alpha-3 code": "OMN", "id": 512, "Latitude (average)": 21.0, "Longitude (average)": 57.0}, {"iso_code": "PAK", "total_cases_per_million": 6702.563, "Country": "Pakistan", "Alpha-2 code": "PK", "Alpha-3 code": "PAK", "id": 586, "Latitude (average)": 30.0, "Longitude (average)": 70.0}, {"iso_code": "PAN", "total_cases_per_million": 235296.519, "Country": "Panama", "Alpha-2 code": "PA", "Alpha-3 code": "PAN", "id": 591, "Latitude (average)": 9.0, "Longitude (average)": -80.0}, {"iso_code": "PCN", "total_cases_per_million": 85106.383, "Country": "Pitcairn", "Alpha-2 code": "PN", "Alpha-3 code": "PCN", "id": 612, "Latitude (average)": -24.7, "Longitude (average)": -127.4}, {"iso_code": "PER", "total_cases_per_million": 132254.816, "Country": "Peru", "Alpha-2 code": "PE", "Alpha-3 code": "PER", "id": 604, "Latitude (average)": -10.0, "Longitude (average)": -76.0}, {"iso_code": "PHL", "total_cases_per_million": 35503.835, "Country": "Philippines", "Alpha-2 code": "PH", "Alpha-3 code": "PHL", "id": 608, "Latitude (average)": 13.0, "Longitude (average)": 122.0}, {"iso_code": "PLW", "total_cases_per_million": 331785.003, "Country": "Palau", "Alpha-2 code": "PW", "Alpha-3 code": "PLW", "id": 585, "Latitude (average)": 7.5, "Longitude (average)": 134.5}, {"iso_code": "PNG", "total_cases_per_million": 4619.021, "Country": "Papua New Guinea", "Alpha-2 code": "PG", "Alpha-3 code": "PNG", "id": 598, "Latitude (average)": -6.0, "Longitude (average)": 147.0}, {"iso_code": "POL", "total_cases_per_million": 163458.701, "Country": "Poland", "Alpha-2 code": "PL", "Alpha-3 code": "POL", "id": 616, "Latitude (average)": 52.0, "Longitude (average)": 20.0}, {"iso_code": "PRI", "total_cases_per_million": 344347.211, "Country": "Puerto Rico", "Alpha-2 code": "PR", "Alpha-3 code": "PRI", "id": 630, "Latitude (average)": 18.25, "Longitude (average)": -66.5}, {"iso_code": "PRK", "total_cases_per_million": null, "Country": "Korea,Democratic People's Republic of", "Alpha-2 code": "KP", "Alpha-3 code": "PRK", "id": 408, "Latitude (average)": 40.0, "Longitude (average)": 127.0}, {"iso_code": "PRT", "total_cases_per_million": 543575.575, "Country": "Portugal", "Alpha-2 code": "PT", "Alpha-3 code": "PRT", "id": 620, "Latitude (average)": 39.5, "Longitude (average)": -8.0}, {"iso_code": "PRY", "total_cases_per_million": 108507.104, "Country": "Paraguay", "Alpha-2 code": "PY", "Alpha-3 code": "PRY", "id": 600, "Latitude (average)": -23.0, "Longitude (average)": -58.0}, {"iso_code": "PSE", "total_cases_per_million": 133946.251, "Country": "Palestinian Territory,Occupied", "Alpha-2 code": "PS", "Alpha-3 code": "PSE", "id": 275, "Latitude (average)": 32.0, "Longitude (average)": 35.25}, {"iso_code": "PYF", "total_cases_per_million": 256350.15, "Country": "French Polynesia", "Alpha-2 code": "PF", "Alpha-3 code": "PYF", "id": 258, "Latitude (average)": -15.0, "Longitude (average)": -140.0}, {"iso_code": "QAT", "total_cases_per_million": 189022.352, "Country": "Qatar", "Alpha-2 code": "QA", "Alpha-3 code": "QAT", "id": 634, "Latitude (average)": 25.5, "Longitude (average)": 51.25}, {"iso_code": "REU", "total_cases_per_million": 507765.419, "Country": "R\u00e9union", "Alpha-2 code": "RE", "Alpha-3 code": "REU", "id": 638, "Latitude (average)": -21.1, "Longitude (average)": 55.6}, {"iso_code": "ROU", "total_cases_per_million": 172812.368, "Country": "Romania", "Alpha-2 code": "RO", "Alpha-3 code": "ROU", "id": 642, "Latitude (average)": 46.0, "Longitude (average)": 25.0}, {"iso_code": "RUS", "total_cases_per_million": 158136.751, "Country": "Russian Federation", "Alpha-2 code": "RU", "Alpha-3 code": "RUS", "id": 643, "Latitude (average)": 60.0, "Longitude (average)": 100.0}, {"iso_code": "RUS", "total_cases_per_million": 158136.751, "Country": "Russia", "Alpha-2 code": "RU", "Alpha-3 code": "RUS", "id": 643, "Latitude (average)": 60.0, "Longitude (average)": 100.0}, {"iso_code": "RWA", "total_cases_per_million": 9668.061, "Country": "Rwanda", "Alpha-2 code": "RW", "Alpha-3 code": "RWA", "id": 646, "Latitude (average)": -2.0, "Longitude (average)": 30.0}, {"iso_code": "SAU", "total_cases_per_million": 23111.678, "Country": "Saudi Arabia", "Alpha-2 code": "SA", "Alpha-3 code": "SAU", "id": 682, "Latitude (average)": 25.0, "Longitude (average)": 45.0}, {"iso_code": "SDN", "total_cases_per_million": 1365.207, "Country": "Sudan", "Alpha-2 code": "SD", "Alpha-3 code": "SDN", "id": 736, "Latitude (average)": 15.0, "Longitude (average)": 30.0}, {"iso_code": "SEN", "total_cases_per_million": 5139.448, "Country": "Senegal", "Alpha-2 code": "SN", "Alpha-3 code": "SEN", "id": 686, "Latitude (average)": 14.0, "Longitude (average)": -14.0}, {"iso_code": "SGP", "total_cases_per_million": 424204.128, "Country": "Singapore", "Alpha-2 code": "SG", "Alpha-3 code": "SGP", "id": 702, "Latitude (average)": 1.3667, "Longitude (average)": 103.8}, {"iso_code": "SHN", "total_cases_per_million": 401036.845, "Country": "Saint Helena,Ascension and Tristan da Cunha", "Alpha-2 code": "SH", "Alpha-3 code": "SHN", "id": 654, "Latitude (average)": -15.9333, "Longitude (average)": -5.7}, {"iso_code": "SLB", "total_cases_per_million": 33930.623, "Country": "Solomon Islands", "Alpha-2 code": "SB", "Alpha-3 code": "SLB", "id": 90, "Latitude (average)": -8.0, "Longitude (average)": 159.0}, {"iso_code": "SLE", "total_cases_per_million": 901.958, "Country": "Sierra Leone", "Alpha-2 code": "SL", "Alpha-3 code": "SLE", "id": 694, "Latitude (average)": 8.5, "Longitude (average)": -11.5}, {"iso_code": "SLV", "total_cases_per_million": 31845.405, "Country": "El Salvador", "Alpha-2 code": "SV", "Alpha-3 code": "SLV", "id": 222, "Latitude (average)": 13.8333, "Longitude (average)": -88.9167}, {"iso_code": "SMR", "total_cases_per_million": 718610.864, "Country": "San Marino", "Alpha-2 code": "SM", "Alpha-3 code": "SMR", "id": 674, "Latitude (average)": 43.7667, "Longitude (average)": 12.4167}, {"iso_code": "SOM", "total_cases_per_million": 1553.288, "Country": "Somalia", "Alpha-2 code": "SO", "Alpha-3 code": "SOM", "id": 706, "Latitude (average)": 10.0, "Longitude (average)": 49.0}, {"iso_code": "SPM", "total_cases_per_million": 582158.029, "Country": "Saint Pierre and Miquelon", "Alpha-2 code": "PM", "Alpha-3 code": "SPM", "id": 666, "Latitude (average)": 46.8333, "Longitude (average)": -56.3333}, {"iso_code": "SRB", "total_cases_per_million": 369246.692, "Country": "Serbia", "Alpha-2 code": "RS", "Alpha-3 code": "SRB", "id": 688, "Latitude (average)": 44.0, "Longitude (average)": 21.0}, {"iso_code": "SSD", "total_cases_per_million": 1683.104, "Country": "South Sudan", "Alpha-2 code": "SS", "Alpha-3 code": "SSD", "id": 728, "Latitude (average)": 8.0, "Longitude (average)": 30.0}, {"iso_code": "STP", "total_cases_per_million": 28857.529, "Country": "Sao Tome and Principe", "Alpha-2 code": "ST", "Alpha-3 code": "STP", "id": 678, "Latitude (average)": 1.0, "Longitude (average)": 7.0}, {"iso_code": "SUR", "total_cases_per_million": 133477.12, "Country": "Suriname", "Alpha-2 code": "SR", "Alpha-3 code": "SUR", "id": 740, "Latitude (average)": 4.0, "Longitude (average)": -56.0}, {"iso_code": "SVK", "total_cases_per_million": 330763.158, "Country": "Slovakia", "Alpha-2 code": "SK", "Alpha-3 code": "SVK", "id": 703, "Latitude (average)": 48.6667, "Longitude (average)": 19.5}, {"iso_code": "SVN", "total_cases_per_million": 633877.603, "Country": "Slovenia", "Alpha-2 code": "SI", "Alpha-3 code": "SVN", "id": 705, "Latitude (average)": 46.0, "Longitude (average)": 15.0}, {"iso_code": "SWE", "total_cases_per_million": 256620.006, "Country": "Sweden", "Alpha-2 code": "SE", "Alpha-3 code": "SWE", "id": 752, "Latitude (average)": 62.0, "Longitude (average)": 15.0}, {"iso_code": "SWZ", "total_cases_per_million": 62138.007, "Country": "Swaziland", "Alpha-2 code": "SZ", "Alpha-3 code": "SWZ", "id": 748, "Latitude (average)": -26.5, "Longitude (average)": 31.5}, {"iso_code": "SYC", "total_cases_per_million": 475446.866, "Country": "Seychelles", "Alpha-2 code": "SC", "Alpha-3 code": "SYC", "id": 690, "Latitude (average)": -4.5833, "Longitude (average)": 55.6667}, {"iso_code": "SYR", "total_cases_per_million": 2595.361, "Country": "Syrian Arab Republic", "Alpha-2 code": "SY", "Alpha-3 code": "SYR", "id": 760, "Latitude (average)": 35.0, "Longitude (average)": 38.0}, {"iso_code": "TCA", "total_cases_per_million": 144075.581, "Country": "Turks and Caicos Islands", "Alpha-2 code": "TC", "Alpha-3 code": "TCA", "id": 796, "Latitude (average)": 21.75, "Longitude (average)": -71.5833}, {"iso_code": "TCD", "total_cases_per_million": 434.343, "Country": "Chad", "Alpha-2 code": "TD", "Alpha-3 code": "TCD", "id": 148, "Latitude (average)": 15.0, "Longitude (average)": 19.0}, {"iso_code": "TGO", "total_cases_per_million": 4462.802, "Country": "Togo", "Alpha-2 code": "TG", "Alpha-3 code": "TGO", "id": 768, "Latitude (average)": 8.0, "Longitude (average)": 1.1667}, {"iso_code": "THA", "total_cases_per_million": 66027.845, "Country": "Thailand", "Alpha-2 code": "TH", "Alpha-3 code": "THA", "id": 764, "Latitude (average)": 15.0, "Longitude (average)": 100.0}, {"iso_code": "TJK", "total_cases_per_million": 1787.037, "Country": "Tajikistan", "Alpha-2 code": "TJ", "Alpha-3 code": "TJK", "id": 762, "Latitude (average)": 39.0, "Longitude (average)": 71.0}, {"iso_code": "TKL", "total_cases_per_million": 2641.31, "Country": "Tokelau", "Alpha-2 code": "TK", "Alpha-3 code": "TKL", "id": 772, "Latitude (average)": -9.0, "Longitude (average)": -172.0}, {"iso_code": "TKM", "total_cases_per_million": null, "Country": "Turkmenistan", "Alpha-2 code": "TM", "Alpha-3 code": "TKM", "id": 795, "Latitude (average)": 40.0, "Longitude (average)": 60.0}, {"iso_code": "TLS", "total_cases_per_million": 17470.391, "Country": "Timor-Leste", "Alpha-2 code": "TL", "Alpha-3 code": "TLS", "id": 626, "Latitude (average)": -8.55, "Longitude (average)": 125.5167}, {"iso_code": "TON", "total_cases_per_million": 157354.469, "Country": "Tonga", "Alpha-2 code": "TO", "Alpha-3 code": "TON", "id": 776, "Latitude (average)": -20.0, "Longitude (average)": -175.0}, {"iso_code": "TTO", "total_cases_per_million": 125075.52, "Country": "Trinidad and Tobago", "Alpha-2 code": "TT", "Alpha-3 code": "TTO", "id": 780, "Latitude (average)": 11.0, "Longitude (average)": -61.0}, {"iso_code": "TUN", "total_cases_per_million": 93304.158, "Country": "Tunisia", "Alpha-2 code": "TN", "Alpha-3 code": "TUN", "id": 788, "Latitude (average)": 34.0, "Longitude (average)": 9.0}, {"iso_code": "TUR", "total_cases_per_million": 199255.078, "Country": "Turkey", "Alpha-2 code": "TR", "Alpha-3 code": "TUR", "id": 792, "Latitude (average)": 39.0, "Longitude (average)": 35.0}, {"iso_code": "TUV", "total_cases_per_million": 245169.828, "Country": "Tuvalu", "Alpha-2 code": "TV", "Alpha-3 code": "TUV", "id": 798, "Latitude (average)": -8.0, "Longitude (average)": 178.0}, {"iso_code": "TWN", "total_cases_per_million": null, "Country": "Taiwan,Province of China", "Alpha-2 code": "TW", "Alpha-3 code": "TWN", "id": 158, "Latitude (average)": 23.5, "Longitude (average)": 121.0}, {"iso_code": "TWN", "total_cases_per_million": null, "Country": "Taiwan", "Alpha-2 code": "TW", "Alpha-3 code": "TWN", "id": 158, "Latitude (average)": 23.5, "Longitude (average)": 121.0}, {"iso_code": "TZA", "total_cases_per_million": 657.702, "Country": "Tanzania,United Republic of", "Alpha-2 code": "TZ", "Alpha-3 code": "TZA", "id": 834, "Latitude (average)": -6.0, "Longitude (average)": 35.0}, {"iso_code": "UGA", "total_cases_per_million": 3612.116, "Country": "Uganda", "Alpha-2 code": "UG", "Alpha-3 code": "UGA", "id": 800, "Latitude (average)": 1.0, "Longitude (average)": 32.0}, {"iso_code": "UKR", "total_cases_per_million": 139499.086, "Country": "Ukraine", "Alpha-2 code": "UA", "Alpha-3 code": "UKR", "id": 804, "Latitude (average)": 49.0, "Longitude (average)": 32.0}, {"iso_code": "URY", "total_cases_per_million": 303229.582, "Country": "Uruguay", "Alpha-2 code": "UY", "Alpha-3 code": "URY", "id": 858, "Latitude (average)": -33.0, "Longitude (average)": -56.0}, {"iso_code": "USA", "total_cases_per_million": 305488.229, "Country": "United States", "Alpha-2 code": "US", "Alpha-3 code": "USA", "id": 840, "Latitude (average)": 38.0, "Longitude (average)": -97.0}, {"iso_code": "UZB", "total_cases_per_million": 7314.589, "Country": "Uzbekistan", "Alpha-2 code": "UZ", "Alpha-3 code": "UZB", "id": 860, "Latitude (average)": 41.0, "Longitude (average)": 64.0}, {"iso_code": "VAT", "total_cases_per_million": 32178.218, "Country": "Holy See (Vatican City State)", "Alpha-2 code": "VA", "Alpha-3 code": "VAT", "id": 336, "Latitude (average)": 41.9, "Longitude (average)": 12.45}, {"iso_code": "VCT", "total_cases_per_million": 92526.862, "Country": "Saint Vincent and the Grenadines", "Alpha-2 code": "VC", "Alpha-3 code": "VCT", "id": 670, "Latitude (average)": 13.25, "Longitude (average)": -61.2}, {"iso_code": "VCT", "total_cases_per_million": 92526.862, "Country": "Saint Vincent & the Grenadines", "Alpha-2 code": "VC", "Alpha-3 code": "VCT", "id": 670, "Latitude (average)": 13.25, "Longitude (average)": -61.2}, {"iso_code": "VCT", "total_cases_per_million": 92526.862, "Country": "St. Vincent and the Grenadines", "Alpha-2 code": "VC", "Alpha-3 code": "VCT", "id": 670, "Latitude (average)": 13.25, "Longitude (average)": -61.2}, {"iso_code": "VEN", "total_cases_per_million": 19528.686, "Country": "Venezuela,Bolivarian Republic of", "Alpha-2 code": "VE", "Alpha-3 code": "VEN", "id": 862, "Latitude (average)": 8.0, "Longitude (average)": -66.0}, {"iso_code": "VEN", "total_cases_per_million": 19528.686, "Country": "Venezuela", "Alpha-2 code": "VE", "Alpha-3 code": "VEN", "id": 862, "Latitude (average)": 8.0, "Longitude (average)": -66.0}, {"iso_code": "VGB", "total_cases_per_million": 233148.219, "Country": "Virgin Islands,British", "Alpha-2 code": "VG", "Alpha-3 code": "VGB", "id": 92, "Latitude (average)": 18.5, "Longitude (average)": -64.5}, {"iso_code": "VIR", "total_cases_per_million": 250665.97, "Country": "Virgin Islands,U.S.", "Alpha-2 code": "VI", "Alpha-3 code": "VIR", "id": 850, "Latitude (average)": 18.3333, "Longitude (average)": -64.8333}, {"iso_code": "VNM", "total_cases_per_million": 117896.463, "Country": "Viet Nam", "Alpha-2 code": "VN", "Alpha-3 code": "VNM", "id": 704, "Latitude (average)": 16.0, "Longitude (average)": 106.0}, {"iso_code": "VNM", "total_cases_per_million": 117896.463, "Country": "Vietnam", "Alpha-2 code": "VN", "Alpha-3 code": "VNM", "id": 704, "Latitude (average)": 16.0, "Longitude (average)": 106.0}, {"iso_code": "VUT", "total_cases_per_million": 36774.968, "Country": "Vanuatu", "Alpha-2 code": "VU", "Alpha-3 code": "VUT", "id": 548, "Latitude (average)": -16.0, "Longitude (average)": 167.0}, {"iso_code": "WLF", "total_cases_per_million": 295532.942, "Country": "Wallis and Futuna", "Alpha-2 code": "WF", "Alpha-3 code": "WLF", "id": 876, "Latitude (average)": -13.3, "Longitude (average)": -176.2}, {"iso_code": "WSM", "total_cases_per_million": 75376.591, "Country": "Samoa", "Alpha-2 code": "WS", "Alpha-3 code": "WSM", "id": 882, "Latitude (average)": -13.5833, "Longitude (average)": -172.3333}, {"iso_code": "YEM", "total_cases_per_million": 354.487, "Country": "Yemen", "Alpha-2 code": "YE", "Alpha-3 code": "YEM", "id": 887, "Latitude (average)": 15.0, "Longitude (average)": 48.0}, {"iso_code": "ZAF", "total_cases_per_million": 67995.807, "Country": "South Africa", "Alpha-2 code": "ZA", "Alpha-3 code": "ZAF", "id": 710, "Latitude (average)": -29.0, "Longitude (average)": 24.0}, {"iso_code": "ZMB", "total_cases_per_million": 17180.371, "Country": "Zambia", "Alpha-2 code": "ZM", "Alpha-3 code": "ZMB", "id": 894, "Latitude (average)": -15.0, "Longitude (average)": 30.0}, {"iso_code": "ZWE", "total_cases_per_million": 16223.484, "Country": "Zimbabwe", "Alpha-2 code": "ZW", "Alpha-3 code": "ZWE", "id": 716, "Latitude (average)": -20.0, "Longitude (average)": 30.0}]}}, {"mode": "vega-lite"});
+</script></div></div>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  <!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="mymarkdownfile.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Chapter 1</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="bibliography.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Bibliography</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prepare">🛒 1. Prepare</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#load-data">Load Data</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#present">2. Present</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-map-projection">Simple map projection</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#graduated-symbols">Graduated Symbols</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#choropleth-map">Choropleth Map</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            <div class="bd-footer-content__inner">
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Me
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div></div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=12da95d707ffb74b382d"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=12da95d707ffb74b382d"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
