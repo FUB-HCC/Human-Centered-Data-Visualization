@@ -1,4 +1,4 @@
-# Welcome to your Jupyter Book
+# Welcome to this book
 
 This is a small sample book of cats. 
 
