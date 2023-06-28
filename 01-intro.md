@@ -39,10 +39,11 @@ When people view your visualization, they go through a process consisting of per
 
 In the following, we use this framework to discuss three examples for well-received visualization examples. 
 
-```{figure} ../images/minard-napoleon-march.jpg
+```{figure} ./images/minard-napoleon-march.jpg
 ---
 height: 200px
 name: napoleon-march-fig
+align: center
 ---
 Snow's map shows cholera cases in London during the 1854 epidemic. Taken from https://commons.wikimedia.org/wiki/File:Minard.png (Charles Minard (1781-1870), Public domain, via Wikimedia Commons)
 ```
