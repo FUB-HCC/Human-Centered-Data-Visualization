@@ -43,6 +43,7 @@ In the following, we use this framework to discuss three examples for well-recei
 ---
 height: 200px
 name: napoleon-march-fig
+align: center
 ---
 Snow's map shows cholera cases in London during the 1854 epidemic. Taken from https://commons.wikimedia.org/wiki/File:Minard.png (Charles Minard (1781-1870), Public domain, via Wikimedia Commons)
 ```
