@@ -41,7 +41,7 @@ In the following, we use this framework to discuss three examples for well-recei
 
 ```{figure} ./images/minard-napoleon-march.jpg
 ---
-height: 200px
+width: 75%
 name: napoleon-march-fig
 align: center
 ---
