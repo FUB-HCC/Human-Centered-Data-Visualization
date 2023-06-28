@@ -35,6 +35,18 @@ We are especially concerned with ‘’the visual representation and presentatio
 
 When people view your visualization, they go through a process consisting of perceiving, interpreting, and comprehending {cite}`kirk2019data`. In reality, these steps occur in parallel. This first first is simply about perceiving, i.e. reading the chart. People try to understand the main features of the visualizations. In the phase interpreting, these observations are translated into meaning which also involves that people map their interpretation onto their own knowledge about this domain. Especially in situations, where people might not have enough knowledge in the visualized domain, a gap between the observation and the meaning might occur. This gap needs to be recognized and bridged. In the third phase of understanding people reflect on what the interpretation means to themselves. This phase depends especially on your viewers, since what might be a learning for one person, might be cryptic for another.
 
+## Example Visualizations
+
+In the following, we use this framework to discuss three examples for well-received visualization examples. 
+
+```{figure} ../images/minard-napoleon-march.jpg
+---
+height: 200px
+name: napoleon-march-fig
+---
+Snow's map shows cholera cases in London during the 1854 epidemic. Taken from https://commons.wikimedia.org/wiki/File:Minard.png (Charles Minard (1781-1870), Public domain, via Wikimedia Commons)
+```
+
 
 
 [^1]: statistics is a statistics database that makes data from market and opinion research institutions as well as from business and official statistics available in various Languages.
