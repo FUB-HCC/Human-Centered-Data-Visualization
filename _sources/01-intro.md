@@ -39,7 +39,7 @@ When people view your visualization, they go through a process consisting of per
 
 In the following, we use this framework to discuss three examples for well-received visualization examples. 
 
-```{figure} ../images/minard-napoleon-march.jpg
+```{figure} ./images/minard-napoleon-march.jpg
 ---
 height: 200px
 name: napoleon-march-fig
