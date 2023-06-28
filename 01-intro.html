@@ -323,7 +323,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
 </div></div>
       
     </div>
@@ -339,6 +341,14 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-visualizations">Example Visualizations</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -362,11 +372,21 @@ document.write(`
 <p>This quote nicely summarize the challenges we face in data visualization. Even though, we have a lot of data available it turns out that we need the ‘’right information’’ at the ‘’right time’‘. However, we need’‘think critically’’ about these data in order to be able to ‘’make important choices wisely’’. One of these important decisions concern how we represent the data.</p>
 <p>We are especially concerned with ‘’the visual representation and presentation of data to facilitate understanding’’<span id="id5">[<a class="reference internal" href="bibliography.html#id13" title="Andy Kirk. Data visualisation: A handbook for data driven design. Sage, 2016.">Kirk, 2016</a>]</span>. Representation relates to the visual depiction of your data, whereas the presentation relates to specific design choices of your visual depiction, such as the composition, the colors used, the interactivity supported, and the annotations provided.</p>
 <p>When people view your visualization, they go through a process consisting of perceiving, interpreting, and comprehending <span id="id6">[<a class="reference internal" href="bibliography.html#id13" title="Andy Kirk. Data visualisation: A handbook for data driven design. Sage, 2016.">Kirk, 2016</a>]</span>. In reality, these steps occur in parallel. This first first is simply about perceiving, i.e. reading the chart. People try to understand the main features of the visualizations. In the phase interpreting, these observations are translated into meaning which also involves that people map their interpretation onto their own knowledge about this domain. Especially in situations, where people might not have enough knowledge in the visualized domain, a gap between the observation and the meaning might occur. This gap needs to be recognized and bridged. In the third phase of understanding people reflect on what the interpretation means to themselves. This phase depends especially on your viewers, since what might be a learning for one person, might be cryptic for another.</p>
+<section id="example-visualizations">
+<h2>Example Visualizations<a class="headerlink" href="#example-visualizations" title="Permalink to this heading">#</a></h2>
+<p>In the following, we use this framework to discuss three examples for well-received visualization examples.</p>
+<figure class="align-default" id="napoleon-march-fig">
+<a class="reference internal image-reference" href="../images/minard-napoleon-march.jpg"><img alt="../images/minard-napoleon-march.jpg" src="../images/minard-napoleon-march.jpg" style="height: 200px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 1 </span><span class="caption-text">Snow’s map shows cholera cases in London during the 1854 epidemic. Taken from <a class="reference external" href="https://commons.wikimedia.org/wiki/File:Minard.png">https://commons.wikimedia.org/wiki/File:Minard.png</a> (Charles Minard (1781-1870), Public domain, via Wikimedia Commons)</span><a class="headerlink" href="#napoleon-march-fig" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
 <hr class="footnotes docutils" />
 <aside class="footnote brackets" id="id7" role="note">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
 <p>statistics is a statistics database that makes data from market and opinion research institutions as well as from business and official statistics available in various Languages.</p>
 </aside>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -427,6 +447,20 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-visualizations">Example Visualizations</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
