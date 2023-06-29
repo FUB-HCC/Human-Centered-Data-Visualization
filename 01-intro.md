@@ -12,7 +12,8 @@ kernelspec:
   name: python3
 ---
 
-# Chapter 1 The Value of Data Visualization
+(chapter01)=
+# The Value of Data Visualization
 
 In the following section, I highlight the value of data visualizations, which is caused by an increasing availability of data. I highlight these values by different typical examples from data visualizations.
 
@@ -91,6 +92,7 @@ On January 28, 1986 the Space Shuttle Challenger broke apart shortly after the l
 
 In summary, Tufte calls for both the reasoning about statistical evidence and for the design of visualizations and defines six requirements “(1) *documenting* the sources and characteristics of the data, (2) insistently enforcing appropriate *comparisons*, (3) demonstrating mechanisms of *cause and effect*, (4) expressing those mechanisms *quantitatively*, (5) recognizing the inherently *multivariate* nature of analytic problems, and (6) inspecting and evaluating *alternative explanations*.” {cite}`tufte1997visualexplanation`. Visualizations should be “documentary, comparative, causal and explanatory, quantified, multivariate, exploratory, skeptical.”{cite}`tufte1997visualexplanation`. 
 
+(01-hcdv)=
 ## Human-Centered Data Visualization
 
 Human-Centered Design (HCD) is an approach to systems design and development that aims to make interactive systems more usable by focusing on the use of the system and applying usability knowledge and techniques {cite}`international2010ergonomics`. We use the term “human-centered design” rather than “user-centered design” in order to emphasize that system design can also impact “indirect” stakeholders, not just users as “direct” stakeholders. However, in practice, these terms are often used synonymously.
