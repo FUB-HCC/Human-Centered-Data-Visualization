@@ -65,7 +65,7 @@ Many consider Minard's original to be the best statistical graph ever drawn.
 <!-- Further information: https://www.ph.ucla.edu/epi/snow/highressnowmap.html -->
 
 
-```{figure} ./images/snow-colera-map.jpg
+```{figure} ./images/snow-cholera-map.jpg
 ---
 width: 75%
 name: tufte_challenger_o-ring-fig
