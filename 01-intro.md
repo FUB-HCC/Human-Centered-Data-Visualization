@@ -48,7 +48,7 @@ width: 75%
 name: napoleon-march-fig
 align: center
 ---
-Snow's map shows cholera cases in London during the 1854 epidemic. Taken from https://commons.wikimedia.org/wiki/File:Minard.png (Charles Minard (1781-1870), Public domain, via Wikimedia Commons)
+Pictorial map of the continuous losses of men of the French army in the Russian campaign 1812-1813. Taken from https://commons.wikimedia.org/wiki/File:Minard.png (Charles Minard (1781-1870), Public domain, via Wikimedia Commons)
 ```
 
 Napoleon's Russian campaign of 1812, after initial French successes, ended in one of the greatest military disasters in history. The French engineer Charles Minard (1781-1870) illustrated the disastrous outcome of Napoleon's failed Russian campaign. The graph (see Figure 1) shows the size of the army by the width of the band across the map of the campaign on its outward and return legs, with the temperature on the retreat shown in the line graph below. 
@@ -68,7 +68,7 @@ Many consider Minard's original to be the best statistical graph ever drawn.
 ```{figure} ./images/snow-cholera-map.jpg
 ---
 width: 75%
-name: tufte_challenger_o-ring-fig
+name: cholera-map-fig
 align: center
 ---
 Snow's map shows cholera cases in London during the 1854 epidemic. Taken from https://commons.wikimedia.org/wiki/File:Snow-cholera-map-1.jpg (John Snow, Public domain, via Wikimedia Commons)
