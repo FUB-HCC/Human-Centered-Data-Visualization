@@ -47,8 +47,8 @@ align: center
 ---
 Example of the Dataset Nutrition Label (first generation). Taken from https://datanutrition.org/
 ```
-
-## Understanding the Data Structure {#Understanding-the-Data-Structure}
+(Understanding-the-Data-Structure)=
+## Understanding the Data Structure 
 
 <!-- Useful Ressources:
 https://bookdown.org/ronsarafian/IntrotoDS/eda.html#summary-statistics
@@ -89,6 +89,13 @@ EDA is a creative process {cite}`WickhamGrolemund2017Rfordatascience`, thus the 
 > --- John Tukey (The future of data analysis. Annals of Mathematical Statistics 33 (1), (1962), page 13)
 
 There is no rule about what questions you should ask to guide your research. However, two types of questions will always be useful for making discoveries in your data. You can phrase these questions loosely as (1) What kind of variation occurs within my variables? and (2) What kind of co-variation occurs between my variables?
+
+## Using Python for Data Exploration
+
+## Visualizing Data
+
+In the following, we use the on-time data for all flights that departed NYC, i.e., JFK, LGA or EWR, in 2013. The Bureau of transportation statistics has released these data. Let's get an overview about this dataset.
+
 
 
 [^2]: I highly recommend reading more about him, for example in [](https://www.stat.berkeley.edu/~brill/Papers/life.pdf).
