@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Understanding your Data &#8212; Data Visualization - From a Human-Centered Perspective (Lecture Notes)</title>
+    <title>3. Understanding your Data &#8212; Data Visualization - From a Human-Centered Perspective (Lecture Notes)</title>
   
   
   
@@ -64,6 +64,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = '03-understanding';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="4. Bibliography" href="bibliography.html" />
+    <link rel="prev" title="2. The Process of Visualizing Data" href="02-process.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -148,10 +150,11 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <ul class="nav bd-sidenav">
+        <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="01-intro.html">1. The Value of Data Visualization</a></li>
 <li class="toctree-l1"><a class="reference internal" href="02-process.html">2. The Process of Visualizing Data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="bibliography.html">3. Bibliography</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">3. Understanding your Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bibliography.html">4. Bibliography</a></li>
 </ul>
 
     </div>
@@ -345,8 +348,8 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#understanding-the-data-context">Understanding the Data Context</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#understanding-the-data-structure-understanding-the-data-structure">Understanding the Data Structure {#Understanding-the-Data-Structure}</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#understanding-the-data-context">3.1. Understanding the Data Context</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#understanding-the-data-structure-understanding-the-data-structure">3.2. Understanding the Data Structure {#Understanding-the-Data-Structure}</a></li>
 </ul>
             </nav>
         </div>
@@ -359,11 +362,11 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="understanding-your-data">
-<h1>Understanding your Data<a class="headerlink" href="#understanding-your-data" title="Permalink to this heading">#</a></h1>
+<h1><span class="section-number">3. </span>Understanding your Data<a class="headerlink" href="#understanding-your-data" title="Permalink to this heading">#</a></h1>
 <p>By building on the Nested odel of Munzner <span id="id1">[<a class="reference internal" href="bibliography.html#id30" title="Tamara Munzner. Visualization analysis and design. CRC press, 2014.">Munzner, 2014</a>]</span>, we have realized how important it is to understand the context of the data origin and the data at hand. In this chapter, we focus on the data, because many data viz project start with so-called “found data”. These are data sets that are openly available on the internet, data sets in which creating you were not involved. The increasing use of data everywhere requires to think about data literacy, inclusion, and fairness to ensure that data creates value <span id="id2">[<a class="reference internal" href="bibliography.html#id45" title="Laura Koesten and Elena Simperl. Ux of data: making data available doesn’t make it usable. Interactions, 28(2):97–99, Mar 2021.">Koesten and Simperl, 2021</a>]</span>. However, data is often reused, thus, we need to reflect on where data has been created. Koesten &amp; Simperl <span id="id3">[<a class="reference internal" href="bibliography.html#id45" title="Laura Koesten and Elena Simperl. Ux of data: making data available doesn’t make it usable. Interactions, 28(2):97–99, Mar 2021.">Koesten and Simperl, 2021</a>]</span> differentiate three main activities to interact with data: inspecting, engaging with the data, and placing data in context.</p>
 <p>Thus, in order to understand, whether data are valuable for your research question and which questions you can really tackle with these data, you need an understanding of its origin (the context of creation) and an understanding of its structure.</p>
 <section id="understanding-the-data-context">
-<h2>Understanding the Data Context<a class="headerlink" href="#understanding-the-data-context" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">3.1. </span>Understanding the Data Context<a class="headerlink" href="#understanding-the-data-context" title="Permalink to this heading">#</a></h2>
 <p>People’s perception of what constitutes good-quality data changed as they engaged with the data. Koesten &amp; Simperl <span id="id4">[<a class="reference internal" href="bibliography.html#id45" title="Laura Koesten and Elena Simperl. Ux of data: making data available doesn’t make it usable. Interactions, 28(2):97–99, Mar 2021.">Koesten and Simperl, 2021</a>]</span> highlight the importance of engagement around datasets, including discussions, feedback, reviews, ratings, and means to contact data creators. User communities and peer support can complement documentation efforts and make dataset maintenance sustainable. They, furthermore, propose the three activities:</p>
 <ol class="arabic simple">
 <li><p>Explore the environment of the dataset’s creation (e.g., a study setup or the conditions surrounding data collection, with timeframes, geospatial boundaries, or configurations of collection devices).</p></li>
@@ -381,16 +384,16 @@ For consumer of datasets, datasheets should encourage reflection on the process 
 Distribution: How the dataset will be distributed and to who, and any restrictions on distribution.</p></li>
 <li><p>Maintenance: Who and how the dataset will be maintained, and if and how others will be able to build on it.</p></li>
 </ul>
-<p>Building on this idea Holland et al. <span id="id6">[<a class="reference internal" href="bibliography.html#id36" title="Sarah Holland, Ahmed Hosny, Sarah Newman, Joshua Joseph, and Kasia Chmielinski. The dataset nutrition label - a framework to drive higher data quality standards. CoRR, Jan 2018. URL: http://arxiv.org/abs/1805.03677v1.">Holland <em>et al.</em>, 2018</a>]</span> proposed the <a class="reference external" href="https://datanutrition.org/">dataset nutrition label</a>. An example is given in <code class="xref std std-numref docutils literal notranslate"><span class="pre">dataset-nutrition-fig</span></code></p>
+<p>Building on this idea Holland et al. <span id="id6">[<a class="reference internal" href="bibliography.html#id36" title="Sarah Holland, Ahmed Hosny, Sarah Newman, Joshua Joseph, and Kasia Chmielinski. The dataset nutrition label - a framework to drive higher data quality standards. CoRR, Jan 2018. URL: http://arxiv.org/abs/1805.03677v1.">Holland <em>et al.</em>, 2018</a>]</span> proposed the <a class="reference external" href="https://datanutrition.org/">dataset nutrition label</a>. An example is given in <a class="reference internal" href="#dataset-nutrition-fig"><span class="std std-numref">Fig. 3.1</span></a></p>
 <figure class="align-center" id="dataset-nutrition-fig">
 <a class="reference internal image-reference" href="_images/dataset_nutrion_label.png"><img alt="_images/dataset_nutrion_label.png" src="_images/dataset_nutrion_label.png" style="width: 100%;" /></a>
 <figcaption>
-<p><span class="caption-text">Example of the Dataset Nutrition Label (first generation). Taken from <a class="reference external" href="https://datanutrition.org/">https://datanutrition.org/</a></span><a class="headerlink" href="#dataset-nutrition-fig" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 3.1 </span><span class="caption-text">Example of the Dataset Nutrition Label (first generation). Taken from <a class="reference external" href="https://datanutrition.org/">https://datanutrition.org/</a></span><a class="headerlink" href="#dataset-nutrition-fig" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
 <section id="understanding-the-data-structure-understanding-the-data-structure">
-<h2>Understanding the Data Structure {#Understanding-the-Data-Structure}<a class="headerlink" href="#understanding-the-data-structure-understanding-the-data-structure" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">3.2. </span>Understanding the Data Structure {#Understanding-the-Data-Structure}<a class="headerlink" href="#understanding-the-data-structure-understanding-the-data-structure" title="Permalink to this heading">#</a></h2>
 <!-- Useful Ressources:
 https://bookdown.org/ronsarafian/IntrotoDS/eda.html#summary-statistics
 https://www.hcbravo.org/IntroDataSci/bookdown-notes/exploratory-data-analysis-summary-statistics.html
@@ -467,6 +470,24 @@ which can always be made precise.
   
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="02-process.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">2. </span>The Process of Visualizing Data</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="bibliography.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">4. </span>Bibliography</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div></div>
   
 </div>
@@ -485,8 +506,8 @@ which can always be made precise.
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#understanding-the-data-context">Understanding the Data Context</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#understanding-the-data-structure-understanding-the-data-structure">Understanding the Data Structure {#Understanding-the-Data-Structure}</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#understanding-the-data-context">3.1. Understanding the Data Context</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#understanding-the-data-structure-understanding-the-data-structure">3.2. Understanding the Data Structure {#Understanding-the-Data-Structure}</a></li>
 </ul>
   </nav></div>
 
