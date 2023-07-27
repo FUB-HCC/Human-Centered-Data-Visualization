@@ -166,10 +166,10 @@ Consider the concept of a table as a type of record that is independent of any p
 
 Networks are well suited for specifying some kind of relationship between two or more items. An item in a network is often called a node (or vertex). A link (or edge) is a relation between two items. Nodes can have associated attributes, just like items in a table. Links could also have attributes associated with them; these may be partly or wholly disjoint from the node attributes. Networks can also be represented by two tables (% KG explain in more detail / examples?). Networks with (% KG fixed) hierarchical structures are more specifically called trees. In contrast to a general network, trees do not have cycles: each child node has only one parent node pointing to it. 
 
-The field dataset type also contains attribute values associated with cells. Each cell in a field contains measurements or calculations from a continuous domain. Continuous phenomena include temperature, pressure, speed, force, and density (or mathematical functions).
-Continuous data requires careful treatment that takes into account the mathematical questions of sampling, how frequently to take the measurements, and interpolation, how to show values in between the sampled points in a way that does not mislead.
+The field dataset type also contains attribute values associated with cells. Each cell in a field contains measurements or calculations from a continuous domain (% KG point out difference to table). Continuous phenomena include temperature, pressure, speed, force, and density (or mathematical functions).
+Continuous data requires careful treatment that takes into account the mathematical questions of sampling, how frequently to take the measurements and interpolation, and how to show values in between the sampled points in a way that does not mislead.
 
-The geometry dataset type specifies information about the shape of items with explicit spatial positions. The items could be points, or one-dimensional lines or curves, or 2D surfaces or regions, or 3D volumes. Spatial data often includes hierarchical structure at multiple scales. 
+The geometry dataset type specifies information about the shape of items with explicit spatial positions. The items could be points, one-dimensional lines or curves, 2D surfaces or regions, or 3D volumes. Spatial data often includes hierarchical structure at multiple scales. 
 
 #### What Data Types Should be Differentiated?
 
@@ -181,6 +181,8 @@ A grid specifies the strategy for sampling continuous data in terms of both geom
 
 (variabletype)=
 #### What Attribute Types Do you Know? 
+
+% KG repeats section from before
 
 What kind of data are you given? What information can you figure out from the data, versus the meanings that you must be told explicitly? What high-level concepts will allow you to split datasets apart into general and useful pieces?
 
@@ -197,24 +199,24 @@ Types of variables encountered in typical data visualization scenarios. Taken fr
 
 ### Reflecting on Tasks
 
-Why Analyze Tasks Abstractly? You need to consider tasks in an abstract form, rather than the domain-specific way that users typically think about them. Transforming task descriptions from domain-specific language into abstract form allows you to reason about similarities and differences between them. 
+Why Analyze Tasks Abstractly? (% KG incomplete sentence) You need to consider tasks in an abstract form rather than the domain-specific way that users typically think about them. Transforming task descriptions from domain-specific language into abstract forms allows you to reason about similarities and differences between them. 
 
-Munzner {cite}`munzner2014visualization` differentiated a small set of carefully chosen words to describe why people are using visualization, designed to help you crisply and concisely distinguish between different goals. We differentiate a set has verbs describing actions, and nouns describing targets.
+Munzner {cite}`munzner2014visualization` differentiated a small set of carefully chosen words to describe why people are using visualization, designed to help you crisply and concisely distinguish between different goals. We differentiate a set has (% KG) verbs describing actions and nouns describing targets.
 
 #### User Goals are Defined by Actions 
-We can define three levels of action. The high-level choices describe how the visualisation is being used to analyze, either to consume existing data or to also produce additional data. The mid-level choices cover what kind of search is involved, in terms of whether the target and location are known or not. The low-level choices pertain to the kind of query: does the user need to identify one target, compare some targets, or summarize all of the targets? Decisions at each of these three levels are independent, and it is usually useful to describe actions at all three levels.
+We can define three levels of action. The high-level choices describe how the visualization is being used to analyze, either to consume existing data or to also produce additional data. The mid-level choices cover what kind of search is involved in terms of whether the target and location are known or not (% KG specify what "target and location" means in this context). The low-level choices pertain to the kind of query: does the user need to identify one target, compare some targets, or summarize all of the targets? Decisions at each of these three levels are independent, and it is usually useful to describe actions at all three levels.
 
-_Action: Analyze for Consumption or Production_ In contrast to the use of vis only for the consumption of existing information, in the production case the intention of the user is to generate new material. Often, the goal in production is to produce output that is immediately used as input for a next instance. Sometimes the user intends to use this new material for some other vision-related task, such as discovery or presentation. Sometimes the intended use of the new material is for another purpose that does not require a vis, such as downstream analysis with non-visual tools. There are three types of production goals: Annotate, Record, and Derive.
+_Action: Analyze for Consumption or Production_ In contrast to the use of vis only for the consumption of existing information, in the production case, the intention of the user is to generate new material. Often, the goal in production is to produce output that is immediately used as input for the next instance. Sometimes the user intends to use this new material for some other vision-related task, such as discovery or presentation. Sometimes the intended use of the new material is for another purpose that does not require a vis, such as downstream analysis with non-visual tools. There are three types of production goals: Annotate, Record, and Derive.
 
-_Action: Search and their Classification_ All high-level analysis cases require the user to search for items of interest within the vis as a middle-level target. The classification of search into four alternatives is broken down according to whether the identity and location of the search target is already known or not. If users already know both what they’re looking for and where it is, then the search type is simply lookup.  If users want to find a known target at an unknown location, the search type is locate, that is, find out where the specific object is. If users don’t know exactly what they’re looking for, but they do have a location in mind of where to look for it, the search type is browse. If users are not even sure of the location, the search type is explore.
+_Action: Search and their Classification_ All high-level analysis cases require the user to search for items of interest within the vis as a middle-level target. The classification of the search into four alternatives is broken down according to whether the identity and location of the search target are already known or not. If users already know both what they’re looking for and where it is, then the search type is simply lookup. If users want to find a known target at an unknown location, the search type is locate, that is, find out where the specific object is. If users don’t know exactly what they’re looking for, but they do have a location in mind of where to look for it, the search type is browse. If users are not even sure of the location, the search type is explore.
 
 _Action: Query_
-A low-level user goal is to query targets at one of three scopes. Once a target or set of targets for a search has been found, a low- level user goal is to query these targets at one of three scopes: identify, compare, or summarize. The progression of these three corresponds to an increase in the amount of search targets under consideration: one, some, or all. That is, identify refers to a single target, compare refers to multiple targets, and summarize refers to the full set of possible targets.
+A low-level user goal is to query targets at one of three scopes. Once a target or set of targets for a search has been found, a low- level user goal is to query these targets at one of three scopes: identify, compare, or summarize. The progression of these three corresponds to an increase in the number of search targets under consideration: one, some, or all. That is, identify refers to a single target, compare refers to multiple targets, and summarize refers to the full set of possible targets.
 
 _Actions Refer to Targets_
-All actions refer to a target, i.e. an aspect of the data that is of interest to the user. The idea of a goal is explicit in search and query actions. It is more implicitly related to the usage actions, but still relevant: for example, what the user presents or discovers.
+All actions refer to a target, i.e. an aspect of the data that is of interest to the user. The idea of a goal is explicit in search and query actions. It is more implicitly related to the usage actions but still relevant: for example, what the user presents or discovers.
 
-Tasks are defined by a {action, target} pairs, for example, discover distribution, compare trends, locate outliers, browse topology. 
+Tasks are defined by {action, target} pairs; for example, discover distribution, compare trends, locate outliers, and browse topology. 
 
 ### The How of Visualization Design - At A Glance
 
@@ -228,21 +230,21 @@ __More Coming Soon__
 
 
 <!-- ## The What-Why-How of Visualization Design
-The design space of possible visualisation idioms is huge, and includes the considerations of both how to create and how to interact with visual representations.
+The design space of possible visualization idioms is huge and includes the considerations of both how to create and how to interact with visual representations.
 Visualization design is full of trade-offs, and most possibilities in the design space are ineffective for a particular task, so validating the effectiveness of a design is both necessary and difficult. You must take into account three very different kinds of resource limitations: those of computers, of humans, and of displays. 
-Visualisation usage can be analysed in terms of why the user needs it, what data is shown, and how the idiom is designed. 
+Visualization usage can be analyzed in terms of why the user needs it, what data is shown, and how the idiom is designed. 
 
-### Knowledge the Design Space of Possible Visualizations
+### Knowledge of the Design Space of Possible Visualizations
 First, there is the space for all possible solutions, including possible solutions that no one has ever thought of. 
 Next, there is the set of possibilities known to you, the vis designer. Of course, this set might be small if you are a beginner who is not familiar with the full range of methods that have been proposed in the past. If you are in this situation, one of the goals of this event is to expand the set of methods. 
 
-The next set is the consideration space, which contains the solutions you are actively considering. This set is necessarily smaller than the known space, since you cannot consider what you do not know. An even smaller set is the proposal space of possibilities that you explore in detail via prototyping. Eventually, one of them becomes the chosen solution.
+The next set is the consideration space, which contains the solutions you are actively considering. This set is necessarily smaller than the known space since you cannot consider what you do not know. An even smaller set is the proposal space of possibilities that you explore in detail via prototyping. Eventually, one of them becomes the chosen solution.
 
 Is it a good solution? Probably not.
 
 
 
-We have learned last week that we live a data area. However, data are not meaningful by themselves. We need to find appropriate approaches to explore data, to relate data to each other, and to communicate it meaningfully~\cite{KlingStar1998:HCD}.
+We learned last week that we live in a data area (% KG era?). However, data are not meaningful by themselves. We need to find appropriate approaches to explore data, relate data to each other, and communicate it meaningfully~\cite{KlingStar1998:HCD}.
 
 ## Übung
 https://docs.google.com/document/d/1HDAyT5tCVR0uRmt4FpkjNsGlA1fKBMiWES87dVDEjjE/edit#heading=h.jmyr3335vjfs
@@ -254,24 +256,24 @@ https://pdritsos.com/files/Roberts-et-al-FDS-2016.pdf
 
 ## Side Topic: Meaning
 
-Understanding is the ability to grasp the meaning of information. Information is conveyed in a message using a specific language. Information is understood by the receiver of a message, if the receiver interprets the information correctly. A correct interpretation depends on Syntax, Semantics, and Pragmatics.
+Understanding is the ability to grasp the meaning of information. Information is conveyed in a message using a specific language. Information is understood by the receiver of a message if the receiver interprets the information correctly. A correct interpretation depends on Syntax, Semantics, and Pragmatics.
 
 ### Syntax
-* It originates from the greek language and means arrangement and ordering.
-* In grammatics syntax denotes the study of principles and processes by which sentences are constructed in particular languages.
-* In formal languages, syntax is just a set of rules, by which well formed expressions can be created from a fundamental set of symbols (alphabet).
+* It originates from the Greek language and means arrangement and ordering.
+* In grammatics, syntax denotes the study of principles and processes by which sentences are constructed in particular languages.
+* In formal languages, syntax is just a set of rules by which well-formed expressions can be created from a fundamental set of symbols (alphabet).
 * In computer science, syntax defines the normative structure of data.
 
 ### Semantics
-* It originates from the greek language. It pertains to the character, the study of meaning.
-* Is part of the linguistics focussed on Sense and Meaning of language or symbols of language.
-* Is the study of interpretation of signs or symbols as used by agents or communities within particular circumstances and contexts.
-* Semantics asks, how sense and meaning of complex concepts can be derived from simple concepts based on the rules of syntax.
+* It originates from the Greek language. It pertains to the character (% KG of what?), the study of meaning.
+* Is part of linguistics focussed on the sense and meaning of language or symbols of language (% KG study of symbols = semiotics).
+* Is the study of the interpretation of signs or symbols as used by agents or communities within particular circumstances and contexts.
+* Semantics asks how the sense and meaning of complex concepts can be derived from simple concepts based on the rules of syntax.
 * The semantics of a message depends on context and pragmatics.
 
 ### Pragmatics
-* It originates from the greek language and relates to action.
-* It reflects the intention by which the language is used to communicate a message.
+* It originates from the Greek language and relates to action.
+* It reflects on the intention by which the language is used to communicate a message.
 * In linguistics, pragmatics denotes the study of applying language in different situations.
 * It also denotes the intended purpose of the speaker.
 * Pragmatics studies the ways in which context contributes to meaning.
@@ -279,7 +281,7 @@ Understanding is the ability to grasp the meaning of information. Information is
 ### Example Traffic Light Situation
 * (Awareness) Syntax: green (bottom); yellow; red
 * Semantic: green = go; …; red = stop
-* Pragmatics: If red and no traffic then it is allowed to go
+* Pragmatics: If red and no traffic, then it is allowed (% KG still somewhat safe - it's not allowed) to go
 
 ### Difference between Data Type and Semantics
 * The data type is an abstract classification that has implications on 
@@ -305,9 +307,9 @@ https://transmarcations.constantvzw.org/texts/Pierre_Visions_carto.pdf
 
 Here you can see what happens if you consider a larger space of possible solutions.
 
-A basic design principle is to consider multiple alternatives and then choose the best one, rather than immediately focusing on one solution without considering alternatives. One way to ensure that more than one possibility is considered is to explicitly generate multiple ideas in parallel.
+A basic design principle is to consider multiple alternatives and then choose the best one rather than immediately focusing on one solution without considering alternatives. One way to ensure that more than one possibility is considered is to explicitly generate multiple ideas in parallel.
 
-In the following, I will introduce a framework that helps you to get structure on the huge design space. Such scaffold will help you to think systematically about choices.
+In the following, I will introduce a framework that helps you to get structure on the huge design space. Such a scaffold will help you to think systematically about choices.
 
 
 
