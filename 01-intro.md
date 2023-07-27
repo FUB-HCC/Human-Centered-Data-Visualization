@@ -16,7 +16,9 @@ kernelspec:
 # The Value of Data Visualization
 
 In the following section, I highlight the value of data visualization, which is caused by
+
 % KG: which is elevated by
+
 the increasing availability of data. I highlight these values with different typical examples from data visualizations.
 
 When thinking about the value of data visualization, we should consider the increasing importance of data in our society. Over the last century, the availability of data in the world has grown exponentially. We now have data whose scope is no longer imaginable.
@@ -24,6 +26,7 @@ When thinking about the value of data visualization, we should consider the incr
 According to statista[^1], the total amount of data reached almost 65 zettabytes in 2020 {cite}`statista2021`. This growth was higher than previously expected due to the COVID-19 pandemic, as more and more people work and study from home and make more use of home entertainment options. However, in 2020, the installed storage capacity reached 6.7 zettabytes, thus, only a small proportion of the created data was kept. During the forecast period from 2020 to 2025, statista states an average annual growth rate of 19.2 % in storage capacity {cite}`statista2021`.
 
 % KG: ggf. am Anfang noch etwas genauer differenzieren, was mit "data" gemeint ist? Insbesondere da du darauf verweist, dass nicht alle Daten, die erzeugt werden, auch gespeichert werden. Plus: home entertainment options klingt so, als seien Datenströme (i.e. Datenabruf?) gemeint?
+
 % Include discussion on big data and reference to machine learning?
 
 Just to recall, a zettabyte is a unit of measurement for storage capacity and stands for 10^21 bytes. That’s trillions of bytes, or in numbers, 1,000,000,000,000,000,000 bytes. This in turn is equal to 1,000 exabytes or one billion terabytes.
