@@ -15,7 +15,7 @@ kernelspec:
 (chapter01)=
 # The Value of Data Visualization
 
-In the following section, I highlight the value of data visualizations, which is caused by an increasing availability of data. I highlight these values by different typical examples from data visualizations.
+In the following section, I highlight the value of data visualizations, which is caused by an increasing availability of data. I highlight these values with different typical examples from data visualizations.
 
 When thinking about the value of data visualization we should consider the increasing importance of data in our society. Over the last century the availability of data in the world is growing exponentially. We now have data whose scope is no longer imaginable.
 
