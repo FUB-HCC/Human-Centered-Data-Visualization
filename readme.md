@@ -1,12 +1,11 @@
-# Data_Visualization_Book
+# Human-Centered Data_Visualization_Book
 
+Welcome! 
 
+These are the lecture notes of the course ''Data Visualization - From a Human-Centered Perspective'' provided by [Claudia Müller-Birn](http://clmb.de). It is a first draft and I expect many mistakes, however, it is a start and I am looking forward to receiving your comments and ideas for additions. 
 
-## Getting started
+This course gives students an introduction to the fundamentals of data visualization with current insights from research and practice. 
 
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+Further information about the course can be found on our [homepage](https://www.mi.fu-berlin.de/en/inf/groups/hcc/teaching/index.html).
 
-
-## Title
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
 
