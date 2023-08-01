@@ -34,6 +34,8 @@ The question arises, how can you tackle these challenges properly? Munzner propo
 
 The __Domain Situation__ contains the details of a specific application domain. This level focuses on a specific domain situation, which encompasses a group of target users, their domain of interest, their questions, and their data. A domain relates to a particular field of interest of the target users of a vis tool, for example, open access, microbiology, or health care. Each domain usually has its own vocabulary for describing its data and problems, and there is usually some existing workflow of how the data is used to solve their (% KG refers to "domain" - change "theirs" to "the users'") problems. A group of target users can (% KG could, for example,) be narrowly defined as a handful of people working at a specific company or broadly defined as anybody who does research. 
 
+% KG: new slide from DV23-2_DataViz-Process slide 18/19 "Methods for Understanding the Domain Situation.
+
 __Domain Validation__ Primary threat is the mischaracterizing (% KG mischaracterization?) of the problem 
 An immediate form of validation is to interview and observe the target audience to verify the characterization (% KG of the task or problem). Contextual inquiry is typically better suited for vis designers than silent observation because of the complex cognitive tasks that are targeted. 
 One downstream form of validation is to report the rate at which the tool has been adopted by the target audience. A tool that is actually used by its intended users has reached a different level of success than one that has only been used by its designers.
@@ -180,6 +182,9 @@ A position is spatial data, providing a location in two-dimensional (2D) or thre
 A grid specifies the strategy for sampling continuous data in terms of both geometric and topological relationships between its cells. 
 
 (variabletype)=
+
+% KG: new content from DV23-2_DataViz-Process slide 21 - Types of Variables in Data Visualization Projects??? (unclear if this is implicitly included in this script or if is just using different terminology and examples. Maybe align terminology and examples?
+
 #### What Attribute Types Do you Know? 
 
 % KG repeats section from before
@@ -224,6 +229,8 @@ Bostock et al. {cite}`Heer_Bostock_Ogievetsky_2010` state:
 
 > All visualizations share a common “DNA” – a set of mappings between data properties and visual attributes 
 > such as position, size, shape, and color – and customized species of visualizations might always be constructed > by varying these encodings.
+
+% KG: new content from DV23-2_DataViz-Process slide 36-39 - Visual Encoding
 
 
 __More Coming Soon__
