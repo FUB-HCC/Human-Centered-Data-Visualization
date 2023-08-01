@@ -101,6 +101,9 @@ Instead of analyzing and showing the data of all previous shuttle launches, they
 
 In summary, Tufte calls for both the reasoning about statistical evidence and for the design of visualizations and defines six requirements “(1) *documenting* the sources and characteristics of the data, (2) insistently enforcing appropriate *comparisons*, (3) demonstrating mechanisms of *cause and effect*, (4) expressing those mechanisms *quantitatively*, (5) recognizing the inherently *multivariate* nature of analytic problems, and (6) inspecting and evaluating *alternative explanations*.” {cite}`tufte1997visualexplanation`. Visualizations should be “documentary, comparative, causal and explanatory, quantified, multivariate, exploratory, skeptical.”{cite}`tufte1997visualexplanation`. 
 
+### Wealth Health Data (WHO)
+% KG: new example from DV23-1_DataViz-Intro slide 13-15
+
 (01-hcdv)=
 ## Human-Centered Data Visualization
 
