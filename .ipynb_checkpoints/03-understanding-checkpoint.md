@@ -9,7 +9,7 @@ jupytext:
 kernelspec:
   display_name: Python 3
   language: python
-  name: python3
+  name: python
 ---
 
 # Understanding your Data
@@ -47,8 +47,8 @@ align: center
 ---
 Example of the Dataset Nutrition Label (first generation). Taken from https://datanutrition.org/
 ```
-
-## Understanding the Data Structure {#Understanding-the-Data-Structure}
+(Understanding-the-Data-Structure)=
+## Understanding the Data Structure 
 
 <!-- Useful Ressources:
 https://bookdown.org/ronsarafian/IntrotoDS/eda.html#summary-statistics
@@ -90,7 +90,142 @@ EDA is a creative process {cite}`WickhamGrolemund2017Rfordatascience`, thus the 
 
 There is no rule about what questions you should ask to guide your research. However, two types of questions will always be useful for making discoveries in your data. You can phrase these questions loosely as (1) What kind of variation occurs within my variables? and (2) What kind of co-variation occurs between my variables?
 
+### Using Python for Data Exploration
+
+In the following, we address these two questions based on the example of Héctor Corrada Bravo from the EDA chapter of his course on [“Introduction to Data Science”](http://www.hcbravo.org/IntroDataSci/bookdown-notes/exploratory-data-analysis-visualization.html) from the Center for Bioinformatics and Computational Biology from the Univ. of Maryland. 
+
+We employ Python with Pandas and Altair which is a widespread tool for statistical analysis. However, you can follow these steps with any programming language at hand. I would like to provide you an methodological understanding of how to explore data, rather than provide an introduction into Python.
+
+
+### Visualizing Data
+
+In the following, we use the on-time data for all flights that departed NYC, i.e., JFK, LGA or EWR, in 2013. The Bureau of transportation statistics has released these data, and it was included into Python. Let's get an overview about this dataset.
+
+```{code-cell} 
+from nycflights13 import flights
+
+# Show the internal structure of the data frame (= flights)
+flights.info()
+
+```
+
+The first line shows the dimension of your data frame[^4], and then each of the columns (attributes) and show with their respective datatype.
+
+Understanding the structure of the dataset is quite useful, since it allows you to get an overview on the available data types. A good understanding of the different data types is an important prerequisite for EDA, because you can use certain statistical measurements only for certain data types. You also need to know which data type you are dealing with in order to choose the right visualization method. Think of data types as a way to categorize different types of variables. We already discussed different types of variables in Section \@ref(sec:variabletype).
+
+For setting up the pipeline it makes sense to work with a subset only, thus, we sample from the available data 10 percent. Furthermore, I decided to include only those observations that are complete. However, this decision should not be made carelessly. 
+
+```{code-cell} 
+from nycflights13 import flights
+import pandas as pd
+
+# Select a sample from the whole data set
+flights = pd.DataFrame(flights)
+flights_sample = flights.head(int(len(flights)*0.1)) # takes a sample of 10 per cent
+
+# dimensions of the data set
+flights_sample.shape
+
+```
+% Fix this code cell: warning SettingWithCopyWarning: A value is trying to be set on a copy of a slice from a DataFrame
+```{code-cell} 
+from nycflights13 import flights
+
+# remove all observations that are not complete (missing a value)
+flights_sample.dropna(axis = 0, how = 'any', inplace = True) # takes a sample of the first 10 rows
+
+# dimensions of the data set
+flights_sample.shape
+
+```
+
+### Scatterplot
+
+The next step is to get a first overview about the data, and for this, we can use a visualization already. For this I use a simple scatterplot.
+
+```{code-cell} 
+import altair as alt
+
+alt.data_transformers.disable_max_rows() # Disables the max rows restriction on handling data
+
+fly_viz1 = flights_sample.reset_index()
+
+# Visualize Data 1 - Scatterplot
+alt.Chart(fly_viz1).mark_circle(size=60).encode(  # reset.index() creates a column with the row index
+    x=alt.X('index', title='Flight ID'),
+    y=alt.Y('dep_delay', title='Departure delay (in min)'),
+    tooltip=['flight', 'year', 'dep_time', 'dep_delay']
+).interactive()
+
+```
+
+This is not very informative because this plot is not structured. However, let us reflect about the visualization for a moment. A scatterplot encodes two quantitative variables using both the vertical and horizontal spatial position channels., and the mark type is necessarily a point. They are highly effective for judging the correlation between two attributes. Scatterplots are often augmented with color coding to show an additional attribute. We talk about these characteristics in detail again.
+
+Table: Characteristics of a scatterplot [@munzner2014visualization]
+
+Idiom       | Scatterplot  
+-------     | -------------  
+What: Data  | Table: two quantitative value attributes.
+How: Encode | Express values with horizontal and vertical spatial position and point marks
+Why: Task   | Find trends, outliers, distribution, correlation; locate clusters.  
+Scale       | Items: hundreds
+
+
+Let's sort the values and change the graphical representation to make it easier to see.
+
+% Fix this code by sorting 
+```{code-cell} 
+# Visualize Data - Scatterplot with ordered values
+
+# 'sort_values' sorts a variable, here dep_delay, in descending order
+# we have to ignore the previous index, otherwise the data frame index will not be reset
+fly_viz2 = flights_sample.sort_values(by=['dep_delay'], ignore_index=True) 
+
+# create new column 'index' with row numbers from column data
+fly_viz2 = fly_viz2.reset_index()
+
+alt.Chart(fly_viz2).mark_circle(size=60).encode(  
+    x=alt.X('index', title='Ordered Flight ID'),
+    y=alt.Y('dep_delay', title='Departure delay (in min)'),
+    tooltip=['flight', 'year', 'dep_time', 'dep_delay']
+).interactive()
+
+```
+
+What do you think of this chart? What can you say about flight delay times now? In the following, we focus on the delays only, since many flights seems to be one time.
+
+```{code-cell} 
+# Remove all flights with no delay
+flights_sample = flights_sample[flights_sample.dep_delay <= 0]
+
+# dimensions of the data set
+flights_sample.shape
+
+```
+
+### Histogram
+
+Let's now create a graphical summary of these variables. Let's start with a histogram. It divides the range of the dep_delay attribute into equal-sized bins and then plots the number of observations within each bin. What additional information does this new visualization give us about this variable?
+
+The idiom of histograms shows the distribution of elements within an attribute. In the example, you can see a histogram of the weight distribution for all cats in a neighborhood, binned into 5-pound ranges. 
+
+The visual coding of a histogram is very similar to bar charts, with a line marker. One difference is that histograms are sometimes displayed with no space between bars to visually imply continuity, while bar charts conversely have spaces between bars to imply discretization. Despite their visual similarity, histograms are very different from bar charts. They do not show the original data but aggregate it.
+
+The number of bins in the histogram can be chosen independently of the number of elements in the data set. The choice of bin size is crucial and tricky: a histogram can look very different depending on the discretization chosen. One possible solution to the problem is to calculate the number of bins based on the features of the data set; another is to provide controls for the user to interactively change the number of bins and see how the histogram changes.
+
+Table: Characteristics of a histogram {cite}`munzner2014visualization` 
+
+Idiom         | Histogram  
+-------       | -------------  
+What: Data    | Table: one quantitative value attribute.
+What: Derived | Derived table: one derived ordered key attribute (bin), one derived quantitative value attribute (item count per bin).
+How: Encode   | Rectilinear Layout. Line mark with aligned position to express derived value attribute. Position: key attribute.
+
+```{code-cell} 
+
+
+```
 
 [^2]: I highly recommend reading more about him, for example in [](https://www.stat.berkeley.edu/~brill/Papers/life.pdf).
 [^3]: The so-called "smooth part of a data set" is the variability that the analyst has accounted for so far, while the "rough" part is the variability that remains unexplained.
-
+[^4]: A dataframe is a list, with each component of that list being a equal length vector. Thus, intuitively, a dataframe is like a matrix with a rows-and-comlumns-structure. However, it differs from a matrix, since each column can having different mode (data type) {cite}`Matloff2011ArtofRProgramming`.
