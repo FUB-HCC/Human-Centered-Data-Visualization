@@ -181,10 +181,11 @@ A link is a relationship between items, typically within a network.
 A position is spatial data, providing a location in two-dimensional (2D) or three-dimensional (3D) space.
 A grid specifies the strategy for sampling continuous data in terms of both geometric and topological relationships between its cells. 
 
-(variabletype)=
+
 
 % KG: new content from DV23-2_DataViz-Process slide 21 - Types of Variables in Data Visualization Projects??? (unclear if this is implicitly included in this script or if is just using different terminology and examples. Maybe align terminology and examples?
 
+(variabletype)=
 #### What Attribute Types Do you Know? 
 
 % KG repeats section from before
