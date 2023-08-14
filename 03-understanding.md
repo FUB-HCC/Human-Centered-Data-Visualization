@@ -367,11 +367,44 @@ mystnb:
       Box Plot of delay times (log scale).
     name: boxplot2
 ---
+import math
+
+# the function insert() inserts a new item by index
+#fly_viz2.insert(len(fly_viz2.columns), "min_delay", min(fly_viz2.dep_delay))
+#fly_viz2.insert(len(fly_viz2.columns+1), "log_dep_delay", math.log(fly_viz2.dep_delay - fly_viz2.min_delay))
 # Visualize Data - Box Plot 
+#alt.Chart(fly_viz2).mark_boxplot().encode(
+#  alt.Y('log_dep_delay:Q').scale(zero=False)
+#)
+```
+### Compare Distributions
+
+Now we can start looking at the relationship between pairs of attributes. That is, how are each of the distributional properties we care about (central trend, spread and skew) of the values of an attribute changing based on the value of a different attribute. Suppose we want to see the relationship between departure delay time (a numeric variable), and the airport origin (a categorical variable).
+
+
+```{code-cell} 
+---
+mystnb:
+  figure:
+    caption: |
+      Box Plot of delay times.
+    name: boxplot_groups
+---
+# Visualize Data - Box Plot in groups
 alt.Chart(fly_viz2).mark_boxplot().encode(
-  alt.Y('dep_delay:Q').scale(zero=False)
+  alt.Y('dep_delay:Q').scale(zero=False),
+  alt.X('origin:N')
 )
 ```
+
+### Summary Statistics
+Let's continue our discussion of exploratory data analysis. In the previous section, we saw ways to visualize attributes (variables) using graphs to begin understanding the properties of the data distribution, an essential and preliminary step in data analysis. In this section, we begin discussing statistical or numerical summaries of data to quantify properties we have observed using visual summaries and plots. Remember that one purpose of EDA is to identify problems in data and understand variable properties. We also want to use EDA to understand the relationship between pairs of variables, such as their correlation or covariance.
+
+We differentiate measures of central tendency, i.e., measures of location that describe a tendency of data to center about certain numerical value. Here we have mode, median, and mean. Then we have measures of variability, i.e., dispersion that describe the spread of the data across possible values. To this group the range, interquartile range, variance, and standard deviation belong to. Finally we have measures of shape that relate to the form of the distribution, its skewness. 
+
+<!-- https://bookdown.org/yih_huynh/Guide-to-R-Book/diamonds.html -->
+
+In this chapter, we use the diamond data set, that contains the prices, carat, color and other attributes of almost 54,000 diamonds. 
 
 
 [^2]: I highly recommend reading more about him, for example, in [](https://www.stat.berkeley.edu/~brill/Papers/life.pdf).
