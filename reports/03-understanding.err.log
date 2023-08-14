@@ -1,0 +1,121 @@
+Traceback (most recent call last):
+  File "/Users/wernph/anaconda3/lib/python3.10/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+  File "/Users/wernph/anaconda3/lib/python3.10/site-packages/nbclient/client.py", line 1204, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/Users/wernph/anaconda3/lib/python3.10/site-packages/nbclient/util.py", line 84, in wrapped
+    return just_run(coro(*args, **kwargs))
+  File "/Users/wernph/anaconda3/lib/python3.10/site-packages/nbclient/util.py", line 62, in just_run
+    return loop.run_until_complete(coro)
+  File "/Users/wernph/anaconda3/lib/python3.10/asyncio/base_events.py", line 649, in run_until_complete
+    return future.result()
+  File "/Users/wernph/anaconda3/lib/python3.10/site-packages/nbclient/client.py", line 663, in async_execute
+    await self.async_execute_cell(
+  File "/Users/wernph/anaconda3/lib/python3.10/site-packages/nbclient/client.py", line 965, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/Users/wernph/anaconda3/lib/python3.10/site-packages/nbclient/client.py", line 862, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+import math
+
+# the function insert() inserts a new item by index
+fly_viz2.insert(len(fly_viz2.columns), "min_delay", min(fly_viz2.dep_delay))
+fly_viz2.insert(len(fly_viz2.columns+1), "log_dep_delay", math.log(fly_viz2.dep_delay - fly_viz2.min_delay))
+# Visualize Data - Box Plot 
+alt.Chart(fly_viz2).mark_boxplot().encode(
+  alt.Y('log_dep_delay:Q').scale(zero=False)
+)
+------------------
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mTypeError[0m                                 Traceback (most recent call last)
+File [0;32m~/anaconda3/lib/python3.10/site-packages/pandas/core/ops/array_ops.py:163[0m, in [0;36m_na_arithmetic_op[0;34m(left, right, op, is_cmp)[0m
+[1;32m    162[0m [38;5;28;01mtry[39;00m:
+[0;32m--> 163[0m     result [38;5;241m=[39m [43mfunc[49m[43m([49m[43mleft[49m[43m,[49m[43m [49m[43mright[49m[43m)[49m
+[1;32m    164[0m [38;5;28;01mexcept[39;00m [38;5;167;01mTypeError[39;00m:
+
+File [0;32m~/anaconda3/lib/python3.10/site-packages/pandas/core/computation/expressions.py:239[0m, in [0;36mevaluate[0;34m(op, a, b, use_numexpr)[0m
+[1;32m    237[0m     [38;5;28;01mif[39;00m use_numexpr:
+[1;32m    238[0m         [38;5;66;03m# error: "None" not callable[39;00m
+[0;32m--> 239[0m         [38;5;28;01mreturn[39;00m [43m_evaluate[49m[43m([49m[43mop[49m[43m,[49m[43m [49m[43mop_str[49m[43m,[49m[43m [49m[43ma[49m[43m,[49m[43m [49m[43mb[49m[43m)[49m  [38;5;66;03m# type: ignore[misc][39;00m
+[1;32m    240[0m [38;5;28;01mreturn[39;00m _evaluate_standard(op, op_str, a, b)
+
+File [0;32m~/anaconda3/lib/python3.10/site-packages/pandas/core/computation/expressions.py:128[0m, in [0;36m_evaluate_numexpr[0;34m(op, op_str, a, b)[0m
+[1;32m    127[0m [38;5;28;01mif[39;00m result [38;5;129;01mis[39;00m [38;5;28;01mNone[39;00m:
+[0;32m--> 128[0m     result [38;5;241m=[39m [43m_evaluate_standard[49m[43m([49m[43mop[49m[43m,[49m[43m [49m[43mop_str[49m[43m,[49m[43m [49m[43ma[49m[43m,[49m[43m [49m[43mb[49m[43m)[49m
+[1;32m    130[0m [38;5;28;01mreturn[39;00m result
+
+File [0;32m~/anaconda3/lib/python3.10/site-packages/pandas/core/computation/expressions.py:69[0m, in [0;36m_evaluate_standard[0;34m(op, op_str, a, b)[0m
+[1;32m     68[0m     _store_test_result([38;5;28;01mFalse[39;00m)
+[0;32m---> 69[0m [38;5;28;01mreturn[39;00m [43mop[49m[43m([49m[43ma[49m[43m,[49m[43m [49m[43mb[49m[43m)[49m
+
+[0;31mTypeError[0m: can only concatenate str (not "int") to str
+
+During handling of the above exception, another exception occurred:
+
+[0;31mTypeError[0m                                 Traceback (most recent call last)
+Cell [0;32mIn[14], line 5[0m
+[1;32m      3[0m [38;5;66;03m# the function insert() inserts a new item by index[39;00m
+[1;32m      4[0m fly_viz2[38;5;241m.[39minsert([38;5;28mlen[39m(fly_viz2[38;5;241m.[39mcolumns), [38;5;124m"[39m[38;5;124mmin_delay[39m[38;5;124m"[39m, [38;5;28mmin[39m(fly_viz2[38;5;241m.[39mdep_delay))
+[0;32m----> 5[0m fly_viz2[38;5;241m.[39minsert([38;5;28mlen[39m([43mfly_viz2[49m[38;5;241;43m.[39;49m[43mcolumns[49m[38;5;241;43m+[39;49m[38;5;241;43m1[39;49m), [38;5;124m"[39m[38;5;124mlog_dep_delay[39m[38;5;124m"[39m, math[38;5;241m.[39mlog(fly_viz2[38;5;241m.[39mdep_delay [38;5;241m-[39m fly_viz2[38;5;241m.[39mmin_delay))
+[1;32m      6[0m [38;5;66;03m# Visualize Data - Box Plot [39;00m
+[1;32m      7[0m alt[38;5;241m.[39mChart(fly_viz2)[38;5;241m.[39mmark_boxplot()[38;5;241m.[39mencode(
+[1;32m      8[0m   alt[38;5;241m.[39mY([38;5;124m'[39m[38;5;124mlog_dep_delay:Q[39m[38;5;124m'[39m)[38;5;241m.[39mscale(zero[38;5;241m=[39m[38;5;28;01mFalse[39;00m)
+[1;32m      9[0m )
+
+File [0;32m~/anaconda3/lib/python3.10/site-packages/pandas/core/ops/common.py:70[0m, in [0;36m_unpack_zerodim_and_defer.<locals>.new_method[0;34m(self, other)[0m
+[1;32m     66[0m             [38;5;28;01mreturn[39;00m [38;5;28mNotImplemented[39m
+[1;32m     68[0m other [38;5;241m=[39m item_from_zerodim(other)
+[0;32m---> 70[0m [38;5;28;01mreturn[39;00m [43mmethod[49m[43m([49m[38;5;28;43mself[39;49m[43m,[49m[43m [49m[43mother[49m[43m)[49m
+
+File [0;32m~/anaconda3/lib/python3.10/site-packages/pandas/core/arraylike.py:100[0m, in [0;36mOpsMixin.__add__[0;34m(self, other)[0m
+[1;32m     98[0m [38;5;129m@unpack_zerodim_and_defer[39m([38;5;124m"[39m[38;5;124m__add__[39m[38;5;124m"[39m)
+[1;32m     99[0m [38;5;28;01mdef[39;00m [38;5;21m__add__[39m([38;5;28mself[39m, other):
+[0;32m--> 100[0m     [38;5;28;01mreturn[39;00m [38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43m_arith_method[49m[43m([49m[43mother[49m[43m,[49m[43m [49m[43moperator[49m[38;5;241;43m.[39;49m[43madd[49m[43m)[49m
+
+File [0;32m~/anaconda3/lib/python3.10/site-packages/pandas/core/indexes/base.py:6717[0m, in [0;36mIndex._arith_method[0;34m(self, other, op)[0m
+[1;32m   6707[0m [38;5;28;01mif[39;00m (
+[1;32m   6708[0m     [38;5;28misinstance[39m(other, Index)
+[1;32m   6709[0m     [38;5;129;01mand[39;00m is_object_dtype(other[38;5;241m.[39mdtype)
+[0;32m   (...)[0m
+[1;32m   6713[0m     [38;5;66;03m# a chance to implement ops before we unwrap them.[39;00m
+[1;32m   6714[0m     [38;5;66;03m# See https://github.com/pandas-dev/pandas/issues/31109[39;00m
+[1;32m   6715[0m     [38;5;28;01mreturn[39;00m [38;5;28mNotImplemented[39m
+[0;32m-> 6717[0m [38;5;28;01mreturn[39;00m [38;5;28;43msuper[39;49m[43m([49m[43m)[49m[38;5;241;43m.[39;49m[43m_arith_method[49m[43m([49m[43mother[49m[43m,[49m[43m [49m[43mop[49m[43m)[49m
+
+File [0;32m~/anaconda3/lib/python3.10/site-packages/pandas/core/base.py:1295[0m, in [0;36mIndexOpsMixin._arith_method[0;34m(self, other, op)[0m
+[1;32m   1292[0m rvalues [38;5;241m=[39m ensure_wrapped_if_datetimelike(rvalues)
+[1;32m   1294[0m [38;5;28;01mwith[39;00m np[38;5;241m.[39merrstate([38;5;28mall[39m[38;5;241m=[39m[38;5;124m"[39m[38;5;124mignore[39m[38;5;124m"[39m):
+[0;32m-> 1295[0m     result [38;5;241m=[39m [43mops[49m[38;5;241;43m.[39;49m[43marithmetic_op[49m[43m([49m[43mlvalues[49m[43m,[49m[43m [49m[43mrvalues[49m[43m,[49m[43m [49m[43mop[49m[43m)[49m
+[1;32m   1297[0m [38;5;28;01mreturn[39;00m [38;5;28mself[39m[38;5;241m.[39m_construct_result(result, name[38;5;241m=[39mres_name)
+
+File [0;32m~/anaconda3/lib/python3.10/site-packages/pandas/core/ops/array_ops.py:222[0m, in [0;36marithmetic_op[0;34m(left, right, op)[0m
+[1;32m    217[0m [38;5;28;01melse[39;00m:
+[1;32m    218[0m     [38;5;66;03m# TODO we should handle EAs consistently and move this check before the if/else[39;00m
+[1;32m    219[0m     [38;5;66;03m# (https://github.com/pandas-dev/pandas/issues/41165)[39;00m
+[1;32m    220[0m     _bool_arith_check(op, left, right)
+[0;32m--> 222[0m     res_values [38;5;241m=[39m [43m_na_arithmetic_op[49m[43m([49m[43mleft[49m[43m,[49m[43m [49m[43mright[49m[43m,[49m[43m [49m[43mop[49m[43m)[49m
+[1;32m    224[0m [38;5;28;01mreturn[39;00m res_values
+
+File [0;32m~/anaconda3/lib/python3.10/site-packages/pandas/core/ops/array_ops.py:170[0m, in [0;36m_na_arithmetic_op[0;34m(left, right, op, is_cmp)[0m
+[1;32m    164[0m [38;5;28;01mexcept[39;00m [38;5;167;01mTypeError[39;00m:
+[1;32m    165[0m     [38;5;28;01mif[39;00m [38;5;129;01mnot[39;00m is_cmp [38;5;129;01mand[39;00m (is_object_dtype(left[38;5;241m.[39mdtype) [38;5;129;01mor[39;00m is_object_dtype(right)):
+[1;32m    166[0m         [38;5;66;03m# For object dtype, fallback to a masked operation (only operating[39;00m
+[1;32m    167[0m         [38;5;66;03m#  on the non-missing values)[39;00m
+[1;32m    168[0m         [38;5;66;03m# Don't do this for comparisons, as that will handle complex numbers[39;00m
+[1;32m    169[0m         [38;5;66;03m#  incorrectly, see GH#32047[39;00m
+[0;32m--> 170[0m         result [38;5;241m=[39m [43m_masked_arith_op[49m[43m([49m[43mleft[49m[43m,[49m[43m [49m[43mright[49m[43m,[49m[43m [49m[43mop[49m[43m)[49m
+[1;32m    171[0m     [38;5;28;01melse[39;00m:
+[1;32m    172[0m         [38;5;28;01mraise[39;00m
+
+File [0;32m~/anaconda3/lib/python3.10/site-packages/pandas/core/ops/array_ops.py:127[0m, in [0;36m_masked_arith_op[0;34m(x, y, op)[0m
+[1;32m    124[0m         mask [38;5;241m=[39m np[38;5;241m.[39mwhere(y [38;5;241m==[39m [38;5;241m1[39m, [38;5;28;01mFalse[39;00m, mask)
+[1;32m    126[0m     [38;5;28;01mif[39;00m mask[38;5;241m.[39many():
+[0;32m--> 127[0m         result[mask] [38;5;241m=[39m [43mop[49m[43m([49m[43mxrav[49m[43m[[49m[43mmask[49m[43m][49m[43m,[49m[43m [49m[43my[49m[43m)[49m
+[1;32m    129[0m np[38;5;241m.[39mputmask(result, [38;5;241m~[39mmask, np[38;5;241m.[39mnan)
+[1;32m    130[0m result [38;5;241m=[39m result[38;5;241m.[39mreshape(x[38;5;241m.[39mshape)  [38;5;66;03m# 2D compat[39;00m
+
+[0;31mTypeError[0m: can only concatenate str (not "int") to str
+TypeError: can only concatenate str (not "int") to str
+
