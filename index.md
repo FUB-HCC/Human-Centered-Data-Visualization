@@ -18,7 +18,8 @@ Claudia Müller-Birn
 > {sub-ref}`today`
 
 ## Preface
-```{note}
+```{admonition} PLEASE NOTE
+:class: warning
 These lecture notes are neither for distribution nor for reference. It is just a first draft and many resources may not be referenced yet, furthermore, images are largely missing. I update these lecture notes throughout the course. If you spot any major mistakes, let me know.
 ```
 
