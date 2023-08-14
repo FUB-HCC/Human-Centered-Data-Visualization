@@ -54,7 +54,8 @@ A logarithmic transformation of data has many advantages, since you can address 
 
 However, in two cases you should avoid using a log scale: when you have negative non-zero values or when you audience is potentially not familiar with this type of scale transformation (which is rather the rule rather than the exception). In the latter case, if you cannot avoid it, make sure that you need to educate the viewer. Include something like (interactive) annotations to ensure that your viewer can understand the visualization. Usually, the logarithmic scale use a base of 10, but the base 2 is useful as well. A base-2 logarithmic scale allows to show rate of change in terms of doubling {cite}`Few2004Showmethenumbers`.
 
-## Visual Encoding for Categorical Data {#Visual-Encoding-for-Categorical-Data}
+(Visual-Encoding-for-Categorical-Data)=
+## Visual Encoding for Categorical Data 
 
 The use of space to encode categorical attributes is a bit more complex, since categorical attributes have often a disordered semantic. Remember, the principle of expressiveness is violated if categorical attributes are encoded using spatial position {cite}`munzner2014visualization`.
 
