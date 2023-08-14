@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>&lt;no title&gt; &#8212; Data Visualization - From a Human-Centered Perspective (Lecture Notes)</title>
+    <title>5. Visualizing Tabular Data &#8212; Data Visualization - From a Human-Centered Perspective (Lecture Notes)</title>
   
   
   
@@ -61,10 +61,12 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '05-tabulardata';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="5. Bibliography" href="bibliography.html" />
+    <link rel="next" title="6. Bibliography" href="bibliography.html" />
     <link rel="prev" title="4. Human Perception and Visual Encoding" href="04-perception.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -150,12 +152,13 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <ul class="nav bd-sidenav">
+        <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="01-intro.html">1. The Value of Data Visualization</a></li>
 <li class="toctree-l1"><a class="reference internal" href="02-process.html">2. The Process of Visualizing Data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="03-understanding.html">3. Understanding your Data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="04-perception.html">4. Human Perception and Visual Encoding</a></li>
-<li class="toctree-l1"><a class="reference internal" href="bibliography.html">5. Bibliography</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">5. Visualizing Tabular Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bibliography.html">6. Bibliography</a></li>
 </ul>
 
     </div>
@@ -339,7 +342,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1><no title></h1>
+    <h1>Visualizing Tabular Data</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -348,9 +351,12 @@ document.write(`
                 <h2> Contents </h2>
             </div>
             <nav aria-label="Page">
-                <ul class="simple visible nav section-nav flex-column">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visual-encoding-for-numerical-data">5.1. Visual Encoding for Numerical Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visual-encoding-for-categorical-data-visual-encoding-for-categorical-data">5.2. Visual Encoding for Categorical Data {#Visual-Encoding-for-Categorical-Data}</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spatial-axis-orientation">5.3. Spatial Axis Orientation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spatial-layout-density">5.4. Spatial Layout Density</a></li>
 </ul>
-
             </nav>
         </div>
     </div>
@@ -361,7 +367,71 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  
+  <section class="tex2jax_ignore mathjax_ignore" id="visualizing-tabular-data">
+<h1><span class="section-number">5. </span>Visualizing Tabular Data<a class="headerlink" href="#visualizing-tabular-data" title="Permalink to this heading">#</a></h1>
+<div class="warning admonition">
+<p class="admonition-title">PLEASE NOTE</p>
+<p>These lecture notes are neither for distribution nor for reference. It is just a first draft and many resources may not be referenced yet, furthermore, images are largely missing. I update these lecture notes throughout the course. If you spot any major mistakes, let me know.</p>
+</div>
+<p>Now you learnt about the general process of creating data visualizations and we have also discussed certain restrictions that exist in human visual and spatial cognition. These foundations help us to dive deeper into the topic of visualizations. In the next three chapters, we explore various visualizations and their characteristics. This helps you to make an informed decision when selecting for a certain visual encoding.</p>
+<p>The majority of “found” data is available in a tabular format, since it is very convenient for understanding and working with the data. In this chapter, thus, we focus on this data type.</p>
+<!-- https://medium.com/transparent-data-eng/5-levels-of-data-openness-a-long-road-from-pdf-to-lod-e10cf36b41c9 -->
+<p>Tabular data <span id="id1">[<a class="reference internal" href="bibliography.html#id30" title="Tamara Munzner. Visualization analysis and design. CRC press, 2014.">Munzner, 2014</a>]</span> consists of key (often the header) and value attributes. A key is an independent attribute that can be used as a unique index to look up items in a table. It can be a categorical or ordinal variable. A value is a dependent attribute: the value of a cell in a table. Values can be categorical, ordinal, or quantitative attributes. What are our possibilities for transferring tabular data into a certain visual encoding? Our decision depends on the semantics of the table’s attributes, i.e., how many keys and how many values our table has. In case of two value attributes that are quantitative, we can use a scatterplot, with one key (categorical) and one value attribute (quantitative), a bar chart is appropriate, and heatmaps show two keys (categorial) and one value (quantitative). In the following sections, we explore possible visual encodings in more detail by focusing on four aspects <span id="id2">[<a class="reference internal" href="bibliography.html#id30" title="Tamara Munzner. Visualization analysis and design. CRC press, 2014.">Munzner, 2014</a>]</span>:</p>
+<ul class="simple">
+<li><p>Visual Encoding for Numerical Data</p></li>
+<li><p>Visual Encoding for Categorical Data</p></li>
+<li><p>Spatial Axis Orientation</p></li>
+<li><p>Spatial Layout Density</p></li>
+</ul>
+<section id="visual-encoding-for-numerical-data">
+<h2><span class="section-number">5.1. </span>Visual Encoding for Numerical Data<a class="headerlink" href="#visual-encoding-for-numerical-data" title="Permalink to this heading">#</a></h2>
+<p>As you already know, quantitative attributes, i.e., numerical data, can visually be encoded by representing them over the spatial position channel. The most simple representation is to encode a single quantitative attribute along an axis by encoding each element of the attribute with a marker.  When you have two quantitative attributes you use the <strong>scatterplot</strong> by encoding the values on the vertical and horizontal spatial position channels, respectively. The mark type is necessarily a point and additional attributes can be encoded with other non-spatial channels such as color and size. Size-coded scatterplots are sometimes referred to as <strong>bubble charts</strong>. As discussed in the EDA Chapter &#64;ref(Understanding-the-Data-Structure) scatter plots are useful for characterizing distributions, especially for finding outliers and extreme values. They are also very effective for assessing the correlation between two attributes.</p>
+<p>However, besides the encoding of the data, scatterplots have so-called non-data components, such as axes and legends. These components are often just as important as the data itself since they provide contextual information for interpreting the data <span id="id3">[<a class="reference internal" href="bibliography.html#id28" title="Justin Talbot, Sharon Lin, and Pat Hanrahan. An extension of wilkinson’s algorithm for positioning tick labels on axes. IEEE Transactions on Visualization and Computer Graphics, 16(6):1036–1043, Nov 2010. URL: http://ieeexplore.ieee.org/document/5613441/, doi:10.1109/TVCG.2010.130.">Talbot <em>et al.</em>, 2010</a>]</span>. The labeling of the axis, for example, allows the viewer to lookup values, to mentally compute ranges, or to estimate the slope. Over the years, many researchers of thought of approaches to algorithmically create ‘’nice’’ labels (such as ). Discussing these approaches is beyond the scope of this lecture but I want to highlight one research work by Talbot et al. <span id="id4">[<a class="reference internal" href="bibliography.html#id28" title="Justin Talbot, Sharon Lin, and Pat Hanrahan. An extension of wilkinson’s algorithm for positioning tick labels on axes. IEEE Transactions on Visualization and Computer Graphics, 16(6):1036–1043, Nov 2010. URL: http://ieeexplore.ieee.org/document/5613441/, doi:10.1109/TVCG.2010.130.">Talbot <em>et al.</em>, 2010</a>]</span>. They compared different approaches in this sphere and recommended a new algorithm for finding an optimal labeling for a given dataset. They made the following recommendations - the labeling should</p>
+<ol class="arabic simple">
+<li><p>be simple, i.e., the numbers of the tick marks should be multiples of 10, 5, 2</p></li>
+<li><p>cover the complete axis, i.e., there should be tick marks close to the ends of the data</p></li>
+<li><p>balance density, i.e., there should not too many, nor too few tick marks.</p></li>
+<li><p>be legibel, i.e., the formatting of the label (e.g., 5M vs. 5,000,000), font size (e.g., for avoiding overlapping labels), and orientation (e.g., o handle extremely dense axis) should be considered.</p></li>
+</ol>
+<p>However, axis labeling is just one component to think of in graphic design. Another important component is the layout of an entire plot, including the placement of titles, axis titles, legends, data labels, or aspect ratio. We talk about the latter in more detail in Section &#64;ref(Visual-Encoding-for-Categorical-Data).</p>
+<p>The issue of axis scaling is also essential to consider. One question that is often discussed is whether scaling to zero is necessary. On the one hand ‘’zooming in’’ helps to understanding the differences in the data, but on the other hand, it can be misleading. The decision depend on the visual encoding of the data. Bar charts, for example, use position (end of bar) and size (length and area) to encode numeric values. When ‘’zooming in’’ bar chats, the length of a bar encodes meaningless information. In any case, when you use a <strong>non zero-based scale</strong>, make sure that your inform the reader clearly about this design decision.</p>
+<!-- http://www.sthda.com/english/wiki/ggplot2-axis-scales-and-transformations -->
+<p>Another challenge occurs if the data is very unevenly distributed. Imagine you have data where the majority of data is very close together but there is one outlier. Because of this outlier, the majority of data is compressed and individual differences are challenging to be caught. What can you do? Well, the easiest the most straightforward approach might be to skip the outlier, however, in many cases such data manipulation is not appropriate. There are two additional approaches that can help to overcome this issue of outliers: the use of a scale break and the transformation of the data (by using a logarithmic scale).</p>
+<p>A <strong>scale breaks</strong> should be designed with care. Conventional scale breaks consists of two short parallel lines intersecting the axis. Such scale breaks should be avoided since often the viewer of the graph may overlook this important information. However, there is also the so-called full scale break which divides the graph into two panels, each with a full frame and its own scale <span id="id5">[<a class="reference internal" href="bibliography.html#id3" title="William S. Cleveland. Graphical methods for data presentation: full scale breaks, dot charts, and multibased logging. The American Statistician, 38(4):270–280, Nov 1984. URL: https://www.tandfonline.com/doi/abs/10.1080/00031305.1984.10483224, doi:10.1080/00031305.1984.10483224.">Cleveland, 1984</a>]</span>. The visual discontinuity discourages pattern or continuity perception across the break.</p>
+<p>A more frequently applied strategy is data transformation by using a log scale. Both approaches increase the visual resolution of the data. The scale break makes it difficult to compare the data, since you have to cognitively and not perceptually consume the data. As opposed to the <strong>log scale</strong>, where you can directly compare all data.</p>
+<p>A logarithmic transformation of data has many advantages, since you can address data skew, for example, when having a long tail or outliers. It enables the viewer the comparison within and across multiple orders of magnitude. A logarithmic scale shows the rate of change, i.e., the same distance along a logarithmic scale equals the same percentage or ratio <span id="id6">[<a class="reference internal" href="bibliography.html#id7" title="Stephen Few. Show me the numbers: designing tables and graphs to enlighten. Analytics Press, 2004. ISBN 978-0-9706019-9-5.">Few, 2004</a>]</span>. This supports the usage of a logarithmic scale in cases, where data to be shown are ratios, for example number of people in a city district, divided by the median number of people across the city (see <span id="id7">[<a class="reference internal" href="bibliography.html#id41" title="Claus O. Wilke. Fundamentals of Data Visualization: A Primer on Making Informative and Compelling Figures. O’Reilly Media, 1st edition edition, Apr 2019. ISBN 978-1-4920-3108-6.">Wilke, 2019</a>]</span>).</p>
+<p>However, in two cases you should avoid using a log scale: when you have negative non-zero values or when you audience is potentially not familiar with this type of scale transformation (which is rather the rule rather than the exception). In the latter case, if you cannot avoid it, make sure that you need to educate the viewer. Include something like (interactive) annotations to ensure that your viewer can understand the visualization. Usually, the logarithmic scale use a base of 10, but the base 2 is useful as well. A base-2 logarithmic scale allows to show rate of change in terms of doubling <span id="id8">[<a class="reference internal" href="bibliography.html#id7" title="Stephen Few. Show me the numbers: designing tables and graphs to enlighten. Analytics Press, 2004. ISBN 978-0-9706019-9-5.">Few, 2004</a>]</span>.</p>
+</section>
+<section id="visual-encoding-for-categorical-data-visual-encoding-for-categorical-data">
+<h2><span class="section-number">5.2. </span>Visual Encoding for Categorical Data {#Visual-Encoding-for-Categorical-Data}<a class="headerlink" href="#visual-encoding-for-categorical-data-visual-encoding-for-categorical-data" title="Permalink to this heading">#</a></h2>
+<p>The use of space to encode categorical attributes is a bit more complex, since categorical attributes have often a disordered semantic. Remember, the principle of expressiveness is violated if categorical attributes are encoded using spatial position <span id="id9">[<a class="reference internal" href="bibliography.html#id30" title="Tamara Munzner. Visualization analysis and design. CRC press, 2014.">Munzner, 2014</a>]</span>.</p>
+<p>Drawing all of the items with the same values for a categorical attribute within the same region uses spatial proximity to encode the information about their similarity. The regions themselves must be given spatial positions on the plane in order to draw any specific picture. The separation should be done according to an attribute that is categorical, whereas alignment and ordering should be done by some other attribute that can be ordered.</p>
+<p>We already talked about the (simple) <strong>bar chart</strong> that are suitable if your tabular data consist of one numerical and one categorical attribute. You use line marks to express the value numerical attribute with aligned vertical position and you separate the key categorical attribute with horizontal position. Bar chart support the lookup of values or their comparison. They scale well up to dozens to hundreds of key attributes.</p>
+<p>Another often used bar chart tye is the <strong>grouped bar chart</strong> if you have one numerical and a number of categorical attributes.</p>
+<p>What we often see are <strong>stacked bar charts</strong> <span id="id10">[<a class="reference internal" href="bibliography.html#id30" title="Tamara Munzner. Visualization analysis and design. CRC press, 2014.">Munzner, 2014</a>]</span>. The scalability of stacked bar charts is similar to that of standard bar charts in terms of the number of categories in the key attribute distributed across the major axis, but is limited for the key used to stack. This idiom works well with multiple categories, with an upper limit of about a dozen. A normalized stacked bar chart stretches each of these bars to the maximum possible length and shows percentages rather than absolute values. Only the lowest subbar in a stacked bar chart is aligned with the others in its category, so that the most accurate position channel can be used. The other subbars use an unaligned position, a channel that is less accurate than the aligned position. If used stacked bar charts should allow the viewer to interactively change the order.</p>
+<p>Both, the simple, grouped, and stacked bar chart can often be replaced by a <strong>dot chart</strong>. This chart has a number of advantages compared to other more widely used bar charts <span id="id11">[<a class="reference internal" href="bibliography.html#id4">Soenning, 2016</a>]</span>. The dot plot was introduced by Cleveland <span id="id12">[<a class="reference internal" href="bibliography.html#id44" title="William S. Cleveland and Robert McGill. Graphical perception: theory, experimentation, and application to the development of graphical methods. Journal of the American statistical association, 79(387):531–554, 1984.">Cleveland and McGill, 1984</a>]</span>. The horizontal scale encodes a quantitative variable and the vertical scale a categorical variable. Furthermore, light horizontal lines connect the data points with their labels.</p>
+<p>Another often used diagram you already know of are <strong>line charts</strong>. A line chart has one quantitative attribute and one ordered attribute. Line charts often emphasize trend relationships. Zacks and Tversky <span id="id13">[<a class="reference internal" href="bibliography.html#id6" title="Jeff Zacks and Barbara Tversky. Bars and lines: a study of graphic communication. Memory &amp; Cognition, 27(6):1073–1079, Nov 1999. URL: https://doi.org/10.3758/BF03201236, doi:10.3758/BF03201236.">Zacks and Tversky, 1999</a>]</span>, for example, studied how people answered questions concerning the meaning provided in line and bar charts. Line graphs for quantitative data provided appropriate trend-related answers, such as “height increases with age.” Bar charts for quantitative data yielded equally appropriate discrete comparison responses, such as “Twelve-year-olds are taller than ten-year-olds.” However, line graphs for categorical data yielded inappropriate trend responses such as “The more male a person is, the taller he is.” This experiment emphasize the importance of well-chosen visual encodings.</p>
+<p>However, the same data can look very different in a line chart depending on its aspect ratio. But what is the perfect shape for a chart? The ratio between the width and height of a rectangle is called the aspect ratio. It is typically expressed as a fraction with two numbers, where the width is divided by the height. An aspect ratio of 1:1 describes a square, while 4:3 (or 1.33:1) is a landscape rectangle and 16:9 is a much wider landscape rectangle. While width is usually greater than height in film and photography, there is no reason for this to be the case in visualization. What do you do? Short answer is: ‘’It depends on the data.’’. However, Cleveland et al. <span id="id14">[<a class="reference internal" href="bibliography.html#id44" title="William S. Cleveland and Robert McGill. Graphical perception: theory, experimentation, and application to the development of graphical methods. Journal of the American statistical association, 79(387):531–554, 1984.">Cleveland and McGill, 1984</a>]</span> proposed that the average line slope in a line chart should be <span class="math notranslate nohighlight">\(45^{\circ}\)</span>. This was called banking to <span class="math notranslate nohighlight">\(45^{\circ}\)</span> and has become one of the common rules in visualization design to determine the ideal aspect ratio. In other words, a rule of thumb is that the average line inclination in a line chart should be 45 degrees. Heer and Agrawala <span id="id15">[<a class="reference internal" href="bibliography.html#id5" title="Jeffrey Heer and Maneesh Agrawala. Multi-scale banking to 45 degrees. IEEE Transactions on Visualization and Computer Graphics, 12(5):701–708, Sep 2006. doi:10.1109/TVCG.2006.163.">Heer and Agrawala, 2006</a>]</span> extended this approach, by analyzing data for trends at various frequency scales and then generates a banked chart for each of these scales.</p>
+<p>The aforementioned visualization are suitable for less complex data sets, but what do you do, if this is not the case. Two visualizations that you should take in mind a the heatmap and the scatterplot matrix.</p>
+<p>A <strong>heatmap</strong> is used to encode two categorical and one quantitative attribute <span id="id16">[<a class="reference internal" href="bibliography.html#id30" title="Tamara Munzner. Visualization analysis and design. CRC press, 2014.">Munzner, 2014</a>]</span>. It is suitable for finding cluster, outliers, and to summarize data. The advantage of heat maps is that the visual coding of quantitative data with color using small area markers is very compact, making them well suited for overviews with high information density. An extension is the <strong>cluster heat map</strong>, it is the side-by-side combination of a heat map and two dendrograms that display the derived data from the cluster hierarchies used in the matrix reordering. The goal of this reordering is to group similar cells together to look for patterns between the two attributes.</p>
+<p>A <strong>scatterplot matrix</strong> (SPLOM) is a matrix where each cell contains an entire scatterplot diagram <span id="id17">[<a class="reference internal" href="bibliography.html#id30" title="Tamara Munzner. Visualization analysis and design. CRC press, 2014.">Munzner, 2014</a>]</span>. A SPLOM shows all possible pairwise combinations of attributes, using the original attributes as rows and columns. Unlike the simple heatmap matrix where each cell displays an attribute value, an SPLOM is an example of a more complex matrix. SPLOMs are heavily used for the abstract tasks of finding correlations, trends, and outliers, according to the use of their constituent scatter plot components.</p>
+</section>
+<section id="spatial-axis-orientation">
+<h2><span class="section-number">5.3. </span>Spatial Axis Orientation<a class="headerlink" href="#spatial-axis-orientation" title="Permalink to this heading">#</a></h2>
+<p>In a rectilinear layout, regions or elements are distributed along two orthogonal axes, the horizontal and vertical spatial positions, ranging from a minimum value on one side of the axis to a maximum value on the other. Rectilinear layouts are heavily used in vis design and appear in many common statistical charts. All examples discussed so far used rectilinear layouts. However, the spatial axes alignment is another design option in visualization design, thus, you can use besides a rectilinear, also a parallel or a radial layout <span id="id18">[<a class="reference internal" href="bibliography.html#id30" title="Tamara Munzner. Visualization analysis and design. CRC press, 2014.">Munzner, 2014</a>]</span>.</p>
+<p>An example for the parallel layout are <strong>parallel coordinates</strong>. It is an approach for visualizing many quantitative attributes at once using spatial position. As the name suggests, the axes are placed parallel to each other, rather than orthogonal at right angles.
+In parallel coordinates a single item is represented by a jagged line that zigzags through the parallel axes, crossing each axis exactly once at the location of the item’s value for the associated attribute. Parallel coordinates scale to show hundreds of elements, but not thousands. If too many lines are overdrawn, the resulting occlusion provides very little information. The original motivation of parallel coordinates was that they are used to check for correlations between attributes. When two adjacent axes have a high positive correlation, the line segments are mostly parallel.  When two axes have a high negative correlation, the line segments usually cross at a point between the axes. The pattern between uncorrelated axes is a mixture of crossing angles. In practice, however, SPLOMs are typically easier to use to find a correlation. Parallel coordinates are used to get an overview of all attributes, to classify the range of values of attributes, to select a range of elements or to detect outliers.</p>
+<p>In a radial spatial layout, elements are distributed around a circle using the angular channel in addition to one or more linear spatial channels. The natural coordinate system in radial layouts is <strong>polar coordinates</strong>, where one dimension is measured as an angle from a starting line and the other as a distance from a center point. Radial layouts can be more effective than rectilinear in representing the periodicity of patterns, however, encoding non-periodic data with the periodic channel of the angle can be misleading. Radial layouts imply an asymmetry of meaning between the two attributes and it would be inappropriate if the two attributes have the same meaning.</p>
+<p>The most commonly used radial statistical graph is the <strong>pie chart</strong>. It encodes a single attribute with area markers and the angle channel. Despite their popularity, pie charts are problematic. Angle judgments at area markers are less accurate than length judgments at line markers. Wedges vary in width along the radial axis, from narrow near the center to wide near the outside, making area judgments particularly difficult. The most useful property of pie charts is that they show the relative contribution of parts to a whole. The sum of the wedge angles must add up to <span class="math notranslate nohighlight">\(360^{\circ}\)</span> of a full circle and match normalized data, such as percentages where the parts must add up to 100%. However, this property is not only important for pie charts; a single bar in a normalized stacked bar chart can also be used to indicate this property with the more accurate length assessment channel.</p>
+</section>
+<section id="spatial-layout-density">
+<h2><span class="section-number">5.4. </span>Spatial Layout Density<a class="headerlink" href="#spatial-layout-density" title="Permalink to this heading">#</a></h2>
+<p>Another design choice with spatial visual coding ideas is whether a layout is dense or sparse.</p>
+<p>A dense (pixel oriented) layout uses small and densely packed marks to provide an overview of as many items as possible with very high information density. A maximally dense layout has point marks that are only a single pixel in size and line marks that are only a single pixel in width. The small size of the marks implies that only the planar position and color channels can be used in visual encoding.</p>
+<p>A space-filling layout has the property that it fills all available space in the view, as the name implies. Space-filling layouts typically use area marks for items or containment marks for relationships, rather than line or connection marks, or point marks. An advantage of space-filling approaches is that they maximize the space available for color markings. On the other hand, a disadvantage of space-filling views is that the designer cannot use white space in the layout. Many graphic design guidelines refer to the careful use of white space for many reasons, including legibility, emphasis, relative importance, and visual balance. Space-filling layouts usually strive for a high density of information. However, the characteristic that a layout fills space is by no means a guarantee of efficient use of space. Technically, the definition of space filling is that the total area used by the layout is equal to the total area available in the view. An example of a space-filling layout are <strong>treemaps</strong> which are discussed in the next chapter.</p>
+</section>
+</section>
+
     <script type="text/x-thebe-config">
     {
         requestKernel: true,
@@ -407,7 +477,7 @@ document.write(`
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">5. </span>Bibliography</p>
+        <p class="prev-next-title"><span class="section-number">6. </span>Bibliography</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -428,9 +498,12 @@ document.write(`
     <i class="fa-solid fa-list"></i> Contents
   </div>
   <nav class="bd-toc-nav page-toc">
-    <ul class="simple visible nav section-nav flex-column">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visual-encoding-for-numerical-data">5.1. Visual Encoding for Numerical Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visual-encoding-for-categorical-data-visual-encoding-for-categorical-data">5.2. Visual Encoding for Categorical Data {#Visual-Encoding-for-Categorical-Data}</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spatial-axis-orientation">5.3. Spatial Axis Orientation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spatial-layout-density">5.4. Spatial Layout Density</a></li>
 </ul>
-
   </nav></div>
 
 </div></div>
