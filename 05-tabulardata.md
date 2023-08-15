@@ -11,7 +11,9 @@ kernelspec:
   language: python
   name: python
 ---
+
 # Visualizing Tabular Data
+
 ```{admonition} PLEASE NOTE
 :class: warning
 These lecture notes are neither for distribution nor for reference. It is just a first draft and many resources may not be referenced yet, furthermore, images are largely missing. I update these lecture notes throughout the course. If you spot any major mistakes, let me know.
@@ -67,7 +69,7 @@ Another often used bar chart tye is the **grouped bar chart** if you have one nu
 
 What we often see are **stacked bar charts** {cite}`munzner2014visualization`. The scalability of stacked bar charts is similar to that of standard bar charts in terms of the number of categories in the key attribute distributed across the major axis, but is limited for the key used to stack. This idiom works well with multiple categories, with an upper limit of about a dozen. A normalized stacked bar chart stretches each of these bars to the maximum possible length and shows percentages rather than absolute values. Only the lowest subbar in a stacked bar chart is aligned with the others in its category, so that the most accurate position channel can be used. The other subbars use an unaligned position, a channel that is less accurate than the aligned position. If used stacked bar charts should allow the viewer to interactively change the order.
 
-Both, the simple, grouped, and stacked bar chart can often be replaced by a **dot chart**. This chart has a number of advantages compared to other more widely used bar charts {cite}`Soenning2016dotplot`. The dot plot was introduced by Cleveland {cite}`ClevelandMcGill1984graphicalperception`. The horizontal scale encodes a quantitative variable and the vertical scale a categorical variable. Furthermore, light horizontal lines connect the data points with their labels.
+Both, the simple, grouped, and stacked bar chart can often be replaced by a **dot chart**. This chart has a number of advantages compared to other more widely used bar charts {cite}`soenning2016dotplot`. The dot plot was introduced by Cleveland {cite}`ClevelandMcGill1984graphicalperception`. The horizontal scale encodes a quantitative variable and the vertical scale a categorical variable. Furthermore, light horizontal lines connect the data points with their labels.
 
 Another often used diagram you already know of are **line charts**. A line chart has one quantitative attribute and one ordered attribute. Line charts often emphasize trend relationships. Zacks and Tversky {cite}`ZacksTversky1999linechartbarchart`, for example, studied how people answered questions concerning the meaning provided in line and bar charts. Line graphs for quantitative data provided appropriate trend-related answers, such as "height increases with age." Bar charts for quantitative data yielded equally appropriate discrete comparison responses, such as "Twelve-year-olds are taller than ten-year-olds." However, line graphs for categorical data yielded inappropriate trend responses such as "The more male a person is, the taller he is." This experiment emphasize the importance of well-chosen visual encodings.
 
