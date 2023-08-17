@@ -399,8 +399,9 @@ mystnb:
 ---
 # Visualize Data - Box Plot in groups
 alt.Chart(fly_viz2, width=200).mark_boxplot().encode(
-  alt.Y('dep_delay:Q').scale(zero=False),
-  alt.X('origin:N')
+  alt.X('origin:N'),
+  alt.Y('log_dep_delay:Q').scale(zero=False)
+  
 )
 ```
 
