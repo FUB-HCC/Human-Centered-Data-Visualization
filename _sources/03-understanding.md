@@ -84,7 +84,7 @@ By supporting data exploration, EDA helps researchers generate hypotheses. These
 In summary, your goal during the EDA is to develop an understanding of your data. The easiest way to accomplish this is to use questions to guide your investigation. When you ask a question, the question focuses your attention on a particular part of your data set and helps you decide which graphs, models, or transformations to make.
 
 <!-- Text von [@WickhamGrolemund2017Rfordatascience] -->
-EDA is a creative process {cite}`WickhamGrolemund2017Rfordatascience`, thus, the key to asking meaningful questions is to generate a large number of questions (% KG: explain in what way this is considered "creative" - or replace "thus" with "i.e.". and expand on it.). Of course, it is very challenging to generate these questions at the beginning because you are not familiar with the dataset. On the other hand, each new question you ask will expose you to a new aspect of your data and increase your chance of discovery <!-- KG: of what? Meaningful insights? Expand on "discovery" and "interesting", which is referred to in the next sentence -->. You can quickly break down the most interesting parts of your data - and develop a thought-provoking set of questions - if you follow each question with a new question based on your findings. This challenge has already been formulated by Tukey:
+EDA is a creative process {cite}`WickhamGrolemund2017Rfordatascience`, thus, the key to asking meaningful questions is to generate a large number of questions <!-- KG: explain in what way this is considered "creative" - or replace "thus" with "i.e.". and expand on it.-->. Of course, it is very challenging to generate these questions at the beginning because you are not familiar with the dataset. On the other hand, each new question you ask will expose you to a new aspect of your data and increase your chance of discovery <!-- KG: of what? Meaningful insights? Expand on "discovery" and "interesting", which is referred to in the next sentence -->. You can quickly break down the most interesting parts of your data - and develop a thought-provoking set of questions - if you follow each question with a new question based on your findings. This challenge has already been formulated by Tukey:
 
 > Far better an approximate answer to the right question, which is often vague, than an exact answer to the wrong question, 
 > which can always be made precise. 
@@ -367,15 +367,20 @@ mystnb:
       Box Plot of delay times (log scale).
     name: boxplot2
 ---
-import math
+import numpy as np # is needed to calculate the logarithm
 
-# the function insert() inserts a new item by index
-#fly_viz2.insert(len(fly_viz2.columns), "min_delay", min(fly_viz2.dep_delay))
-#fly_viz2.insert(len(fly_viz2.columns+1), "log_dep_delay", math.log(fly_viz2.dep_delay - fly_viz2.min_delay))
-# Visualize Data - Box Plot 
-#alt.Chart(fly_viz2).mark_boxplot().encode(
-#  alt.Y('log_dep_delay:Q').scale(zero=False)
-#)
+# find the minimum of dep_delay
+min_delay = fly_viz2['dep_delay'].min() 
+# substract the min_delay from dep_delay in each row
+fly_viz2["dep_delay"] = fly_viz2["dep_delay"] - min_delay 
+
+# create a new column that contains the logarithm of the previously subtracted dep_delay
+fly_viz2['log_dep_delay'] = np.log(fly_viz2['dep_delay']) 
+
+# Visualize Data - Box Plot with log scale
+alt.Chart(fly_viz2).mark_boxplot().encode(
+  alt.Y('log_dep_delay:Q').scale(zero=False)
+)
 ```
 ### Compare Distributions
 
