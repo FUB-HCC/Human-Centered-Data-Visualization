@@ -354,7 +354,8 @@ mystnb:
     name: boxplot
 ---
 # Visualize Data - Box Plot 
-alt.Chart(fly_viz2).mark_boxplot().encode(
+fly_viz2['x'] = ""
+alt.Chart(fly_viz2, width=200).mark_boxplot().encode( # control the size of the chart with hight/width
   alt.Y('dep_delay:Q').scale(zero=False)
 )
 ```
@@ -378,7 +379,8 @@ fly_viz2["dep_delay"] = fly_viz2["dep_delay"] - min_delay
 fly_viz2['log_dep_delay'] = np.log(fly_viz2['dep_delay']) 
 
 # Visualize Data - Box Plot with log scale
-alt.Chart(fly_viz2).mark_boxplot().encode(
+alt.Chart(fly_viz2, width=200).mark_boxplot().encode( 
+  alt.X('x'),
   alt.Y('log_dep_delay:Q').scale(zero=False)
 )
 ```
@@ -396,7 +398,7 @@ mystnb:
     name: boxplot_groups
 ---
 # Visualize Data - Box Plot in groups
-alt.Chart(fly_viz2).mark_boxplot().encode(
+alt.Chart(fly_viz2, width=200).mark_boxplot().encode(
   alt.Y('dep_delay:Q').scale(zero=False),
   alt.X('origin:N')
 )
