@@ -410,11 +410,12 @@ import numpy as np # is needed to calculate the logarithm
 # find the minimum of dep_delay
 min_delay = fly_viz2['dep_delay'].min() 
 # substract the min_delay from dep_delay in each row
-fly_viz2["dep_delay"] = fly_viz2["dep_delay"] - min_delay 
-fly_viz2 = fly_viz2[fly_viz2.dep_delay!=0] # to avoid loc(0) in the following example
+fly_viz3 = fly_viz2.copy()
+fly_viz3["dep_delay"] = fly_viz2.dep_delay - min_delay
+fly_viz3 = fly_viz3[fly_viz3.dep_delay!=0] # to avoid loc(0) in the following example
 
 # create a new column that contains the logarithm of the previously subtracted dep_delay
-fly_viz2['log_dep_delay'] = np.log(fly_viz2['dep_delay']) 
+fly_viz3['log_dep_delay'] = np.log(fly_viz3['dep_delay'])
 
 # Visualize Data - Box Plot with log scale
 alt.Chart(fly_viz2, width=200).mark_boxplot().encode( 
@@ -439,7 +440,7 @@ mystnb:
     name: boxplot_groups
 ---
 # Visualize Data - Box Plot in groups
-alt.Chart(fly_viz2, width=200).mark_boxplot().encode(
+alt.Chart(fly_viz3, width=200).mark_boxplot().encode(
   alt.X('origin:N'),
   alt.Y('log_dep_delay:Q').scale(zero=False)
 ).properties( 
@@ -653,7 +654,7 @@ Both, Data Wrangler and Voyager are using a formal language - the Vega-Lite visu
 
 The Vega-Lite compiler automatically produces visualization components including axes, legends, and scales. Vega-Lite supports both data transformations (e.g., aggregation, binning, filtering, sorting) and visual transformations (e.g., stacking and faceting). Moreover, Vega-Lite specifications can be composed into layered and multi-view displays, and made interactive with selections as you can see in the example. 
 
-Vega-Lite is being used in another interesting library. On top of the Vega-Lite JSON specification a simple API was built: Altair. It is a declarative statistical visualization library for Python. [Source code](https://github.com/altair-viz/altair) and a comprehensive [documentation](https://altair-viz.github.io/) as well as [Tutorial Notebooks](github.com/altair-viz/altair_notebooks) are available on Github.
+Vega-Lite is being used in another interesting library. On top of the Vega-Lite JSON specification a simple API was built: Altair. It is a declarative statistical visualization library for Python. [Source code](https://github.com/altair-viz/altair) and a comprehensive [documentation](https://altair-viz.github.io/) <!--as well as [Tutorial Notebooks](github.com/altair-viz/altair_notebooks)--> are available on Github.
 
 
 
