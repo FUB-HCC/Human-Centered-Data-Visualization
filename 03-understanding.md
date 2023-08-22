@@ -205,6 +205,8 @@ fly_viz2 = flights_sample.copy()
 # 'sort_values' sorts a variable, here dep_delay, in descending order
 # we have to ignore the previous index, otherwise the data frame index will not be reset
 fly_viz2 = fly_viz2.sort_values(by=['dep_delay'], ignore_index=True) 
+# limit data to dep_delay<800
+fly_viz2 = fly_viz2[fly_viz2.dep_delay<800]
 
 # create new column 'index' with row numbers from column data
 fly_viz2 = fly_viz2.reset_index()
@@ -223,8 +225,9 @@ alt.Chart(fly_viz2).mark_circle(size=60).encode(
 What do you think of this chart? What can you say about flight delay times now? In the following, we focus on the delays only, since many flights seems to be one time.
 
 ```{code-cell} 
-# Remove all flights with no delay
+# Remove all flights with no delay and limit to max dep_delay 800
 flights_sample = flights_sample[flights_sample.dep_delay>0]
+flights_sample = flights_sample[flights_sample.dep_delay<=800]
 
 # dimensions of the data set
 flights_sample.shape
