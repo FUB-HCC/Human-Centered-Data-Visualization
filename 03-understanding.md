@@ -92,11 +92,14 @@ EDA is a creative process {cite}`WickhamGrolemund2017Rfordatascience`, thus, the
 
 There is no rule about what questions you should ask to guide your research. However, two types of questions will always be useful for making discoveries in your data. You can phrase these questions loosely as (1) What kind of variation occurs within my variables? and (2) What kind of co-variation occurs between my variables?
 
-### Using R for Data Exploration
+### Using Python for Data Exploration
+
+<!-- REWRITE FOR PYTHON:
 
 In the following, we address these two questions based on the example of Héctor Corrada Bravo from the EDA chapter of his course on [''Introduction to Data Science''](http://www.hcbravo.org/IntroDataSci/bookdown-notes/exploratory-data-analysis-visualization.html) from the Center for Bioinformatics and Computational Biology from the Univ. of Maryland. 
 
 We employ the GNU R which is a widespread tool for statistical analysis. However, you can follow these steps with any programming language at hand. I would like to provide you an methodological understanding of how to explore data, rather than provide an introduction into R (http://www.r-project.org/) which is a GNU project, thus, R is Free Software under the terms of GPL. There are over 2,000 user-contributed packages available at R CRAN (https://cran.r-project.org/) with packages for specific functions or specific areas of study. It has an excellent integration with DBs (MySQL, SQLite) and automation based on scripts is easy. Furthermore, the graphical user interface RStudio (https://www.rstudio.com/) makes its usage very convenient. R is an interpreted language. It supports procedural programming with functions and, for some functions, object-oriented programming with generic functions. A generic function acts differently depending on the type of arguments passed to it, for example, R has a generic print() function that can print almost every type of object in R with a simple ''print(objectname)'' syntax. A Base R Cheat Sheet can be found [here](https://www.povertyactionlab.org/sites/default/files/r-cheat-sheet.pdf).
+-->
 
 ### Visualizing Data
 
@@ -116,13 +119,16 @@ Understanding the structure of the dataset is quite useful, since it allows you 
 
 For setting up the pipeline it makes sense to work with a subset only, thus, we sample from the available data 10 percent. Furthermore, I decided to include only those observations that are complete. However, this decision should not be made carelessly. 
 
+<!-- L: Explains why to use .copy() https://stackoverflow.com/questions/65926892/misleading-settingwithcopywarning-when-assigning-on-result-of-dataframe-dropna-->
+
 ```{code-cell} 
 from nycflights13 import flights
 import pandas as pd
 
 # Select a sample from the whole data set
 flights = pd.DataFrame(flights)
-flights_sample = flights.head(int(len(flights)*0.1)) # takes a sample of 10 per cent
+# takes a sample of 10 per cent, with copy() it is specified, that changes to flights_sample doesn't effect flights, else you will get a SettingWithCopyWarning
+flights_sample = flights.head(int(len(flights)*0.1)).copy() 
 
 # dimensions of the data set
 flights_sample.shape
@@ -133,7 +139,8 @@ flights_sample.shape
 from nycflights13 import flights
 
 # remove all observations that are not complete (missing a value)
-flights_sample.dropna(axis = 0, how = 'any', inplace = True) # takes a sample of the first 10 rows
+# axis=0: Drop incomplete rows, how='any' if any value is missing drop, inplace=True: modify DataFrame instead of creating new one
+flights_sample.dropna(axis = 0, how = 'any', inplace = True) 
 
 # dimensions of the data set
 flights_sample.shape
@@ -162,8 +169,11 @@ fly_viz1 = fly_viz1.reset_index() # reset_index copies the data frame index into
 alt.Chart(fly_viz1).mark_circle(size=60).encode( 
     x=alt.X('index', title='Flight ID'),
     y=alt.Y('dep_delay', title='Departure delay (in min)'),
-    tooltip=['flight', 'year', 'dep_time', 'dep_delay']
-).interactive()
+    tooltip=['flight', 'year', 'dep_time', 'dep_delay'] # when you hover over the points, these data will be shown
+).properties( # you can set the size of the chart with properties
+    width=350,
+    height=250
+    ).interactive()
 
 ```
 This is not very informative because this plot is not structured. However, let us reflect about the visualization for a moment. A scatterplot encodes two quantitative variables using both the vertical and horizontal spatial position channels., and the mark type is necessarily a point. They are highly effective for judging the correlation between two attributes. Scatterplots are often augmented with color coding to show an additional attribute. We talk about these characteristics in detail again.
@@ -190,8 +200,8 @@ mystnb:
     name: scatterplot2
 ---
 # Visualize Data - Scatterplot with ordered values
-
-fly_viz2 = flights_sample
+# with copy() it is specified, that changes to flights_sample doesn't effect flights, else you will get a SettingWithCopyWarning
+fly_viz2 = flights_sample.copy() 
 # 'sort_values' sorts a variable, here dep_delay, in descending order
 # we have to ignore the previous index, otherwise the data frame index will not be reset
 fly_viz2 = fly_viz2.sort_values(by=['dep_delay'], ignore_index=True) 
@@ -203,7 +213,10 @@ alt.Chart(fly_viz2).mark_circle(size=60).encode(
     x=alt.X('index', title='Ordered Flight ID'),
     y=alt.Y('dep_delay', title='Departure delay (in min)'),
     tooltip=['flight', 'year', 'dep_time', 'dep_delay']
-).interactive()
+).properties( 
+    width=350,
+    height=250
+    ).interactive()
 
 ```
 
@@ -248,7 +261,10 @@ mystnb:
 alt.Chart(flights_sample).mark_bar().encode(
   x=alt.X('dep_delay', title='Departure delay (in min)'),
   y=alt.Y('count()', title='Number of Flights')
-)
+).properties( 
+    width=350,
+    height=250
+    )
 
 ```
 
@@ -258,21 +274,30 @@ In the standard function the number of bins are 30, but of course, you can chang
 alt.Chart(flights_sample).mark_bar().encode(
   x=alt.X('dep_delay', title='Departure delay (in min)', bin=alt.Bin(extent=[0, 750], step=1)),
   y=alt.Y('count()', title='Number of Flights')
-)
+).properties( 
+    width=350,
+    height=250
+    )
 
 ```
 ```{code-cell} 
 alt.Chart(flights_sample).mark_bar().encode(
   x=alt.X('dep_delay', title='Departure delay (in min)', bin=alt.Bin(extent=[0, 750], step=5)),
   y=alt.Y('count()', title='Number of Flights')
-)
+).properties( 
+    width=350,
+    height=250
+    )
 
 ```
 ```{code-cell} 
 alt.Chart(flights_sample).mark_bar().encode(
   x=alt.X('dep_delay', title='Departure delay (in min)', bin=alt.Bin(extent=[0, 750], step=10)),
   y=alt.Y('count()', title='Number of Flights')
-)
+).properties( 
+    width=350,
+    height=250
+    )
 
 ```
 
@@ -288,7 +313,10 @@ mystnb:
 alt.Chart(flights_sample).mark_bar().encode(
   x=alt.X('dep_delay', title='Departure delay (in min)', bin=alt.Bin(extent=[0, 750], step=15)),
   y=alt.Y('count()', title='Number of Flights')
-)
+).properties( 
+    width=350,
+    height=250
+    )
 ```
 
 ### Density Plot
@@ -314,7 +342,10 @@ alt.Chart(fly_viz2).transform_density(
 ).mark_area().encode(
   x="Departure delay (in min):Q",
   y='density:Q'
-)
+).properties( 
+    width=350,
+    height=250
+    )
 ```
 
 ### Boxplot
@@ -357,7 +388,10 @@ mystnb:
 fly_viz2['x'] = ""
 alt.Chart(fly_viz2, width=200).mark_boxplot().encode( # control the size of the chart with hight/width
   alt.Y('dep_delay:Q').scale(zero=False)
-)
+).properties( 
+    width=350,
+    height=250
+    )
 ```
 
 ```{code-cell} 
@@ -383,7 +417,10 @@ fly_viz2['log_dep_delay'] = np.log(fly_viz2['dep_delay'])
 alt.Chart(fly_viz2, width=200).mark_boxplot().encode( 
   alt.X('x'),
   alt.Y('log_dep_delay:Q').scale(zero=False)
-)
+).properties( 
+    width=350,
+    height=250
+    )
 ```
 ### Compare Distributions
 
@@ -402,8 +439,10 @@ mystnb:
 alt.Chart(fly_viz2, width=200).mark_boxplot().encode(
   alt.X('origin:N'),
   alt.Y('log_dep_delay:Q').scale(zero=False)
-  
-)
+).properties( 
+    width=350,
+    height=250
+    )
 ```
 
 ### Summary Statistics
