@@ -459,17 +459,23 @@ We differentiate measures of central tendency, i.e., measures of location that d
 In this chapter, we use the diamond data set, that contains the prices, carat, color and other attributes of almost 54,000 diamonds. 
 
 ```{code-cell} 
-#library(skimr)
+#Library with datasets
+import seaborn as sns 
 
 # load dataset and show structure
+diamonds = sns.load_dataset('diamonds', cache=True, data_home=None)
 
+# show attributes 
+diamonds.info()
 
-# show attributes only
+```
 
-
+```{code-cell} 
 # count frequencies
+diamonds['cut'].value_counts()
+```
 
-
+```{code-cell} 
 # counts proportions
 
 ```
