@@ -273,36 +273,6 @@ alt.Chart(flights_sample).mark_bar().encode(
 
 In the standard function the number of bins are 30, but of course, you can change them easily. The choice of binwidth significantly affects the resulting plot. Smaller binwidths can make the plot cluttered, but larger binwidths may obscure nuances in the data.
 
-```{code-cell} 
-alt.Chart(flights_sample).mark_bar().encode(
-  x=alt.X('dep_delay', title='Departure delay (in min)', bin=alt.Bin(extent=[0, 750], step=1)),
-  y=alt.Y('count()', title='Number of Flights')
-).properties( 
-    width=350,
-    height=250
-    )
-
-```
-```{code-cell} 
-alt.Chart(flights_sample).mark_bar().encode(
-  x=alt.X('dep_delay', title='Departure delay (in min)', bin=alt.Bin(extent=[0, 750], step=5)),
-  y=alt.Y('count()', title='Number of Flights')
-).properties( 
-    width=350,
-    height=250
-    )
-
-```
-```{code-cell} 
-alt.Chart(flights_sample).mark_bar().encode(
-  x=alt.X('dep_delay', title='Departure delay (in min)', bin=alt.Bin(extent=[0, 750], step=10)),
-  y=alt.Y('count()', title='Number of Flights')
-).properties( 
-    width=350,
-    height=250
-    )
-
-```
 
 ```{code-cell} 
 ---
@@ -313,14 +283,45 @@ mystnb:
     name: histogram2
 ---
 
-alt.Chart(flights_sample).mark_bar().encode(
+s1 = alt.Chart(flights_sample).mark_bar().encode(
+  x=alt.X('dep_delay', title='Departure delay (in min)', bin=alt.Bin(extent=[0, 750], step=1)),
+  y=alt.Y('count()', title='Number of Flights')
+).properties( 
+    width=200,
+    height=150
+    )
+
+s5 = alt.Chart(flights_sample).mark_bar().encode(
+  x=alt.X('dep_delay', title='Departure delay (in min)', bin=alt.Bin(extent=[0, 750], step=5)),
+  y=alt.Y('count()', title='Number of Flights')
+).properties( 
+    width=200,
+    height=150
+    )
+
+
+
+s10 = alt.Chart(flights_sample).mark_bar().encode(
+  x=alt.X('dep_delay', title='Departure delay (in min)', bin=alt.Bin(extent=[0, 750], step=10)),
+  y=alt.Y('count()', title='Number of Flights')
+).properties( 
+    width=200,
+    height=150
+    )
+
+s15 = alt.Chart(flights_sample).mark_bar().encode(
   x=alt.X('dep_delay', title='Departure delay (in min)', bin=alt.Bin(extent=[0, 750], step=15)),
   y=alt.Y('count()', title='Number of Flights')
 ).properties( 
-    width=350,
-    height=250
+    width=200,
+    height=150
     )
+
+# display charts next to each other with "|" and below each other with alt.vconcat(upper, lower)
+alt.vconcat((s1 | s5), (s10 | s15))
+
 ```
+
 
 ### Density Plot
 
@@ -477,6 +478,7 @@ diamonds['cut'].value_counts()
 
 ```{code-cell} 
 # counts proportions
+diamonds['cut'].value_counts(normalize=True)
 
 ```
 <!-- Might be a better example: https://r4ds.had.co.nz/exploratory-data-analysis.html#patterns-and-models -->
@@ -484,7 +486,24 @@ diamonds['cut'].value_counts()
 Part of our goal is to understand how the variables are distributed in a given data set. Again, note that we are not using distribution in a formal mathematical (or probabilistic) sense. All the statements we make here are based on the data at hand, so we might call this an empirical distribution of data. Empirical is used here in the sense that it is data resulting from an experiment. Let's take a data set on the properties of diamonds as an example.
 
 ```{code-cell} 
+---
+mystnb:
+  figure:
+    caption: |
+      Distribution of Depth in the Diamonds Data Set.
+    name: dist_depth
+---
+# disable max rows (5000)
+alt.data_transformers.disable_max_rows()
+
 # dimensions of the data set
+alt.Chart(diamonds).mark_bar().encode(
+  x=alt.X('depth', bin=alt.Bin(maxbins=100)), # with Bin parameter maxbins the number of maxbins can be specified 
+  y='count()'
+).properties( 
+    width=350,
+    height=250
+    )
 
 ```
 ### Central Tendency
@@ -500,8 +519,33 @@ $\bar{x} = \frac{1}{n}\sum_{i=1}^{n} x_{i}$.
 Where is the mean in our example dataset?
 
 ```{code-cell} 
+---
+mystnb:
+  figure:
+    caption: |
+      Show Mean in Distribution of Depth in the Diamonds Data Set.
+    name: median
+---
 # determine median
 
+dimensions = alt.Chart(diamonds).mark_bar().encode(
+  x=alt.X('depth', bin=alt.Bin(maxbins=100)),
+  y='count()'
+).properties( 
+    width=350,
+    height=250
+    )
+
+# create chart with median (mean of depth)
+median = alt.Chart(diamonds).mark_rule(color='red').encode( #set color of mark_rule
+  x=alt.X('mean(depth)'),size=alt.value(2) # set size of line with size=alt.value()
+).properties( 
+    width=350,
+    height=250
+    )
+
+# combine charts
+dimensions + median
 ```
 Now that we have a measure of the center, we can now discuss how the data is distributed around that center.
 
