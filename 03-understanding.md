@@ -536,9 +536,9 @@ dimensions = alt.Chart(diamonds).mark_bar().encode(
     height=250
     )
 
-# create chart with median (mean of depth)
+# create chart with median of depth
 median = alt.Chart(diamonds).mark_rule(color='red').encode( #set color of mark_rule
-  x=alt.X('mean(depth)'),size=alt.value(2) # set size of line with size=alt.value()
+  x=alt.X('median(depth)'),size=alt.value(2) # set size of line with size=alt.value()
 ).properties( 
     width=350,
     height=250
@@ -555,9 +555,27 @@ Median is better measure of central tendency than the mean when we have outliers
 
 ```{code-cell} 
 # min and max value
+from tabulate import tabulate
 
+# data structure to use for the table
+table = [
+    ["Min", "Max"], 
+    [min(diamonds.depth), max(diamonds.depth)]
+]
+print(tabulate(table)) # use tabulate to create a table format
 # mean vs. median
 
+```
+
+```{code-cell} 
+# mean vs. median
+
+# data structure to use for the table
+table_mean = [
+    ["Mean", "Median"], 
+    [np.round(diamonds['depth'].mean(), 1), diamonds['depth'].median()]
+]
+print(tabulate(table_mean)) 
 ```
 
 For the mean, we have a convenient way to describe this: the average distance (using the squared difference) from the mean. We call this the variance of the data. vhe Variance is a commonly used statistic for dispersion, but it has the disadvantage that its units are not easily conceptualized (e.g., squared diamond depth).
@@ -573,14 +591,17 @@ We can also use standard deviations as an interpretable unit for how far a parti
 Just like we saw how the median is a rank statistic used to describe central tendency, we can also use rank statistics to describe spread. 
 For this we use two more rank statistics: the first and third quartiles, x(n/4) and x(3n/4) respectively. We know this already, it is the interquartile range. Also called midspread and is the difference between third and first quartiles (spread in the middle 50%).
 It is not affected by extreme values.
-
+<!-- L: Find Python equivalent to R range() to get min and max values of the column -->
 ```{code-cell} 
 # Rang
 
 # Variance
+diamonds['depth'].var()
+```
 
+```{code-cell} 
 #standard deviation
-
+diamonds['depth'].std()
 ```
 
 ### Outliers
@@ -588,7 +609,18 @@ It is not affected by extreme values.
 There is no precise way to define and identify outliers. Instead, a subject matter expert must interpret the raw observations and decide whether or not a value is an outlier. 
 
 ```{code-cell} 
-# Determine outlier (Finds value with largest difference between it and sample mean, which can be an outlier.)
+# Determine outlier 
+
+df = diamonds['depth']
+
+q1 = df.quantile(0.25)
+q2 = df.quantile(0.75)
+# calculate IQR 
+iqr = q2 - q1 
+
+# detect outliers based on the formula above
+outliers = df[((df < (q1 - 1.5 * iqr)) | (df > (q2 + 1.5 * iqr)))]
+outliers
 
 ```
 
@@ -602,7 +634,27 @@ $\mbox{outliers}_{IQR}(x)= \{x_j|x_j < x_{(1/4)} - k \times IQR(x) \mbox{ or } x
 This is usually referred to as the Tukey outlier rule, where the multiplier k plays the same role as before. We use IQR here because it is less prone to inflating due to severe outliers in the data set. It also works better for skewed data than the standard deviation based method.
 
 ```{code-cell} 
+---
+mystnb:
+  figure:
+    caption: |
+      Distribution of Depth in the Diamonds Data Set after removing outliers.
+    name: outlier-filter
+---
 # Outliers (based on IQR)
+
+# filter out the outliers and create a diamonds subset with the remaining rows
+filter = (df >= q1 - 1.5 * iqr) & (df <= q2 + 1.5 * iqr)
+diamonds_subset = diamonds.loc[filter]
+
+# dimensions of the data set after filtering out outliers 
+alt.Chart(diamonds_subset).mark_bar().encode(
+  x=alt.X('depth', bin=alt.Bin(maxbins=100)), 
+  y='count()'
+).properties( 
+    width=350,
+    height=250
+    )
 
 ```
 
