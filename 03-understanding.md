@@ -398,35 +398,7 @@ alt.Chart(fly_viz2, width=200).mark_boxplot().encode( # control the size of the 
     )
 ```
 
-```{code-cell} 
----
-mystnb:
-  figure:
-    caption: |
-      Box Plot of delay times (log scale).
-    name: boxplot2
----
-import numpy as np # is needed to calculate the logarithm
 
-# find the minimum of dep_delay
-min_delay = fly_viz2['dep_delay'].min() 
-# substract the min_delay from dep_delay in each row
-fly_viz3 = fly_viz2.copy()
-fly_viz3["dep_delay"] = fly_viz2.dep_delay - min_delay
-fly_viz3 = fly_viz3[fly_viz3.dep_delay!=0] # to avoid loc(0) in the following example
-
-# create a new column that contains the logarithm of the previously subtracted dep_delay
-fly_viz3['log_dep_delay'] = np.log(fly_viz3['dep_delay'])
-
-# Visualize Data - Box Plot with log scale
-alt.Chart(fly_viz2, width=200).mark_boxplot().encode( 
-  alt.X('x'),
-  alt.Y('log_dep_delay:Q').scale(zero=False)
-).properties( 
-    width=350,
-    height=250
-    )
-```
 ### Compare Distributions
 
 Now we can start looking at the relationship between pairs of attributes. That is, how are each of the distributional properties we care about (central trend, spread and skew) of the values of an attribute changing based on the value of a different attribute. Suppose we want to see the relationship between departure delay time (a numeric variable), and the airport origin (a categorical variable).
