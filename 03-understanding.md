@@ -391,6 +391,7 @@ mystnb:
 # Visualize Data - Box Plot 
 fly_viz2['x'] = ""
 alt.Chart(fly_viz2, width=200).mark_boxplot().encode( # control the size of the chart with hight/width
+  alt.X('x'),
   alt.Y('dep_delay:Q').scale(zero=False)
 ).properties( 
     width=350,
@@ -411,15 +412,14 @@ import numpy as np # is needed to calculate the logarithm
 min_delay = fly_viz2['dep_delay'].min() 
 # substract the min_delay from dep_delay in each row
 fly_viz3 = fly_viz2.copy()
-fly_viz3["dep_delay"] = fly_viz2.dep_delay - min_delay
-fly_viz3 = fly_viz3[fly_viz3.dep_delay!=0] # to avoid loc(0) in the following example
+fly_viz3["dep_delay_min"] = fly_viz2.dep_delay - min_delay
+fly_viz3 = fly_viz3[fly_viz3.dep_delay_min!=0] # to avoid loc(0) in the following example
 
 # create a new column that contains the logarithm of the previously subtracted dep_delay
-fly_viz3['log_dep_delay'] = np.log(fly_viz3['dep_delay'])
+fly_viz3['log_dep_delay'] = np.log(fly_viz3['dep_delay_min'])
 
 # Visualize Data - Box Plot with log scale
-alt.Chart(fly_viz2, width=200).mark_boxplot().encode( 
-  alt.X('x'),
+alt.Chart(fly_viz3, width=200).mark_boxplot().encode( 
   alt.Y('log_dep_delay:Q').scale(zero=False)
 ).properties( 
     width=350,
