@@ -397,7 +397,35 @@ alt.Chart(fly_viz2, width=200).mark_boxplot().encode( # control the size of the 
     height=250
     )
 ```
+```{code-cell} 
+---
+mystnb:
+  figure:
+    caption: |
+      Box Plot of delay times (log scale).
+    name: boxplot2
+---
+import numpy as np # is needed to calculate the logarithm
 
+# find the minimum of dep_delay
+min_delay = fly_viz2['dep_delay'].min() 
+# substract the min_delay from dep_delay in each row
+fly_viz3 = fly_viz2.copy()
+fly_viz3["dep_delay"] = fly_viz2.dep_delay - min_delay
+fly_viz3 = fly_viz3[fly_viz3.dep_delay!=0] # to avoid loc(0) in the following example
+
+# create a new column that contains the logarithm of the previously subtracted dep_delay
+fly_viz3['log_dep_delay'] = np.log(fly_viz3['dep_delay'])
+
+# Visualize Data - Box Plot with log scale
+alt.Chart(fly_viz2, width=200).mark_boxplot().encode( 
+  alt.X('x'),
+  alt.Y('log_dep_delay:Q').scale(zero=False)
+).properties( 
+    width=350,
+    height=250
+    )
+```
 
 ### Compare Distributions
 
@@ -535,7 +563,6 @@ table = [
     [min(diamonds.depth), max(diamonds.depth)]
 ]
 print(tabulate(table)) # use tabulate to create a table format
-# mean vs. median
 
 ```
 
@@ -609,30 +636,7 @@ $\mbox{outliers}_{IQR}(x)= \{x_j|x_j < x_{(1/4)} - k \times IQR(x) \mbox{ or } x
 
 This is usually referred to as the Tukey outlier rule, where the multiplier k plays the same role as before. We use IQR here because it is less prone to inflating due to severe outliers in the data set. It also works better for skewed data than the standard deviation based method.
 
-```{code-cell} 
----
-mystnb:
-  figure:
-    caption: |
-      Distribution of Depth in the Diamonds Data Set after removing outliers.
-    name: outlier-filter
----
-# Outliers (based on IQR)
 
-# filter out the outliers and create a diamonds subset with the remaining rows
-filter = (df >= q1 - 1.5 * iqr) & (df <= q2 + 1.5 * iqr)
-diamonds_subset = diamonds.loc[filter]
-
-# dimensions of the data set after filtering out outliers 
-alt.Chart(diamonds_subset).mark_bar().encode(
-  x=alt.X('depth', bin=alt.Bin(maxbins=100)), 
-  y='count()'
-).properties( 
-    width=350,
-    height=250
-    )
-
-```
 
 When does it make sense to remove outliers?
 <!-- taken from https://statisticsbyjim.com/basics/remove-outliers/ -->
