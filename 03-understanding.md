@@ -563,7 +563,6 @@ table = [
     [min(diamonds.depth), max(diamonds.depth)]
 ]
 print(tabulate(table)) # use tabulate to create a table format
-# mean vs. median
 
 ```
 
