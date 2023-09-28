@@ -636,30 +636,7 @@ $\mbox{outliers}_{IQR}(x)= \{x_j|x_j < x_{(1/4)} - k \times IQR(x) \mbox{ or } x
 
 This is usually referred to as the Tukey outlier rule, where the multiplier k plays the same role as before. We use IQR here because it is less prone to inflating due to severe outliers in the data set. It also works better for skewed data than the standard deviation based method.
 
-```{code-cell} 
----
-mystnb:
-  figure:
-    caption: |
-      Distribution of Depth in the Diamonds Data Set after removing outliers.
-    name: outlier-filter
----
-# Outliers (based on IQR)
 
-# filter out the outliers and create a diamonds subset with the remaining rows
-filter = (df >= q1 - 1.5 * iqr) & (df <= q2 + 1.5 * iqr)
-diamonds_subset = diamonds.loc[filter]
-
-# dimensions of the data set after filtering out outliers 
-alt.Chart(diamonds_subset).mark_bar().encode(
-  x=alt.X('depth', bin=alt.Bin(maxbins=100)), 
-  y='count()'
-).properties( 
-    width=350,
-    height=250
-    )
-
-```
 
 When does it make sense to remove outliers?
 <!-- taken from https://statisticsbyjim.com/basics/remove-outliers/ -->
