@@ -14,9 +14,9 @@ kernelspec:
 
 # Understanding your Data
 
-By building on the Nested odel of Munzner {cite}`munzner2014visualization`, we have realized how important it is to understand the context of the data origin and the data at hand. In this chapter, we focus on the data, because many data viz projects start with so-called “found data”. These are data sets that are openly available on the internet, data sets in which creating you were not involved. The increasing use of data everywhere requires thinking about data literacy, inclusion, and fairness to ensure that data creates value {cite}`KoestenSimperl2021_dataUX` (% KG: explain "value" in this context, i.e., make it more obvious that "value" is not primarily financial etc.). However, data is often reused, thus, we need to reflect on where data has been created (% KG: applies generally, as pointed out in chapter 2). Koesten & Simperl {cite}`KoestenSimperl2021_dataUX` differentiate three main activities to interact with data: inspecting, engaging with the data, and placing data in context. 
+By building on the Nested odel of Munzner {cite}`munzner2014visualization`, we have realized how important it is to understand the context of the data origin and the data at hand. In this chapter, we focus on the data, because many data viz projects start with so-called “found data”. These are data sets that are openly available on the internet, data sets in which creating you were not involved. The increasing use of data everywhere requires thinking about data literacy, inclusion, and fairness to ensure that data creates value {cite}`KoestenSimperl2021_dataUX` <!-- KG: explain "value" in this context, i.e., make it more obvious that "value" is not primarily financial etc.-->. However, data is often reused, thus, we need to reflect on where data has been created <!--- KG: applies generally, as pointed out in chapter 2--->. Koesten & Simperl {cite}`KoestenSimperl2021_dataUX` differentiate three main activities to interact with data: inspecting, engaging with the data, and placing data in context. 
 
-Thus, in order to understand whether data are valuable (<!---  KG applicable --->) for your research question and which questions you can really tackle with these data, you need an understanding of its origin (the context of creation) and an understanding of its structure.   
+Thus, in order to understand whether data are valuable <!---  KG applicable ---> for your research question and which questions you can really tackle with these data, you need an understanding of its origin (the context of creation) and an understanding of its structure.   
 
 ## Understanding the Data Context
 
@@ -65,7 +65,7 @@ https://medium.com/swlh/effective-visualization-of-multi-dimensional-data-a-hand
 
 <!--NEXT TERM: CHANGE THE ORDERING: mean, distribution, variability - ask for both datasets questions, check if for the first part the second data set is more appropriate, and the other way around (or leave out outlier of the flight dataset) -->
 
-In this section, we focus on understanding the structure of our data by employing Exploratory Data Analysis (EDA). EDA is an approach to analyzing data sets to summarize their main characteristics by using data visualizations. In 1970 John Tukey {cite}`Tukey1977eda` introduced EDA with this seminal book on this topic. He was an extraordinary (% KG name disciplinary background instead of appraisal) scientist who had a profound impact on statistics and computer science[^2]. Much of what we cover in EDA today is based on his work. Part of EDA is the so-called initial data analysis (IDA) [](https://towardsdatascience.com/a-basic-guide-to-initial-and-exploratory-data-analysis-6d2577dfc242). IDA focuses on identifying data inconsistencies (e.g., missing values) and the description of the data properties; thus, EDA encompasses IDA. 
+In this section, we focus on understanding the structure of our data by employing Exploratory Data Analysis (EDA). EDA is an approach to analyzing data sets to summarize their main characteristics by using data visualizations. In 1970 John Tukey {cite}`Tukey1977eda` introduced EDA with this seminal book on this topic. He was an extraordinary <!-- KG name disciplinary background instead of appraisal--> scientist who had a profound impact on statistics and computer science[^2]. Much of what we cover in EDA today is based on his work. Part of EDA is the so-called initial data analysis (IDA) [](https://towardsdatascience.com/a-basic-guide-to-initial-and-exploratory-data-analysis-6d2577dfc242). IDA focuses on identifying data inconsistencies (e.g., missing values) and the description of the data properties; thus, EDA encompasses IDA. 
 
 Explorative Data Analysis allows the data analysts to achieve a richer qualitative understanding by ''looking at data to see what it seems to say'' <!-- KG: source? -->. EDA should be understood as an iterative process that supports the following:
 * the search for answers by visualizing, transforming, and modeling your data,
@@ -398,35 +398,7 @@ alt.Chart(fly_viz2, width=200).mark_boxplot().encode( # control the size of the 
     )
 ```
 
-```{code-cell} 
----
-mystnb:
-  figure:
-    caption: |
-      Box Plot of delay times (log scale).
-    name: boxplot2
----
-import numpy as np # is needed to calculate the logarithm
 
-# find the minimum of dep_delay
-min_delay = fly_viz2['dep_delay'].min() 
-# substract the min_delay from dep_delay in each row
-fly_viz3 = fly_viz2.copy()
-fly_viz3["dep_delay"] = fly_viz2.dep_delay - min_delay
-fly_viz3 = fly_viz3[fly_viz3.dep_delay!=0] # to avoid loc(0) in the following example
-
-# create a new column that contains the logarithm of the previously subtracted dep_delay
-fly_viz3['log_dep_delay'] = np.log(fly_viz3['dep_delay'])
-
-# Visualize Data - Box Plot with log scale
-alt.Chart(fly_viz2, width=200).mark_boxplot().encode( 
-  alt.X('x'),
-  alt.Y('log_dep_delay:Q').scale(zero=False)
-).properties( 
-    width=350,
-    height=250
-    )
-```
 ### Compare Distributions
 
 Now we can start looking at the relationship between pairs of attributes. That is, how are each of the distributional properties we care about (central trend, spread and skew) of the values of an attribute changing based on the value of a different attribute. Suppose we want to see the relationship between departure delay time (a numeric variable), and the airport origin (a categorical variable).
@@ -536,9 +508,9 @@ dimensions = alt.Chart(diamonds).mark_bar().encode(
     height=250
     )
 
-# create chart with median (mean of depth)
+# create chart with median of depth
 median = alt.Chart(diamonds).mark_rule(color='red').encode( #set color of mark_rule
-  x=alt.X('mean(depth)'),size=alt.value(2) # set size of line with size=alt.value()
+  x=alt.X('median(depth)'),size=alt.value(2) # set size of line with size=alt.value()
 ).properties( 
     width=350,
     height=250
@@ -555,9 +527,27 @@ Median is better measure of central tendency than the mean when we have outliers
 
 ```{code-cell} 
 # min and max value
+from tabulate import tabulate
 
+# data structure to use for the table
+table = [
+    ["Min", "Max"], 
+    [min(diamonds.depth), max(diamonds.depth)]
+]
+print(tabulate(table)) # use tabulate to create a table format
 # mean vs. median
 
+```
+
+```{code-cell} 
+# mean vs. median
+
+# data structure to use for the table
+table_mean = [
+    ["Mean", "Median"], 
+    [np.round(diamonds['depth'].mean(), 1), diamonds['depth'].median()]
+]
+print(tabulate(table_mean)) 
 ```
 
 For the mean, we have a convenient way to describe this: the average distance (using the squared difference) from the mean. We call this the variance of the data. vhe Variance is a commonly used statistic for dispersion, but it has the disadvantage that its units are not easily conceptualized (e.g., squared diamond depth).
@@ -573,14 +563,21 @@ We can also use standard deviations as an interpretable unit for how far a parti
 Just like we saw how the median is a rank statistic used to describe central tendency, we can also use rank statistics to describe spread. 
 For this we use two more rank statistics: the first and third quartiles, x(n/4) and x(3n/4) respectively. We know this already, it is the interquartile range. Also called midspread and is the difference between third and first quartiles (spread in the middle 50%).
 It is not affected by extreme values.
+<!-- L: Find Python equivalent to R range() to get min and max values of the column -->
 
 ```{code-cell} 
-# Rang
+# Range
+print(f"{min(diamonds.depth)} to {max(diamonds.depth)}")
+```
 
+```{code-cell} 
 # Variance
+diamonds['depth'].var()
+```
 
+```{code-cell} 
 #standard deviation
-
+diamonds['depth'].std()
 ```
 
 ### Outliers
@@ -588,7 +585,18 @@ It is not affected by extreme values.
 There is no precise way to define and identify outliers. Instead, a subject matter expert must interpret the raw observations and decide whether or not a value is an outlier. 
 
 ```{code-cell} 
-# Determine outlier (Finds value with largest difference between it and sample mean, which can be an outlier.)
+# Determine outlier 
+
+df = diamonds['depth']
+
+q1 = df.quantile(0.25)
+q2 = df.quantile(0.75)
+# calculate IQR 
+iqr = q2 - q1 
+
+# detect outliers based on the formula above
+outliers = df[((df < (q1 - 1.5 * iqr)) | (df > (q2 + 1.5 * iqr)))]
+outliers
 
 ```
 
@@ -602,7 +610,27 @@ $\mbox{outliers}_{IQR}(x)= \{x_j|x_j < x_{(1/4)} - k \times IQR(x) \mbox{ or } x
 This is usually referred to as the Tukey outlier rule, where the multiplier k plays the same role as before. We use IQR here because it is less prone to inflating due to severe outliers in the data set. It also works better for skewed data than the standard deviation based method.
 
 ```{code-cell} 
+---
+mystnb:
+  figure:
+    caption: |
+      Distribution of Depth in the Diamonds Data Set after removing outliers.
+    name: outlier-filter
+---
 # Outliers (based on IQR)
+
+# filter out the outliers and create a diamonds subset with the remaining rows
+filter = (df >= q1 - 1.5 * iqr) & (df <= q2 + 1.5 * iqr)
+diamonds_subset = diamonds.loc[filter]
+
+# dimensions of the data set after filtering out outliers 
+alt.Chart(diamonds_subset).mark_bar().encode(
+  x=alt.X('depth', bin=alt.Bin(maxbins=100)), 
+  y='count()'
+).properties( 
+    width=350,
+    height=250
+    )
 
 ```
 

@@ -17,36 +17,28 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-import math
-
-# the function insert() inserts a new item by index
-#fly_viz2.insert(len(fly_viz2.columns), "min_delay", min(fly_viz2.dep_delay))
-#fly_viz2.insert(len(fly_viz2.columns+1), "log_dep_delay", math.log(fly_viz2.dep_delay - fly_viz2.min_delay))
-# Visualize Data - Box Plot 
-#alt.Chart(fly_viz2).mark_boxplot().encode(
-#  alt.Y('log_dep_delay:Q').scale(zero=False)
-#)
-min_delay = fly_viz2["dep_delay"].min()
-print(min_delay)
-fly_viz2["log_dep_delay"] = math.log(fly_viz2["dep_delay"] - min_delay)
-
-#alt.Chart(fly_viz2).mark_boxplot().encode(
-#  alt.Y('log_dep_delay:Q').scale(zero=False)
-#)
+# Visualize Data - Box Plot in groups
+alt.Chart(fly_viz3, width=200).mark_boxplot().encode(
+  alt.X('origin:N'),
+  alt.Y('log_dep_delay:Q').scale(zero=False)
+).properties( 
+    width=350,
+    height=250
+    )
 ------------------
 
 [0;31m---------------------------------------------------------------------------[0m
-[0;31mTypeError[0m                                 Traceback (most recent call last)
-Cell [0;32mIn[14], line 12[0m
-[1;32m     10[0m min_delay [38;5;241m=[39m fly_viz2[[38;5;124m"[39m[38;5;124mdep_delay[39m[38;5;124m"[39m][38;5;241m.[39mmin()
-[1;32m     11[0m [38;5;28mprint[39m(min_delay)
-[0;32m---> 12[0m fly_viz2[[38;5;124m"[39m[38;5;124mlog_dep_delay[39m[38;5;124m"[39m] [38;5;241m=[39m [43mmath[49m[38;5;241;43m.[39;49m[43mlog[49m[43m([49m[43mfly_viz2[49m[43m[[49m[38;5;124;43m"[39;49m[38;5;124;43mdep_delay[39;49m[38;5;124;43m"[39;49m[43m][49m[43m [49m[38;5;241;43m-[39;49m[43m [49m[43mmin_delay[49m[43m)[49m
+[0;31mNameError[0m                                 Traceback (most recent call last)
+Cell [0;32mIn[11], line 2[0m
+[1;32m      1[0m [38;5;66;03m# Visualize Data - Box Plot in groups[39;00m
+[0;32m----> 2[0m alt[38;5;241m.[39mChart([43mfly_viz3[49m, width[38;5;241m=[39m[38;5;241m200[39m)[38;5;241m.[39mmark_boxplot()[38;5;241m.[39mencode(
+[1;32m      3[0m   alt[38;5;241m.[39mX([38;5;124m'[39m[38;5;124morigin:N[39m[38;5;124m'[39m),
+[1;32m      4[0m   alt[38;5;241m.[39mY([38;5;124m'[39m[38;5;124mlog_dep_delay:Q[39m[38;5;124m'[39m)[38;5;241m.[39mscale(zero[38;5;241m=[39m[38;5;28;01mFalse[39;00m)
+[1;32m      5[0m )[38;5;241m.[39mproperties( 
+[1;32m      6[0m     width[38;5;241m=[39m[38;5;241m350[39m,
+[1;32m      7[0m     height[38;5;241m=[39m[38;5;241m250[39m
+[1;32m      8[0m     )
 
-File [0;32m~/anaconda3/lib/python3.10/site-packages/pandas/core/series.py:191[0m, in [0;36m_coerce_method.<locals>.wrapper[0;34m(self)[0m
-[1;32m    189[0m [38;5;28;01mif[39;00m [38;5;28mlen[39m([38;5;28mself[39m) [38;5;241m==[39m [38;5;241m1[39m:
-[1;32m    190[0m     [38;5;28;01mreturn[39;00m converter([38;5;28mself[39m[38;5;241m.[39miloc[[38;5;241m0[39m])
-[0;32m--> 191[0m [38;5;28;01mraise[39;00m [38;5;167;01mTypeError[39;00m([38;5;124mf[39m[38;5;124m"[39m[38;5;124mcannot convert the series to [39m[38;5;132;01m{[39;00mconverter[38;5;132;01m}[39;00m[38;5;124m"[39m)
-
-[0;31mTypeError[0m: cannot convert the series to <class 'float'>
-TypeError: cannot convert the series to <class 'float'>
+[0;31mNameError[0m: name 'fly_viz3' is not defined
+NameError: name 'fly_viz3' is not defined
 
