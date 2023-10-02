@@ -652,9 +652,12 @@ If one of these differences is larger than the other, then it suggests that this
 
 ```{code-cell} 
 # Summary statistics
+diamonds.depth.describe()
+```
 
+```{code-cell} 
 # Skewness
-
+diamonds.depth.skew()
 ```
 The skewness of the data is negative, thus, we can conclude that the data are close to bell shape but slightly skewed to the left. 
 
@@ -662,8 +665,21 @@ The skewness of the data is negative, thus, we can conclude that the data are cl
 For pairs of continuous variables, the most useful visualization is the scatter plot. This gives an idea of how a variable varies (in terms of central trend, variance and skewness) depending on another variable. A scatter plot can be used to show relationship between `price` and `carrat`.
 
 ```{code-cell} 
+---
+mystnb:
+  figure:
+    caption: |
+      Scatterplot of Price Depending On Carat
+    name: sp_price-carat
+---
 # Visualize Data - Scatterplot
-
+alt.Chart(diamonds).mark_circle(size=60).encode(
+  x='price', 
+  y='carat'
+).properties( 
+    width=350,
+    height=250
+    )
 ```
 
 As we expected, there seem to be a relationsship between price and carrat, which brings us to the next question. 
@@ -675,7 +691,42 @@ http://lipas.uwasa.fi/~sjp/Teaching/Bs/Lectures/BasicStatistics.html -->
 As you have learned, the scatterplot is a visual method for observing relationships between pairs of variables. 
 
 ```{code-cell} 
+---
+mystnb:
+  figure:
+    caption: |
+      Covariance and correlation.
+    name: sp_covariance
+---
 # Covariance and correlation
+# create a scatterplot with x = carat and y = price
+sp = alt.Chart(diamonds).mark_circle(size=60).encode(
+  x='carat', 
+  y='price'
+).properties( 
+    width=350,
+    height=250
+    )
+
+# create the mean of carat
+mean_carat = alt.Chart(diamonds).mark_rule(color='blue', strokeDash=[8,8]).encode( #set color of mark_rule
+  x=alt.X('mean(carat)'), size=alt.value(2) # set size of line with size=alt.value()
+).properties( 
+    width=350,
+    height=250
+    )
+
+
+mean_price = alt.Chart(diamonds).mark_rule(color='blue', strokeDash=[8,8]).encode( #set color of mark_rule
+  y=alt.Y('mean(price)'), size=alt.value(2) # set size of line with size=alt.value()
+).properties( 
+    width=350,
+    height=250
+    )
+
+
+# combine the scatterplot with the mean lines of price and carat
+sp + mean_carat + mean_price
 
 ```
 However, how do we quantitatively summarize the relationship between two variables. We need to extend our notion of scatter (or variation of data around the mean) to the notion of covariation: do pairs of variables vary around the mean in the same way or more precisly, does x~i vary in the same direction and on the same scale away from its mean as y~i? 
@@ -700,10 +751,38 @@ The covariance is a simple summary of association between two variables, but it 
 
 ```{code-cell} 
 # Correlation Matrix (less meaningful example - just a showcase)
-
 # Print mcor and round to 2 digits
 
+diamonds[['carat', 'depth', 'table', 'price']].corr().round(2)
+
 # Load visualization from package
+```
+
+<!-- Source: https://github.com/altair-viz/altair/pull/1945 -->
+```{code-cell} 
+# Load visualization from package
+corrMatrix = diamonds[['carat', 'depth', 'table', 'price']].corr().reset_index().melt('index')
+corrMatrix.columns = ['var1', 'var2', 'corr']
+
+chart = alt.Chart(corrMatrix).mark_rect().encode(
+    x='var1',
+    y='var2',
+    color=alt.Color('corr'),
+).properties(
+    width=350,
+    height=250
+)
+
+chart += chart.mark_text(size=25).encode(
+    text=alt.Text('corr', format=".2f"),
+    color=alt.condition(
+        "datum.corr > 0.5",
+        alt.value('white'),
+        alt.value('black')
+    )
+)
+
+chart
 ```
 
 ## General Guidelines for EDA
