@@ -94,6 +94,15 @@ There is no rule about what questions you should ask to guide your research. How
 
 ### Using Python for Data Exploration
 
+In the following, we address these two questions based on the example of Héctor Corrada Bravo from the EDA chapter of his course on [''Introduction to Data Science''](http://www.hcbravo.org/IntroDataSci/bookdown-notes/exploratory-data-analysis-visualization.html) from the Center for Bioinformatics and Computational Biology from the Univ. of Maryland, but using Python instead of R.
+
+We will use Python in combination with the libraries Pandas and Altair. However, you can follow these steps with any programming language at hand. I would like to provide you an methodological understanding of how to explore data, rather than provide an introduction into Python. 
+
+[Pandas](https://pandas.pydata.org/) is a library vor data analysis and therefore very well suited for evaluating and preparing your data to visualize them afterwards. [Here](https://pandas.pydata.org/docs/user_guide/10min.html#min) you can find a short introduction to Pandas.
+
+[Vega-Altair](https://altair-viz.github.io/) is a declarative statistical visualization library for Python. With Vega-Altair you can transform your data in various kinds of visualizations. [Here](https://altair-viz.github.io/getting_started/overview.html) you can get a short overview of Vega-Altair.
+
+
 <!-- REWRITE FOR PYTHON:
 
 In the following, we address these two questions based on the example of Héctor Corrada Bravo from the EDA chapter of his course on [''Introduction to Data Science''](http://www.hcbravo.org/IntroDataSci/bookdown-notes/exploratory-data-analysis-visualization.html) from the Center for Bioinformatics and Computational Biology from the Univ. of Maryland. 
