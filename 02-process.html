@@ -19,12 +19,12 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link href="_static/styles/theme.css?digest=365ca57ee442770a23c6" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=365ca57ee442770a23c6" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=365ca57ee442770a23c6" rel="stylesheet" />
 
   
-  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=365ca57ee442770a23c6" rel="stylesheet" />
   <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
@@ -38,8 +38,9 @@
     <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=365ca57ee442770a23c6" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=365ca57ee442770a23c6" />
+  <script src="_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=365ca57ee442770a23c6"></script>
 
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
@@ -64,7 +65,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = '02-process';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="3. Understanding your Data" href="03-understanding.html" />
+    <link rel="next" title="3. Human Perception and Visual Encoding" href="04-perception.html" />
     <link rel="prev" title="1. The Value of Data Visualization" href="01-intro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -76,6 +77,15 @@ const thebe_selector_output = ".output, .cell_output"
   
   
   <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
   
   <input type="checkbox"
           class="sidebar-toggle"
@@ -137,6 +147,7 @@ const thebe_selector_output = ".output, .cell_output"
   
   
   
+  
     <p class="title logo__title">Data Visualization - From a Human-Centered Perspective (Lecture Notes)</p>
   
 </a></div>
@@ -153,10 +164,11 @@ const thebe_selector_output = ".output, .cell_output"
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="01-intro.html">1. The Value of Data Visualization</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">2. The Process of Visualizing Data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="03-understanding.html">3. Understanding your Data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="04-perception.html">4. Human Perception and Visual Encoding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04-perception.html">3. Human Perception and Visual Encoding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04-vt_distributions.html">4. Visualization Techniques: Distributions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="05-tabulardata.html">5. Visualizing Tabular Data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="bibliography.html">6. Bibliography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix.html">6. Appendix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bibliography.html">7. Bibliography</a></li>
 </ul>
 
     </div>
@@ -312,10 +324,10 @@ const thebe_selector_output = ".output, .cell_output"
 
 <script>
 document.write(`
-  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
-    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
-    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
   </button>
 `);
 </script>
@@ -323,7 +335,7 @@ document.write(`
 <script>
 document.write(`
   <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
   </button>
 `);
 </script>
@@ -371,6 +383,10 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-how-of-visualization-design-at-a-glance">2.3.3. The How of Visualization Design - At A Glance</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#understanding-your-data">2.4. Understanding your Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#understanding-the-data-context">2.4.1. Understanding the Data Context</a></li>
 </ul>
 </li>
 </ul>
@@ -545,6 +561,38 @@ All actions refer to a target, i.e. an aspect of the data that is of interest to
 <div><p>All visualizations share a common “DNA” – a set of mappings between data properties and visual attributes
 such as position, size, shape, and color – and customized species of visualizations might always be constructed &gt; by varying these encodings.</p>
 </div></blockquote>
+</section>
+</section>
+<section id="understanding-your-data">
+<h2><span class="section-number">2.4. </span>Understanding your Data<a class="headerlink" href="#understanding-your-data" title="Permalink to this heading">#</a></h2>
+<p>By building on the Nested odel of Munzner <span id="id13">[<a class="reference internal" href="bibliography.html#id30" title="Tamara Munzner. Visualization analysis and design. CRC press, 2014.">Munzner, 2014</a>]</span>, we have realized how important it is to understand the context of the data origin and the data at hand. In this chapter, we focus on the data, because many data viz projects start with so-called “found data”. These are data sets that are openly available on the internet, data sets in which creating you were not involved. The increasing use of data everywhere requires thinking about data literacy, inclusion, and fairness to ensure that data creates value <span id="id14">[<a class="reference internal" href="bibliography.html#id45" title="Laura Koesten and Elena Simperl. Ux of data: making data available doesn’t make it usable. Interactions, 28(2):97–99, Mar 2021.">Koesten and Simperl, 2021</a>]</span> <!-- KG: explain "value" in this context, i.e., make it more obvious that "value" is not primarily financial etc.-->. However, data is often reused, thus, we need to reflect on where data has been created <!-- KG: applies generally, as pointed out in chapter 2-->. Koesten &amp; Simperl <span id="id15">[<a class="reference internal" href="bibliography.html#id45" title="Laura Koesten and Elena Simperl. Ux of data: making data available doesn’t make it usable. Interactions, 28(2):97–99, Mar 2021.">Koesten and Simperl, 2021</a>]</span> differentiate three main activities to interact with data: inspecting, engaging with the data, and placing data in context.</p>
+<p>Thus, in order to understand whether data are valuable <!--  KG applicable --> for your research question and which questions you can really tackle with these data, you need an understanding of its origin (the context of creation) and an understanding of its structure.</p>
+<section id="understanding-the-data-context">
+<h3><span class="section-number">2.4.1. </span>Understanding the Data Context<a class="headerlink" href="#understanding-the-data-context" title="Permalink to this heading">#</a></h3>
+<p>People’s perceptions of what constitutes good-quality data changed as they engaged with the data <!-- KG unclear/generalized, possibly expand? -->. Koesten &amp; Simperl <span id="id16">[<a class="reference internal" href="bibliography.html#id45" title="Laura Koesten and Elena Simperl. Ux of data: making data available doesn’t make it usable. Interactions, 28(2):97–99, Mar 2021.">Koesten and Simperl, 2021</a>]</span> highlight the importance of engagement around datasets, including discussions, feedback, reviews, ratings, and means to contact data creators. User communities and peer support can complement documentation efforts and make dataset maintenance sustainable. They, furthermore, propose three activities <!-- KG that can inform/structure engagement with data -->:</p>
+<ol class="arabic simple">
+<li><p>Explore the environment of the dataset’s creation (e.g., a study setup or the conditions surrounding data collection, with timeframes, geospatial boundaries, or configurations of collection devices).</p></li>
+<li><p>Explore the norms of the discipline in which the data was collected, including methods of analysis and validation, as well as limitations (e.g., common margins of error).</p></li>
+<li><p>Connect data with the world, gauging how representative it is and reflecting on assumptions about how much it mirrors reality (includes also the question of what might be missing from the data.</p></li>
+</ol>
+<p>Gebru et al. <span id="id17">[<a class="reference internal" href="bibliography.html#id37" title="Timnit Gebru, Jamie Morgenstern, Briana Vecchione, Jennifer Wortman Vaughan, Hanna Wallach, Hal Daumé III, and Kate Crawford. Datasheets for datasets. arXiv.org, Mar 2018. URL: http://arxiv.org/abs/1803.09010v7.">Gebru <em>et al.</em>, 2018</a>]</span> propose “datasheets” inspired by more robust documentation standards in the electronics industry. <!-- KG: describe what datasheets are --> Datasheets are meant to improve transparency and accountability of datasets and to be useful to both dataset creators and dataset consumers <!-- KG: i.e. people working with "found data" -->.
+For consumers of datasets, datasheets should encourage reflection on the process of creating, distributing, and maintaining a dataset (including benefits and harms). For dataset creators it helps also to reflect on the data and to make more informed decisions about its use. The authors offer guiding questions towards creating datasheets for datasets:</p>
+<ul class="simple">
+<li><p>Motivations: Describe the motivations for creating the dataset, including funding, any specific tasks the authors had in mind, and who the authors are.</p></li>
+<li><p>Composition: Describe the composition of the dataset, like what kinds of data are in it, how it was collected, whether labels are associated with the data, and whether the dataset contains sensitive information.</p></li>
+<li><p>Collection Process: Describe the data collection process, like how the data was collected, where or who it was collected from, who was involved in the collection process, and if people are involved, if consent was given for the data to be collected.</p></li>
+<li><p>Processing: Whether the data was processed or labeled and how it was done.</p></li>
+<li><p>Uses: The tasks the dataset is intended to be used for, how it has already been used, and limitations of use.</p></li>
+<li><p>Distribution: How the dataset will be distributed and to whom, and any restrictions on distribution.</p></li>
+<li><p>Maintenance: Who and how the dataset will be maintained, and if and how others will be able to build on it.</p></li>
+</ul>
+<p>Building on this idea, Holland et al. <span id="id18">[<a class="reference internal" href="bibliography.html#id36" title="Sarah Holland, Ahmed Hosny, Sarah Newman, Joshua Joseph, and Kasia Chmielinski. The dataset nutrition label - a framework to drive higher data quality standards. CoRR, Jan 2018. URL: http://arxiv.org/abs/1805.03677v1.">Holland <em>et al.</em>, 2018</a>]</span> proposed the <a class="reference external" href="https://datanutrition.org/">dataset nutrition label</a>. An example is given in <a class="reference internal" href="#dataset-nutrition-fig"><span class="std std-numref">Fig. 2.3</span></a></p>
+<figure class="align-center" id="dataset-nutrition-fig">
+<a class="reference internal image-reference" href="_images/dataset_nutrion_label.png"><img alt="_images/dataset_nutrion_label.png" src="_images/dataset_nutrion_label.png" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 2.3 </span><span class="caption-text">Example of the Dataset Nutrition Label (first generation). Taken from <a class="reference external" href="https://datanutrition.org/">https://datanutrition.org/</a></span><a class="headerlink" href="#dataset-nutrition-fig" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
 <p><strong>More Coming Soon</strong></p>
 <!-- ## The What-Why-How of Visualization Design
 The design space of possible visualization idioms is huge and includes the considerations of both how to create and how to interact with visual representations.
@@ -662,11 +710,10 @@ Padilla, L. M. (2018, October). A case for cognitive models in visualization res
 
               
               
-                <footer class="bd-footer-article">
-                  
-<div class="footer-article-items footer-article__inner">
-  
-    <div class="footer-article-item"><!-- Previous / next buttons -->
+              
+              
+                <footer class="prev-next-footer">
+                  <!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
        href="01-intro.html"
@@ -678,18 +725,15 @@ Padilla, L. M. (2018, October). A case for cognitive models in visualization res
       </div>
     </a>
     <a class="right-next"
-       href="03-understanding.html"
+       href="04-perception.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">3. </span>Understanding your Data</p>
+        <p class="prev-next-title"><span class="section-number">3. </span>Human Perception and Visual Encoding</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
-</div></div>
-  
 </div>
-
                 </footer>
               
             </div>
@@ -725,6 +769,10 @@ Padilla, L. M. (2018, October). A case for cognitive models in visualization res
 </ul>
 </li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-how-of-visualization-design-at-a-glance">2.3.3. The How of Visualization Design - At A Glance</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#understanding-your-data">2.4. Understanding your Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#understanding-the-data-context">2.4.1. Understanding the Data Context</a></li>
 </ul>
 </li>
 </ul>
@@ -774,8 +822,8 @@ By Prof. Dr. Claudia Müller-Birn
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
-<script src="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+  <script src="_static/scripts/bootstrap.js?digest=365ca57ee442770a23c6"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=365ca57ee442770a23c6"></script>
 
   <footer class="bd-footer">
   </footer>

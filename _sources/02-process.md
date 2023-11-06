@@ -233,6 +233,44 @@ Bostock et al. {cite}`Heer_Bostock_Ogievetsky_2010` state:
 
 % KG: new content from DV23-2_DataViz-Process slide 36-39 - Visual Encoding
 
+## Understanding your Data
+
+By building on the Nested odel of Munzner {cite}`munzner2014visualization`, we have realized how important it is to understand the context of the data origin and the data at hand. In this chapter, we focus on the data, because many data viz projects start with so-called “found data”. These are data sets that are openly available on the internet, data sets in which creating you were not involved. The increasing use of data everywhere requires thinking about data literacy, inclusion, and fairness to ensure that data creates value {cite}`KoestenSimperl2021_dataUX` <!-- KG: explain "value" in this context, i.e., make it more obvious that "value" is not primarily financial etc.-->. However, data is often reused, thus, we need to reflect on where data has been created <!-- KG: applies generally, as pointed out in chapter 2-->. Koesten & Simperl {cite}`KoestenSimperl2021_dataUX` differentiate three main activities to interact with data: inspecting, engaging with the data, and placing data in context. 
+
+Thus, in order to understand whether data are valuable <!--  KG applicable --> for your research question and which questions you can really tackle with these data, you need an understanding of its origin (the context of creation) and an understanding of its structure.   
+
+### Understanding the Data Context
+
+People's perceptions of what constitutes good-quality data changed as they engaged with the data <!-- KG unclear/generalized, possibly expand? -->. Koesten & Simperl {cite}`KoestenSimperl2021_dataUX` highlight the importance of engagement around datasets, including discussions, feedback, reviews, ratings, and means to contact data creators. User communities and peer support can complement documentation efforts and make dataset maintenance sustainable. They, furthermore, propose three activities <!-- KG that can inform/structure engagement with data -->:
+
+1. Explore the environment of the dataset's creation (e.g., a study setup or the conditions surrounding data collection, with timeframes, geospatial boundaries, or configurations of collection devices).
+2. Explore the norms of the discipline in which the data was collected, including methods of analysis and validation, as well as limitations (e.g., common margins of error). 
+3. Connect data with the world, gauging how representative it is and reflecting on assumptions about how much it mirrors reality (includes also the question of what might be missing from the data.
+
+% KG: differentiate the kind of data that is at the center of the argument and streamline wording in line with chapter 2 (i.e., situatedness of data, data is created, not "objectively" collected etc. - reduce inconsistency between "collect" and "create", i.e. the context of data creation.)
+
+Gebru et al. {cite}`Gebruetal2018datasheets` propose “datasheets” inspired by more robust documentation standards in the electronics industry. <!-- KG: describe what datasheets are --> Datasheets are meant to improve transparency and accountability of datasets and to be useful to both dataset creators and dataset consumers <!-- KG: i.e. people working with "found data" -->. 
+For consumers of datasets, datasheets should encourage reflection on the process of creating, distributing, and maintaining a dataset (including benefits and harms). For dataset creators it helps also to reflect on the data and to make more informed decisions about its use. The authors offer guiding questions towards creating datasheets for datasets:
+
+* Motivations: Describe the motivations for creating the dataset, including funding, any specific tasks the authors had in mind, and who the authors are.
+* Composition: Describe the composition of the dataset, like what kinds of data are in it, how it was collected, whether labels are associated with the data, and whether the dataset contains sensitive information.
+* Collection Process: Describe the data collection process, like how the data was collected, where or who it was collected from, who was involved in the collection process, and if people are involved, if consent was given for the data to be collected.
+* Processing: Whether the data was processed or labeled and how it was done.
+* Uses: The tasks the dataset is intended to be used for, how it has already been used, and limitations of use.
+* Distribution: How the dataset will be distributed and to whom, and any restrictions on distribution.
+* Maintenance: Who and how the dataset will be maintained, and if and how others will be able to build on it.
+
+Building on this idea, Holland et al. {cite}`Hollandetal2018DatasetNutritionLabel` proposed the [dataset nutrition label](https://datanutrition.org/). An example is given in {numref}`dataset-nutrition-fig`
+
+```{figure} ./images/dataset_nutrion_label.png
+---
+width: 100%
+name: dataset-nutrition-fig
+align: center
+---
+Example of the Dataset Nutrition Label (first generation). Taken from https://datanutrition.org/
+```
+
 
 __More Coming Soon__
 
