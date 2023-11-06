@@ -233,7 +233,13 @@ Bostock et al. {cite}`Heer_Bostock_Ogievetsky_2010` state:
 
 % KG: new content from DV23-2_DataViz-Process slide 36-39 - Visual Encoding
 
-## Understanding the Data Context
+## Understanding your Data
+
+By building on the Nested odel of Munzner {cite}`munzner2014visualization`, we have realized how important it is to understand the context of the data origin and the data at hand. In this chapter, we focus on the data, because many data viz projects start with so-called “found data”. These are data sets that are openly available on the internet, data sets in which creating you were not involved. The increasing use of data everywhere requires thinking about data literacy, inclusion, and fairness to ensure that data creates value {cite}`KoestenSimperl2021_dataUX` <!-- KG: explain "value" in this context, i.e., make it more obvious that "value" is not primarily financial etc.-->. However, data is often reused, thus, we need to reflect on where data has been created <!-- KG: applies generally, as pointed out in chapter 2-->. Koesten & Simperl {cite}`KoestenSimperl2021_dataUX` differentiate three main activities to interact with data: inspecting, engaging with the data, and placing data in context. 
+
+Thus, in order to understand whether data are valuable <!--  KG applicable --> for your research question and which questions you can really tackle with these data, you need an understanding of its origin (the context of creation) and an understanding of its structure.   
+
+### Understanding the Data Context
 
 People's perceptions of what constitutes good-quality data changed as they engaged with the data <!-- KG unclear/generalized, possibly expand? -->. Koesten & Simperl {cite}`KoestenSimperl2021_dataUX` highlight the importance of engagement around datasets, including discussions, feedback, reviews, ratings, and means to contact data creators. User communities and peer support can complement documentation efforts and make dataset maintenance sustainable. They, furthermore, propose three activities <!-- KG that can inform/structure engagement with data -->:
 
