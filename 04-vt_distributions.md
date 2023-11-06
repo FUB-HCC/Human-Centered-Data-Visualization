@@ -11,8 +11,9 @@ kernelspec:
   language: python
   name: python
 ---
-# General Guidelines for EDA
+# Visualization Techniques: Distributions
 
+## General Guidelines for EDA
 
 
 It is difficult to say, what the best process is in EDA. I just provided a number of analyses and possible visualizations. You find many alternative suggestions, and I provide one of them:
@@ -25,7 +26,7 @@ It is difficult to say, what the best process is in EDA. I just provided a numbe
 
 However, each dataset is very special, thus, as often it stays to be an individualized process. Therefore, reproducibility is very important during EDA. Computational notebooks such as R Markdown (used here), but also Jupyter notebooks (used in our exercise), Observable (google product) support readability and understandability of your exploration process. This supports [Knuth’s vision of literate programming](https://en.wikipedia.org/wiki/Literate_programming).
 
-# Tools and Libraries for Data Exploration
+## Tools and Libraries for Data Exploration
 
 Besides GNY R there are many tools and libraries that support the process of data exploration. In this section, I provide a selection. 
 
@@ -92,7 +93,7 @@ Variables: gender, age, studentID
 
 
 (Understanding-the-Data-Structure)=
-# Understanding the Data Structure 
+## Understanding the Data Structure 
 
 <!-- Useful Ressources:
 https://bookdown.org/ronsarafian/IntrotoDS/eda.html#summary-statistics
@@ -134,7 +135,7 @@ EDA is a creative process {cite}`WickhamGrolemund2017Rfordatascience`, thus, the
 
 There is no rule about what questions you should ask to guide your research. However, two types of questions will always be useful for making discoveries in your data. You can phrase these questions loosely as (1) What kind of variation occurs within my variables? and (2) What kind of co-variation occurs between my variables?
 
-## Using Python for Data Exploration
+### Using Python for Data Exploration
 
 In the following, we address these two questions based on the example of Héctor Corrada Bravo from the EDA chapter of his course on [''Introduction to Data Science''](http://www.hcbravo.org/IntroDataSci/bookdown-notes/exploratory-data-analysis-visualization.html) from the Center for Bioinformatics and Computational Biology from the Univ. of Maryland, but using Python instead of R.
 
@@ -152,7 +153,7 @@ In the following, we address these two questions based on the example of Héctor
 We employ the GNU R which is a widespread tool for statistical analysis. However, you can follow these steps with any programming language at hand. I would like to provide you an methodological understanding of how to explore data, rather than provide an introduction into R (http://www.r-project.org/) which is a GNU project, thus, R is Free Software under the terms of GPL. There are over 2,000 user-contributed packages available at R CRAN (https://cran.r-project.org/) with packages for specific functions or specific areas of study. It has an excellent integration with DBs (MySQL, SQLite) and automation based on scripts is easy. Furthermore, the graphical user interface RStudio (https://www.rstudio.com/) makes its usage very convenient. R is an interpreted language. It supports procedural programming with functions and, for some functions, object-oriented programming with generic functions. A generic function acts differently depending on the type of arguments passed to it, for example, R has a generic print() function that can print almost every type of object in R with a simple ''print(objectname)'' syntax. A Base R Cheat Sheet can be found [here](https://www.povertyactionlab.org/sites/default/files/r-cheat-sheet.pdf).
 -->
 
-## Visualizing Data
+### Visualizing Data
 
 In the following, we use the on-time data for all flights that departed NYC, i.e., JFK, LGA or EWR, in 2013. The Bureau of transportation statistics has released these data, and it was included into Python. Let's get an overview about this dataset.
 
@@ -198,7 +199,7 @@ flights_sample.shape
 
 ```
 
-## Scatterplot
+### Scatterplot
 
 The next step is to get a first overview about the data, and for this, we can use a visualization already. For this I use a simple scatterplot.
 
@@ -285,7 +286,7 @@ flights_sample.shape
 
 ```
 
-## Histogram
+### Histogram
 
 Let's now create a graphical summary of these variables. Let's start with a histogram. It divides the range of the dep_delay attribute into equal-sized bins and then plots the number of observations within each bin. What additional information does this new visualization give us about this variable?
 
@@ -374,7 +375,7 @@ alt.vconcat((s1 | s5), (s10 | s15))
 ```
 
 
-## Density Plot
+### Density Plot
 
 A Density Plot is a smoothed, continuous version of a histogram that visualizes the underlying probability distribution of the data by a continuous curve^[An excellent introduction in the usefulness of this method is given by Claus Wilke, check out  https://clauswilke.com/dataviz/histograms-density-plots.html]. The peaks of a Density Plot help display where values are concentrated over the interval. The most common form of estimation is known as [kernel density estimation](https://en.wikipedia.org/wiki/Kernel_density_estimation). In this method, a continuous curve (the kernel) is drawn at every individual data point and all of these curves are then added together to make a single smooth density estimation. The kernel most often used is a Gaussian (which produces a Gaussian bell curve at each data point). 
 
@@ -403,7 +404,7 @@ alt.Chart(fly_viz2).transform_density(
     )
 ```
 
-## Boxplot
+### Boxplot
 
 Another alternative to display the distribution of a continuous variable broken down by a categorical variable is the Boxplot. The boxplot is an idiom presenting summary statistics for the distribution of a quantitative attribute, using five derived values {numref}`boxplot-fig`.
 
@@ -477,7 +478,7 @@ alt.Chart(fly_viz3, width=200).mark_boxplot().encode(
     height=250
     )
 ```
-## Compare Distributions
+### Compare Distributions
 
 Now we can start looking at the relationship between pairs of attributes. That is, how are each of the distributional properties we care about (central trend, spread and skew) of the values of an attribute changing based on the value of a different attribute. Suppose we want to see the relationship between departure delay time (a numeric variable), and the airport origin (a categorical variable).
 
