@@ -11,16 +11,88 @@ kernelspec:
   language: python
   name: python
 ---
+# General Guidelines for EDA
 
-# Understanding your Data
 
-By building on the Nested odel of Munzner {cite}`munzner2014visualization`, we have realized how important it is to understand the context of the data origin and the data at hand. In this chapter, we focus on the data, because many data viz projects start with so-called “found data”. These are data sets that are openly available on the internet, data sets in which creating you were not involved. The increasing use of data everywhere requires thinking about data literacy, inclusion, and fairness to ensure that data creates value {cite}`KoestenSimperl2021_dataUX` <!-- KG: explain "value" in this context, i.e., make it more obvious that "value" is not primarily financial etc.-->. However, data is often reused, thus, we need to reflect on where data has been created <!-- KG: applies generally, as pointed out in chapter 2-->. Koesten & Simperl {cite}`KoestenSimperl2021_dataUX` differentiate three main activities to interact with data: inspecting, engaging with the data, and placing data in context. 
 
-Thus, in order to understand whether data are valuable <!--  KG applicable --> for your research question and which questions you can really tackle with these data, you need an understanding of its origin (the context of creation) and an understanding of its structure.   
+It is difficult to say, what the best process is in EDA. I just provided a number of analyses and possible visualizations. You find many alternative suggestions, and I provide one of them:
+
+* Begin with a discussion of the “center” of the data, generally based on mean.
+* Describes how data are distributed. 
+* Follow with a discussion of variability (and of skew if appropriate).
+* End with a summary evaluation which may have a subjective component (numbers must be interpreted, they don’t speak for themselves).
+* Make sure to use numbers in a description wisely – not too few or too many.
+
+However, each dataset is very special, thus, as often it stays to be an individualized process. Therefore, reproducibility is very important during EDA. Computational notebooks such as R Markdown (used here), but also Jupyter notebooks (used in our exercise), Observable (google product) support readability and understandability of your exploration process. This supports [Knuth’s vision of literate programming](https://en.wikipedia.org/wiki/Literate_programming).
+
+# Tools and Libraries for Data Exploration
+
+Besides GNY R there are many tools and libraries that support the process of data exploration. In this section, I provide a selection. 
+
+<!-- create table with tools -->
+
+Wrangler provides data-transformation scripts within a visual, direct manipulation interface augmented by predictive models {cite}`kandel2011wrangler`. Wrangler is an interactive system for creating data transformations. It uses semantic data types, such as geographic locations, dates, classification  codes to support the validation of data and the type conversion. Interactive histories support review, refinement, and annotation of transformation scripts. The researchers provide a WebApp but also a [commercial product](https://www.trifacta.com/start-wrangling/). 
+
+A similar approach is realized by [Open Refine](https://openrefine.org/). This tool was formerly developed by Google but it is now maintained by the open source community. It allows you to clean data, transform it from one format into another, or extend you data by additional data from an API. 
+
+Besides DataWrangler, I would like to mention the tool Voyager {cite}`wongsuphasawat2015voyager`. The Voyager system is specifically suitable for exploratory visual analysis. You can again test it via a [WebApp](https://vega.github.io/voyager/) and the source code is available on [Github](https://github.com/vega/voyager). And for the sake of completeness, there is also a commercial software [Tableau](https://www.tableau.com/), which can be freely used in the educational context.
+
+Both, Data Wrangler and Voyager are using a formal language - the Vega-Lite visualization grammar. Vega-Lite is a high-level grammar of interactive graphics that provides a concise, declarative JSON syntax to create diagrams for data analysis and presentation. Vega-Lite specifications describe visualizations as ``encoding mappings'' from data to properties of graphical marks (e.g., points or bars). 
+
+The Vega-Lite compiler automatically produces visualization components including axes, legends, and scales. Vega-Lite supports both data transformations (e.g., aggregation, binning, filtering, sorting) and visual transformations (e.g., stacking and faceting). Moreover, Vega-Lite specifications can be composed into layered and multi-view displays, and made interactive with selections as you can see in the example. 
+
+Vega-Lite is being used in another interesting library. On top of the Vega-Lite JSON specification a simple API was built: Altair. It is a declarative statistical visualization library for Python. [Source code](https://github.com/altair-viz/altair) and a comprehensive [documentation](https://altair-viz.github.io/) <!--as well as [Tutorial Notebooks](github.com/altair-viz/altair_notebooks)--> are available on Github.
+
+
+
+
+
+
+
+<!--  In der Wahrscheinlichkeitstheorie betrachten wir einen zugrundeliegenden Prozess, der eine gewisse Zufälligkeit oder Unsicherheit aufweist, die durch Zufallsvariablen modelliert wird, und wir finden heraus, was passiert. 
+
+In der Statistik beobachten wir etwas, das passiert ist, und versuchen herauszufinden, welcher zugrunde liegende Prozess diese Beobachtungen erklären würde.
+
+Statistik ist eng mit der Wahrscheinlichkeitstheorie verbunden. Mit Hilfe der Statistik können Sie die Wahrscheinlichkeit, die Chance, dass ein bestimmtes Ereignis eintritt, ausrechnen: Wenn Sie wissen wollen, wie hoch die Wahrscheinlichkeit ist, dass Ihr Ferienflugzeug abstürzt, denken Sie daran, wie viele Flugzeuge in der Regel innerhalb eines Jahres abstürzen. Da diese Zahl sehr klein ist, folgern Sie, dass die Wahrscheinlichkeit, dass Ihr Flugzeug abstürzt, ebenfalls gering ist. Sie haben eine sehr einfache statistische Analyse der Daten über Flugzeugabstürze durchgeführt und daraus eine Wahrscheinlichkeit berechnet.
+
+Aber die Dinge funktionieren auch umgekehrt: Sie können abstrakte Wahrscheinlichkeiten verwenden, um Ihnen bei Ihren Statistiken zu helfen. Sagen Sie zum Beispiel, Sie wollen testen, ob ein Würfel, der in einem Casino verwendet wird, fair ist. Dazu werfen Sie den Würfel sehr oft und zeichnen die Ergebnisse auf. Dann argumentieren Sie wie folgt: Wenn der Würfel fair ist, dann sollte jede Zahl gleich wahrscheinlich sein. Es gibt sechs Zahlen, also sollte jede Zahl in 1/6 der Fälle auftauchen. Sie vergleichen den tatsächlichen Würfel mit einem idealen Würfel: Wenn Ihr Casinowürfel Ihnen in etwa 1/6 aller Würfe jede Zahl liefert, entscheiden Sie, dass es fair ist.
+
+Die Wahrscheinlichkeitstheorie ist wichtig, wenn es um die Auswertung von Statistiken geht. Wenn Sie in einer Meinungsumfrage feststellen, dass 80% der Befragten den derzeitigen Premierminister mögen, ist die Versuchung groß, daraus zu schließen, dass der Premierminister sehr beliebt ist. Aber woher wissen Sie, dass Ihr Ergebnis nicht nur zufällig zustande gekommen ist? Nun, Sie verwenden die Wahrscheinlichkeitstheorie, um die Wahrscheinlichkeit zu berechnen, dass Ihr Ergebnis zufällig zustande gekommen ist - wenn diese Wahrscheinlichkeit sehr gering ist, dann sollten Sie zu dem Schluss kommen, dass der Premierminister sehr beliebt ist.
+
+Statistics is the branch of mathematics that transforms data into useful information for decision makers
+
+Statistics is the art of understanding and learning from data
+
+Involves
+Collecting data
+Presenting and describing data
+Analyzing and interpreting data
+
+Data are facts that we consider worth collecting, summarizing, analyzing, and interpreting
+
+Data sets are data collected for a particular study or analysis
+
+Unit of analysis is a person, thing, transaction, or event that can be separately and uniquely identified and about which we want to collect data
+Person (student, customer, programmer, ...)
+Thing (education, power plant, ...)
+Transaction (sale, cost of a software license, monthly rent, ...)
+Event (application, election)
+
+Variable is a characteristic, an attribute, or an occurrence observed for each unit of analysis
+
+Examples
+Unit of analysis: a computer science student
+Variables: gender, age, studentID
+
+-->
+
+[^2]: I highly recommend reading more about him, for example, in [](https://www.stat.berkeley.edu/~brill/Papers/life.pdf).
+[^3]: The so-called "smooth part of a data set" is the variability that the analyst has accounted for so far, while the "rough" part is the variability that remains unexplained.
+[^4]: A dataframe is a list, with each component of that list being a equal length vector. Thus, intuitively, a dataframe is like a matrix with a rows-and-comlumns-structure. However, it differs from a matrix, since each column can having different mode (data type) {cite}`Matloff2011ArtofRProgramming`.
 
 
 (Understanding-the-Data-Structure)=
-## Understanding the Data Structure 
+# Understanding the Data Structure 
 
 <!-- Useful Ressources:
 https://bookdown.org/ronsarafian/IntrotoDS/eda.html#summary-statistics
@@ -62,7 +134,7 @@ EDA is a creative process {cite}`WickhamGrolemund2017Rfordatascience`, thus, the
 
 There is no rule about what questions you should ask to guide your research. However, two types of questions will always be useful for making discoveries in your data. You can phrase these questions loosely as (1) What kind of variation occurs within my variables? and (2) What kind of co-variation occurs between my variables?
 
-### Using Python for Data Exploration
+## Using Python for Data Exploration
 
 In the following, we address these two questions based on the example of Héctor Corrada Bravo from the EDA chapter of his course on [''Introduction to Data Science''](http://www.hcbravo.org/IntroDataSci/bookdown-notes/exploratory-data-analysis-visualization.html) from the Center for Bioinformatics and Computational Biology from the Univ. of Maryland, but using Python instead of R.
 
@@ -80,7 +152,7 @@ In the following, we address these two questions based on the example of Héctor
 We employ the GNU R which is a widespread tool for statistical analysis. However, you can follow these steps with any programming language at hand. I would like to provide you an methodological understanding of how to explore data, rather than provide an introduction into R (http://www.r-project.org/) which is a GNU project, thus, R is Free Software under the terms of GPL. There are over 2,000 user-contributed packages available at R CRAN (https://cran.r-project.org/) with packages for specific functions or specific areas of study. It has an excellent integration with DBs (MySQL, SQLite) and automation based on scripts is easy. Furthermore, the graphical user interface RStudio (https://www.rstudio.com/) makes its usage very convenient. R is an interpreted language. It supports procedural programming with functions and, for some functions, object-oriented programming with generic functions. A generic function acts differently depending on the type of arguments passed to it, for example, R has a generic print() function that can print almost every type of object in R with a simple ''print(objectname)'' syntax. A Base R Cheat Sheet can be found [here](https://www.povertyactionlab.org/sites/default/files/r-cheat-sheet.pdf).
 -->
 
-### Visualizing Data
+## Visualizing Data
 
 In the following, we use the on-time data for all flights that departed NYC, i.e., JFK, LGA or EWR, in 2013. The Bureau of transportation statistics has released these data, and it was included into Python. Let's get an overview about this dataset.
 
@@ -126,7 +198,7 @@ flights_sample.shape
 
 ```
 
-### Scatterplot
+## Scatterplot
 
 The next step is to get a first overview about the data, and for this, we can use a visualization already. For this I use a simple scatterplot.
 
@@ -213,7 +285,7 @@ flights_sample.shape
 
 ```
 
-### Histogram
+## Histogram
 
 Let's now create a graphical summary of these variables. Let's start with a histogram. It divides the range of the dep_delay attribute into equal-sized bins and then plots the number of observations within each bin. What additional information does this new visualization give us about this variable?
 
@@ -302,7 +374,7 @@ alt.vconcat((s1 | s5), (s10 | s15))
 ```
 
 
-### Density Plot
+## Density Plot
 
 A Density Plot is a smoothed, continuous version of a histogram that visualizes the underlying probability distribution of the data by a continuous curve^[An excellent introduction in the usefulness of this method is given by Claus Wilke, check out  https://clauswilke.com/dataviz/histograms-density-plots.html]. The peaks of a Density Plot help display where values are concentrated over the interval. The most common form of estimation is known as [kernel density estimation](https://en.wikipedia.org/wiki/Kernel_density_estimation). In this method, a continuous curve (the kernel) is drawn at every individual data point and all of these curves are then added together to make a single smooth density estimation. The kernel most often used is a Gaussian (which produces a Gaussian bell curve at each data point). 
 
@@ -331,7 +403,7 @@ alt.Chart(fly_viz2).transform_density(
     )
 ```
 
-### Boxplot
+## Boxplot
 
 Another alternative to display the distribution of a continuous variable broken down by a categorical variable is the Boxplot. The boxplot is an idiom presenting summary statistics for the distribution of a quantitative attribute, using five derived values {numref}`boxplot-fig`.
 
@@ -405,7 +477,7 @@ alt.Chart(fly_viz3, width=200).mark_boxplot().encode(
     height=250
     )
 ```
-### Compare Distributions
+## Compare Distributions
 
 Now we can start looking at the relationship between pairs of attributes. That is, how are each of the distributional properties we care about (central trend, spread and skew) of the values of an attribute changing based on the value of a different attribute. Suppose we want to see the relationship between departure delay time (a numeric variable), and the airport origin (a categorical variable).
 
@@ -428,81 +500,3 @@ alt.Chart(fly_viz3, width=200).mark_boxplot().encode(
     )
 ```
 
-## General Guidelines for EDA
-
-
-
-It is difficult to say, what the best process is in EDA. I just provided a number of analyses and possible visualizations. You find many alternative suggestions, and I provide one of them:
-
-* Begin with a discussion of the “center” of the data, generally based on mean.
-* Describes how data are distributed. 
-* Follow with a discussion of variability (and of skew if appropriate).
-* End with a summary evaluation which may have a subjective component (numbers must be interpreted, they don’t speak for themselves).
-* Make sure to use numbers in a description wisely – not too few or too many.
-
-However, each dataset is very special, thus, as often it stays to be an individualized process. Therefore, reproducibility is very important during EDA. Computational notebooks such as R Markdown (used here), but also Jupyter notebooks (used in our exercise), Observable (google product) support readability and understandability of your exploration process. This supports [Knuth’s vision of literate programming](https://en.wikipedia.org/wiki/Literate_programming).
-
-## Tools and Libraries for Data Exploration
-
-Besides GNY R there are many tools and libraries that support the process of data exploration. In this section, I provide a selection. 
-
-<!-- create table with tools -->
-
-Wrangler provides data-transformation scripts within a visual, direct manipulation interface augmented by predictive models {cite}`kandel2011wrangler`. Wrangler is an interactive system for creating data transformations. It uses semantic data types, such as geographic locations, dates, classification  codes to support the validation of data and the type conversion. Interactive histories support review, refinement, and annotation of transformation scripts. The researchers provide a WebApp but also a [commercial product](https://www.trifacta.com/start-wrangling/). 
-
-A similar approach is realized by [Open Refine](https://openrefine.org/). This tool was formerly developed by Google but it is now maintained by the open source community. It allows you to clean data, transform it from one format into another, or extend you data by additional data from an API. 
-
-Besides DataWrangler, I would like to mention the tool Voyager {cite}`wongsuphasawat2015voyager`. The Voyager system is specifically suitable for exploratory visual analysis. You can again test it via a [WebApp](https://vega.github.io/voyager/) and the source code is available on [Github](https://github.com/vega/voyager). And for the sake of completeness, there is also a commercial software [Tableau](https://www.tableau.com/), which can be freely used in the educational context.
-
-Both, Data Wrangler and Voyager are using a formal language - the Vega-Lite visualization grammar. Vega-Lite is a high-level grammar of interactive graphics that provides a concise, declarative JSON syntax to create diagrams for data analysis and presentation. Vega-Lite specifications describe visualizations as ``encoding mappings'' from data to properties of graphical marks (e.g., points or bars). 
-
-The Vega-Lite compiler automatically produces visualization components including axes, legends, and scales. Vega-Lite supports both data transformations (e.g., aggregation, binning, filtering, sorting) and visual transformations (e.g., stacking and faceting). Moreover, Vega-Lite specifications can be composed into layered and multi-view displays, and made interactive with selections as you can see in the example. 
-
-Vega-Lite is being used in another interesting library. On top of the Vega-Lite JSON specification a simple API was built: Altair. It is a declarative statistical visualization library for Python. [Source code](https://github.com/altair-viz/altair) and a comprehensive [documentation](https://altair-viz.github.io/) <!--as well as [Tutorial Notebooks](github.com/altair-viz/altair_notebooks)--> are available on Github.
-
-
-
-
-
-
-
-<!--  In der Wahrscheinlichkeitstheorie betrachten wir einen zugrundeliegenden Prozess, der eine gewisse Zufälligkeit oder Unsicherheit aufweist, die durch Zufallsvariablen modelliert wird, und wir finden heraus, was passiert. 
-
-In der Statistik beobachten wir etwas, das passiert ist, und versuchen herauszufinden, welcher zugrunde liegende Prozess diese Beobachtungen erklären würde.
-
-Statistik ist eng mit der Wahrscheinlichkeitstheorie verbunden. Mit Hilfe der Statistik können Sie die Wahrscheinlichkeit, die Chance, dass ein bestimmtes Ereignis eintritt, ausrechnen: Wenn Sie wissen wollen, wie hoch die Wahrscheinlichkeit ist, dass Ihr Ferienflugzeug abstürzt, denken Sie daran, wie viele Flugzeuge in der Regel innerhalb eines Jahres abstürzen. Da diese Zahl sehr klein ist, folgern Sie, dass die Wahrscheinlichkeit, dass Ihr Flugzeug abstürzt, ebenfalls gering ist. Sie haben eine sehr einfache statistische Analyse der Daten über Flugzeugabstürze durchgeführt und daraus eine Wahrscheinlichkeit berechnet.
-
-Aber die Dinge funktionieren auch umgekehrt: Sie können abstrakte Wahrscheinlichkeiten verwenden, um Ihnen bei Ihren Statistiken zu helfen. Sagen Sie zum Beispiel, Sie wollen testen, ob ein Würfel, der in einem Casino verwendet wird, fair ist. Dazu werfen Sie den Würfel sehr oft und zeichnen die Ergebnisse auf. Dann argumentieren Sie wie folgt: Wenn der Würfel fair ist, dann sollte jede Zahl gleich wahrscheinlich sein. Es gibt sechs Zahlen, also sollte jede Zahl in 1/6 der Fälle auftauchen. Sie vergleichen den tatsächlichen Würfel mit einem idealen Würfel: Wenn Ihr Casinowürfel Ihnen in etwa 1/6 aller Würfe jede Zahl liefert, entscheiden Sie, dass es fair ist.
-
-Die Wahrscheinlichkeitstheorie ist wichtig, wenn es um die Auswertung von Statistiken geht. Wenn Sie in einer Meinungsumfrage feststellen, dass 80% der Befragten den derzeitigen Premierminister mögen, ist die Versuchung groß, daraus zu schließen, dass der Premierminister sehr beliebt ist. Aber woher wissen Sie, dass Ihr Ergebnis nicht nur zufällig zustande gekommen ist? Nun, Sie verwenden die Wahrscheinlichkeitstheorie, um die Wahrscheinlichkeit zu berechnen, dass Ihr Ergebnis zufällig zustande gekommen ist - wenn diese Wahrscheinlichkeit sehr gering ist, dann sollten Sie zu dem Schluss kommen, dass der Premierminister sehr beliebt ist.
-
-Statistics is the branch of mathematics that transforms data into useful information for decision makers
-
-Statistics is the art of understanding and learning from data
-
-Involves
-Collecting data
-Presenting and describing data
-Analyzing and interpreting data
-
-Data are facts that we consider worth collecting, summarizing, analyzing, and interpreting
-
-Data sets are data collected for a particular study or analysis
-
-Unit of analysis is a person, thing, transaction, or event that can be separately and uniquely identified and about which we want to collect data
-Person (student, customer, programmer, ...)
-Thing (education, power plant, ...)
-Transaction (sale, cost of a software license, monthly rent, ...)
-Event (application, election)
-
-Variable is a characteristic, an attribute, or an occurrence observed for each unit of analysis
-
-Examples
-Unit of analysis: a computer science student
-Variables: gender, age, studentID
-
--->
-
-[^2]: I highly recommend reading more about him, for example, in [](https://www.stat.berkeley.edu/~brill/Papers/life.pdf).
-[^3]: The so-called "smooth part of a data set" is the variability that the analyst has accounted for so far, while the "rough" part is the variability that remains unexplained.
-[^4]: A dataframe is a list, with each component of that list being a equal length vector. Thus, intuitively, a dataframe is like a matrix with a rows-and-comlumns-structure. However, it differs from a matrix, since each column can having different mode (data type) {cite}`Matloff2011ArtofRProgramming`.
