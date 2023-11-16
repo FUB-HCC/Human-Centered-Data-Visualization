@@ -16,11 +16,13 @@ kernelspec:
 
 As we have discussed on the previous chapters, an important first step in data visualization is to contextualize your data. The next step is to select - based on the data characteristics - an effective visual encoding. Such visual encoding maps the data values to graphical features such as position, size, shape, and color. However, such mapping is not as straightforward as one might assume. A prerequisite is to understand how we, as humans, perceive our world, or more specifically visualizations. Ware states in his book {cite}`ware2019information`: “Understanding human perception can significantly improve both the quality and the quantity of information being displayed.” Such understanding allows us to design visualizations that can replace demanding cognitive calculations with simple perceptual inferences which often improve interpretability & comprehension and, therefore, decision making {cite}`Heer_Bostock_Ogievetsky_2010`.
 
+<!-- LW: Presentation begins with "Design Criteria for Visual Encodings (9) -->
+
 ## Human Perception
 
 Human perception is the ability to perceive our surroundings through the light that enters the eyes. The eye convert light into a series of electrochemical signals that are transmitted to the brain. This process can take as little as 13 milliseconds, according to a 2017 study by MIT in the United States {cite}`munzner2014visualization`. However, human vision has a number of physical and perceptual limitations (concerning colors, patterns, and structures), which we should be aware of in order to create more effective data visualizations.
 
-We can roughly divide perception into two stages {cite}`Few2004showmenumbers`. The sensations is the physical reception of the stimulus from the outside world, and the perception is a cognitive process that relates to the processing and interpretation of that stimulus. On the one hand the physical properties of the eye and the visual system mean that there are certain things that cannot be seen by the human; on the other hand, the interpretative capabilities of visual processing allow images to be constructed from incomplete information. 
+We can roughly divide perception into two stages {cite}`Few2004showmenumbers`. The sensations is the physical reception of the stimulus from the outside world, and the perception is a cognitive process that relates to the processing and interpretation of that stimulus. On the one hand the physical properties of the eye and the visual system mean that there are certain things that cannot be seen by the human; on the other hand, the interpretative capabilities of visual processing allow images to be constructed from incomplete information. <!-- LW: Specifying the "Process of Visual Perception" and "Stages of Visual Perception" (p. 11/12) -->
 
 We need to understand both stages as both influence what can and cannot be perceived visually by a human being, which in turn directly affects the way that we design visualizations. 
 
@@ -107,6 +109,8 @@ The expressiveness principle dictates that the visual encoding should express al
 
 The effectiveness principle dictates that the importance of the attribute should match the salience of the channel, i.e. its noticeability. We already talked about colors but there are more visual channels we can consider when we decide about the visual encoding. The first researcher who thought about the effectiveness of visualizations is [Jacques Bertin](https://en.wikipedia.org/wiki/Jacques_Bertin).
 
+<!-- LW: Section of Gestalt laws is missing (21-30) -->
+
 <!-- https://graphworkflow.com/retinal/ -->
 <!-- Check out: A Survey of Perception-Based Visualization Studies by Task -->
 ### Choice of Encoding - Bertin’s Guidance
@@ -152,6 +156,8 @@ align: center
 Results of Psychophysical power law of Stevens. Taken from Munzner (2014).
 ```
 Their results for visual encodings agree well with psychophysical channel measurements. Psychophysics is devoted to the systematic measurement of general human perception {cite}`StevensMarks2017Psychophysics`. We perceive different visual channels with different degrees of accuracy; they are not all equally distinguishable. Our responses to the sensory experience of size can be characterized by power-law/power-law, where the exponent depends on the precise sensory modality: Most stimuli are magnified or compressed; few remain unchanged. The diagram in Figure XX shows that length has an exponent of n = 1.0, so our perception of length is very close to the true value. Length means the length of a line segment on a 2D plane perpendicular to the observer. The other visual channels are not perceived as accurately: Area and brightness are compressed, while color saturation or electroshocks are magnified. 
+
+<!-- LW: Section "Color" is missing (p. 42-47) -->
 
 ## Combining Channels
 
