@@ -470,15 +470,15 @@ import numpy as np # is needed to calculate the logarithm
 # find the minimum of dep_delay
 min_delay = fly_viz2['dep_delay'].min() 
 # substract the min_delay from dep_delay in each row
-fly_viz3 = fly_viz2.copy()
-fly_viz3["dep_delay_min"] = fly_viz2.dep_delay - min_delay
-fly_viz3 = fly_viz3[fly_viz3.dep_delay_min!=0] # to avoid loc(0) in the following example
+fly_viz4 = fly_viz2.copy()
+fly_viz4["dep_delay_min"] = fly_viz2.dep_delay - min_delay
+fly_viz4 = fly_viz4[fly_viz4.dep_delay_min!=0] # to avoid loc(0) in the following example
 
 # create a new column that contains the logarithm of the previously subtracted dep_delay
-fly_viz3['log_dep_delay'] = np.log(fly_viz3['dep_delay_min'])
+fly_viz4['log_dep_delay'] = np.log(fly_viz4['dep_delay_min'])
 
 # Visualize Data - Box Plot with log scale
-alt.Chart(fly_viz3, width=200).mark_boxplot().encode( 
+alt.Chart(fly_viz4, width=200).mark_boxplot().encode( 
   alt.Y('log_dep_delay:Q').scale(zero=False)
 ).properties( 
     width=350,
@@ -508,3 +508,51 @@ alt.Chart(fly_viz3, width=200).mark_boxplot().encode(
     )
 ```
 
+### Visualizing Multiple Distributions at Once
+
+```{code-cell} 
+---
+mystnb:
+  figure:
+    caption: |
+      Arrival delays at NYC airport: Overlapping Histogram.
+    name: hist_overlap
+---
+# Visualize overlapping colors of arrival delays 
+
+
+```
+
+
+```{code-cell} 
+---
+mystnb:
+  figure:
+    caption: |
+      Arrival delays at NYC airport: Side-by-Side Histogram.
+    name: hist_side-by-side
+---
+# Visualize arrival delays side by side
+
+
+```
+
+```{code-cell} 
+---
+mystnb:
+  figure:
+    caption: |
+      Arrival delays at NYC airport: Stacked Histogram.
+    name: hist_stacked
+---
+# Visualize arrival delays stacked 
+alt.Chart(fly_viz3).mark_bar().encode(
+  x=alt.X('dep_delay', title='Departure delay (in min)', bin=alt.Bin(step=2)),
+  y=alt.Y('count()', title='Number of Flights'),
+  color='carrier:N'
+).properties( 
+    width=350,
+    height=250
+    )
+
+```
