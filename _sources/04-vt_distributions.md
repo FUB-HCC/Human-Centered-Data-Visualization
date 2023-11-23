@@ -14,9 +14,9 @@ kernelspec:
 # Visualization Techniques: Distributions
 
 ## General Guidelines for EDA
+<!-- LW: Maybe transfer this part under "Understanding the Data Structure?-->
 
-
-It is difficult to say, what the best process is in EDA. I just provided a number of analyses and possible visualizations. You find many alternative suggestions, and I provide one of them:
+It is difficult to say, what the best process is in Exploratory Data Analysis (EDA). I just provided a number of analyses and possible visualizations. You find many alternative suggestions, and I provide one of them:
 
 * Begin with a discussion of the “center” of the data, generally based on mean.
 * Describes how data are distributed. 
@@ -199,6 +199,12 @@ flights_sample.shape
 
 ```
 
+```{code-cell} 
+# show first 10 rows
+flights.head(10)
+
+```
+
 ### Scatterplot
 
 The next step is to get a first overview about the data, and for this, we can use a visualization already. For this I use a simple scatterplot.
@@ -218,7 +224,7 @@ fly_viz1 = flights_sample
 fly_viz1 = fly_viz1.reset_index() # reset_index copies the data frame index into the new index column
 
 # Visualize Data 1 - Scatterplot
-alt.Chart(fly_viz1).mark_circle(size=60).encode( 
+alt.Chart(fly_viz1).mark_circle(size=40).encode( 
     x=alt.X('index', title='Flight ID'),
     y=alt.Y('dep_delay', title='Departure delay (in min)'),
     tooltip=['flight', 'year', 'dep_time', 'dep_delay'] # when you hover over the points, these data will be shown
@@ -263,7 +269,7 @@ fly_viz2 = fly_viz2[fly_viz2.dep_delay<800]
 # create new column 'index' with row numbers from column data
 fly_viz2 = fly_viz2.reset_index()
 
-alt.Chart(fly_viz2).mark_circle(size=60).encode(  
+alt.Chart(fly_viz2).mark_circle(size=40).encode(  
     x=alt.X('index', title='Ordered Flight ID'),
     y=alt.Y('dep_delay', title='Departure delay (in min)'),
     tooltip=['flight', 'year', 'dep_time', 'dep_delay']
@@ -313,7 +319,9 @@ mystnb:
       Histogram of delay times.
     name: histogram1
 ---
-alt.Chart(flights_sample).mark_bar().encode(
+fly_viz3 = flights_sample[flights_sample.dep_delay<=100]
+
+alt.Chart(fly_viz3).mark_bar().encode(
   x=alt.X('dep_delay', title='Departure delay (in min)'),
   y=alt.Y('count()', title='Number of Flights')
 ).properties( 
@@ -336,7 +344,7 @@ mystnb:
 ---
 
 s1 = alt.Chart(flights_sample).mark_bar().encode(
-  x=alt.X('dep_delay', title='Departure delay (in min)', bin=alt.Bin(extent=[0, 750], step=1)),
+  x=alt.X('dep_delay', title='Departure delay (in min)', bin=alt.Bin(extent=[-20, 100], step=1)),
   y=alt.Y('count()', title='Number of Flights')
 ).properties( 
     width=200,
@@ -344,7 +352,7 @@ s1 = alt.Chart(flights_sample).mark_bar().encode(
     )
 
 s5 = alt.Chart(flights_sample).mark_bar().encode(
-  x=alt.X('dep_delay', title='Departure delay (in min)', bin=alt.Bin(extent=[0, 750], step=5)),
+  x=alt.X('dep_delay', title='Departure delay (in min)', bin=alt.Bin(extent=[-20, 100], step=5)),
   y=alt.Y('count()', title='Number of Flights')
 ).properties( 
     width=200,
@@ -354,7 +362,7 @@ s5 = alt.Chart(flights_sample).mark_bar().encode(
 
 
 s10 = alt.Chart(flights_sample).mark_bar().encode(
-  x=alt.X('dep_delay', title='Departure delay (in min)', bin=alt.Bin(extent=[0, 750], step=10)),
+  x=alt.X('dep_delay', title='Departure delay (in min)', bin=alt.Bin(extent=[-20, 100], step=10)),
   y=alt.Y('count()', title='Number of Flights')
 ).properties( 
     width=200,
@@ -362,14 +370,13 @@ s10 = alt.Chart(flights_sample).mark_bar().encode(
     )
 
 s15 = alt.Chart(flights_sample).mark_bar().encode(
-  x=alt.X('dep_delay', title='Departure delay (in min)', bin=alt.Bin(extent=[0, 750], step=15)),
+  x=alt.X('dep_delay', title='Departure delay (in min)', bin=alt.Bin(extent=[-20, 100], step=15)),
   y=alt.Y('count()', title='Number of Flights')
 ).properties( 
     width=200,
     height=150
     )
 
-# display charts next to each other with "|" and below each other with alt.vconcat(upper, lower)
 alt.vconcat((s1 | s5), (s10 | s15))
 
 ```
@@ -392,7 +399,7 @@ mystnb:
     name: densityPlot1
 ---
 # Visualize Data - Density Plot
-alt.Chart(fly_viz2).transform_density(
+alt.Chart(fly_viz3).transform_density(
   'dep_delay',
   as_=['Departure delay (in min)', 'density'],
 ).mark_area().encode(
@@ -463,15 +470,15 @@ import numpy as np # is needed to calculate the logarithm
 # find the minimum of dep_delay
 min_delay = fly_viz2['dep_delay'].min() 
 # substract the min_delay from dep_delay in each row
-fly_viz3 = fly_viz2.copy()
-fly_viz3["dep_delay_min"] = fly_viz2.dep_delay - min_delay
-fly_viz3 = fly_viz3[fly_viz3.dep_delay_min!=0] # to avoid loc(0) in the following example
+fly_viz4 = fly_viz2.copy()
+fly_viz4["dep_delay_min"] = fly_viz2.dep_delay - min_delay
+fly_viz4 = fly_viz4[fly_viz4.dep_delay_min!=0] # to avoid loc(0) in the following example
 
 # create a new column that contains the logarithm of the previously subtracted dep_delay
-fly_viz3['log_dep_delay'] = np.log(fly_viz3['dep_delay_min'])
+fly_viz4['log_dep_delay'] = np.log(fly_viz4['dep_delay_min'])
 
 # Visualize Data - Box Plot with log scale
-alt.Chart(fly_viz3, width=200).mark_boxplot().encode( 
+alt.Chart(fly_viz4, width=200).mark_boxplot().encode( 
   alt.Y('log_dep_delay:Q').scale(zero=False)
 ).properties( 
     width=350,
@@ -501,3 +508,51 @@ alt.Chart(fly_viz3, width=200).mark_boxplot().encode(
     )
 ```
 
+### Visualizing Multiple Distributions at Once
+
+```{code-cell} 
+---
+mystnb:
+  figure:
+    caption: |
+      Arrival delays at NYC airport: Overlapping Histogram.
+    name: hist_overlap
+---
+# Visualize overlapping colors of arrival delays 
+
+
+```
+
+
+```{code-cell} 
+---
+mystnb:
+  figure:
+    caption: |
+      Arrival delays at NYC airport: Side-by-Side Histogram.
+    name: hist_side-by-side
+---
+# Visualize arrival delays side by side
+
+
+```
+
+```{code-cell} 
+---
+mystnb:
+  figure:
+    caption: |
+      Arrival delays at NYC airport: Stacked Histogram.
+    name: hist_stacked
+---
+# Visualize arrival delays stacked 
+alt.Chart(fly_viz3).mark_bar().encode(
+  x=alt.X('dep_delay', title='Departure delay (in min)', bin=alt.Bin(step=2)),
+  y=alt.Y('count()', title='Number of Flights'),
+  color='carrier:N'
+).properties( 
+    width=350,
+    height=250
+    )
+
+```

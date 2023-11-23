@@ -19,12 +19,12 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=365ca57ee442770a23c6" rel="stylesheet" />
-<link href="_static/styles/bootstrap.css?digest=365ca57ee442770a23c6" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=365ca57ee442770a23c6" rel="stylesheet" />
+  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
 
   
-  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=365ca57ee442770a23c6" rel="stylesheet" />
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
   <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
@@ -38,9 +38,8 @@
     <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=365ca57ee442770a23c6" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=365ca57ee442770a23c6" />
-  <script src="_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=365ca57ee442770a23c6"></script>
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
 
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
@@ -65,7 +64,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = '02-process';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="3. Human Perception and Visual Encoding" href="04-perception.html" />
+    <link rel="next" title="3. Human Perception and Visual Encoding" href="03-perception.html" />
     <link rel="prev" title="1. The Value of Data Visualization" href="01-intro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -77,15 +76,6 @@ const thebe_selector_output = ".output, .cell_output"
   
   
   <a class="skip-link" href="#main-content">Skip to main content</a>
-  
-  <div id="pst-scroll-pixel-helper"></div>
-
-  
-  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
-    <i class="fa-solid fa-arrow-up"></i>
-    Back to top
-  </button>
-
   
   <input type="checkbox"
           class="sidebar-toggle"
@@ -147,7 +137,6 @@ const thebe_selector_output = ".output, .cell_output"
   
   
   
-  
     <p class="title logo__title">Data Visualization - From a Human-Centered Perspective (Lecture Notes)</p>
   
 </a></div>
@@ -164,7 +153,7 @@ const thebe_selector_output = ".output, .cell_output"
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="01-intro.html">1. The Value of Data Visualization</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">2. The Process of Visualizing Data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="04-perception.html">3. Human Perception and Visual Encoding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03-perception.html">3. Human Perception and Visual Encoding</a></li>
 <li class="toctree-l1"><a class="reference internal" href="04-vt_distributions.html">4. Visualization Techniques: Distributions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="05-tabulardata.html">5. Visualizing Tabular Data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="appendix.html">6. Appendix</a></li>
@@ -324,10 +313,10 @@ const thebe_selector_output = ".output, .cell_output"
 
 <script>
 document.write(`
-  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
   </button>
 `);
 </script>
@@ -335,7 +324,7 @@ document.write(`
 <script>
 document.write(`
   <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+    <i class="fa-solid fa-magnifying-glass"></i>
   </button>
 `);
 </script>
@@ -405,7 +394,7 @@ document.write(`
 <p>In <a class="reference internal" href="01-intro.html#chapter01"><span class="std std-numref">Chapter 1</span></a>, we have learned that visualization has helped people from the beginning (% KG specify) to make sense of their environment. Before we dive deeper into data visualization, we need to build the necessary methodological foundation. For this, we already introduced human-centered design (see <a class="reference internal" href="01-intro.html#hcdv"><span class="std std-numref">Section 1.2</span></a>); however, in this chapter, I want to focus specifically on the process of visualizing data. In general, we can differentiate two motivations for visualization design: a problem-driven and a technique-driven design <span id="id1">[<a class="reference internal" href="bibliography.html#id30" title="Tamara Munzner. Visualization analysis and design. CRC press, 2014.">Munzner, 2014</a>]</span>. In the former case, a visualization designer tackles a real-world problem of specific users and attempts to design a solution that helps them work more effectively. Such a problem can often be solved based on existing visual encodings and interaction idioms (see <a class="reference internal" href="01-intro.html#hcdv"><span class="std std-numref">Section 1.2</span></a>). Thus, the main challenge is to understand the problem and translate it into an effective visualization design. In the latter case <!-- KG technique-driven design -->, a visualization designer has an idea for a new visual encoding, an interaction idiom, or a new algorithm. Sometimes, such ideas emerge during problem-driven visualization design.</p>
 <section id="id2">
 <h2><span class="section-number">2.1. </span>The Process of Visualizing Data<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
-<p>When preparing a data visualization project, we are often wondering where to begin with in the first place <!-- KG what to begin with or where to begin? -->. From data collection, cleaning, exploration, analysis, and visualization, there is a lot that needs to be done in order to derive insight from data. As you can imagine, there are many proposed data visualization pipelines (e.g., <span id="id3">[<a class="reference internal" href="bibliography.html#id31" title="Ben Fry. Visualizing data: Exploring and explaining data with the processing environment. O'Reilly Media, Inc., 2008.">Fry, 2008</a>]</span>, <span id="id4">[<a class="reference internal" href="bibliography.html#id13" title="Andy Kirk. Data visualisation: A handbook for data driven design. Sage, 2016.">Kirk, 2016</a>]</span>). However, I would like to focus on one proposition - the four levels nested model of visualization design <span id="id5">[<a class="reference internal" href="bibliography.html#id30" title="Tamara Munzner. Visualization analysis and design. CRC press, 2014.">Munzner, 2014</a>]</span>. Munzner proposed to divide the problem of visualization design into four cascading levels: (1) the situation level, which contains details of a specific application domain; (2) the data/task abstraction level, where the domain-specific problems and data are separated from context; (3) the visual encoding/interaction idiom level, where the data are visualized and interaction is added; (4) the algorithmic level, where the algorithm is realized to computationally instantiate these idioms. These levels are nested, which means that if you make a bad choice in the abstraction phase, then even perfect choices at the idiom and algorithm levels will not result in a visualization solution that solves the intended problem. For example, you misunderstand the context and, thus, the needs of your stakeholders, and because of that, you are focusing on the wrong data that are being visualized with an insufficient idiom. Finally, it could happen that your code is too slow. Visualization design is usually a highly iterative refinement process. In other words, visualization design follows the principle of design as redesign. In the following, I detail each of these levels.</p>
+<p>When preparing a data visualization project, we are often wondering where to begin with in the first place <!-- KG what to begin with or where to begin? -->. From data collection, cleaning, exploration, analysis, and visualization, there is a lot that needs to be done in order to derive insight from data. As you can imagine, there are many proposed data visualization pipelines (e.g., <span id="id3">[<a class="reference internal" href="bibliography.html#id31" title="Ben Fry. Visualizing data: Exploring and explaining data with the processing environment. O'Reilly Media, Inc., 2008.">Fry, 2008</a>]</span>, <span id="id4">[<a class="reference internal" href="bibliography.html#id13" title="Andy Kirk. Data visualisation: A handbook for data driven design. Sage, 2016.">Kirk, 2016</a>]</span>). However, I would like to focus on one proposition - the four levels nested model of visualization design <span id="id5">[<a class="reference internal" href="bibliography.html#id30" title="Tamara Munzner. Visualization analysis and design. CRC press, 2014.">Munzner, 2014</a>]</span>. <!-- LW In den Folien werden noch mehr Modelle erwähnt (Fry, B. (2008) Visualizing Data. O’Reilly; Kirk, A. (2016). Data visualisation: A handbook for data driven design. Sage.; Beyer, J. et al. (2021) The design sprint process.; The Data Vis workflow of Moritz Stefaner.) --> Munzner proposed to divide the problem of visualization design into four cascading levels: (1) the situation level, which contains details of a specific application domain; (2) the data/task abstraction level, where the domain-specific problems and data are separated from context; (3) the visual encoding/interaction idiom level, where the data are visualized and interaction is added; (4) the algorithmic level, where the algorithm is realized to computationally instantiate these idioms. These levels are nested, which means that if you make a bad choice in the abstraction phase, then even perfect choices at the idiom and algorithm levels will not result in a visualization solution that solves the intended problem. For example, you misunderstand the context and, thus, the needs of your stakeholders, and because of that, you are focusing on the wrong data that are being visualized with an insufficient idiom. Finally, it could happen that your code is too slow. Visualization design is usually a highly iterative refinement process. In other words, visualization design follows the principle of design as redesign. In the following, I detail each of these levels.</p>
 <p>The question arises, how can you tackle these challenges properly? Munzner proposes here an immediate validation and downstream validation. In other words, she recommends properly reflecting on each stage of your design decisions before your enter the next level. Taking this very validation-centered perspective on vis design <!-- KG When you take this very validation-centered perspective on vis design --> and if you consider that the design of visualizations follows the principle of design as redesign, then you see the parallels to the human-centered design process. You can easily map Munzner’s levels <!-- KG nested levels --> on the HCD process, which makes it easier to position all the methods you already know in Munzner’s model.</p>
 <section id="the-situation-level">
 <h3><span class="section-number">2.1.1. </span>The situation level<a class="headerlink" href="#the-situation-level" title="Permalink to this heading">#</a></h3>
@@ -561,6 +550,10 @@ All actions refer to a target, i.e. an aspect of the data that is of interest to
 <div><p>All visualizations share a common “DNA” – a set of mappings between data properties and visual attributes
 such as position, size, shape, and color – and customized species of visualizations might always be constructed &gt; by varying these encodings.</p>
 </div></blockquote>
+<!-- LW: In the presentation 2 are also the following topics:
+Encoding Value - an Overview F41 (Univariate data, Bivariate data, Trivariate data, Multivariate data)
+What would you like to show F42 (which chart is good for comparison, relationship, distribution, composition) 
+Techniques discussed in this course F44 + Python Libraries F45 (would be better in chapter 4 Visualization Techniques I think -->
 </section>
 </section>
 <section id="understanding-your-data">
@@ -710,10 +703,11 @@ Padilla, L. M. (2018, October). A case for cognitive models in visualization res
 
               
               
-              
-              
-                <footer class="prev-next-footer">
-                  <!-- Previous / next buttons -->
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
        href="01-intro.html"
@@ -725,7 +719,7 @@ Padilla, L. M. (2018, October). A case for cognitive models in visualization res
       </div>
     </a>
     <a class="right-next"
-       href="04-perception.html"
+       href="03-perception.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
@@ -733,7 +727,10 @@ Padilla, L. M. (2018, October). A case for cognitive models in visualization res
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
+</div></div>
+  
 </div>
+
                 </footer>
               
             </div>
@@ -822,8 +819,8 @@ By Prof. Dr. Claudia Müller-Birn
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="_static/scripts/bootstrap.js?digest=365ca57ee442770a23c6"></script>
-<script src="_static/scripts/pydata-sphinx-theme.js?digest=365ca57ee442770a23c6"></script>
+  <script src="_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
 
   <footer class="bd-footer">
   </footer>
