@@ -522,8 +522,7 @@ mystnb:
 
 
 ```
-
-
+<!-- ToDo: Fix, that everything is in one chart-->
 ```{code-cell} 
 ---
 mystnb:
@@ -532,11 +531,36 @@ mystnb:
       Arrival delays at NYC airport: Side-by-Side Histogram.
     name: hist_side-by-side
 ---
-# Visualize arrival delays side by side
+# rename used carriers
+# Legend of carrier names: https://nycflights13.tidyverse.org/reference/airlines.html
 
+fly_viz3 = fly_viz3.replace('AA', 'American Airlines')
+fly_viz3 = fly_viz3.replace('B6', 'JetBlue Airways')
+fly_viz3 = fly_viz3.replace('EV', 'ExpressJet Airlines Inc.')
+fly_viz3 = fly_viz3.replace('DL', 'Delta Air Lines Inc.')
+fly_viz3 = fly_viz3.replace('UA', 'United Air Lines Inc.')
+
+# define colors
+colors = ['#D55E00', '#009E73', '#F0E442', '#56B4E9', '#E69F00']
+
+# Visualize arrival delays side by side
+alt.Chart(fly_viz3).mark_bar().encode(
+  column=alt.Column('carrier'),
+
+  x=alt.X('dep_delay', title='Departure delay (in min)', bin=alt.Bin(step=10)),
+  y=alt.Y('count()', title='Number of Flights'),
+  color=alt.Color('carrier:N', title='Airlines')
+).transform_filter(
+    alt.FieldOneOfPredicate(field='carrier', oneOf=['United Air Lines Inc.', 'JetBlue Airways', 'ExpressJet Airlines Inc.', 'Delta Air Lines Inc.', 'American Airlines'])
+).configure_range(# set the colors to previously defined colors
+    category=alt.RangeScheme(colors)
+).properties( 
+    width=350,
+    height=250
+    )
 
 ```
-
+<!-- ToDo: rename legend labels, is there another way?-->
 ```{code-cell} 
 ---
 mystnb:
@@ -545,14 +569,45 @@ mystnb:
       Arrival delays at NYC airport: Stacked Histogram.
     name: hist_stacked
 ---
-# Visualize arrival delays stacked 
 alt.Chart(fly_viz3).mark_bar().encode(
-  x=alt.X('dep_delay', title='Departure delay (in min)', bin=alt.Bin(step=2)),
+  x=alt.X('dep_delay', title='Departure delay (in min)', bin=alt.Bin(step=10)),
   y=alt.Y('count()', title='Number of Flights'),
-  color='carrier:N'
+  color=alt.Color('carrier:N', title='Airlines')
+).transform_filter(
+    # you can filter your dataset, here an example with filtering out carriers
+    # Legend of carrier names: https://nycflights13.tidyverse.org/reference/airlines.html
+    alt.FieldOneOfPredicate(field='carrier', oneOf=['United Air Lines Inc.', 'JetBlue Airways', 'ExpressJet Airlines Inc.', 'Delta Air Lines Inc.', 'American Airlines'])
+).configure_range(
+    category=alt.RangeScheme(colors)
 ).properties( 
     width=350,
     height=250
     )
+```
 
+```{code-cell} 
+---
+mystnb:
+  figure:
+    caption: |
+      Arrival delays at NYC airport: Density Plot with Multiple Airlines.
+    name: density_multiple
+---
+alt.Chart(fly_viz3).transform_density(
+  'dep_delay',
+  as_=['Departure delay (in min)', 'density'],
+  groupby=['carrier']
+).mark_area(  
+).encode(
+  x="Departure delay (in min):Q",
+  y='density:Q',
+  color=alt.Color('carrier:N', title='Airlines')
+).transform_filter(
+    alt.FieldOneOfPredicate(field='carrier', oneOf=['United Air Lines Inc.', 'JetBlue Airways', 'ExpressJet Airlines Inc.', 'Delta Air Lines Inc.', 'American Airlines'])
+).configure_range(
+    category=alt.RangeScheme(colors)
+).properties( 
+    width=350,
+    height=250
+    )
 ```
