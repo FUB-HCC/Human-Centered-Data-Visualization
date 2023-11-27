@@ -283,8 +283,7 @@ alt.Chart(fly_viz2).mark_circle(size=40).encode(
 What do you think of this chart? What can you say about flight delay times now? In the following, we focus on the delays only, since many flights seems to be one time.
 
 ```{code-cell} 
-# Remove all flights with no delay and limit to max dep_delay 800
-flights_sample = flights_sample[flights_sample.dep_delay>0]
+# Remove all flights up to max dep_delay 800
 flights_sample = flights_sample[flights_sample.dep_delay<=800]
 
 # dimensions of the data set
@@ -499,7 +498,7 @@ mystnb:
     name: boxplot_groups
 ---
 # Visualize Data - Box Plot in groups
-alt.Chart(fly_viz3, width=200).mark_boxplot().encode(
+alt.Chart(fly_viz4, width=200).mark_boxplot().encode(
   alt.X('origin:N'),
   alt.Y('log_dep_delay:Q').scale(zero=False)
 ).properties( 
@@ -604,6 +603,35 @@ alt.Chart(fly_viz3).transform_density(
   color=alt.Color('carrier:N', title='Airlines')
 ).transform_filter(
     alt.FieldOneOfPredicate(field='carrier', oneOf=['United Air Lines Inc.', 'JetBlue Airways', 'ExpressJet Airlines Inc.', 'Delta Air Lines Inc.', 'American Airlines'])
+).configure_range(
+    category=alt.RangeScheme(colors)
+).properties( 
+    width=350,
+    height=250
+    )
+```
+
+```{code-cell} 
+---
+mystnb:
+  figure:
+    caption: |
+      Arrival delays at NYC airport: Shaded Density Plot.
+    name: density_shaded
+---
+fly_viz3 = fly_viz3.replace('AS', 'Alaska Airlines Inc.')
+
+alt.Chart(fly_viz3).transform_density(
+  'dep_delay',
+  as_=['Departure delay (in min)', 'density'],
+  groupby=['carrier']
+).mark_area(opacity=0.4  
+).encode(
+  x='Departure delay (in min):Q',
+  y='density:Q',
+  color=alt.Color('carrier:N', title='Airlines')
+).transform_filter(
+    alt.FieldOneOfPredicate(field='carrier', oneOf=['United Air Lines Inc.', 'Alaska Airlines Inc.'])
 ).configure_range(
     category=alt.RangeScheme(colors)
 ).properties( 
