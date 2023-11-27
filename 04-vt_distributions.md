@@ -517,8 +517,72 @@ mystnb:
       Arrival delays at NYC airport: Overlapping Histogram.
     name: hist_overlap
 ---
-# Visualize overlapping colors of arrival delays 
+# rename used carriers
+# Legend of carrier names: https://nycflights13.tidyverse.org/reference/airlines.html
 
+fly_viz3 = fly_viz3.replace('AA', 'American Airlines')
+fly_viz3 = fly_viz3.replace('B6', 'JetBlue Airways')
+fly_viz3 = fly_viz3.replace('EV', 'ExpressJet Airlines Inc.')
+fly_viz3 = fly_viz3.replace('DL', 'Delta Air Lines Inc.')
+fly_viz3 = fly_viz3.replace('UA', 'United Air Lines Inc.')
+
+# Visualize overlapping colors of arrival delays 
+a1 = airlineViz = alt.Chart(fly_viz3).mark_bar(opacity=0.3).encode(
+    x=alt.X('arr_delay', title='Arrival delay (in min)', bin=alt.Bin(step=5)),
+    y=alt.Y('count()', title='Number of Flights'),
+    color=alt.Color('carrier:N', title='Airlines')
+).transform_filter(
+    alt.FieldEqualPredicate(field='carrier', equal='United Air Lines Inc.')
+).properties( 
+    width=350,
+    height=250
+    )
+
+a2 = airlineViz = alt.Chart(fly_viz3).mark_bar(opacity=0.3).encode(
+    x=alt.X('arr_delay', title='Arrival delay (in min)', bin=alt.Bin(step=5)),
+    y=alt.Y('count()', title='Number of Flights'),
+    color=alt.Color('carrier:N', title='Airlines')
+).transform_filter(
+    alt.FieldEqualPredicate(field='carrier', equal='JetBlue Airways')
+).properties( 
+    width=350,
+    height=250
+    )
+
+a3 = airlineViz = alt.Chart(fly_viz3).mark_bar(opacity=0.3).encode(
+    x=alt.X('arr_delay', title='Arrival delay (in min)', bin=alt.Bin(step=5)),
+    y=alt.Y('count()', title='Number of Flights'),
+    color=alt.Color('carrier:N', title='Airlines')
+).transform_filter(
+    alt.FieldEqualPredicate(field='carrier', equal='ExpressJet Airlines Inc.')
+).properties( 
+    width=350,
+    height=250
+    )
+
+a4 = airlineViz = alt.Chart(fly_viz3).mark_bar(opacity=0.3).encode(
+    x=alt.X('arr_delay', title='Arrival delay (in min)', bin=alt.Bin(step=5)),
+    y=alt.Y('count()', title='Number of Flights'),
+    color=alt.Color('carrier:N', title='Airlines')
+).transform_filter(
+    alt.FieldEqualPredicate(field='carrier', equal='Delta Air Lines Inc.')
+).properties( 
+    width=350,
+    height=250
+    )
+
+a5 = airlineViz = alt.Chart(fly_viz3).mark_bar(opacity=0.3).encode(
+    x=alt.X('arr_delay', title='Arrival delay (in min)', bin=alt.Bin(step=5)),
+    y=alt.Y('count()', title='Number of Flights'),
+    color=alt.Color('carrier:N', title='Airlines')
+).transform_filter(
+    alt.FieldEqualPredicate(field='carrier', equal='American Airlines')
+).properties( 
+    width=350,
+    height=250
+    )
+
+a1 + a2 + a3 + a4 + a5
 
 ```
 <!-- ToDo: Fix, that everything is in one chart-->
@@ -530,15 +594,6 @@ mystnb:
       Arrival delays at NYC airport: Side-by-Side Histogram.
     name: hist_side-by-side
 ---
-# rename used carriers
-# Legend of carrier names: https://nycflights13.tidyverse.org/reference/airlines.html
-
-fly_viz3 = fly_viz3.replace('AA', 'American Airlines')
-fly_viz3 = fly_viz3.replace('B6', 'JetBlue Airways')
-fly_viz3 = fly_viz3.replace('EV', 'ExpressJet Airlines Inc.')
-fly_viz3 = fly_viz3.replace('DL', 'Delta Air Lines Inc.')
-fly_viz3 = fly_viz3.replace('UA', 'United Air Lines Inc.')
-
 # define colors
 colors = ['#D55E00', '#009E73', '#F0E442', '#56B4E9', '#E69F00']
 
@@ -546,7 +601,7 @@ colors = ['#D55E00', '#009E73', '#F0E442', '#56B4E9', '#E69F00']
 alt.Chart(fly_viz3).mark_bar().encode(
   column=alt.Column('carrier'),
 
-  x=alt.X('dep_delay', title='Departure delay (in min)', bin=alt.Bin(step=10)),
+  x=alt.X('arr_delay', title='Arrival delay (in min)', bin=alt.Bin(step=10)),
   y=alt.Y('count()', title='Number of Flights'),
   color=alt.Color('carrier:N', title='Airlines')
 ).transform_filter(
@@ -569,7 +624,7 @@ mystnb:
     name: hist_stacked
 ---
 alt.Chart(fly_viz3).mark_bar().encode(
-  x=alt.X('dep_delay', title='Departure delay (in min)', bin=alt.Bin(step=10)),
+  x=alt.X('arr_delay', title='Arrival delay (in min)', bin=alt.Bin(step=5)),
   y=alt.Y('count()', title='Number of Flights'),
   color=alt.Color('carrier:N', title='Airlines')
 ).transform_filter(
@@ -594,13 +649,13 @@ mystnb:
 ---
 # transform_density gives a density plot
 alt.Chart(fly_viz3).transform_density(
-  'dep_delay',
-  as_=['Departure delay (in min)', 'Density'],
+  'arr_delay',
+  as_=['Arrival delay (in min)', 'Density'],
   groupby=['carrier']
 # you can choose how you want to visualize the density plot (here line)
 ).mark_line(  
 ).encode(
-  x="Departure delay (in min):Q",
+  x="Arrival delay (in min):Q",
   y='Density:Q',
   color=alt.Color('carrier:N', title='Airlines')
 ).transform_filter(
@@ -624,12 +679,12 @@ mystnb:
 fly_viz3 = fly_viz3.replace('AS', 'Alaska Airlines Inc.')
 
 alt.Chart(fly_viz3).transform_density(
-  'dep_delay',
-  as_=['Departure delay (in min)', 'density'],
+  'arr_delay',
+  as_=['Arrival delay (in min)', 'density'],
   groupby=['carrier']
 ).mark_area(opacity=0.4  
 ).encode(
-  x='Departure delay (in min):Q',
+  x='Arrival delay (in min):Q',
   y='density:Q',
   color=alt.Color('carrier:N', title='Airlines')
 ).transform_filter(
@@ -640,4 +695,40 @@ alt.Chart(fly_viz3).transform_density(
     width=350,
     height=250
     )
+```
+
+```{code-cell} 
+---
+mystnb:
+  figure:
+    caption: |
+      Arrival delay of Alaska Airlines Inc. at NYC airport: Rug Plot.
+    name: rug_plot
+---
+d_alaska = alt.Chart(fly_viz3).transform_density(
+  'arr_delay',
+  as_=['Arrival delay (in min)', 'density'],
+  groupby=['carrier']
+).mark_line(  
+).encode(
+  x='Arrival delay (in min):Q',
+  y='density:Q',
+  color=alt.Color('carrier:N', title='Airlines')
+).transform_filter(
+    alt.FieldEqualPredicate(field='carrier', equal='Alaska Airlines Inc.')
+).properties( 
+    width=350,
+    height=250
+    )
+
+s_alaska = alt.Chart(fly_viz3).mark_tick().encode(
+  x='arr_delay'
+).transform_filter(
+    alt.FieldEqualPredicate(field='carrier', equal='Alaska Airlines Inc.')
+).properties( 
+    width=350,
+    height=250
+  )
+
+d_alaska + s_alaska
 ```
