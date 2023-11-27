@@ -681,9 +681,13 @@ mystnb:
       Arrival delays at NYC airport: Shaded Density Plot.
     name: density_shaded
 ---
+
+fly_viz3 = fly_viz3[fly_viz3.arr_delay<150]
+fly_viz3 = fly_viz3[fly_viz3.arr_delay>-70]
+
 fly_viz3 = fly_viz3.replace('AS', 'Alaska Airlines Inc.')
 
-alt.Chart(fly_viz3).transform_density(
+al1 = alt.Chart(fly_viz3).transform_density(
   'arr_delay',
   as_=['Arrival delay (in min)', 'density'],
   groupby=['carrier']
@@ -693,9 +697,24 @@ alt.Chart(fly_viz3).transform_density(
   y='density:Q',
   color=alt.Color('carrier:N', title='Airlines')
 ).transform_filter(
-    alt.FieldOneOfPredicate(field='carrier', oneOf=['United Air Lines Inc.', 'Alaska Airlines Inc.'])
-).configure_range(
-    category=alt.RangeScheme(colors)
+    alt.FieldEqualPredicate(field='carrier', equal='United Air Lines Inc.')
+).properties( 
+    width=350,
+    height=250
+    )
+
+
+al2 = alt.Chart(fly_viz3).transform_density(
+  'arr_delay',
+  as_=['Arrival delay (in min)', 'density'],
+  groupby=['carrier']
+).mark_area(opacity=0.4  
+).encode(
+  x='Arrival delay (in min):Q',
+  y='density:Q',
+  color=alt.Color('carrier:N', title='Airlines')
+).transform_filter(
+    alt.FieldEqualPredicate(field='carrier', equal='Alaska Airlines Inc.')
 ).properties( 
     width=350,
     height=250
