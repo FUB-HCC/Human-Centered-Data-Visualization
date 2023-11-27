@@ -592,14 +592,16 @@ mystnb:
       Arrival delays at NYC airport: Density Plot with Multiple Airlines.
     name: density_multiple
 ---
+# transform_density gives a density plot
 alt.Chart(fly_viz3).transform_density(
   'dep_delay',
-  as_=['Departure delay (in min)', 'density'],
+  as_=['Departure delay (in min)', 'Density'],
   groupby=['carrier']
-).mark_area(  
+# you can choose how you want to visualize the density plot (here line)
+).mark_line(  
 ).encode(
   x="Departure delay (in min):Q",
-  y='density:Q',
+  y='Density:Q',
   color=alt.Color('carrier:N', title='Airlines')
 ).transform_filter(
     alt.FieldOneOfPredicate(field='carrier', oneOf=['United Air Lines Inc.', 'JetBlue Airways', 'ExpressJet Airlines Inc.', 'Delta Air Lines Inc.', 'American Airlines'])
