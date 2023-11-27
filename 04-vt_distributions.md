@@ -506,6 +506,7 @@ alt.Chart(fly_viz4, width=200).mark_boxplot().encode(
     height=250
     )
 ```
+<!-- ToDo: rename legend labels, is there another way?-->
 
 ### Visualizing Multiple Distributions at Once
 
@@ -517,6 +518,10 @@ mystnb:
       Arrival delays at NYC airport: Overlapping Histogram.
     name: hist_overlap
 ---
+# limit arrival delay time to -60 - 120
+fly_viz3 = fly_viz3[fly_viz3.arr_delay<120]
+fly_viz3 = fly_viz3[fly_viz3.arr_delay>-60]
+
 # rename used carriers
 # Legend of carrier names: https://nycflights13.tidyverse.org/reference/airlines.html
 
@@ -601,7 +606,7 @@ colors = ['#D55E00', '#009E73', '#F0E442', '#56B4E9', '#E69F00']
 alt.Chart(fly_viz3).mark_bar().encode(
   column=alt.Column('carrier'),
 
-  x=alt.X('arr_delay', title='Arrival delay (in min)', bin=alt.Bin(step=10)),
+  x=alt.X('arr_delay', title='Arrival delay (in min)', bin=alt.Bin(step=5)),
   y=alt.Y('count()', title='Number of Flights'),
   color=alt.Color('carrier:N', title='Airlines')
 ).transform_filter(
@@ -614,7 +619,7 @@ alt.Chart(fly_viz3).mark_bar().encode(
     )
 
 ```
-<!-- ToDo: rename legend labels, is there another way?-->
+
 ```{code-cell} 
 ---
 mystnb:
@@ -624,7 +629,7 @@ mystnb:
     name: hist_stacked
 ---
 alt.Chart(fly_viz3).mark_bar().encode(
-  x=alt.X('arr_delay', title='Arrival delay (in min)', bin=alt.Bin(step=5)),
+  x=alt.X('arr_delay', title='Arrival delay (in min)', bin=alt.Bin(step=15)),
   y=alt.Y('count()', title='Number of Flights'),
   color=alt.Color('carrier:N', title='Airlines')
 ).transform_filter(
