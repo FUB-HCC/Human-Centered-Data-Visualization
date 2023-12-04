@@ -599,24 +599,35 @@ mystnb:
       Arrival delays at NYC airport: Side-by-Side Histogram.
     name: hist_side-by-side
 ---
-# define colors
-colors = ['#D55E00', '#009E73', '#F0E442', '#56B4E9', '#E69F00']
+import matplotlib.pyplot as plt
 
-# Visualize arrival delays side by side
-alt.Chart(fly_viz3).mark_bar().encode(
-  column=alt.Column('carrier'),
+fig, ax = plt.subplots()
 
-  x=alt.X('arr_delay', title='Arrival delay (in min)', bin=alt.Bin(step=5)),
-  y=alt.Y('count()', title='Number of Flights'),
-  color=alt.Color('carrier:N', title='Airlines')
-).transform_filter(
-    alt.FieldOneOfPredicate(field='carrier', oneOf=['United Air Lines Inc.', 'JetBlue Airways', 'ExpressJet Airlines Inc.', 'Delta Air Lines Inc.', 'American Airlines'])
-).configure_range(# set the colors to previously defined colors
-    category=alt.RangeScheme(colors)
-).properties( 
-    width=350,
-    height=250
-    )
+# Make a separate list for each airline
+x1 = list(fly_viz3[fly_viz3['carrier'] == 'United Air Lines Inc.']['arr_delay'])
+x2 = list(fly_viz3[fly_viz3['carrier'] == 'JetBlue Airways']['arr_delay'])
+x3 = list(fly_viz3[fly_viz3['carrier'] == 'ExpressJet Airlines Inc.']['arr_delay'])
+x4 = list(fly_viz3[fly_viz3['carrier'] == 'Delta Air Lines Inc.']['arr_delay'])
+x5 = list(fly_viz3[fly_viz3['carrier'] == 'American Airlines Inc.']['arr_delay'])
+
+# Assign colors for each airline and the names
+colors = ['#E69F00', '#56B4E9', '#F0E442', '#009E73', '#D55E00']
+names = ['United Air Lines Inc.', 'JetBlue Airways', 'ExpressJet Airlines Inc.',
+         'Delta Air Lines Inc.', 'American Airlines Inc.']
+         
+# Make the histogram using a list of lists
+# Normalize the flights and assign colors and names
+plt.hist([x1, x2, x3, x4, x5], bins = int(180/15),
+         color = colors, label=names, density=True)
+
+# Plot formatting
+plt.legend(bbox_to_anchor=(1.02, 1), loc='upper left', borderaxespad=0, frameon=False)
+plt.xlabel('Delay (min)')
+# Density = True:
+plt.ylabel('Normalized Flights')
+plt.title('Side-by-Side Histogram with Multiple Airlines')
+ax.spines['top'].set_visible(False)
+ax.spines['right'].set_visible(False)
 
 ```
 
@@ -628,20 +639,20 @@ mystnb:
       Arrival delays at NYC airport: Stacked Histogram.
     name: hist_stacked
 ---
-alt.Chart(fly_viz3).mark_bar().encode(
-  x=alt.X('arr_delay', title='Arrival delay (in min)', bin=alt.Bin(step=15)),
-  y=alt.Y('count()', title='Number of Flights'),
-  color=alt.Color('carrier:N', title='Airlines')
-).transform_filter(
-    # you can filter your dataset, here an example with filtering out carriers
-    # Legend of carrier names: https://nycflights13.tidyverse.org/reference/airlines.html
-    alt.FieldOneOfPredicate(field='carrier', oneOf=['United Air Lines Inc.', 'JetBlue Airways', 'ExpressJet Airlines Inc.', 'Delta Air Lines Inc.', 'American Airlines'])
-).configure_range(
-    category=alt.RangeScheme(colors)
-).properties( 
-    width=350,
-    height=250
-    )
+# Stacked Histogram with Matplotlib
+plt.hist([x1, x2, x3, x4, x5], bins = int(180/15), stacked=True,
+         density=True, color = colors, label=names)
+
+# Plot formatting
+plt.legend(bbox_to_anchor=(1.02, 1), loc='upper left', borderaxespad=0, frameon=False)
+plt.xlabel('Delay (min)')
+# Density = True:
+plt.ylabel('Normalized Flights')
+plt.title('Side-by-Side Histogram with Multiple Airlines')
+ax.spines['top'].set_visible(False)
+ax.spines['right'].set_visible(False)
+
+plt.show()
 ```
 
 ```{code-cell} 
@@ -719,6 +730,8 @@ al2 = alt.Chart(fly_viz3).transform_density(
     width=350,
     height=250
     )
+
+a1 + a2
 ```
 
 ```{code-cell} 
