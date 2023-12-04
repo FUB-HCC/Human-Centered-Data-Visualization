@@ -229,8 +229,8 @@ alt.Chart(fly_viz1).mark_circle(size=40).encode(
     y=alt.Y('dep_delay', title='Departure delay (in min)'),
     tooltip=['flight', 'year', 'dep_time', 'dep_delay'] # when you hover over the points, these data will be shown
 ).properties( # you can set the size of the chart with properties
-    width=350,
-    height=250
+    width=550,
+    height=400
     ).interactive()
 
 ```
@@ -274,8 +274,8 @@ alt.Chart(fly_viz2).mark_circle(size=40).encode(
     y=alt.Y('dep_delay', title='Departure delay (in min)'),
     tooltip=['flight', 'year', 'dep_time', 'dep_delay']
 ).properties( 
-    width=350,
-    height=250
+    width=550,
+    height=400
     ).interactive()
 
 ```
@@ -732,7 +732,7 @@ al2 = alt.Chart(fly_viz3).transform_density(
     height=400
     )
 
-a1 + a2
+al1 + al2
 ```
 
 ```{code-cell} 
