@@ -324,8 +324,8 @@ alt.Chart(fly_viz3).mark_bar().encode(
   x=alt.X('dep_delay', title='Departure delay (in min)'),
   y=alt.Y('count()', title='Number of Flights')
 ).properties( 
-    width=350,
-    height=250
+    width=550,
+    height=400
     )
 
 ```
@@ -405,8 +405,8 @@ alt.Chart(fly_viz3).transform_density(
   x="Departure delay (in min):Q",
   y='density:Q'
 ).properties( 
-    width=350,
-    height=250
+    width=550,
+    height=400
     )
 ```
 
@@ -452,8 +452,8 @@ alt.Chart(fly_viz2, width=200).mark_boxplot().encode( # control the size of the 
   alt.X('x'),
   alt.Y('dep_delay:Q').scale(zero=False)
 ).properties( 
-    width=350,
-    height=250
+    width=550,
+    height=400
     )
 ```
 ```{code-cell} 
@@ -480,8 +480,8 @@ fly_viz4['log_dep_delay'] = np.log(fly_viz4['dep_delay_min'])
 alt.Chart(fly_viz4, width=200).mark_boxplot().encode( 
   alt.Y('log_dep_delay:Q').scale(zero=False)
 ).properties( 
-    width=350,
-    height=250
+    width=550,
+    height=400
     )
 ```
 ### Compare Distributions
@@ -502,8 +502,8 @@ alt.Chart(fly_viz4, width=200).mark_boxplot().encode(
   alt.X('origin:N'),
   alt.Y('log_dep_delay:Q').scale(zero=False)
 ).properties( 
-    width=350,
-    height=250
+    width=550,
+    height=400
     )
 ```
 <!-- ToDo: rename legend labels, is there another way?-->
@@ -539,8 +539,8 @@ a1 = airlineViz = alt.Chart(fly_viz3).mark_bar(opacity=0.3).encode(
 ).transform_filter(
     alt.FieldEqualPredicate(field='carrier', equal='United Air Lines Inc.')
 ).properties( 
-    width=350,
-    height=250
+    width=550,
+    height=400
     )
 
 a2 = airlineViz = alt.Chart(fly_viz3).mark_bar(opacity=0.3).encode(
@@ -550,8 +550,8 @@ a2 = airlineViz = alt.Chart(fly_viz3).mark_bar(opacity=0.3).encode(
 ).transform_filter(
     alt.FieldEqualPredicate(field='carrier', equal='JetBlue Airways')
 ).properties( 
-    width=350,
-    height=250
+    width=550,
+    height=400
     )
 
 a3 = airlineViz = alt.Chart(fly_viz3).mark_bar(opacity=0.3).encode(
@@ -561,8 +561,8 @@ a3 = airlineViz = alt.Chart(fly_viz3).mark_bar(opacity=0.3).encode(
 ).transform_filter(
     alt.FieldEqualPredicate(field='carrier', equal='ExpressJet Airlines Inc.')
 ).properties( 
-    width=350,
-    height=250
+    width=550,
+    height=400
     )
 
 a4 = airlineViz = alt.Chart(fly_viz3).mark_bar(opacity=0.3).encode(
@@ -572,8 +572,8 @@ a4 = airlineViz = alt.Chart(fly_viz3).mark_bar(opacity=0.3).encode(
 ).transform_filter(
     alt.FieldEqualPredicate(field='carrier', equal='Delta Air Lines Inc.')
 ).properties( 
-    width=350,
-    height=250
+    width=550,
+    height=400
     )
 
 a5 = airlineViz = alt.Chart(fly_viz3).mark_bar(opacity=0.3).encode(
@@ -583,8 +583,8 @@ a5 = airlineViz = alt.Chart(fly_viz3).mark_bar(opacity=0.3).encode(
 ).transform_filter(
     alt.FieldEqualPredicate(field='carrier', equal='American Airlines')
 ).properties( 
-    width=350,
-    height=250
+    width=550,
+    height=400
     )
 
 a1 + a2 + a3 + a4 + a5
@@ -629,6 +629,7 @@ plt.title('Side-by-Side Histogram with Multiple Airlines')
 ax.spines['top'].set_visible(False)
 ax.spines['right'].set_visible(False)
 
+plt.show()
 ```
 
 ```{code-cell} 
@@ -679,8 +680,8 @@ alt.Chart(fly_viz3).transform_density(
 ).configure_range(
     category=alt.RangeScheme(colors)
 ).properties( 
-    width=350,
-    height=250
+    width=550,
+    height=400
     )
 ```
 
@@ -710,8 +711,8 @@ al1 = alt.Chart(fly_viz3).transform_density(
 ).transform_filter(
     alt.FieldEqualPredicate(field='carrier', equal='United Air Lines Inc.')
 ).properties( 
-    width=350,
-    height=250
+    width=550,
+    height=400
     )
 
 
@@ -727,8 +728,8 @@ al2 = alt.Chart(fly_viz3).transform_density(
 ).transform_filter(
     alt.FieldEqualPredicate(field='carrier', equal='Alaska Airlines Inc.')
 ).properties( 
-    width=350,
-    height=250
+    width=550,
+    height=400
     )
 
 a1 + a2
@@ -754,8 +755,8 @@ d_alaska = alt.Chart(fly_viz3).transform_density(
 ).transform_filter(
     alt.FieldEqualPredicate(field='carrier', equal='Alaska Airlines Inc.')
 ).properties( 
-    width=350,
-    height=250
+    width=550,
+    height=400
     )
 
 s_alaska = alt.Chart(fly_viz3).mark_tick().encode(
@@ -763,8 +764,8 @@ s_alaska = alt.Chart(fly_viz3).mark_tick().encode(
 ).transform_filter(
     alt.FieldEqualPredicate(field='carrier', equal='Alaska Airlines Inc.')
 ).properties( 
-    width=350,
-    height=250
+    width=550,
+    height=400
   )
 
 d_alaska + s_alaska
