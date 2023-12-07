@@ -743,30 +743,23 @@ mystnb:
       Arrival delay of Alaska Airlines Inc. at NYC airport: Rug Plot.
     name: rug_plot
 ---
-d_alaska = alt.Chart(fly_viz3).transform_density(
-  'arr_delay',
-  as_=['Arrival delay (in min)', 'density'],
-  groupby=['carrier']
-).mark_line(  
-).encode(
-  x='Arrival delay (in min):Q',
-  y='density:Q',
-  color=alt.Color('carrier:N', title='Airlines')
-).transform_filter(
-    alt.FieldEqualPredicate(field='carrier', equal='Alaska Airlines Inc.')
-).properties( 
-    width=550,
-    height=400
-    )
+# Subset to Alaska Airlines
+subset = fly_viz3[fly_viz3['carrier'] == 'Alaska Airlines Inc.']
 
-s_alaska = alt.Chart(fly_viz3).mark_tick().encode(
-  x='arr_delay'
-).transform_filter(
-    alt.FieldEqualPredicate(field='carrier', equal='Alaska Airlines Inc.')
-).properties( 
-    width=550,
-    height=400
-  )
+# Density Plot with Rug Plot
+sns.displot(subset['arr_delay'], 
+    rug = True,
+    kind="kde",
+    height=4.5,
+    aspect=1.5,
+    color = 'darkblue', 
+    rug_kws={'color': 'black'})
 
-d_alaska + s_alaska
+# Plot formatting
+plt.title('Density Plot with Rug Plot for Alaska Airlines')
+plt.xlabel('Delay (min)')
+plt.ylabel('Density')
+
+
+plt.show()
 ```
