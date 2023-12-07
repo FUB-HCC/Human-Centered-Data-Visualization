@@ -601,7 +601,8 @@ mystnb:
 ---
 import matplotlib.pyplot as plt
 
-fig, ax = plt.subplots()
+fig, ax = plt.subplots(figsize=(12,8))
+plt.style.use('seaborn-v0_8-whitegrid')
 
 # Make a separate list for each airline
 x1 = list(fly_viz3[fly_viz3['carrier'] == 'United Air Lines Inc.']['arr_delay'])
@@ -743,6 +744,7 @@ mystnb:
       Arrival delay of Alaska Airlines Inc. at NYC airport: Rug Plot.
     name: rug_plot
 ---
+import seaborn as sns
 # Subset to Alaska Airlines
 subset = fly_viz3[fly_viz3['carrier'] == 'Alaska Airlines Inc.']
 
@@ -761,5 +763,74 @@ plt.xlabel('Delay (min)')
 plt.ylabel('Density')
 
 
+plt.show()
+```
+
+```{code-cell} 
+---
+mystnb:
+  figure:
+    caption: |
+      Arrival Delays of Alaska Airlines: Empirical Cumulative Distribution Functions.
+    name: ecdf_plot
+---
+# Density Plot with Rug Plot
+sns.displot(subset['arr_delay'],
+            kind="ecdf")
+
+# Plot formatting
+plt.title('Empirical Cumulative Distribution Functions Plot for Alaska Airlines')
+plt.xlabel('Delay (min)')
+
+plt.show()
+```
+
+```{code-cell} 
+---
+mystnb:
+  figure:
+    caption: |
+      Arrival Delays: Highly Skewed Distributions
+    name: skewed_plots
+---
+flights_s = flights.head(int(len(flights)*0.1)).copy() 
+flights_s.dropna(axis = 0, how = 'any', inplace = True) 
+
+# limit arrival delay time to -60 - 120
+flights_s = flights_s[flights_s.arr_delay>0]
+
+fig, ax = plt.subplots(1,2, figsize=(7,4), dpi=120)
+
+# Density Plot with Rug Plot
+sns.kdeplot(flights_s['arr_delay'], ax=ax[0])
+
+sns.ecdfplot(data=flights_s, x=flights_s['arr_delay'], ax=ax[1])
+
+# Plot formatting
+plt.xlabel('Arrival Delay (min)')
+
+plt.show()
+```
+
+
+```{code-cell} 
+---
+mystnb:
+  figure:
+    caption: |
+      Arrival Delays of Alaska Airlines: Empirical Cumulative Distribution Functions Plot next to Density Plot.
+    name: ecdf_density_plots
+---
+# Define 2 columns
+fig, ax = plt.subplots(1,2, figsize=(7,4), dpi=120)
+
+# Density Plot
+sns.kdeplot(fly_viz3['arr_delay'],
+            ax=ax[0])
+
+# ECDF Plot
+sns.ecdfplot(data=fly_viz3, x=fly_viz3['arr_delay'], ax=ax[1])
+
+plt.xlabel('Arrival Delay (min)')
 plt.show()
 ```
