@@ -834,3 +834,19 @@ sns.ecdfplot(data=fly_viz3, x=fly_viz3['arr_delay'], ax=ax[1])
 plt.xlabel('Arrival Delay (min)')
 plt.show()
 ```
+
+```{code-cell} 
+---
+mystnb:
+  figure:
+    caption: |
+      Arrival Delays: Violin Plot.
+    name: violin_plot
+---
+fly_viz4 = fly_viz4[fly_viz4.arr_delay<150]
+sns.violinplot(data=fly_viz4, x='carrier', y='arr_delay')
+plt.show()
+```
+
+
+
