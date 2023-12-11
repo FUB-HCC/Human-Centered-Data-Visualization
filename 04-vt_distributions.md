@@ -757,7 +757,7 @@ sns.kdeplot(data=fly_filtered, x='arr_delay', hue='carrier', multiple='layer', f
 
 plt.xlabel('Airlines')
 plt.ylabel('Arrival Delay (min)')
-plt.show
+plt.show()
 ```
 
 ```{code-cell} 
