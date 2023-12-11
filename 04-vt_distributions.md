@@ -525,14 +525,14 @@ fly_viz3 = fly_viz3[fly_viz3.arr_delay>-60]
 # rename used carriers
 # Legend of carrier names: https://nycflights13.tidyverse.org/reference/airlines.html
 
-fly_viz3 = fly_viz3.replace('AA', 'American Airlines')
+fly_viz3 = fly_viz3.replace('UA', 'United Air Lines Inc.')
 fly_viz3 = fly_viz3.replace('B6', 'JetBlue Airways')
 fly_viz3 = fly_viz3.replace('EV', 'ExpressJet Airlines Inc.')
 fly_viz3 = fly_viz3.replace('DL', 'Delta Air Lines Inc.')
-fly_viz3 = fly_viz3.replace('UA', 'United Air Lines Inc.')
+fly_viz3 = fly_viz3.replace('AA', 'American Airlines Inc.')
 
 # Visualize overlapping colors of arrival delays 
-a1 = airlineViz = alt.Chart(fly_viz3).mark_bar(opacity=0.3).encode(
+a1 = alt.Chart(fly_viz3).mark_bar(opacity=0.3).encode(
     x=alt.X('arr_delay', title='Arrival delay (in min)', bin=alt.Bin(step=5)),
     y=alt.Y('count()', title='Number of Flights'),
     color=alt.Color('carrier:N', title='Airlines')
@@ -543,7 +543,7 @@ a1 = airlineViz = alt.Chart(fly_viz3).mark_bar(opacity=0.3).encode(
     height=400
     )
 
-a2 = airlineViz = alt.Chart(fly_viz3).mark_bar(opacity=0.3).encode(
+a2 = alt.Chart(fly_viz3).mark_bar(opacity=0.3).encode(
     x=alt.X('arr_delay', title='Arrival delay (in min)', bin=alt.Bin(step=5)),
     y=alt.Y('count()', title='Number of Flights'),
     color=alt.Color('carrier:N', title='Airlines')
@@ -554,7 +554,7 @@ a2 = airlineViz = alt.Chart(fly_viz3).mark_bar(opacity=0.3).encode(
     height=400
     )
 
-a3 = airlineViz = alt.Chart(fly_viz3).mark_bar(opacity=0.3).encode(
+a3  = alt.Chart(fly_viz3).mark_bar(opacity=0.3).encode(
     x=alt.X('arr_delay', title='Arrival delay (in min)', bin=alt.Bin(step=5)),
     y=alt.Y('count()', title='Number of Flights'),
     color=alt.Color('carrier:N', title='Airlines')
@@ -565,7 +565,7 @@ a3 = airlineViz = alt.Chart(fly_viz3).mark_bar(opacity=0.3).encode(
     height=400
     )
 
-a4 = airlineViz = alt.Chart(fly_viz3).mark_bar(opacity=0.3).encode(
+a4 = alt.Chart(fly_viz3).mark_bar(opacity=0.3).encode(
     x=alt.X('arr_delay', title='Arrival delay (in min)', bin=alt.Bin(step=5)),
     y=alt.Y('count()', title='Number of Flights'),
     color=alt.Color('carrier:N', title='Airlines')
@@ -576,20 +576,32 @@ a4 = airlineViz = alt.Chart(fly_viz3).mark_bar(opacity=0.3).encode(
     height=400
     )
 
-a5 = airlineViz = alt.Chart(fly_viz3).mark_bar(opacity=0.3).encode(
+a5 = alt.Chart(fly_viz3).mark_bar(opacity=0.3).encode(
     x=alt.X('arr_delay', title='Arrival delay (in min)', bin=alt.Bin(step=5)),
     y=alt.Y('count()', title='Number of Flights'),
     color=alt.Color('carrier:N', title='Airlines')
 ).transform_filter(
-    alt.FieldEqualPredicate(field='carrier', equal='American Airlines')
+    alt.FieldEqualPredicate(field='carrier', equal='American Airlines Inc.')
 ).properties( 
     width=550,
     height=400
     )
 
+
 a1 + a2 + a3 + a4 + a5
 
 ```
+
+```{code-cell} 
+# Reusable Matplotlib/Seaborn plot formatting
+def plot_formatting():
+    # Plot formatting
+    plt.legend(bbox_to_anchor=(1.02, 1), loc='upper left', borderaxespad=0, frameon=False)
+    ax.spines['top'].set_visible(False)
+    ax.spines['right'].set_visible(False)
+    plt.style.use('seaborn-v0_8-whitegrid')
+    plt.show()
+``````
 <!-- ToDo: Fix, that everything is in one chart-->
 ```{code-cell} 
 ---
@@ -601,8 +613,7 @@ mystnb:
 ---
 import matplotlib.pyplot as plt
 
-fig, ax = plt.subplots(figsize=(12,8))
-plt.style.use('seaborn-v0_8-whitegrid')
+fig, ax = plt.subplots()
 
 # Make a separate list for each airline
 x1 = list(fly_viz3[fly_viz3['carrier'] == 'United Air Lines Inc.']['arr_delay'])
@@ -610,6 +621,7 @@ x2 = list(fly_viz3[fly_viz3['carrier'] == 'JetBlue Airways']['arr_delay'])
 x3 = list(fly_viz3[fly_viz3['carrier'] == 'ExpressJet Airlines Inc.']['arr_delay'])
 x4 = list(fly_viz3[fly_viz3['carrier'] == 'Delta Air Lines Inc.']['arr_delay'])
 x5 = list(fly_viz3[fly_viz3['carrier'] == 'American Airlines Inc.']['arr_delay'])
+x6 = list(fly_viz3[fly_viz3['carrier'] == 'American Airlines Inc.']['arr_delay'])
 
 # Assign colors for each airline and the names
 colors = ['#E69F00', '#56B4E9', '#F0E442', '#009E73', '#D55E00']
@@ -622,15 +634,11 @@ plt.hist([x1, x2, x3, x4, x5], bins = int(180/15),
          color = colors, label=names, density=True)
 
 # Plot formatting
-plt.legend(bbox_to_anchor=(1.02, 1), loc='upper left', borderaxespad=0, frameon=False)
 plt.xlabel('Delay (min)')
-# Density = True:
+    # Density = True:
 plt.ylabel('Normalized Flights')
 plt.title('Side-by-Side Histogram with Multiple Airlines')
-ax.spines['top'].set_visible(False)
-ax.spines['right'].set_visible(False)
-
-plt.show()
+plot_formatting()
 ```
 
 ```{code-cell} 
@@ -641,20 +649,15 @@ mystnb:
       Arrival delays at NYC airport: Stacked Histogram.
     name: hist_stacked
 ---
-# Stacked Histogram with Matplotlib
-plt.hist([x1, x2, x3, x4, x5], bins = int(180/15), stacked=True,
-         density=True, color = colors, label=names)
+# Make the histogram using a list of lists
+# Normalize the flights and assign colors and names
+plt.hist([x1, x2, x3, x4, x5], bins = int(180/15),
+         color = colors, label=names, density=True, stacked=True)
 
 # Plot formatting
-plt.legend(bbox_to_anchor=(1.02, 1), loc='upper left', borderaxespad=0, frameon=False)
 plt.xlabel('Delay (min)')
-# Density = True:
 plt.ylabel('Normalized Flights')
-plt.title('Side-by-Side Histogram with Multiple Airlines')
-ax.spines['top'].set_visible(False)
-ax.spines['right'].set_visible(False)
-
-plt.show()
+plot_formatting()
 ```
 
 ```{code-cell} 
@@ -741,6 +744,27 @@ al1 + al2
 mystnb:
   figure:
     caption: |
+      Arrival delays at NYC airport: Shaded Density Plot 2.
+    name: density_shaded2
+---
+
+import seaborn as sns
+fig, ax = plt.subplots(figsize=(7,5), dpi=120)
+options = ['United Air Lines Inc.', 'Alaska Airlines Inc.']
+fly_filtered = fly_viz3[fly_viz3['carrier'].isin(options)]
+
+sns.kdeplot(data=fly_filtered, x='arr_delay', hue='carrier', multiple='layer', fill=True)
+
+plt.xlabel('Airlines')
+plt.ylabel('Arrival Delay (min)')
+plt.show
+```
+
+```{code-cell} 
+---
+mystnb:
+  figure:
+    caption: |
       Arrival delay of Alaska Airlines Inc. at NYC airport: Rug Plot.
     name: rug_plot
 ---
@@ -758,12 +782,9 @@ sns.displot(subset['arr_delay'],
     rug_kws={'color': 'black'})
 
 # Plot formatting
-plt.title('Density Plot with Rug Plot for Alaska Airlines')
 plt.xlabel('Delay (min)')
 plt.ylabel('Density')
-
-
-plt.show()
+plot_formatting()
 ```
 
 ```{code-cell} 
@@ -779,10 +800,9 @@ sns.displot(subset['arr_delay'],
             kind="ecdf")
 
 # Plot formatting
-plt.title('Empirical Cumulative Distribution Functions Plot for Alaska Airlines')
 plt.xlabel('Delay (min)')
 
-plt.show()
+plot_formatting()
 ```
 
 ```{code-cell} 
