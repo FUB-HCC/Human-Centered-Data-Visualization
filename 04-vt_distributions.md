@@ -864,7 +864,7 @@ mystnb:
     name: violin_plot
 ---
 fig, ax = plt.subplots(figsize=(7,5), dpi=120)
-options = ['United Air Lines Inc.', 'JetBlue Airways', 'ExpressJet Airlines Inc.', 'Delta Air Lines Inc.', 'American Airlines']
+options = ['United Air Lines Inc.', 'JetBlue Airways', 'ExpressJet Airlines Inc.', 'Delta Air Lines Inc.', 'American Airlines Inc.']
 fly_filtered = fly_viz3[fly_viz3['carrier'].isin(options)]
 sns.boxplot(data=fly_filtered, x='carrier', y='arr_delay', whis=(0, 100))
 
@@ -882,7 +882,7 @@ mystnb:
     name: violin_plot
 ---
 fig, ax = plt.subplots(figsize=(7,5), dpi=120)
-options = ['United Air Lines Inc.', 'JetBlue Airways', 'ExpressJet Airlines Inc.', 'Delta Air Lines Inc.', 'American Airlines']
+options = ['United Air Lines Inc.', 'JetBlue Airways', 'ExpressJet Airlines Inc.', 'Delta Air Lines Inc.', 'American Airlines Inc.']
 fly_filtered = fly_viz3[fly_viz3['carrier'].isin(options)]
 sns.violinplot(data=fly_filtered, x='carrier', y='arr_delay')
 
