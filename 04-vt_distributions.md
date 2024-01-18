@@ -567,29 +567,26 @@ mystnb:
 ---
 import matplotlib.pyplot as plt
 
-fig, ax = plt.subplots()
-
-# Make a separate list for each airline
-x1 = list(fly_viz3[fly_viz3['carrier'] == 'United Air Lines Inc.']['arr_delay'])
-x2 = list(fly_viz3[fly_viz3['carrier'] == 'JetBlue Airways']['arr_delay'])
-x3 = list(fly_viz3[fly_viz3['carrier'] == 'ExpressJet Airlines Inc.']['arr_delay'])
-x4 = list(fly_viz3[fly_viz3['carrier'] == 'Delta Air Lines Inc.']['arr_delay'])
-x5 = list(fly_viz3[fly_viz3['carrier'] == 'American Airlines Inc.']['arr_delay'])
-x6 = list(fly_viz3[fly_viz3['carrier'] == 'American Airlines Inc.']['arr_delay'])
+#fig, ax = plt.subplots()
+fig, ax = plt.subplots(figsize=(7,5), dpi=150)
 
 # Assign colors for each airline and the names
 colors = ['#E69F00', '#56B4E9', '#F0E442', '#009E73', '#D55E00']
 names = ['United Air Lines Inc.', 'JetBlue Airways', 'ExpressJet Airlines Inc.',
          'Delta Air Lines Inc.', 'American Airlines Inc.']
-         
+
+# Make a separate list for each airline
+d = {}
+for i in range(5):
+    key = str("x"+str(i))
+    d[key] = list(fly_viz3[fly_viz3['carrier'] == names[i]]['arr_delay'])
+     
 # Make the histogram using a list of lists
 # Normalize the flights and assign colors and names
-plt.hist([x1, x2, x3, x4, x5], bins = int(180/15),
+plt.hist([d['x0'], d['x1'], d['x2'], d['x3'], d['x4']], bins = int(180/15),
          color = colors, label=names, density=True)
 
-# Plot formatting
 plt.xlabel('Delay (min)')
-    # Density = True:
 plt.ylabel('Normalized Flights')
 plt.title('Side-by-Side Histogram with Multiple Airlines')
 plot_formatting()
