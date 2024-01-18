@@ -188,8 +188,6 @@ flights_sample.shape
 ```
 
 ```{code-cell} 
-from nycflights13 import flights
-
 # remove all observations that are not complete (missing a value)
 # axis=0: Drop incomplete rows, how='any' if any value is missing drop, inplace=True: modify DataFrame instead of creating new one
 flights_sample.dropna(axis = 0, how = 'any', inplace = True) 
@@ -524,71 +522,27 @@ fly_viz3 = fly_viz3[fly_viz3.arr_delay>-60]
 
 # rename used carriers
 # Legend of carrier names: https://nycflights13.tidyverse.org/reference/airlines.html
+airlines_s = ['UA', 'B6', 'EV', 'DL', 'AA', 'AS']
+airline_list = ['United Air Lines Inc.', 'JetBlue Airways', 'ExpressJet Airlines Inc.', 'Delta Air Lines Inc.', 'American Airlines Inc.', 'Alaska Airlines Inc.']
+for i in range(6):
+    fly_viz3 = fly_viz3.replace(airlines_s[i], airline_list[i])
 
-fly_viz3 = fly_viz3.replace('UA', 'United Air Lines Inc.')
-fly_viz3 = fly_viz3.replace('B6', 'JetBlue Airways')
-fly_viz3 = fly_viz3.replace('EV', 'ExpressJet Airlines Inc.')
-fly_viz3 = fly_viz3.replace('DL', 'Delta Air Lines Inc.')
-fly_viz3 = fly_viz3.replace('AA', 'American Airlines Inc.')
+# Set the charts and add them in one chart
+d = {}
+for i in range(5):
+    key = str("a"+str(i))
+    d[key] = alt.Chart(fly_viz3).mark_bar(opacity=0.3).encode(
+        x=alt.X('arr_delay', title='Arrival delay (in min)', bin=alt.Bin(step=5)),
+        y=alt.Y('count()', title='Number of Flights'),
+        color=alt.Color('carrier:N', title='Airlines')
+    ).transform_filter(
+        alt.FieldEqualPredicate(field='carrier', equal=airline_list[i])
+    ).properties( 
+        width=550,
+        height=400
+        )
 
-# Visualize overlapping colors of arrival delays 
-a1 = alt.Chart(fly_viz3).mark_bar(opacity=0.3).encode(
-    x=alt.X('arr_delay', title='Arrival delay (in min)', bin=alt.Bin(step=5)),
-    y=alt.Y('count()', title='Number of Flights'),
-    color=alt.Color('carrier:N', title='Airlines')
-).transform_filter(
-    alt.FieldEqualPredicate(field='carrier', equal='United Air Lines Inc.')
-).properties( 
-    width=550,
-    height=400
-    )
-
-a2 = alt.Chart(fly_viz3).mark_bar(opacity=0.3).encode(
-    x=alt.X('arr_delay', title='Arrival delay (in min)', bin=alt.Bin(step=5)),
-    y=alt.Y('count()', title='Number of Flights'),
-    color=alt.Color('carrier:N', title='Airlines')
-).transform_filter(
-    alt.FieldEqualPredicate(field='carrier', equal='JetBlue Airways')
-).properties( 
-    width=550,
-    height=400
-    )
-
-a3  = alt.Chart(fly_viz3).mark_bar(opacity=0.3).encode(
-    x=alt.X('arr_delay', title='Arrival delay (in min)', bin=alt.Bin(step=5)),
-    y=alt.Y('count()', title='Number of Flights'),
-    color=alt.Color('carrier:N', title='Airlines')
-).transform_filter(
-    alt.FieldEqualPredicate(field='carrier', equal='ExpressJet Airlines Inc.')
-).properties( 
-    width=550,
-    height=400
-    )
-
-a4 = alt.Chart(fly_viz3).mark_bar(opacity=0.3).encode(
-    x=alt.X('arr_delay', title='Arrival delay (in min)', bin=alt.Bin(step=5)),
-    y=alt.Y('count()', title='Number of Flights'),
-    color=alt.Color('carrier:N', title='Airlines')
-).transform_filter(
-    alt.FieldEqualPredicate(field='carrier', equal='Delta Air Lines Inc.')
-).properties( 
-    width=550,
-    height=400
-    )
-
-a5 = alt.Chart(fly_viz3).mark_bar(opacity=0.3).encode(
-    x=alt.X('arr_delay', title='Arrival delay (in min)', bin=alt.Bin(step=5)),
-    y=alt.Y('count()', title='Number of Flights'),
-    color=alt.Color('carrier:N', title='Airlines')
-).transform_filter(
-    alt.FieldEqualPredicate(field='carrier', equal='American Airlines Inc.')
-).properties( 
-    width=550,
-    height=400
-    )
-
-
-a1 + a2 + a3 + a4 + a5
+d['a0'] + d['a1'] + d['a2'] + d['a3'] + d['a4']
 
 ```
 
