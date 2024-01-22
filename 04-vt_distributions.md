@@ -695,27 +695,6 @@ al1 + al2
 mystnb:
   figure:
     caption: |
-      Arrival delays at NYC airport: Shaded Density Plot 2.
-    name: density_shaded2
----
-
-import seaborn as sns
-fig, ax = plt.subplots(figsize=(7,5), dpi=120)
-options = ['United Air Lines Inc.', 'Alaska Airlines Inc.']
-fly_filtered = fly_viz3[fly_viz3['carrier'].isin(options)]
-
-sns.kdeplot(data=fly_filtered, x='arr_delay', hue='carrier', multiple='layer', fill=True)
-
-plt.xlabel('Airlines')
-plt.ylabel('Arrival Delay (min)')
-plt.show()
-```
-
-```{code-cell} 
----
-mystnb:
-  figure:
-    caption: |
       Arrival delay of Alaska Airlines Inc. at NYC airport: Rug Plot.
     name: rug_plot
 ---
