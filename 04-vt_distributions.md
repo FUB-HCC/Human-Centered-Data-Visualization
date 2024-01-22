@@ -791,20 +791,21 @@ plt.show()
 mystnb:
   figure:
     caption: |
-      Arrival Delays of Alaska Airlines: Empirical Cumulative Distribution Functions Plot next to Density Plot.
+      Distribution of the logarithm of Arrival Times.
     name: ecdf_density_plots
 ---
 # Define 2 columns
 fig, ax = plt.subplots(1,2, figsize=(7,4), dpi=120)
 
-# Density Plot
-sns.kdeplot(fly_viz3['arr_delay'],
-            ax=ax[0])
+# Density Plot with Rug Plot of the logarithm of arrival times
+sns.kdeplot(flights_s['arr_delay'], ax=ax[0], log_scale=10)
 
-# ECDF Plot
-sns.ecdfplot(data=fly_viz3, x=fly_viz3['arr_delay'], ax=ax[1])
+sns.ecdfplot(data=flights_s, x=flights_s['arr_delay'], ax=ax[1], log_scale=10)
 
+# Plot formatting
 plt.xlabel('Arrival Delay (min)')
+plt.xlim((0, 1500))
+
 plt.show()
 ```
 
