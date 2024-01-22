@@ -602,7 +602,7 @@ mystnb:
 ---
 # Make the histogram using a list of lists
 # Normalize the flights and assign colors and names
-plt.hist([x1, x2, x3, x4, x5], bins = int(180/15),
+plt.hist([d['x0'], d['x1'], d['x2'], d['x3'], d['x4']], bins = int(180/15),
          color = colors, label=names, density=True, stacked=True)
 
 # Plot formatting
@@ -766,7 +766,7 @@ mystnb:
       Arrival Delays: Highly Skewed Distributions
     name: skewed_plots
 ---
-flights_s = flights.head(int(len(flights)*0.1)).copy() 
+flights_s = fly_viz1.copy()
 flights_s.dropna(axis = 0, how = 'any', inplace = True) 
 
 # limit arrival delay time to -60 - 120
@@ -775,11 +775,12 @@ flights_s = flights_s[flights_s.arr_delay>0]
 fig, ax = plt.subplots(1,2, figsize=(7,4), dpi=120)
 
 # Density Plot with Rug Plot
-sns.kdeplot(flights_s['arr_delay'], ax=ax[0])
-
 sns.ecdfplot(data=flights_s, x=flights_s['arr_delay'], ax=ax[1])
 
+sns.kdeplot(flights_s['arr_delay'], ax=ax[0])
+
 # Plot formatting
+plt.xlim((0, 1500))
 plt.xlabel('Arrival Delay (min)')
 
 plt.show()
@@ -798,9 +799,9 @@ mystnb:
 fig, ax = plt.subplots(1,2, figsize=(7,4), dpi=120)
 
 # Density Plot with Rug Plot of the logarithm of arrival times
-sns.kdeplot(flights_s['arr_delay'], ax=ax[0], log_scale=10)
-
 sns.ecdfplot(data=flights_s, x=flights_s['arr_delay'], ax=ax[1], log_scale=10)
+
+sns.kdeplot(flights_s['arr_delay'], ax=ax[0], log_scale=10)
 
 # Plot formatting
 plt.xlabel('Arrival Delay (min)')
