@@ -754,12 +754,12 @@ flights_s = flights_s[flights_s.arr_delay>0]
 fig, ax = plt.subplots(1,2, figsize=(7,4), dpi=120)
 
 # Density Plot with Rug Plot
-sns.ecdfplot(data=flights_s, x=flights_s['arr_delay'], ax=ax[1])
+sns.ecdfplot(data=flights_s, x=flights_s['arr_delay'], ax=ax[0])
 
-sns.kdeplot(flights_s['arr_delay'], ax=ax[0])
+sns.kdeplot(flights_s['arr_delay'], ax=ax[1])
 
 # Plot formatting
-plt.xlim((0, 1500))
+plt.xlim((1, 1500))
 plt.xlabel('Arrival Delay (min)')
 
 plt.show()
@@ -778,13 +778,13 @@ mystnb:
 fig, ax = plt.subplots(1,2, figsize=(7,4), dpi=120)
 
 # Density Plot with Rug Plot of the logarithm of arrival times
-sns.ecdfplot(data=flights_s, x=flights_s['arr_delay'], ax=ax[1], log_scale=10)
+sns.ecdfplot(data=flights_s, x=flights_s['arr_delay'], ax=ax[0], log_scale=10)
 
-sns.kdeplot(flights_s['arr_delay'], ax=ax[0], log_scale=10)
+sns.kdeplot(flights_s['arr_delay'], ax=ax[1], log_scale=10)
 
 # Plot formatting
 plt.xlabel('Arrival Delay (min)')
-plt.xlim((0, 1500))
+plt.xlim((1, 1500))
 
 plt.show()
 ```
