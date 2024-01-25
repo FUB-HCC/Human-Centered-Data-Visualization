@@ -813,7 +813,6 @@ sns.boxplot(data=fly_filtered, x='carrier', y='arr_delay', whis=(0, 100))
 plt.xlabel('Airlines')
 plt.ylabel('Arrival Delay (min)')
 plt.ylim((-75,150))
-plt.figure(figsize=(7,5))
 plt.show()
 ```
 ```{code-cell} 
