@@ -802,14 +802,18 @@ mystnb:
       Arrival Delays: Box Plot.
     name: box_plot3
 ---
-fig, ax = plt.subplots(figsize=(7,5), dpi=120)
-options = ['United Air Lines Inc.', 'JetBlue Airways', 'ExpressJet Airlines Inc.', 'Delta Air Lines Inc.', 'American Airlines Inc.']
-fly_filtered = fly_viz3[fly_viz3['carrier'].isin(options)]
+# limit arrival delay time to -60 - 120
+fly_viz1 = fly_viz1[fly_viz1.arr_delay<120]
+fly_viz1 = fly_viz1[fly_viz1.arr_delay>-60]
+
+options = ['UA', 'B6', 'EV', 'DL', 'AA']
+fly_filtered = fly_viz1[fly_viz1['carrier'].isin(options)]
 sns.boxplot(data=fly_filtered, x='carrier', y='arr_delay', whis=(0, 100))
 
 plt.xlabel('Airlines')
 plt.ylabel('Arrival Delay (min)')
-plt.ylim(-75,150)
+plt.ylim((-75,150))
+plt.figure(figsize=(7,5))
 plt.show()
 ```
 ```{code-cell} 
@@ -820,14 +824,12 @@ mystnb:
       Arrival Delays: Violin Plot.
     name: violin_plot
 ---
-fig, ax = plt.subplots(figsize=(7,5), dpi=120)
-options = ['United Air Lines Inc.', 'JetBlue Airways', 'ExpressJet Airlines Inc.', 'Delta Air Lines Inc.', 'American Airlines Inc.']
-fly_filtered = fly_viz3[fly_viz3['carrier'].isin(options)]
+fly_filtered = fly_viz1[fly_viz1['carrier'].isin(options)]
 sns.violinplot(data=fly_filtered, x='carrier', y='arr_delay')
 
 plt.xlabel('Airlines')
 plt.ylabel('Arrival Delay (min)')
-plt.ylim(-75,150)
+plt.ylim((-75,150))
 plt.show()
 ```
 
