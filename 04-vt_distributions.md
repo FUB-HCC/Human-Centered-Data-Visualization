@@ -733,14 +733,13 @@ mystnb:
       Arrival Delays of Alaska Airlines: Empirical Cumulative Distribution Functions.
     name: ecdf_plot
 ---
-# Density Plot with Rug Plot
-sns.displot(subset['arr_delay'],
-            kind="ecdf")
+# ECDF Plot
+sns.ecdfplot(data=subset, x=subset['arr_delay'])
 
 # Plot formatting
 plt.xlabel('Delay (min)')
-
-plot_formatting()
+plt.xlim(-60,80)
+plt.show()
 ```
 
 ```{code-cell} 
@@ -767,7 +766,7 @@ sns.kdeplot(flights_s['arr_delay'], ax=ax[1])
 # Plot formatting
 plt.xlim((1, 1500))
 plt.xlabel('Arrival Delay (min)')
-plt.ylim((0,0.025))
+plt.ylim(0,0.025)
 plt.show()
 ```
 
@@ -790,8 +789,8 @@ sns.kdeplot(flights_s['arr_delay'], ax=ax[1], log_scale=10)
 
 # Plot formatting
 plt.xlabel('Arrival Delay (min)')
-plt.xlim((1, 1500))
-plt.ylim((0,0.7))
+plt.xlim(1, 1500)
+plt.ylim(0,0.7)
 plt.show()
 ```
 
@@ -810,7 +809,7 @@ sns.boxplot(data=fly_filtered, x='carrier', y='arr_delay', whis=(0, 100))
 
 plt.xlabel('Airlines')
 plt.ylabel('Arrival Delay (min)')
-plt.ylim((-75,150))
+plt.ylim(-75,150)
 plt.show()
 ```
 ```{code-cell} 
@@ -828,7 +827,7 @@ sns.violinplot(data=fly_filtered, x='carrier', y='arr_delay')
 
 plt.xlabel('Airlines')
 plt.ylabel('Arrival Delay (min)')
-plt.ylim((-75,150))
+plt.ylim(-75,150)
 plt.show()
 ```
 
