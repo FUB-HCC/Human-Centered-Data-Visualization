@@ -589,6 +589,8 @@ plt.hist([d['x0'], d['x1'], d['x2'], d['x3'], d['x4']], bins = int(180/15),
 plt.xlabel('Delay (min)')
 plt.ylabel('Normalized Flights')
 plt.title('Side-by-Side Histogram with Multiple Airlines')
+plt.xlim(-75,125)
+plt.ylim(0,0.025)
 plot_formatting()
 ```
 
@@ -608,6 +610,8 @@ plt.hist([d['x0'], d['x1'], d['x2'], d['x3'], d['x4']], bins = int(180/15),
 # Plot formatting
 plt.xlabel('Delay (min)')
 plt.ylabel('Normalized Flights')
+plt.xlim(-75,125)
+plt.ylim(0,0.025)
 plot_formatting()
 ```
 
@@ -716,6 +720,8 @@ sns.displot(subset['arr_delay'],
 ax.spines['top'].set_visible(False)
 ax.spines['right'].set_visible(False)
 plt.style.use('seaborn-v0_8-whitegrid')
+plt.xlim((-100,100))
+plt.ylim((0,0.016))
 plt.show()
 ```
 
@@ -751,7 +757,7 @@ flights_s.dropna(axis = 0, how = 'any', inplace = True)
 # limit arrival delay time to -60 - 120
 flights_s = flights_s[flights_s.arr_delay>0]
 
-fig, ax = plt.subplots(1,2, figsize=(7,4), dpi=120)
+fig, ax = plt.subplots(1,2, figsize=(8,5), dpi=120)
 
 # Density Plot with Rug Plot
 sns.ecdfplot(data=flights_s, x=flights_s['arr_delay'], ax=ax[0])
@@ -761,7 +767,7 @@ sns.kdeplot(flights_s['arr_delay'], ax=ax[1])
 # Plot formatting
 plt.xlim((1, 1500))
 plt.xlabel('Arrival Delay (min)')
-
+plt.ylim((0,0.025))
 plt.show()
 ```
 
@@ -775,7 +781,7 @@ mystnb:
     name: ecdf_density_plots
 ---
 # Define 2 columns
-fig, ax = plt.subplots(1,2, figsize=(7,4), dpi=120)
+fig, ax = plt.subplots(1,2, figsize=(8,5), dpi=120)
 
 # Density Plot with Rug Plot of the logarithm of arrival times
 sns.ecdfplot(data=flights_s, x=flights_s['arr_delay'], ax=ax[0], log_scale=10)
@@ -785,7 +791,7 @@ sns.kdeplot(flights_s['arr_delay'], ax=ax[1], log_scale=10)
 # Plot formatting
 plt.xlabel('Arrival Delay (min)')
 plt.xlim((1, 1500))
-
+plt.ylim((0,0.7))
 plt.show()
 ```
 
@@ -804,6 +810,7 @@ sns.boxplot(data=fly_filtered, x='carrier', y='arr_delay', whis=(0, 100))
 
 plt.xlabel('Airlines')
 plt.ylabel('Arrival Delay (min)')
+plt.ylim((-75,150))
 plt.show()
 ```
 ```{code-cell} 
@@ -821,6 +828,7 @@ sns.violinplot(data=fly_filtered, x='carrier', y='arr_delay')
 
 plt.xlabel('Airlines')
 plt.ylabel('Arrival Delay (min)')
+plt.ylim((-75,150))
 plt.show()
 ```
 
