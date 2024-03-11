@@ -180,7 +180,7 @@ import pandas as pd
 # Select a sample from the whole data set
 flights = pd.DataFrame(flights)
 # takes a sample of 10 per cent, with copy() it is specified, that changes to flights_sample doesn't effect flights, else you will get a SettingWithCopyWarning
-flights_sample = flights.head(int(len(flights)*0.1)).copy() 
+flights_sample = flights.sample(n=5000, replace=True, random_state=1).copy() 
 
 # dimensions of the data set
 flights_sample.shape
@@ -188,8 +188,6 @@ flights_sample.shape
 ```
 
 ```{code-cell} 
-from nycflights13 import flights
-
 # remove all observations that are not complete (missing a value)
 # axis=0: Drop incomplete rows, how='any' if any value is missing drop, inplace=True: modify DataFrame instead of creating new one
 flights_sample.dropna(axis = 0, how = 'any', inplace = True) 
@@ -229,8 +227,8 @@ alt.Chart(fly_viz1).mark_circle(size=40).encode(
     y=alt.Y('dep_delay', title='Departure delay (in min)'),
     tooltip=['flight', 'year', 'dep_time', 'dep_delay'] # when you hover over the points, these data will be shown
 ).properties( # you can set the size of the chart with properties
-    width=350,
-    height=250
+    width=550,
+    height=400
     ).interactive()
 
 ```
@@ -274,8 +272,8 @@ alt.Chart(fly_viz2).mark_circle(size=40).encode(
     y=alt.Y('dep_delay', title='Departure delay (in min)'),
     tooltip=['flight', 'year', 'dep_time', 'dep_delay']
 ).properties( 
-    width=350,
-    height=250
+    width=550,
+    height=400
     ).interactive()
 
 ```
@@ -283,8 +281,7 @@ alt.Chart(fly_viz2).mark_circle(size=40).encode(
 What do you think of this chart? What can you say about flight delay times now? In the following, we focus on the delays only, since many flights seems to be one time.
 
 ```{code-cell} 
-# Remove all flights with no delay and limit to max dep_delay 800
-flights_sample = flights_sample[flights_sample.dep_delay>0]
+# Remove all flights up to max dep_delay 800
 flights_sample = flights_sample[flights_sample.dep_delay<=800]
 
 # dimensions of the data set
@@ -319,14 +316,14 @@ mystnb:
       Histogram of delay times.
     name: histogram1
 ---
-fly_viz3 = flights_sample[flights_sample.dep_delay<=100]
+fly_viz3 = flights_sample[flights_sample.dep_delay<=60]
 
 alt.Chart(fly_viz3).mark_bar().encode(
   x=alt.X('dep_delay', title='Departure delay (in min)'),
   y=alt.Y('count()', title='Number of Flights')
 ).properties( 
-    width=350,
-    height=250
+    width=550,
+    height=400
     )
 
 ```
@@ -344,7 +341,7 @@ mystnb:
 ---
 
 s1 = alt.Chart(flights_sample).mark_bar().encode(
-  x=alt.X('dep_delay', title='Departure delay (in min)', bin=alt.Bin(extent=[-20, 100], step=1)),
+  x=alt.X('dep_delay', title='Departure delay (in min)', bin=alt.Bin(extent=[-20, 60], step=1)),
   y=alt.Y('count()', title='Number of Flights')
 ).properties( 
     width=200,
@@ -352,7 +349,7 @@ s1 = alt.Chart(flights_sample).mark_bar().encode(
     )
 
 s5 = alt.Chart(flights_sample).mark_bar().encode(
-  x=alt.X('dep_delay', title='Departure delay (in min)', bin=alt.Bin(extent=[-20, 100], step=5)),
+  x=alt.X('dep_delay', title='Departure delay (in min)', bin=alt.Bin(extent=[-20, 60], step=5)),
   y=alt.Y('count()', title='Number of Flights')
 ).properties( 
     width=200,
@@ -362,7 +359,7 @@ s5 = alt.Chart(flights_sample).mark_bar().encode(
 
 
 s10 = alt.Chart(flights_sample).mark_bar().encode(
-  x=alt.X('dep_delay', title='Departure delay (in min)', bin=alt.Bin(extent=[-20, 100], step=10)),
+  x=alt.X('dep_delay', title='Departure delay (in min)', bin=alt.Bin(extent=[-20, 60], step=10)),
   y=alt.Y('count()', title='Number of Flights')
 ).properties( 
     width=200,
@@ -370,7 +367,7 @@ s10 = alt.Chart(flights_sample).mark_bar().encode(
     )
 
 s15 = alt.Chart(flights_sample).mark_bar().encode(
-  x=alt.X('dep_delay', title='Departure delay (in min)', bin=alt.Bin(extent=[-20, 100], step=15)),
+  x=alt.X('dep_delay', title='Departure delay (in min)', bin=alt.Bin(extent=[-20, 60], step=15)),
   y=alt.Y('count()', title='Number of Flights')
 ).properties( 
     width=200,
@@ -406,8 +403,8 @@ alt.Chart(fly_viz3).transform_density(
   x="Departure delay (in min):Q",
   y='density:Q'
 ).properties( 
-    width=350,
-    height=250
+    width=550,
+    height=400
     )
 ```
 
@@ -453,8 +450,8 @@ alt.Chart(fly_viz2, width=200).mark_boxplot().encode( # control the size of the 
   alt.X('x'),
   alt.Y('dep_delay:Q').scale(zero=False)
 ).properties( 
-    width=350,
-    height=250
+    width=550,
+    height=400
     )
 ```
 ```{code-cell} 
@@ -481,8 +478,8 @@ fly_viz4['log_dep_delay'] = np.log(fly_viz4['dep_delay_min'])
 alt.Chart(fly_viz4, width=200).mark_boxplot().encode( 
   alt.Y('log_dep_delay:Q').scale(zero=False)
 ).properties( 
-    width=350,
-    height=250
+    width=550,
+    height=400
     )
 ```
 ### Compare Distributions
@@ -499,14 +496,15 @@ mystnb:
     name: boxplot_groups
 ---
 # Visualize Data - Box Plot in groups
-alt.Chart(fly_viz3, width=200).mark_boxplot().encode(
+alt.Chart(fly_viz4, width=200).mark_boxplot().encode(
   alt.X('origin:N'),
   alt.Y('log_dep_delay:Q').scale(zero=False)
 ).properties( 
-    width=350,
-    height=250
+    width=550,
+    height=400
     )
 ```
+<!-- ToDo: rename legend labels, is there another way?-->
 
 ### Visualizing Multiple Distributions at Once
 
@@ -518,10 +516,46 @@ mystnb:
       Arrival delays at NYC airport: Overlapping Histogram.
     name: hist_overlap
 ---
-# Visualize overlapping colors of arrival delays 
+# limit arrival delay time to -60 - 120
+fly_viz3 = fly_viz3[fly_viz3.arr_delay<120]
+fly_viz3 = fly_viz3[fly_viz3.arr_delay>-60]
 
+# rename used carriers
+# Legend of carrier names: https://nycflights13.tidyverse.org/reference/airlines.html
+airlines_s = ['UA', 'B6', 'EV', 'DL', 'AA', 'AS']
+airline_list = ['United Air Lines Inc.', 'JetBlue Airways', 'ExpressJet Airlines Inc.', 'Delta Air Lines Inc.', 'American Airlines Inc.', 'Alaska Airlines Inc.']
+for i in range(6):
+    fly_viz3 = fly_viz3.replace(airlines_s[i], airline_list[i])
+
+# Set the charts and add them in one chart
+d = {}
+for i in range(5):
+    key = str("a"+str(i))
+    d[key] = alt.Chart(fly_viz3).mark_bar(opacity=0.3).encode(
+        x=alt.X('arr_delay', title='Arrival delay (in min)', bin=alt.Bin(step=5)),
+        y=alt.Y('count()', title='Number of Flights'),
+        color=alt.Color('carrier:N', title='Airlines')
+    ).transform_filter(
+        alt.FieldEqualPredicate(field='carrier', equal=airline_list[i])
+    ).properties( 
+        width=550,
+        height=400
+        )
+
+d['a0'] + d['a1'] + d['a2'] + d['a3'] + d['a4']
 
 ```
+
+```{code-cell} 
+# Reusable Matplotlib/Seaborn plot formatting
+def plot_formatting():
+    # Plot formatting
+    plt.legend(bbox_to_anchor=(1.02, 1), loc='upper left', borderaxespad=0, frameon=False)
+    ax.spines['top'].set_visible(False)
+    ax.spines['right'].set_visible(False)
+    plt.style.use('seaborn-v0_8-whitegrid')
+    plt.show()
+``````
 <!-- ToDo: Fix, that everything is in one chart-->
 ```{code-cell} 
 ---
@@ -531,36 +565,35 @@ mystnb:
       Arrival delays at NYC airport: Side-by-Side Histogram.
     name: hist_side-by-side
 ---
-# rename used carriers
-# Legend of carrier names: https://nycflights13.tidyverse.org/reference/airlines.html
+import matplotlib.pyplot as plt
 
-fly_viz3 = fly_viz3.replace('AA', 'American Airlines')
-fly_viz3 = fly_viz3.replace('B6', 'JetBlue Airways')
-fly_viz3 = fly_viz3.replace('EV', 'ExpressJet Airlines Inc.')
-fly_viz3 = fly_viz3.replace('DL', 'Delta Air Lines Inc.')
-fly_viz3 = fly_viz3.replace('UA', 'United Air Lines Inc.')
+#fig, ax = plt.subplots()
+fig, ax = plt.subplots(figsize=(7,5), dpi=150)
 
-# define colors
-colors = ['#D55E00', '#009E73', '#F0E442', '#56B4E9', '#E69F00']
+# Assign colors for each airline and the names
+colors = ['#E69F00', '#56B4E9', '#F0E442', '#009E73', '#D55E00']
+names = ['United Air Lines Inc.', 'JetBlue Airways', 'ExpressJet Airlines Inc.',
+         'Delta Air Lines Inc.', 'American Airlines Inc.']
 
-# Visualize arrival delays side by side
-alt.Chart(fly_viz3).mark_bar().encode(
-  column=alt.Column('carrier'),
+# Make a separate list for each airline
+d = {}
+for i in range(5):
+    key = str("x"+str(i))
+    d[key] = list(fly_viz3[fly_viz3['carrier'] == names[i]]['arr_delay'])
+     
+# Make the histogram using a list of lists
+# Normalize the flights and assign colors and names
+plt.hist([d['x0'], d['x1'], d['x2'], d['x3'], d['x4']], bins = int(180/15),
+         color = colors, label=names, density=True)
 
-  x=alt.X('dep_delay', title='Departure delay (in min)', bin=alt.Bin(step=10)),
-  y=alt.Y('count()', title='Number of Flights'),
-  color=alt.Color('carrier:N', title='Airlines')
-).transform_filter(
-    alt.FieldOneOfPredicate(field='carrier', oneOf=['United Air Lines Inc.', 'JetBlue Airways', 'ExpressJet Airlines Inc.', 'Delta Air Lines Inc.', 'American Airlines'])
-).configure_range(# set the colors to previously defined colors
-    category=alt.RangeScheme(colors)
-).properties( 
-    width=350,
-    height=250
-    )
-
+plt.xlabel('Delay (min)')
+plt.ylabel('Normalized Flights')
+plt.title('Side-by-Side Histogram with Multiple Airlines')
+plt.xlim(-75,125)
+plt.ylim(0,0.025)
+plot_formatting()
 ```
-<!-- ToDo: rename legend labels, is there another way?-->
+
 ```{code-cell} 
 ---
 mystnb:
@@ -569,20 +602,17 @@ mystnb:
       Arrival delays at NYC airport: Stacked Histogram.
     name: hist_stacked
 ---
-alt.Chart(fly_viz3).mark_bar().encode(
-  x=alt.X('dep_delay', title='Departure delay (in min)', bin=alt.Bin(step=10)),
-  y=alt.Y('count()', title='Number of Flights'),
-  color=alt.Color('carrier:N', title='Airlines')
-).transform_filter(
-    # you can filter your dataset, here an example with filtering out carriers
-    # Legend of carrier names: https://nycflights13.tidyverse.org/reference/airlines.html
-    alt.FieldOneOfPredicate(field='carrier', oneOf=['United Air Lines Inc.', 'JetBlue Airways', 'ExpressJet Airlines Inc.', 'Delta Air Lines Inc.', 'American Airlines'])
-).configure_range(
-    category=alt.RangeScheme(colors)
-).properties( 
-    width=350,
-    height=250
-    )
+# Make the histogram using a list of lists
+# Normalize the flights and assign colors and names
+plt.hist([d['x0'], d['x1'], d['x2'], d['x3'], d['x4']], bins = int(180/15),
+         color = colors, label=names, density=True, stacked=True)
+
+# Plot formatting
+plt.xlabel('Delay (min)')
+plt.ylabel('Normalized Flights')
+plt.xlim(-75,125)
+plt.ylim(0,0.025)
+plot_formatting()
 ```
 
 ```{code-cell} 
@@ -593,21 +623,218 @@ mystnb:
       Arrival delays at NYC airport: Density Plot with Multiple Airlines.
     name: density_multiple
 ---
+# transform_density gives a density plot
 alt.Chart(fly_viz3).transform_density(
-  'dep_delay',
-  as_=['Departure delay (in min)', 'density'],
+  'arr_delay',
+  as_=['Arrival delay (in min)', 'Density'],
   groupby=['carrier']
-).mark_area(  
+# you can choose how you want to visualize the density plot (here line)
+).mark_line(  
 ).encode(
-  x="Departure delay (in min):Q",
-  y='density:Q',
+  x="Arrival delay (in min):Q",
+  y='Density:Q',
   color=alt.Color('carrier:N', title='Airlines')
 ).transform_filter(
     alt.FieldOneOfPredicate(field='carrier', oneOf=['United Air Lines Inc.', 'JetBlue Airways', 'ExpressJet Airlines Inc.', 'Delta Air Lines Inc.', 'American Airlines'])
 ).configure_range(
     category=alt.RangeScheme(colors)
 ).properties( 
-    width=350,
-    height=250
+    width=550,
+    height=400
     )
 ```
+
+```{code-cell} 
+---
+mystnb:
+  figure:
+    caption: |
+      Arrival delays at NYC airport: Shaded Density Plot.
+    name: density_shaded
+---
+
+fly_viz3 = fly_viz3[fly_viz3.arr_delay<150]
+fly_viz3 = fly_viz3[fly_viz3.arr_delay>-70]
+
+fly_viz3 = fly_viz3.replace('AS', 'Alaska Airlines Inc.')
+
+al1 = alt.Chart(fly_viz3).transform_density(
+  'arr_delay',
+  as_=['Arrival delay (in min)', 'density'],
+  groupby=['carrier']
+).mark_area(opacity=0.4  
+).encode(
+  x='Arrival delay (in min):Q',
+  y='density:Q',
+  color=alt.Color('carrier:N', title='Airlines')
+).transform_filter(
+    alt.FieldEqualPredicate(field='carrier', equal='United Air Lines Inc.')
+).properties( 
+    width=550,
+    height=400
+    )
+
+
+al2 = alt.Chart(fly_viz3).transform_density(
+  'arr_delay',
+  as_=['Arrival delay (in min)', 'density'],
+  groupby=['carrier']
+).mark_area(opacity=0.4  
+).encode(
+  x='Arrival delay (in min):Q',
+  y='density:Q',
+  color=alt.Color('carrier:N', title='Airlines')
+).transform_filter(
+    alt.FieldEqualPredicate(field='carrier', equal='Alaska Airlines Inc.')
+).properties( 
+    width=550,
+    height=400
+    )
+
+al1 + al2
+```
+
+```{code-cell} 
+---
+mystnb:
+  figure:
+    caption: |
+      Arrival delay of Alaska Airlines Inc. at NYC airport: Rug Plot.
+    name: rug_plot
+---
+import seaborn as sns
+# Subset to Alaska Airlines
+subset = fly_viz3[fly_viz3['carrier'] == 'Alaska Airlines Inc.']
+
+# Density Plot with Rug Plot
+sns.displot(subset['arr_delay'], 
+    rug = True,
+    kind="kde",
+    height=4.5,
+    aspect=1.5,
+    color = 'darkblue', 
+    rug_kws={'color': 'black'})
+
+# Plot formatting
+# Plot formatting
+ax.spines['top'].set_visible(False)
+ax.spines['right'].set_visible(False)
+plt.style.use('seaborn-v0_8-whitegrid')
+plt.xlim((-100,100))
+plt.ylim((0,0.016))
+plt.show()
+```
+
+```{code-cell} 
+---
+mystnb:
+  figure:
+    caption: |
+      Arrival Delays of Alaska Airlines: Empirical Cumulative Distribution Functions.
+    name: ecdf_plot
+---
+# ECDF Plot
+sns.ecdfplot(data=subset, x=subset['arr_delay'])
+
+# Plot formatting
+plt.xlabel('Delay (min)')
+plt.xlim(-60,80)
+plt.show()
+```
+
+```{code-cell} 
+---
+mystnb:
+  figure:
+    caption: |
+      Arrival Delays: Highly Skewed Distributions
+    name: skewed_plots
+---
+flights_s = fly_viz1.copy()
+flights_s.dropna(axis = 0, how = 'any', inplace = True) 
+
+# limit arrival delay time to -60 - 120
+flights_s = flights_s[flights_s.arr_delay>0]
+
+fig, ax = plt.subplots(1,2, figsize=(8,5), dpi=120)
+
+# Density Plot with Rug Plot
+sns.ecdfplot(data=flights_s, x=flights_s['arr_delay'], ax=ax[0])
+
+sns.kdeplot(flights_s['arr_delay'], ax=ax[1])
+
+# Plot formatting
+plt.xlim((1, 1500))
+plt.xlabel('Arrival Delay (min)')
+plt.ylim(0,0.025)
+plt.show()
+```
+
+
+```{code-cell} 
+---
+mystnb:
+  figure:
+    caption: |
+      Distribution of the logarithm of Arrival Times.
+    name: ecdf_density_plots
+---
+# Define 2 columns
+fig, ax = plt.subplots(1,2, figsize=(8,5), dpi=120)
+
+# Density Plot with Rug Plot of the logarithm of arrival times
+sns.ecdfplot(data=flights_s, x=flights_s['arr_delay'], ax=ax[0], log_scale=10)
+
+sns.kdeplot(flights_s['arr_delay'], ax=ax[1], log_scale=10)
+
+# Plot formatting
+plt.xlabel('Arrival Delay (min)')
+plt.xlim(1, 1500)
+plt.ylim(0,0.7)
+plt.show()
+```
+
+```{code-cell} 
+---
+mystnb:
+  figure:
+    caption: |
+      Arrival Delays: Box Plot.
+    name: box_plot3
+---
+# limit arrival delay time to -60 - 120
+fly_viz1 = fly_viz1[fly_viz1.arr_delay<120]
+fly_viz1 = fly_viz1[fly_viz1.arr_delay>-60]
+
+options = ['UA', 'B6', 'EV', 'DL', 'AA']
+fly_filtered = fly_viz1[fly_viz1['carrier'].isin(options)]
+sns.boxplot(data=fly_filtered, x='carrier', y='arr_delay', whis=(0, 100))
+
+plt.xlabel('Airlines')
+plt.ylabel('Arrival Delay (min)')
+plt.ylim((-75,150))
+plt.show()
+```
+```{code-cell} 
+---
+mystnb:
+  figure:
+    caption: |
+      Arrival Delays: Violin Plot.
+    name: violin_plot
+---
+fly_filtered = fly_viz1[fly_viz1['carrier'].isin(options)]
+sns.violinplot(data=fly_filtered, x='carrier', y='arr_delay')
+
+plt.xlabel('Airlines')
+plt.ylabel('Arrival Delay (min)')
+plt.ylim(-75,150)
+plt.show()
+```
+
+
+
+
+
+
+
