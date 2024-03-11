@@ -180,7 +180,7 @@ import pandas as pd
 # Select a sample from the whole data set
 flights = pd.DataFrame(flights)
 # takes a sample of 10 per cent, with copy() it is specified, that changes to flights_sample doesn't effect flights, else you will get a SettingWithCopyWarning
-flights_sample = flights.head(int(len(flights)*0.1)).copy() 
+flights_sample = flights.sample(n=5000, replace=True, random_state=1).copy() 
 
 # dimensions of the data set
 flights_sample.shape
@@ -316,7 +316,7 @@ mystnb:
       Histogram of delay times.
     name: histogram1
 ---
-fly_viz3 = flights_sample[flights_sample.dep_delay<=100]
+fly_viz3 = flights_sample[flights_sample.dep_delay<=60]
 
 alt.Chart(fly_viz3).mark_bar().encode(
   x=alt.X('dep_delay', title='Departure delay (in min)'),
@@ -341,7 +341,7 @@ mystnb:
 ---
 
 s1 = alt.Chart(flights_sample).mark_bar().encode(
-  x=alt.X('dep_delay', title='Departure delay (in min)', bin=alt.Bin(extent=[-20, 100], step=1)),
+  x=alt.X('dep_delay', title='Departure delay (in min)', bin=alt.Bin(extent=[-20, 60], step=1)),
   y=alt.Y('count()', title='Number of Flights')
 ).properties( 
     width=200,
@@ -349,7 +349,7 @@ s1 = alt.Chart(flights_sample).mark_bar().encode(
     )
 
 s5 = alt.Chart(flights_sample).mark_bar().encode(
-  x=alt.X('dep_delay', title='Departure delay (in min)', bin=alt.Bin(extent=[-20, 100], step=5)),
+  x=alt.X('dep_delay', title='Departure delay (in min)', bin=alt.Bin(extent=[-20, 60], step=5)),
   y=alt.Y('count()', title='Number of Flights')
 ).properties( 
     width=200,
@@ -359,7 +359,7 @@ s5 = alt.Chart(flights_sample).mark_bar().encode(
 
 
 s10 = alt.Chart(flights_sample).mark_bar().encode(
-  x=alt.X('dep_delay', title='Departure delay (in min)', bin=alt.Bin(extent=[-20, 100], step=10)),
+  x=alt.X('dep_delay', title='Departure delay (in min)', bin=alt.Bin(extent=[-20, 60], step=10)),
   y=alt.Y('count()', title='Number of Flights')
 ).properties( 
     width=200,
@@ -367,7 +367,7 @@ s10 = alt.Chart(flights_sample).mark_bar().encode(
     )
 
 s15 = alt.Chart(flights_sample).mark_bar().encode(
-  x=alt.X('dep_delay', title='Departure delay (in min)', bin=alt.Bin(extent=[-20, 100], step=15)),
+  x=alt.X('dep_delay', title='Departure delay (in min)', bin=alt.Bin(extent=[-20, 60], step=15)),
   y=alt.Y('count()', title='Number of Flights')
 ).properties( 
     width=200,
@@ -828,7 +828,7 @@ sns.violinplot(data=fly_filtered, x='carrier', y='arr_delay')
 
 plt.xlabel('Airlines')
 plt.ylabel('Arrival Delay (min)')
-plt.ylim((-75,150))
+plt.ylim(-75,150)
 plt.show()
 ```
 
