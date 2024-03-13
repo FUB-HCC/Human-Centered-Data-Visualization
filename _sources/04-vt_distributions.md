@@ -180,7 +180,7 @@ import pandas as pd
 # Select a sample from the whole data set
 flights = pd.DataFrame(flights)
 # takes a sample of 10 per cent, with copy() it is specified, that changes to flights_sample doesn't effect flights, else you will get a SettingWithCopyWarning
-flights_sample = flights.sample(n=5000, replace=True, random_state=1).copy() 
+flights_sample = flights.sample(n=10000, replace=True, random_state=1).copy() 
 
 # dimensions of the data set
 flights_sample.shape
@@ -547,6 +547,7 @@ d['a0'] + d['a1'] + d['a2'] + d['a3'] + d['a4']
 ```
 
 ```{code-cell} 
+import matplotlib.pyplot as plt
 # Reusable Matplotlib/Seaborn plot formatting
 def plot_formatting():
     # Plot formatting
@@ -565,7 +566,6 @@ mystnb:
       Arrival delays at NYC airport: Side-by-Side Histogram.
     name: hist_side-by-side
 ---
-import matplotlib.pyplot as plt
 
 #fig, ax = plt.subplots()
 fig, ax = plt.subplots(figsize=(7,5), dpi=150)
@@ -721,7 +721,7 @@ ax.spines['top'].set_visible(False)
 ax.spines['right'].set_visible(False)
 plt.style.use('seaborn-v0_8-whitegrid')
 plt.xlim((-100,100))
-plt.ylim((0,0.016))
+plt.ylim((0,0.020))
 plt.show()
 ```
 
@@ -766,7 +766,7 @@ sns.kdeplot(flights_s['arr_delay'], ax=ax[1])
 # Plot formatting
 plt.xlim((1, 1500))
 plt.xlabel('Arrival Delay (min)')
-plt.ylim(0,0.025)
+plt.ylim(0,0.02)
 plt.show()
 ```
 
