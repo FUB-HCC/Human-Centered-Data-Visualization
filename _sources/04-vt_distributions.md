@@ -179,7 +179,7 @@ import pandas as pd
 
 # Select a sample from the whole data set
 flights = pd.DataFrame(flights)
-# takes a sample of 10 per cent, with copy() it is specified, that changes to flights_sample doesn't effect flights, else you will get a SettingWithCopyWarning
+# takes a sample of 10000 entries, with copy() it is specified, that changes to flights_sample doesn't effect flights, else you will get a SettingWithCopyWarning
 flights_sample = flights.sample(n=10000, replace=True, random_state=1).copy() 
 
 # dimensions of the data set
